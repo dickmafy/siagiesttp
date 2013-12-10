@@ -1,0 +1,62 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+   
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="itnr_list" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{profesionItinerario.nativeUpdate}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:panel header="#{profesionItinerario.nombreProfesion} - Actualizar Unidad Didáctica: #{profesionItinerario.bean.titulo}">
+    		
+    		<table class="form_table">
+    		<tr><td><p:outputLabel for="txtMod" value="Módulo" /></td></tr>
+   			<tr>
+   				<td>
+					<p:selectOneMenu id="txtMod" value="#{profesionItinerario.bean.modulo}" style="width:350px" disabled="true">
+		   				<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+						<f:selectItems value="#{profesionItinerario.moduloList}" var="lstMod" itemValue="#{lstMod.nivelA}" itemLabel="#{lstMod.titulo}"/>
+					</p:selectOneMenu>
+				</td>
+   			</tr>
+   			</table>
+   			
+    		<table class="form_table">
+    		<tr>
+   				<td><p:outputLabel for="txtTit" value="Título" /></td>
+   				<td><p:outputLabel for="txtSem" value="Semestre" /></td>
+   				<td><p:outputLabel for="txtHorSem" value="Horas por Semana" /></td>
+   				<td><p:outputLabel for="txtCre" value="Créditos" /></td>
+   				<td><p:outputLabel for="txtHorTot" value="Horas Totales" /></td>
+   			</tr>
+   			<tr>
+				<td><p:inputText id="txtTit" value="#{profesionItinerario.bean.titulo}" size="80" disabled="true"/></td>
+				<td><p:spinner  id="txtSem" value="#{profesionItinerario.bean.semestre}" min="1" max="8" size="12"/></td>
+		       	<td>
+		       		<p:spinner  id="txtHorSem" value="#{profesionItinerario.bean.horasSemestre}" min="1" max="10" size="12">
+		       			<p:ajax event="change" update=":frmNew:txtHorTot" listener="#{profesionItinerario.calcularHoras}"/>
+		       		</p:spinner>
+		       	</td>		
+		       	<td><p:spinner  id="txtCre" value="#{profesionItinerario.bean.creditos}" min="1" max="5" size="3"/></td>
+		       	<td><p:inputText  id="txtHorTot" value="#{profesionItinerario.bean.horasTotal}" disabled="true"/></td>
+   			</tr>
+    		</table>
+    		
+    		<table class="form_table">
+    		<tr><td><p:outputLabel for="txtDes" value="Descripción" /></td></tr>
+   			<tr><td><p:inputTextarea id="txtDes" value="#{profesionItinerario.bean.descripcion}" rows="3" cols="166" autoResize="false"/></td></tr>
+   			</table>
+    		
+		</p:panel> 		
+     </h:form>
+    </ui:define>
+</ui:composition>

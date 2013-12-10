@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	   http://www.springframework.org/schema/aop
+	   http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	
+	<!-- Marco Educativo -->
+	<bean id="capacidad" 						class="modules.marco.domain.Capacidad" 				scope="session" />
+	<bean id="familia" 							class="modules.marco.domain.Familia" 				scope="session" />
+	<bean id="profesion" 						class="modules.marco.domain.Profesion" 				scope="session" />
+	<bean id="referenteEducativo"			 	class="modules.marco.domain.ReferenteEducativo" 	scope="session" />
+	<bean id="referenteProductivo" 				class="modules.marco.domain.ReferenteProductivo" 	scope="session" />
+	<bean id="referenteTransversal"				class="modules.marco.domain.ReferenteTransversal" 	scope="session" />
+	<bean id="referenteItinerario" 				class="modules.marco.domain.Itinerario" 			scope="session" />
+	<bean id="referenteItinerarioTransversal" 	class="modules.marco.domain.ItinerarioTransversal" 	scope="session" />
+	<bean id="requisitoAmbiente"			 	class="modules.marco.domain.RequisitoAmbiente" 		scope="session" />
+	<bean id="transversal" 						class="modules.marco.domain.Transversal"		 	scope="session" />
+	
+</beans>

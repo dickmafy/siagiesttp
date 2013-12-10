@@ -1,0 +1,71 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmNew" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   		
+  		 <p:toolbar>  
+	    	<p:toolbarGroup align="left">
+	    		<p:commandButton title="Regresar" value="Regresar" icon="icn_bar_back" action="itc_lab_list" ajax="false" />
+	    	    <p:commandButton title="Guardar" value="Guardar" icon="icn_bar_save" actionListener="#{institucionHistorialLaboral.nativeUpdate}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>  		
+      	<p:spacer height="4px"/>
+      	
+   		<p:panel header="#{institucionHistorialLaboral.nombrePersonal} - Actualizar Experiencia Laboral Educativa">
+       	<table>
+        <tr>
+        	<td><p:outputLabel for="txtTip" value="Tipo" /></td>
+        	<td><p:outputLabel for="txtIns" value="Institución" /></td>
+        	<td><p:outputLabel for="txtIni" value="Inicio" /></td>
+        	<td><p:outputLabel for="txtFin" value="Fin" /></td>
+        </tr>
+        <tr>
+        	<td>
+        		<p:selectOneMenu id="txtTip" value="#{institucionHistorialLaboral.bean.tipo}">
+					<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        <f:selectItem itemLabel="IEST"      itemValue="1" />
+           	        <f:selectItem itemLabel="CETPRO"    itemValue="2" />
+           	        <f:selectItem itemLabel="DRE"       itemValue="3" />        
+           	        <f:selectItem itemLabel="UGEL" 		itemValue="4" />
+           	        <p:ajax event="change" update=":frmNew:txtIns" listener="#{institucionHistorialLaboral.selectTipo}"/>
+				</p:selectOneMenu>
+        	</td>
+        	<td>
+       			<p:selectOneMenu id="txtIns" value="#{institucionHistorialLaboral.bean.institucion}" style="width:300px"> 
+					<f:selectItems value="#{institucionHistorialLaboral.institucionList}"/>
+       			</p:selectOneMenu>
+    		</td>
+    		<td><p:calendar id="txtIni" value="#{institucionHistorialLaboral.bean.inicio}" showOn="button"  size="10"/></td>
+    		<td><p:calendar id="txtFin" value="#{institucionHistorialLaboral.bean.fin}" showOn="button"  size="10"/></td>
+        </tr>
+        </table>
+        
+        <table>
+        <tr>
+        	<td><p:outputLabel for="txtPue" value="Puesto" /></td>
+        	<td><p:outputLabel for="txtFun" value="Función" /></td>
+        	<td><p:outputLabel for="txtRes" value="Resolución" /></td>
+        </tr>
+        <tr>
+        	<td>
+       			<p:selectOneMenu id="txtPue" value="#{institucionHistorialLaboral.bean.puesto}" style="width:200px"> 
+					<f:selectItems value="#{institucionHistorialLaboral.puestoList}"/>
+       			</p:selectOneMenu>
+    		</td>
+        	<td><p:inputText id="txtFun" value="#{institucionHistorialLaboral.bean.funcion}" size="80"/></td>
+        	<td>
+       			<p:selectOneMenu id="txtRes" value="#{institucionHistorialLaboral.bean.resolucion}" style="width:200px" filter="true" filterMatchMode="startsWith"> 
+					<f:selectItems value="#{institucionHistorialLaboral.resolucionList}"/>
+       			</p:selectOneMenu>
+    		</td>
+        </tr>
+        </table>
+        </p:panel>
+	</h:form>
+    </ui:define>
+</ui:composition>

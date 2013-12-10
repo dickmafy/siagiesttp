@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+    
+    <!-- JSF and Spring are integrated -->
+     <application>
+  		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+  	</application>
+  	
+	<!-- Documentos -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_documento_list</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_documento_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_documento_new</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_documento_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_documento_update</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_documento_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- OBJETIVO -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_objetivo_list</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_objetivo_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_objetivo_new</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_objetivo_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_objetivo_update</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_objetivo_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+		<!-- INDICADOR -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_indicador_list</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_indicador_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_indicador_new</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_indicador_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_indicador_update</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_indicador_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+		<!-- Recurso -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_recurso_list</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_recurso_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_recurso_new</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_recurso_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_recurso_update</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_recurso_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+		<!-- Recurso -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_resultado_list</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_resultado_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_resultado_new</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_resultado_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_resultado_update</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_resultado_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+			<!-- Capacitacion -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_capacitacion_list</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_capacitacion_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_capacitacion_new</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_capacitacion_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>planificacion_capacitacion_update</from-outcome>
+			<to-view-id>/modulos/planificacion/planificacion_capacitacion_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+</faces-config>

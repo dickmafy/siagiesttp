@@ -1,0 +1,74 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
+  		<p:toolbar>  
+  			<p:toolbarGroup align="left">
+	    		<p:spacer height="6px"/>
+		        <p:outputLabel for="txtIns" value="Institución" style="position:relative;  top:-4px;"/>
+		   		<p:selectOneMenu id="txtIns" value="#{adminProceso.institucion}" style="position:relative;  top:3px; left:15px; width:270px">
+					<f:selectItems value="#{adminProceso.institucionList}"/>
+					<p:ajax event="change" update=":frmList" listener="#{adminProceso.defaultList}"/>
+				</p:selectOneMenu>
+				<p:spacer height="6px"/>
+		        <p:commandButton id="btnNew" title="Nuevo" value="Nuevo" icon="icn_bar_new" style="position:relative;  top:-4px; left:20px;"
+					actionListener="#{adminProceso.nativeNew}" ajax="false" rendered="#{adminProceso.institucion ne -1}"/>
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      
+   		<p:dataTable id="itemList" var="item" value="#{adminProceso.beanList}" filteredValue="#{adminProceso.beanFilterList}"
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom"
+   			paginator="true" rows="7"  
+        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+     		
+     		<f:facet name="header">
+				<h:outputText value="Periodos de Procesos de Admisión (#{adminProceso.defaultListSize})" />  
+			</f:facet>
+			
+			<p:column headerText="Tipo" style="width:23%; align:center;" >   
+				<h:outputText value="#{item.nombreTipo}"/>
+			</p:column>	
+						
+			<p:column headerText="Periodo" style="width:23%; align:center;" >   
+				<h:outputText value="#{item.nombrePeriodo}"/>
+			</p:column>	
+				
+			<p:column headerText="Ejecucion" style="width:23%; align:center;" >   
+				<h:outputText value="#{item.nombreEjecucion}"/>
+			</p:column>	
+			
+			<p:column headerText="Inicio" style="width:20%; align:center;">   
+				<h:outputText value="#{item.vigenciaInicio}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+   				</h:outputText>	    
+			</p:column>		
+			
+			<p:column headerText="Fin" style="width:20%; align:center;">   
+				<h:outputText value="#{item.vigenciaFin}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+   				</h:outputText>	    
+			</p:column>		
+		
+			
+			<p:column headerText="Opciones" style="width:7%">  
+				<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{adminProceso.nativeLoad}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{adminProceso.beanSelected}" />
+			</p:commandButton>
+				
+			<p:commandButton icon="icn_item_download" 	title="Descargar Resolución"  ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{adminProceso.beanSelected}" />
+					<p:fileDownload value="#{adminProceso.file}"/>
+			</p:commandButton>
+				
+        	</p:column>      	        
+		</p:dataTable> 
+	</h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,101 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">
+		     
+		        
+		        <p:commandButton title="Nuevo" 	value="Nuevo" 	icon="icn_bar_new" actionListener="#{planificacionRecurso.nativeNew}" ajax="false" />
+
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+   		<p:dataTable id="itemList" var="item" value="#{planificacionRecurso.beanList}" filteredValue="#{planificacionRecurso.beanFilterList}" 
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  
+   			paginator="true" rows="#{constante.LIST_SIZE}"  paginatorPosition="bottom"
+        	paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+     		
+     		<f:facet name="header">
+				<h:outputText value="Listado de Recursos (#{planificacionRecurso.defaultListSize})" />  
+			</f:facet>
+			
+			<p:column headerText="id" style="width:7%; align:center;" sortBy="#{item.id}">       
+				<h:outputText value="#{item.id}"  />  
+			</p:column>
+			
+			<p:column headerText="anio" style="width:7%; align:center;" sortBy="#{item.anio}">       
+				<h:outputText value="#{item.anio}"  />  
+			</p:column>
+			
+			<p:column headerText="Concepto" style="width:7%; align:center;" sortBy="#{item.descripcion}">       
+				<h:outputText value="#{item.nombreConcepto}" />  
+			</p:column>
+			
+			<p:column headerText="Descripcion" style="width:7%; align:center;" sortBy="#{item.descripcion}">       
+				<h:outputText value="#{item.descripcion}" />  
+			</p:column>
+			
+			<p:column headerText="Arrendatario / Contraste" style="width:7%; align:center;" sortBy="#{item.descripcion}">       
+				<h:outputText value="#{item.arrendante_contratante}" />  
+			</p:column>
+			
+			<p:column headerText="Periodicidad" style="width:7%; align:center;" sortBy="#{item.descripcion}">       
+				<h:outputText value="#{item.nombrePeriodicidad}" />  
+			</p:column>
+			
+			<p:column headerText="Merced / Ingreso" style="width:7%; align:center;" sortBy="#{item.descripcion}">       
+				<h:outputText value="#{item.merced_ingreso}" />  
+			</p:column>
+			
+			<p:column headerText="Fecha Inicio" style="width:7%; align:center;" sortBy="#{item.fecha_inicio}">   
+				<h:outputText value="#{item.fecha_inicio}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+   				</h:outputText>
+			</p:column>
+			
+			<p:column headerText="Fecha Fin" style="width:7%; align:center;" sortBy="#{item.fecha_fin}">   
+				<h:outputText value="#{item.fecha_fin}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+   				</h:outputText>
+			</p:column>
+		
+			
+			<p:column headerText="Opciones" style="width:13%">  
+			
+				<p:commandButton icon="icn_item_download" 	title="Descargar" 	 ajax="false"  >
+					<f:setPropertyActionListener value="#{item}" target="#{planificacionRecurso.beanSelected}" />
+					<p:fileDownload value="#{planificacionRecurso.file}"/>
+				</p:commandButton>  
+				
+				<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{planificacionRecurso.nativeLoad}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{planificacionRecurso.beanSelected}" />
+				</p:commandButton>
+				
+        	</p:column>      	        
+		</p:dataTable> 
+	</h:form>
+   		    
+   		    
+   		    <!-- Eliminar Institutos/Cetpro -->
+		<p:confirmDialog widgetVar="dialogUsrDel" width="350" appendToBody="true"
+			header="Mensaje de Confirmacion" message="¿Estas seguro de eliminar el indicador" style="font-size:13px;"
+        	closable="true" severity="alert" closeOnEscape="true">
+        	<h:form>	
+			<h:panelGroup style="text-align: right;" >
+				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogUsrDel.hide()"  actionListener="#{planificacionRecurso.nativeRemove}"  update=":frmList"/>
+        		<p:commandButton value="No" id="cancelButton" onclick="dialogUsrDel.hide()"/>   
+			</h:panelGroup>
+			</h:form>	
+   		</p:confirmDialog>
+   		
+   		
+    </ui:define>
+</ui:composition>

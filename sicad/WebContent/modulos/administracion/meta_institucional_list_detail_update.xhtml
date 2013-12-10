@@ -1,0 +1,79 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmUpd" ajaxSubmit="false">
+   
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="meta_institucional_list_detail" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{adminMetaInstitucionalDetalle.nativeUpdate}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:fieldset>      	
+    		<table class="form_table" style="width:100%">
+    		<tr>
+    			<td width="7%"><p:outputLabel styleClass="form_readonly_title" value="Año" /></td>
+    			<td width="10%"><p:outputLabel styleClass="form_readonly_title" value="Proceso" /></td>
+    			<td width="9%"><p:outputLabel styleClass="form_readonly_title" value="Turno" /></td>
+    			<td width="20%"><p:outputLabel styleClass="form_readonly_title" value="Profesión" /></td>
+    			<td width="54%"><p:outputLabel styleClass="form_readonly_title" value="Unidad Didáctica" /></td>
+    		</tr>
+    		<tr>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{adminMetaInstitucionalDetalle.annio}" /></td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{adminMetaInstitucional.beanSelected.nombreProceso}" /></td>
+    			<td>
+    				<p:outputLabel styleClass="form_readonly_value" value="Mañana" 	rendered="#{adminMetaInstitucionalDetalle.turno eq 1}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Tarde" 	rendered="#{adminMetaInstitucionalDetalle.turno eq 2}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Noche" 	rendered="#{adminMetaInstitucionalDetalle.turno eq 3}" />
+    			</td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{adminMetaInstitucional.beanSelected.nombreProfesion}" /></td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{adminMetaInstitucionalDetalle.bean.nombreUnidad}" /></td>
+    		</tr>
+    		</table>
+    	</p:fieldset>
+    	<p:spacer height="4px"/>
+    	
+      	<p:panel id="panelUpdate" header="Actualizar Detalle de Meta">
+    		<table class="form_table">
+    		<tr>
+   				<td><p:outputLabel value="Ingresante" /></td>
+   				<td><p:outputLabel value="Regular" /></td>
+   				<td><p:outputLabel value="Rezagados" /></td>
+   				<td><p:outputLabel value="Retirado" /></td>
+   				<td><p:outputLabel value="Secciones" /></td>
+   				<td><p:outputLabel value="Resolución" rendered="#{adminMetaInstitucionalDetalle.bean.cantidad gt 1}"/></td>
+   				<td><p:outputLabel value="Solicitud" rendered="#{adminMetaInstitucionalDetalle.bean.cantidad gt 1}"/></td>
+   			</tr>
+   			<tr>
+	   			<td><p:spinner  value="#{adminMetaInstitucionalDetalle.bean.ingresantes}" min="0" max="100" size="6"/></td>
+	   			<td><p:spinner  value="#{adminMetaInstitucionalDetalle.bean.regular}" min="0" max="100" size="6"/></td>
+	   			<td><p:spinner  value="#{adminMetaInstitucionalDetalle.bean.rezagados}" min="0" max="100" size="6"/></td>
+	   			<td><p:spinner  value="#{adminMetaInstitucionalDetalle.bean.retiros}" min="0" max="100" size="6"/></td>
+   				<td>
+   					<p:spinner  value="#{adminMetaInstitucionalDetalle.bean.cantidad}" min="0" max="100"  size="6" >
+   						<p:ajax update=":frmUpd"> </p:ajax>
+   					</p:spinner>
+   				</td>
+   				<td>
+					<p:selectOneMenu id="txtRes" value="#{adminMetaInstitucionalDetalle.bean.resolucion}" style="width:200px" filter="true" filterMatchMode="startsWith" rendered="#{adminMetaInstitucionalDetalle.bean.cantidad gt 1}"> 
+						<f:selectItems value="#{adminMetaInstitucionalDetalle.resolucionList}"/>
+     			   	</p:selectOneMenu>
+				</td>
+     			<td>
+					<p:selectOneMenu id="txtSol" value="#{adminMetaInstitucionalDetalle.bean.solicitud}" style="width:200px"  rendered="#{adminMetaInstitucionalDetalle.bean.cantidad gt 1}"> 
+						<f:selectItems value="#{adminMetaInstitucionalDetalle.solicitudList}"/>
+     			   	</p:selectOneMenu>
+				</td>
+       		</tr>
+   			</table>
+		</p:panel> 		
+     </h:form>
+    </ui:define>
+</ui:composition>

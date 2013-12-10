@@ -1,0 +1,112 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+   
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="adm_loc_lst" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{adminLocal.nativeUpdate}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:panel header="#{adminLocal.nombreInstitucion} - Actualizar Local #{adminLocal.bean.nombre} ">
+    		<table class="form_table">
+    		<tr>
+   				<td>
+   				<table>
+   				<tr>
+   					<td><p:outputLabel for="txtNom" value="Nombre" /></td>
+   					<td><p:outputLabel for="txtEnc" value="Encargado" /></td>
+   					<td><p:outputLabel for="txtTel" value="Telefonos" /></td>
+   				</tr>
+   				<tr>
+   					<td><p:inputText   id="txtNom" value="#{adminLocal.bean.nombre}" size="50"/></td>
+   					<td>
+   						<p:selectOneMenu id="txtEnc" value="#{adminLocal.bean.encargado}" style="width:260px"> 
+							<f:selectItems value="#{adminLocal.personalList}" var="Encargado" itemValue="#{Encargado.id}" itemLabel="#{Encargado.apellido_paterno}"/>
+        			   	</p:selectOneMenu>
+        			</td>
+        			<td><p:inputText   id="txtTel" value="#{adminLocal.bean.telefonos}" size="50"/></td>
+   				</tr>
+   				</table>
+   				</td>
+   			</tr>
+    		<tr>
+   				<td>
+   				<table>
+   				<tr>
+   					<td><p:outputLabel for="txtDep" value="Departamento" /></td>
+   					<td><p:outputLabel for="txtPro" value="Provincia" /></td>
+    				<td><p:outputLabel for="txtDis" value="Distrito" /></td>
+    				<td><p:outputLabel for="txtDir" value="Dirección" /></td>
+   				</tr>
+    			<tr>
+    				<td>
+    					<p:selectOneMenu id="txtDep" value="#{adminLocal.departamento}" style="width:180px;">
+							<f:selectItems value="#{adminLocal.depList}" var="lstDep" itemValue="#{lstDep.departamento}" itemLabel="#{lstDep.descripcion}"/>
+							<p:ajax event="change" update=":frmNew:txtPro,:frmNew:txtDis" listener="#{adminLocal.fillPro}"/>
+						</p:selectOneMenu>		    			
+	       			</td>
+	       			<td>
+	    				<p:selectOneMenu id="txtPro" value="#{adminLocal.provincia}" style="width:180px;">
+							<f:selectItems value="#{adminLocal.proList}" var="lstPro" itemValue="#{lstPro.provincia}" itemLabel="#{lstPro.descripcion}"/>
+							<p:ajax event="change" update=":frmNew:txtDis" listener="#{adminLocal.fillDis}"/>
+						</p:selectOneMenu>
+	       			</td>
+	       			<td>
+	    				<p:selectOneMenu id="txtDis" value="#{adminLocal.bean.ubigeo}" style="width:180px;">
+							<f:selectItems value="#{adminLocal.disList}" var="lstDis" itemValue="#{lstDis.id}" itemLabel="#{lstDis.descripcion}"/>
+							<p:ajax event="change"/>
+						</p:selectOneMenu>
+	       			</td>	   
+	       			<td><p:inputText id="txtDir" value="#{adminLocal.bean.direccion}" style="width:400px;"/></td> 				
+    			</tr>	
+   				</table>
+   				</td>
+   			</tr>
+   			<tr>
+   				<td>
+   				<table>
+   				<tr>
+   					<td><p:outputLabel for="txtRef" value="Referencia" /></td>
+   					<td><p:outputLabel for="txtLat" value="Latitud" /></td>
+    				<td><p:outputLabel for="txtLon" value="Longitud" /></td>
+   				</tr>
+   				<tr>
+   					<td><p:inputText id="txtRef" value="#{adminLocal.bean.referencia}" size="70"/></td>
+   					<td><p:inputText id="txtLat" value="#{adminLocal.bean.latitud}" size="15"/></td>
+   					<td><p:inputText id="txtLon" value="#{adminLocal.bean.longitud}" size="15"/></td>
+   				</tr>
+   				</table>
+   				</td>
+   			</tr>
+    		</table>
+    		<table class="form_table">
+    		<tr>
+	    		<td><p:outputLabel for="txtRes" value="Resolucion" /></td>
+   		        <td><p:outputLabel for="txtSol" value="Solicitud"/></td>
+	    	</tr>
+	    	<tr>
+	    		<td>
+   					<p:selectOneMenu id="txtRes" value="#{adminLocal.bean.resolucion}" style="width:200px" filter="true" filterMatchMode="startsWith"> 
+						<f:selectItems value="#{adminLocal.resolucionList}"/>
+        		   	</p:selectOneMenu>
+   				</td>
+   				<td>
+   					<p:selectOneMenu id="txtSol" value="#{adminLocal.bean.solicitud}" style="width:200px"> 
+						<f:selectItems value="#{adminLocal.solicitudList}"/>
+        			</p:selectOneMenu>
+   				</td>
+   			</tr>
+   			</table>
+		</p:panel> 		
+     </h:form>
+    </ui:define>
+</ui:composition>

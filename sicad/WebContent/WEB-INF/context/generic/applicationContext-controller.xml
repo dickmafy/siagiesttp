@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="genericController" class="com.belogick.factory.util.controller.GenericController" scope="request"  parent="genericValidation">
+		<property name="service" ref="genericService"></property>
+	</bean>	
+	<bean id="genericReport" class="com.belogick.factory.util.controller.GenericReport" scope="session" parent="genericController">
+		<property name="service" ref="genericService"></property>		
+	</bean>
+	<bean id="genericValidation" class="com.belogick.factory.util.controller.GenericValidation" scope="request"/>	
+	
+</beans>

@@ -1,0 +1,69 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{marcoProfesion.nativeNew}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+   		<p:dataTable id="itemList" var="item" value="#{marcoProfesion.beanList}" 
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  
+   			paginator="true" rows="8"  paginatorPosition="bottom"
+        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+     		
+     		<f:facet name="header">
+				<h:outputText value="Lista de Profesiones (#{marcoProfesion.defaultListSize})" />  
+			</f:facet>
+			
+			<p:column headerText="Familia" style="width:20%; align:center;" sortBy="#{item.nombreFamilia}" filterBy="#{item.nombreFamilia}">   
+				<h:outputText value="#{item.nombreFamilia}" />  
+			</p:column>	
+			
+			<p:column headerText="Nombre" style="width:55%; align:center;" sortBy="#{item.nombre}" filterBy="#{item.nombre}">   
+				<h:outputText value="#{item.nombre}" />  
+			</p:column>		
+			
+			<p:column headerText="Duración" style="width:10%; align:center;" sortBy="#{item.duracion}" filterBy="#{item.duracion}">   
+				<h:outputText value="#{item.duracion} Semestres"  rendered="#{item.duracion gt 0}"/> 
+			</p:column>		
+		
+			
+			<p:column headerText="Opciones" style="width:15%">  
+				<p:commandButton icon="icn_prf_general" 	title="Datos Generales" 		action="#{marcoProfesion.nativeLoad}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{marcoProfesion.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_prf_productivo" 	title="Referente Productivo" 	action="#{marcoProfesion.optionGoProductivo}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{marcoProfesion.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_prf_educativo" 	title="Referente Educativo" 	action="#{marcoProfesion.optionGoEducativo}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{marcoProfesion.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_prf_requisito" 	title="Itinerario" 	action="#{marcoProfesion.optionGoItinerario}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{marcoProfesion.beanSelected}" />
+				</p:commandButton>
+		 		
+				 <p:commandButton icon="icn_item_disable" 	title="Habilitar" 		action="#{marcoProfesion.nativeEnabled}"	 ajax="false"	
+                	update=":frmList:itemList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_DISABLED}">
+                	 <f:setPropertyActionListener value="#{item}" target="#{marcoProfesion.beanSelected}" /> 
+                </p:commandButton>
+                <p:commandButton icon="icn_item_enable" 	title="Deshabilitar" 	action="#{marcoProfesion.nativeDisabled}" ajax="false"	
+                	update=":frmList:itemList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_ENABLED}">
+                	 <f:setPropertyActionListener value="#{item}" target="#{marcoProfesion.beanSelected}" /> 
+                </p:commandButton>
+             
+        	</p:column>      	        
+		</p:dataTable> 
+	</h:form>
+	
+	
+    </ui:define>
+</ui:composition>

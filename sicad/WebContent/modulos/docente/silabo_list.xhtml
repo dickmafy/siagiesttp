@@ -1,0 +1,109 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>  
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">
+	    		<p:spacer width="6px"/>
+	    		
+	    		<p:outputLabel for="txtAnn" value="Año  " style="position:relative;  top:-4px;"/>
+	    		<p:selectOneMenu id="txtAnn" value="#{horarioMetaDetalle.annio}" style="position:relative;  top:2px; width:120px">
+                    <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        <f:selectItem itemLabel="2013"  itemValue="2013" />
+           	        <f:selectItem itemLabel="2014" 	itemValue="2014" />
+           	        <f:selectItem itemLabel="2015" 	itemValue="2015" />
+           	        <f:selectItem itemLabel="2016" 	itemValue="2016" />
+           	        <f:selectItem itemLabel="2017" 	itemValue="2017" /> 
+           	        <p:ajax event="change" update=":frmList" listener="#{horarioMetaDetalle.selectAnnio}"/>       
+       	       	</p:selectOneMenu>
+       	       	
+       	       	<p:outputLabel for="txtPrc" value="     Proceso  " style="position:relative;  top:-4px;"/>
+		   		<p:selectOneMenu id="txtPrc" value="#{horarioMetaDetalle.proceso}" style="position:relative;  top:3px; width:120px">
+		   			<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+					<f:selectItems value="#{horarioMetaDetalle.procesoList}"/>
+					<p:ajax event="change" update=":frmList" listener="#{horarioMetaDetalle.selectProceso}"/>
+				</p:selectOneMenu>
+				
+				<p:outputLabel for="txtPrf" value="        Profesión  " style="position:relative;  top:-4px;"/>
+		   		<p:selectOneMenu id="txtPrf" value="#{horarioMetaDetalle.profesion}" style="position:relative;  top:3px; width:320px">
+		   			<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+					<f:selectItems value="#{horarioMetaDetalle.profesionList}"/>
+					<p:ajax event="change" update=":frmList" listener="#{horarioMetaDetalle.defaultList}"/>
+				</p:selectOneMenu>
+				
+				<p:outputLabel for="txtTur" value="        Turno  " style="position:relative;  top:-4px;"/>
+		   		<p:selectOneMenu id="txtTur" value="#{horarioMetaDetalle.turno}" style="position:relative;  top:2px;  width:120px">
+                    <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        <f:selectItem itemLabel="Mañana"  	itemValue="1" />
+           	        <f:selectItem itemLabel="Tarde" 	itemValue="2" />
+           	        <f:selectItem itemLabel="Noche" 	itemValue="3" /> 
+           	        <p:ajax event="change" update=":frmList" listener="#{horarioMetaDetalle.defaultList}"/>       
+       	       	</p:selectOneMenu>
+				
+				<p:spacer width="6px"/>
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+  
+   		<p:dataTable id="itemList" var="item" value="#{horarioMetaDetalle.beanList}" filteredValue="#{horarioMetaDetalle.beanFilterList}"
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom" >
+     		
+     		<f:facet name="header">
+				<h:outputText value="Distribución de Secciones por Detalle de Meta Institucional" />  
+			</f:facet>
+							
+			<p:column headerText="Módulo" style="width:5%; align:center;" >   
+				<h:outputText value="MP#{item.valorModulo}" title="MÓDULO PROFESIONAL: #{item.nombreModulo}" rendered="#{item.tipo eq 1}"/>
+				<h:outputText value="MT" title="MÓDULO TRANSVERSAL: #{item.nombreModulo}" rendered="#{item.tipo eq 2}"/>
+			</p:column>		
+			
+			<p:column headerText="Unidad" style="width:45%; align:center;" >   
+				<h:outputText value="#{item.nombreUnidad}" title="UNIDAD DIDACTICA: #{item.nombreUnidad}"/>
+			</p:column>
+			
+			<p:column headerText="Ingr." style="width:5%; align:center;" >   
+				<h:outputText value="#{item.ingresantes}"/>
+			</p:column>	
+			<p:column headerText="Reg." style="width:5%; align:center;" >   
+				<h:outputText value="#{item.regular}"/>
+			</p:column>
+			<p:column headerText="Rez." style="width:5%; align:center;" >   
+				<h:outputText value="#{item.rezagados}"/>
+			</p:column>
+			<p:column headerText="Ret." style="width:5%; align:center;" >   
+				<h:outputText value="#{item.retiros}"/>
+			</p:column>
+			<p:column headerText="Avn/Tot" style="width:6%; align:center;" >   
+				<h:outputText value="#{item.metaAvance}/#{item.metaTotal}"/>
+			</p:column>
+			
+			<p:column headerText="Permiso" style="width:7%; align:center;" >   
+				<h:outputText value="#{item.nombrePermiso}"/>
+				<h:outputText value=" (#{item.cantidad})" rendered="#{item.permiso eq 2}"/>
+			</p:column>
+			
+			<p:column headerText="Estado" style="width:10%; align:center;" >   
+				<h:outputText value="#{item.nombreEstado}"/>
+			</p:column>
+			
+			<p:column headerText="Opciones" style="width:7%">  
+				<p:commandButton icon="icn_item_section" 	title="Secciones" 		action="#{horarioMetaDetalle.optionSeccion}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{horarioMetaDetalle.beanSelected}" />
+				</p:commandButton> 
+				<p:commandButton icon="icn_prc_publicar" 	title="Publicar" 	action="#{horarioMetaDetalle.optionPublicar}" ajax="false" rendered="#{item.estado eq 2}">
+					<f:setPropertyActionListener value="#{item}" target="#{horarioMetaDetalle.beanSelected}" />
+				</p:commandButton>
+        	</p:column>  
+        	      	        
+		</p:dataTable>
+		
+		
+	</h:form>
+    </ui:define>
+</ui:composition>

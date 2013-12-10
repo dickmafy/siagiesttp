@@ -1,0 +1,148 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>  		
+      	<p:spacer height="4px"/>
+      					
+   		<p:dataTable id="itemList" var="item" value="#{admisionProceso.beanList}" 
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  
+   			paginator="true" rows="#{constante.LIST_SIZE}"  paginatorPosition="bottom"
+        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+     		
+     		<f:facet name="header">
+				<h:outputText value="Lista de Procesos de Admisión" />  
+			</f:facet>
+	
+			<p:column headerText="Año" style="width:10%; align:center;" sortBy="#{item.annio}">   
+				<h:outputText value="#{item.annio}" />  
+			</p:column>	
+			<p:column headerText="Tipo de Proceso" style="width:15%; align:center;" sortBy="#{item.nombreTipo}">   
+				<h:outputText value="#{item.nombreTipo}" />  
+			</p:column>	
+			<p:column headerText="Periodo" style="width:15%; align:center;" sortBy="#{item.nombrePeriodo}">   
+				<h:outputText value="#{item.nombrePeriodo}" />  
+			</p:column>	
+			<p:column headerText="Ejecución" style="width:20%; align:center;" sortBy="#{item.nombreEjecucion}">   
+				<h:outputText value="#{item.nombreEjecucion}" />  
+			</p:column>	
+			
+			<p:column headerText="Estado" style="width:20%; align:center;" sortBy="#{item.nombreEstado}">   
+				<h:outputText value="#{item.nombreEstado}" />  
+			</p:column>	
+			
+			<p:column headerText="Opciones" style="width:20%">  
+				<p:commandButton icon="icn_item_detail" 	title="Ver Detalle de Proceso" 	   action="#{admisionProceso.nativeLoad}" ajax="false" rendered="#{item.estado ne 1}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />
+				</p:commandButton>
+				
+				<p:commandButton icon="icn_item_update" 	title="Actualizar" 	   action="#{admisionProceso.nativeLoad}" ajax="false" rendered="#{item.estado eq 1}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_item_process" 	title="Publicar" 	oncomplete="dialogPubPro.show()" rendered="#{item.estado eq 2}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />				
+				</p:commandButton>
+				<p:commandButton icon="icn_item_remove" 	title="Anular" 		oncomplete="dialogAnuPro.show()" rendered="#{item.estado eq 1}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />				
+				</p:commandButton>
+				
+						
+				<p:commandButton icon="icn_prc_postulante" 	title="Registrar Postulantes" 	   action="#{admisionProceso.optionGoPostulante}" ajax="false" rendered="#{item.estado eq 3}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_item_process" 	title="Iniciar Etapa Admisión" 		oncomplete="dialogAdmPro.show()" rendered="#{item.estado eq 3}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />				
+				</p:commandButton>
+				
+				
+				<p:commandButton icon="icn_prc_postulantes" 	title="Ver Postulantes" 	   action="#{admisionProceso.optionGoPostulante}" ajax="false" rendered="#{item.estado gt 3}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_prc_ingresante" 	title="Registrar Ingresantes" 	   action="#{admisionProceso.optionGoAdmision}" ajax="false" rendered="#{item.estado eq 4}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />
+				</p:commandButton>
+					<p:commandButton icon="icn_item_process" 	title="Iniciar Etapa Matricula" 		oncomplete="dialogMatPro.show()" rendered="#{item.estado eq 4}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />				
+				</p:commandButton>
+				
+
+				<p:commandButton icon="icn_prc_ingresante" 	title="Ver Ingresantes" 	   action="#{admisionProceso.optionGoAdmision}" ajax="false" rendered="#{item.estado gt 4}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_prc_matricula" 	title="Matricula" 	   action="#{admisionProceso.optionGoMatricula}" ajax="false" rendered="#{item.estado eq 5}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_item_process" 	title="Iniciar Etapa Academica" 	   action="#{admisionProceso.optionAcademica}" ajax="false" rendered="#{item.estado eq 5}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />
+				</p:commandButton>
+				
+				<p:commandButton icon="icn_prc_ingresante" 	title="Ver Matriculados" 	   action="#{admisionProceso.optionGoMatricula}" ajax="false" rendered="#{item.estado gt 5}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_prc_ingresante" 	title="Ver Retiros" 	   action="#{admisionProceso.optionGoMatricula}" ajax="false" rendered="#{item.estado gt 5}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_item_process" 	title="Finalizar Proceso" 	   action="#{admisionProceso.optionFinalizar}" ajax="false" rendered="#{item.estado eq 6}">
+					<f:setPropertyActionListener value="#{item}" target="#{admisionProceso.beanSelected}" />
+				</p:commandButton>
+				
+							
+				
+        	</p:column>      	        
+		</p:dataTable> 
+	</h:form>
+		
+		<!-- Anular Proceso -->
+		<p:confirmDialog widgetVar="dialogAnuPro" width="350" appendToBody="true"
+			header="Mensaje de Confirmacion" message="¿Estas seguro de anular este proceso de admisión?" style="font-size:13px;"
+        	closable="true" severity="alert" closeOnEscape="true">
+        	<h:form>	
+			<h:panelGroup style="text-align: right;" >
+				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogAnuPro.hide()"  actionListener="#{admisionProceso.optionAnular}"  update=":frmList"/>
+        		<p:commandButton value="No" id="cancelButton" onclick="dialogAnuPro.hide()"/>   
+			</h:panelGroup>
+			</h:form>	
+   		</p:confirmDialog>
+   		
+   		<!-- Publicar Proceso -->
+		<p:confirmDialog widgetVar="dialogPubPro" width="350" appendToBody="true"
+			header="Mensaje de Confirmacion" message="¿Estas seguro de publicar este proceso de admisión?" style="font-size:13px;"
+        	closable="true" severity="alert" closeOnEscape="true">
+        	<h:form>	
+			<h:panelGroup style="text-align: right;" >
+				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogPubPro.hide()"  actionListener="#{admisionProceso.optionPublicar}"  update=":frmList"/>
+        		<p:commandButton value="No" id="cancelButton" onclick="dialogPubPro.hide()"/>   
+			</h:panelGroup>
+			</h:form>	
+   		</p:confirmDialog>
+   		
+   		<!-- Admisión -->
+		<p:confirmDialog widgetVar="dialogAdmPro" width="350" appendToBody="true"
+			header="Mensaje de Confirmacion" message="¿Estas seguro de iniciar el proceso de admisión?" style="font-size:13px;"
+        	closable="true" severity="alert" closeOnEscape="true">
+        	<h:form>	
+			<h:panelGroup style="text-align: right;" >
+				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogAdmPro.hide()"  actionListener="#{admisionProceso.optionAdmision}"  update=":frmList"/>
+        		<p:commandButton value="No" id="cancelButton" onclick="dialogAdmPro.hide()"/>   
+			</h:panelGroup>
+			</h:form>	
+   		</p:confirmDialog>
+   		
+   		<!-- Matricula -->
+		<p:confirmDialog widgetVar="dialogMatPro" width="350" appendToBody="true"
+			header="Mensaje de Confirmacion" message="¿Estas seguro de iniciar el proceso de matricula" style="font-size:13px;"
+        	closable="true" severity="alert" closeOnEscape="true">
+        	<h:form>	
+			<h:panelGroup style="text-align: right;" >
+				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogMatPro.hide()"  actionListener="#{admisionProceso.optionMatricula}"  update=":frmList"/>
+        		<p:commandButton value="No" id="cancelButton" onclick="dialogMatPro.hide()"/>   
+			</h:panelGroup>
+			</h:form>	
+   		</p:confirmDialog>
+    </ui:define>
+</ui:composition>

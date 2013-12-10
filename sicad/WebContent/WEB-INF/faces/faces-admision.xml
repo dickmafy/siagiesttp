@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+    
+    <!-- JSF and Spring are integrated -->
+     <application>
+  		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+  	</application>
+  	
+	<!-- Procesos -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_pro_lst</from-outcome>
+			<to-view-id>/modulos/admision/proceso_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_pro_upd</from-outcome>
+			<to-view-id>/modulos/admision/proceso_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Interesado -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_int_new</from-outcome>
+			<to-view-id>/modulos/admision/interesado_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_int_list</from-outcome>
+			<to-view-id>/modulos/admision/interesado_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_int_update</from-outcome>
+			<to-view-id>/modulos/admision/interesado_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Ingresante -->
+		<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_ing_lst</from-outcome>
+			<to-view-id>/modulos/admision/ingresante_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<!-- Postulante -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_pos_lst</from-outcome>
+			<to-view-id>/modulos/admision/postulante_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_pos_new</from-outcome>
+			<to-view-id>/modulos/admision/postulante_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_pos_upd</from-outcome>
+			<to-view-id>/modulos/admision/postulante_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_pos_det</from-outcome>
+			<to-view-id>/modulos/admision/postulante_detail.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+
+	<!-- Matricula -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_mat_lst</from-outcome>
+			<to-view-id>/modulos/admision/matricula_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_mat_det</from-outcome>
+			<to-view-id>/modulos/admision/matricula_detail.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_mat_upd</from-outcome>
+			<to-view-id>/modulos/admision/matricula_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+			
+	<!-- Retiro -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_ret_new</from-outcome>
+			<to-view-id>/modulos/admision/retiro_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Requisitos -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_req_lst</from-outcome>
+			<to-view-id>/modulos/admision/requisito_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_req_new</from-outcome>
+			<to-view-id>/modulos/admision/requisito_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+</faces-config>

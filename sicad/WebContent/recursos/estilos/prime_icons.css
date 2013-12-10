@@ -1,0 +1,133 @@
+/* Session */
+/* ======= */
+.session_logout 
+{ background-image: url('../iconos/session_logout.png') !important; }
+.session_update
+{ background-image: url('../iconos/session_update.png') !important; }
+.session_password
+{ background-image: url('../iconos/session_password.png') !important; }
+.system_logo
+{ background-image: url('../iconos/system_logo.png') !important; }
+
+/* Item */
+/* ==== */
+.icn_item_disable
+{ background-image: url('../iconos/item_disable.png') !important; }
+.icn_item_enable
+{ background-image: url('../iconos/item_enable.png') !important; }
+.icn_item_reset
+{ background-image: url('../iconos/item_reset.png') !important; }
+.icn_item_update
+{ background-image: url('../iconos/item_update.png') !important; }
+.icn_item_remove
+{ background-image: url('../iconos/item_remove.png') !important; }
+.icn_item_account
+{ background-image: url('../iconos/item_account.png') !important; }
+.icn_item_area
+{ background-image: url('../iconos/item_area.png') !important; }
+.icn_item_role
+{ background-image: url('../iconos/item_role.png') !important; }
+.icn_item_people
+{ background-image: url('../iconos/item_people.png') !important; }
+.icn_item_office
+{ background-image: url('../iconos/item_office.png') !important; }
+.icn_item_send
+{ background-image: url('../iconos/item_send.png') !important; }
+.icn_item_approve
+{ background-image: url('../iconos/item_approve.png') !important; }
+.icn_item_disapprove
+{ background-image: url('../iconos/item_disapprove.png') !important; }
+.icn_item_detail
+{ background-image: url('../iconos/item_detail.png') !important; }
+.icn_item_print
+{ background-image: url('../iconos/item_print.png') !important; }
+.icn_item_users
+{ background-image: url('../iconos/item_users.png') !important; }
+.icn_item_calendar
+{ background-image: url('../iconos/item_calendar.png') !important; }
+.icn_item_profesion
+{ background-image: url('../iconos/item_profesion.png') !important; }
+.icn_item_aula
+{ background-image: url('../iconos/item_aula.png') !important; }
+.icn_item_process
+{ background-image: url('../iconos/item_process.png') !important; }
+.icn_item_download
+{ background-image: url('../iconos/item_download.png') !important; }
+.icn_item_hand
+{ background-image: url('../iconos/item_hand.png') !important; }
+.icn_item_goal
+{ background-image: url('../iconos/item_goal.png') !important; }
+.icn_item_historial
+{ background-image: url('../iconos/item_historial.png') !important; }
+.icn_item_section
+{ background-image: url('../iconos/item_section.png') !important; }
+.icn_item_teacher
+{ background-image: url('../iconos/item_teacher.png') !important; }
+.icn_item_sillabo
+{ background-image: url('../iconos/item_sillabo.png') !important; }
+.icn_item_results
+{ background-image: url('../iconos/item_results.png') !important; }
+.icn_item_strategy
+{ background-image: url('../iconos/item_strategy.png') !important; }
+.icn_item_activities
+{ background-image: url('../iconos/item_activities.png') !important; }
+.icn_item_indicator
+{ background-image: url('../iconos/item_indicator.png') !important; }
+
+/* Bar */
+/* ==== */
+.icn_bar_back
+{ background-image: url('../iconos/bar_back.png') !important; }
+.icn_bar_new
+{ background-image: url('../iconos/bar_new.png') !important; }
+.icn_bar_save
+{ background-image: url('../iconos/bar_save.png') !important; }
+.icn_bar_search
+{ background-image: url('../iconos/bar_search.png') !important; }
+.icn_bar_undo
+{ background-image: url('../iconos/bar_undo.png') !important; }
+.icn_bar_pdf
+{ background-image: url('../iconos/bar_pdf.png') !important; }
+.icn_bar_xls
+{ background-image: url('../iconos/bar_xls.png') !important; }
+
+/* Profesiones */
+/* =========== */
+.icn_prf_general
+{ background-image: url('../iconos/prf_general.png') !important; }
+.icn_prf_productivo
+{ background-image: url('../iconos/prf_productivo.png') !important; }
+.icn_prf_educativo
+{ background-image: url('../iconos/prf_educativo.png') !important; }
+.icn_prf_requisito
+{ background-image: url('../iconos/prf_requisito.png') !important; }
+
+
+/* Instituto */
+/* =========== */
+.icn_ist_local
+{ background-image: url('../iconos/ist_local.png') !important; }
+.icn_ist_personal
+{ background-image: url('../iconos/ist_personal.png') !important; }
+.icn_ist_estructura
+{ background-image: url('../iconos/ist_estructura.png') !important; }
+
+/* Proceso */
+/* =========== */
+.icn_prc_publicar
+{ background-image: url('../iconos/prc_publicar.png') !important; }
+.icn_prc_ingresante
+{ background-image: url('../iconos/prc_ingresante.png') !important; }
+.icn_prc_postulante
+{ background-image: url('../iconos/prc_postulante.png') !important; }
+.icn_prc_postulantes
+{ background-image: url('../iconos/prc_postulantes.png') !important; }
+.icn_prc_retiro
+{ background-image: url('../iconos/prc_retiro.png') !important; }
+.icn_prc_matricula
+{ background-image: url('../iconos/prc_matricula.png') !important; }
+
+/* Solicitud */
+/* =========== */
+.icn_sol_enviar
+{ background-image: url('../iconos/item_enviar.png') !important; }

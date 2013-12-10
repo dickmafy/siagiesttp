@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- Mi Institución -->
+	<bean id="institucionAmbiente" class="modules.institucion.controller.InstitucionAmbiente" scope="session" parent="genericController">	  
+	    <property name="bean" ref="ambiente"/>	  
+	</bean>
+	
+	<bean id="institucionConvenio" class="modules.institucion.controller.InstitucionConvenio" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="seguridadService"/>
+	    <property name="bean" ref="convenio"/>
+	</bean>
+	
+	<bean id="institucionFeriado" class="modules.institucion.controller.InstitucionFeriado" scope="session" parent="genericController">	  
+	    <property name="bean" ref="feriado"/>	  
+	</bean>
+	
+	<bean id="institucionGeneral" class="modules.institucion.controller.InstitucionGeneral" scope="session" parent="genericController">	  
+	    <property name="bean" ref="institucion"/>	  
+	</bean>
+	
+	<bean id="institucionOferta" class="modules.institucion.controller.InstitucionOferta" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="seguridadService"/>
+	    <property name="bean" ref="institucion"/>	  
+	</bean>
+	
+	<bean id="institucionProceso" class="modules.institucion.controller.InstitucionProceso" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="seguridadService"/>
+	    <property name="bean" ref="cronograma"/>	  
+	</bean>
+	
+	<bean id="institucionPersonal" class="modules.institucion.controller.InstitucionPersonal" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="seguridadService"/>
+	    <property name="bean" ref="personal"/>	  
+	</bean>
+	
+	<bean id="institucionMetaIest" class="modules.institucion.controller.InstitucionMetaIest" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="seguridadService"/>
+	    <property name="bean" ref="metaInstitucional"/>	  
+	</bean>
+	
+	<bean id="institucionMetaCetpro" class="modules.institucion.controller.InstitucionMetaCetpro" scope="session" parent="genericController">
+		<property name="myService" 	ref="seguridadService"/>	  
+	    <property name="bean" 		ref="metaOcupacional"/>	  
+	</bean>
+	
+	<bean id="institucionHistorialAcademico" class="modules.institucion.controller.InstitucionHistorialAcademico" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="seguridadService"/>
+	    <property name="bean" ref="historialAcademico"/>	  
+	</bean>
+	
+	<bean id="institucionHistorialLaboral" class="modules.institucion.controller.InstitucionHistorialLaboral" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="seguridadService"/>
+	    <property name="bean" ref="historialLaboral"/>	  
+	</bean>
+	
+	
+	<bean id="institucionSolicitud" class="modules.institucion.controller.InstitucionSolicitud" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="seguridadService"/>
+	    <property name="bean" ref="solicitud"/>	  
+	</bean>
+	<bean id="consultaSolicitud" class="modules.institucion.controller.ConsultaSolicitud" scope="session" parent="genericController">	  
+	     <property name="myService" 	ref="seguridadService"/>
+	    <property name="bean" ref="solicitud"/>	  
+	</bean>
+	
+	<bean id="institucionUsuario" class="modules.institucion.controller.InstitucionUsuario" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="seguridadService"/>
+	    <property name="bean" ref="usuario"/>	  
+	</bean>
+	
+	<bean id="institucionUnidad" class="modules.institucion.controller.InstitucionUnidad" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="marcoService"/>
+	    <property name="bean" ref="ambienteUnidad"/>	  
+	</bean>
+		
+</beans>
