@@ -1,0 +1,77 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" actionListener="#{mantenimientoColegio.init}" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{mantenimientoColegio.nativeSave}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:panel header="Actualizar - #{mantenimientoColegio.bean.nombre}"> 
+    		<table class="form_table">
+    			<tr>
+    				<td><p:outputLabel for="txtTip" value="Tipo" /></td>  
+    				<td><p:outputLabel for="txtNom" value="Nombre" /></td>
+    				
+    		 	</tr>
+    		 	<tr>
+    				<td><p:selectOneMenu id="txtTip" value="#{mantenimientoColegio.bean.tipo}" style="width:180px;">
+	                        <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+	            	        <f:selectItem itemLabel="PARTICULAR"         itemValue="1" />
+	            	        <f:selectItem itemLabel="ESTATAL"           itemValue="2" />
+        			   		</p:selectOneMenu>
+        			</td>
+        			<td><p:inputText id="txtNom" value="#{mantenimientoColegio.bean.nombre}" size="68"/></td>
+        		</tr>
+        	</table>
+        	<table>
+    			<tr>
+   					<td><p:outputLabel for="txtDep"  value="Departamento" /></td>
+   					<td><p:outputLabel for="txtProv"  value="Provincia" /></td>
+   					<td><p:outputLabel for="txtDis"  value="Distrito" /></td>
+   				</tr>
+   				<tr>
+   					<td>	
+	  					<p:selectOneMenu id="txtDep" value="#{mantenimientoColegio.departamento}" style="width:180px;">
+						<f:selectItems value="#{mantenimientoColegio.depList}" var="lstDep" itemValue="#{lstDep.departamento}" itemLabel="#{lstDep.descripcion}"/>
+						<p:ajax event="change" update=":frmNew:txtProv,:frmNew:txtDis" listener="#{mantenimientoColegio.fillPro}"/>
+						</p:selectOneMenu>		    			
+	      			</td>
+	      			<td>
+		   				<p:selectOneMenu id="txtProv" value="#{mantenimientoColegio.provincia}" style="width:180px;">
+							<f:selectItems value="#{mantenimientoColegio.proList}" var="lstPro" itemValue="#{lstPro.provincia}" itemLabel="#{lstPro.descripcion}"/>
+							<p:ajax event="change" update=":frmNew:txtDis" listener="#{mantenimientoColegio.fillDis}"/>
+						</p:selectOneMenu>
+	      			</td>
+	      			<td>
+		   				<p:selectOneMenu id="txtDis" value="#{mantenimientoColegio.bean.ubigeo}" style="width:180px;">
+							<f:selectItems value="#{mantenimientoColegio.disList}" var="lstDis" itemValue="#{lstDis.id}" itemLabel="#{lstDis.descripcion}"/>
+							<p:ajax event="change"/>
+						</p:selectOneMenu>
+	      			</td>	   
+   				</tr>
+   			</table>
+   			<table>
+    		 	<tr>
+    				<td><p:outputLabel for="txtDir" value="Dirección" /></td>
+    				<td colspan="2"><p:outputLabel for="txtTel" value="Teléfono" /></td> 
+    				  			
+    			</tr>
+    			<tr>
+    				<td><p:inputText size="78" id="txtDir" value="#{mantenimientoColegio.bean.direccion}"/></td>
+    				<td colspan="2"><p:inputText id="txtTel" value="#{mantenimientoColegio.bean.telefono}"/></td>
+    			</tr>
+    		</table>
+		</p:panel> 		
+     </h:form>
+    </ui:define>
+</ui:composition>

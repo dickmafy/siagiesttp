@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	   http://www.springframework.org/schema/aop
+	   http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	
+	<bean id="seccion"         		class="modules.horario.domain.Seccion" 	            scope="session" />
+	<bean id="silabo" 				class="modules.horario.domain.Silabo"				scope="session" />
+	<bean id="silaboNota" 			class="modules.horario.domain.SilaboNota"			scope="session" />
+	<bean id="silaboProgramacion" 	class="modules.horario.domain.SilaboProgramacion"	scope="session" />
+	<bean id="silaboCronograma" 	class="modules.horario.domain.SilaboCronograma"		scope="session" />
+	<bean id="horarioRecuperacion" 	class="modules.horario.domain.HorarioRecuperacion"	scope="session" />
+	<bean id="horarioDistribucion" 	class="modules.horario.domain.HorarioDistribucion"	scope="session" />
+	<bean id="horarioDocente" 		class="modules.horario.domain.HorarioDocente"		scope="session" />
+	<bean id="asistenciaDocente" 	class="modules.horario.domain.AsistenciaDocente"	scope="session" />
+</beans>

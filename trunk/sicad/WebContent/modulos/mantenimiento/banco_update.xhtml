@@ -1,0 +1,39 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">
+	    	    <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="banco_list"       ajax="false" />  
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{mantenimientoBanco.nativeSave}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	<p:panel header="Actualizar - #{mantenimientoBanco.bean.nombre}">
+			<table>
+               <tr>
+                  <td><p:outputLabel for="txtNom" value="Nombre" /></td>
+                  <td><p:outputLabel for="txtSig" value="Siglas" /></td>  
+                </tr>
+                <tr>
+                   <td><p:inputText   id="txtNom" value="#{mantenimientoBanco.bean.nombre}" size="60"/></td>
+                   <td><p:inputText   id="txtSig" value="#{mantenimientoBanco.bean.siglas}" size="10"/></td>
+                   
+                </tr>
+                <tr>
+                	<td colspan="2"><p:outputLabel for="txtDes" value="Descripción" /></td>
+                </tr>
+                <tr>
+                	<td colspan="2"><p:inputTextarea rows="6" cols="78" id="txtDes"  value="#{mantenimientoBanco.bean.descripcion}"/>  </td>
+                </tr>
+            </table>
+		</p:panel>  		
+	</h:form>
+  </ui:define>
+</ui:composition>

@@ -1,0 +1,74 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+     
+       	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" actionListener="#{perfilController.init}" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{perfilController.nativeSave}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:panel header="Agregar Nuevo Perfil">
+    	
+    		<p:tabView id="tabOption" style="border:none;">  
+				<p:tab id="tabInf" title="Datos Generales">
+	  			<table class="form_table">
+	    			<tr>
+	    				<td><p:outputLabel for="txtTip" value="Tipo" /></td>
+	    				<td><p:outputLabel for="txtNom" value="Nombre" /></td>
+	    			</tr>
+	    			<tr>
+	    				<td><p:selectOneMenu id="txtTip" value="#{perfilController.bean.tipo}" size="20">
+    			          <f:selectItem    itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />     
+            		      <f:selectItem itemLabel="Sistema"         itemValue="1" />  
+            		      <f:selectItem itemLabel="Institucional"   itemValue="2" />
+            		      <f:selectItem itemLabel="UGEL"    		itemValue="3" />  
+            		      <f:selectItem itemLabel="DRE"   	 		itemValue="4" />
+            		      <p:ajax event="change" update=":frmNew:tabOption:itemList" listener="#{perfilController.fillAccesos}"/>
+        	          	</p:selectOneMenu>
+        	          	</td>
+        	          	<td><p:inputText id="txtNom" value="#{perfilController.bean.nombre}" size="60"/></td>
+	    			</tr>
+	    		</table>
+	    		<table>
+					<tr><td><p:outputLabel for="txtDes" value="Descripción" /></td></tr>
+					<tr><td><p:inputText id="txtDes" value="#{perfilController.bean.descripcion}" style="width:460px;"/></td></tr>
+	    		</table>
+    			</p:tab>
+    			  			
+  		   		<p:tab id="tabAcc" title="Lista de Accesos" >
+	  			<p:dataTable id="itemList" var="item" value="#{perfilController.menuList}" filteredValue="#{perfilController.menuFilterList}"
+		      		 scrollable="true" scrollHeight="280">
+					<p:column headerText="Menu" style="width:93%; align:center;">       
+						<h:graphicImage value="#{constante.PATH_ICONS}/system_module.png" rendered="#{item.modulo eq 0 and item.menu eq 0}"  style="top:3px; position:relative"/>
+			        	<h:outputText value="#{item.titulo}" style="margin-left:4px; font-weight:bold;" rendered="#{item.modulo eq 0 and item.menu eq 0}" />
+			        	
+						<h:graphicImage value="#{constante.PATH_ICONS}/system_folder.png" rendered="#{item.modulo ne 0 and item.menu eq 0}"  style="margin-left:15px; top:3px; position:relative"/>
+			        	<h:outputText value="#{item.titulo}" style="margin-left:10px; font-weight:bold;" rendered="#{item.modulo ne 0 and item.menu eq 0}" />
+			        	
+			        	<h:graphicImage value="#{constante.PATH_ICONS}/system_item.png" rendered="#{item.menu ne 0}" style="margin-left:30px; top:4px; position:relative"/>
+			        	<h:outputText value="#{item.titulo}" style="margin-left:10px;" rendered="#{item.menu ne 0}" />
+			        	
+					</p:column>
+					<p:column headerText="Acceso" style="width:7%">  
+						<p:commandLink action="#{perfilController.clickMenu}" update=":frmNew">
+							<p:selectBooleanCheckbox value="#{item.selected}" />  
+							<f:setPropertyActionListener value="#{item}" target="#{perfilController.menuSelected}" />
+						</p:commandLink>
+					</p:column>      	        
+				</p:dataTable>
+				</p:tab>  
+			</p:tabView>
+		</p:panel> 		
+     </h:form>
+    </ui:define>
+</ui:composition>

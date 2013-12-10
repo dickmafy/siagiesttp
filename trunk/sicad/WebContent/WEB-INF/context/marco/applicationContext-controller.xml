@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- Marco Educativo -->
+	<bean id="marcoFamilia" class="modules.marco.controller.MarcoFamilia" scope="session" parent="genericController">
+		<property name="bean" 		ref="familia"/>
+	</bean>
+	<bean id="marcoTransversal" class="modules.marco.controller.MarcoTransversal" scope="session" parent="genericController">
+		<property name="bean" 		ref="transversal"/>
+		<property name="myService" 	ref="marcoService"/>
+	</bean>
+	<bean id="marcoProfesion" class="modules.marco.controller.MarcoProfesion" scope="session" parent="genericController">
+		<property name="bean" 		ref="profesion"/>
+		<property name="myService" 	ref="marcoService"/>
+	</bean>
+	<bean id="marcoOcupacion" class="modules.marco.controller.MarcoOcupacion" scope="session" parent="genericController">
+		<property name="bean" 		ref="profesion"/>
+		<property name="myService" 	ref="marcoService"/>
+	</bean>
+	<bean id="marcoItinerario" class="modules.marco.controller.MarcoItinerario" scope="session" parent="genericController">
+		<property name="bean" 		ref="referenteItinerario"/>
+		<property name="myService" 	ref="marcoService"/>
+	</bean>
+	<bean id="profesionProductivo" class="modules.marco.controller.ProfesionProductivo" scope="session" parent="genericController">
+		<property name="bean" 		ref="referenteProductivo"/>
+		<property name="myService" 	ref="marcoService"/>
+	</bean>
+	<bean id="profesionEducativo" class="modules.marco.controller.ProfesionEducativo" scope="session" parent="genericController">
+		<property name="bean" 		ref="referenteEducativo"/>
+		<property name="myService" 	ref="marcoService"/>
+	</bean>
+	<bean id="profesionItinerario" class="modules.marco.controller.ProfesionItinerario" scope="session" parent="genericController">
+		<property name="bean" 		ref="referenteItinerario"/>
+		<property name="myService" 	ref="marcoService"/>
+	</bean>
+	<bean id="profesionItinerarioTransversal" class="modules.marco.controller.ProfesionItinerarioTransversal" scope="session" parent="genericController">
+		<property name="bean" 		ref="referenteItinerarioTransversal"/>
+		<property name="myService" 	ref="marcoService"/>
+	</bean>
+	
+</beans>

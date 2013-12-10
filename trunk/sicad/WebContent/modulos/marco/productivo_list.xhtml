@@ -1,0 +1,125 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">
+	    		<p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="#{profesionProductivo.returnPage}" ajax="false" />
+		        <p:commandButton title="Agregar" 	value="Agregar" 	icon="icn_bar_new" 	actionListener="#{profesionProductivo.nativeNew}" ajax="false" />
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:panel header="Referente Productivo - #{profesionProductivo.nombreProfesion}">
+      	<p:tabView id="tabOption" style="border:none;">
+      	  
+			<p:tab id="tabCap" title="Capacidades Profesionales">
+			
+				<p:dataTable id="capacidadList" var="item" value="#{profesionProductivo.capacidadList}"
+	   			emptyMessage="#{constante.LIST_EMPTY}" rowIndexVar="rowNumber" scrollable="true" >
+	     		
+	     		<p:column headerText="#" style="width:1%; align:center;">
+							<h:outputText value="#{rowNumber+1}" />  
+						</p:column>
+						
+	     		<p:column headerText="Descripción" style="width:89%; align:center;" sortBy="#{item.descripcion}">   
+					<h:outputText value="#{item.descripcion}" title="CP#{rowNumber+1} - #{item.descripcion}"/>  
+				</p:column>	
+				
+				<p:column headerText="Opciones" style="width:10%">
+					<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{profesionProductivo.nativeLoad}" ajax="false">
+						<f:setPropertyActionListener value="#{item}" target="#{profesionProductivo.beanSelected}" />
+					</p:commandButton>
+					<p:commandButton icon="icn_item_disable" 	title="Habilitar" 		action="#{profesionProductivo.nativeEnabled}"	 ajax="false"	
+	                	update=":frmNew:tabOption:capacidadList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_DISABLED}">
+	                	 <f:setPropertyActionListener value="#{item}" target="#{profesionProductivo.beanSelected}" /> 
+	                </p:commandButton>
+	                <p:commandButton icon="icn_item_enable" 	title="Deshabilitar" 	action="#{profesionProductivo.nativeDisabled}" ajax="false"	
+	                	update=":frmNew:tabOption:capacidadList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_ENABLED}">
+	                	 <f:setPropertyActionListener value="#{item}" target="#{profesionProductivo.beanSelected}" /> 
+	                </p:commandButton>
+					 <p:commandButton icon="icn_item_remove" 	title="Eliminar" 		oncomplete="dialogDel.show()">
+					<f:setPropertyActionListener value="#{item}" target="#{profesionProductivo.beanSelected}" />				
+				</p:commandButton> 
+	        	</p:column>
+	        	      	        
+				</p:dataTable> 
+    		</p:tab>
+    		
+    		
+    		<p:tab id="tabUnd" title="Unidades de Competencia">
+				<p:dataTable id="esquemaList" var="item" value="#{profesionProductivo.esquemaList}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+	     		
+	     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
+					<h:outputText value="UC#{item.nivelA}: #{item.descripcion}" title="UNIDAD DE COMPETENCIA #{item.nivelA}: #{item.descripcion}" rendered="#{item.nivelB eq 0 and item.nivelC eq 0}" style="font-weight:bold"/>
+					<h:outputText value="    R#{item.nivelB}: #{item.descripcion}" title="REALIZACIÓN #{item.nivelB}: #{item.descripcion}" rendered="#{item.nivelB ne 0 and item.nivelC eq 0}"/>
+					<h:outputText value="        CR#{item.nivelC}: #{item.descripcion}" title="CRITERIO DE REALIZACIÓN: #{item.descripcion}" rendered="#{item.nivelC ne 0}"/>
+					  
+				</p:column>	
+				
+				<p:column headerText="Opciones" style="width:10%">
+					<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{profesionProductivo.nativeLoad}" ajax="false">
+						<f:setPropertyActionListener value="#{item}" target="#{profesionProductivo.beanSelected}" />
+					</p:commandButton>
+					<p:commandButton icon="icn_item_disable" 	title="Habilitar" 		action="#{profesionProductivo.nativeEnabled}"	 ajax="false"	
+	                	update=":frmNew:tabOption:capacidadList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_DISABLED}">
+	                	 <f:setPropertyActionListener value="#{item}" target="#{profesionProductivo.beanSelected}" /> 
+	                </p:commandButton>
+	                <p:commandButton icon="icn_item_enable" 	title="Deshabilitar" 	action="#{profesionProductivo.nativeDisabled}" ajax="false"	
+	                	update=":frmNew:tabOption:capacidadList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_ENABLED}">
+	                	 <f:setPropertyActionListener value="#{item}" target="#{profesionProductivo.beanSelected}" /> 
+	                </p:commandButton>
+					 <p:commandButton icon="icn_item_remove" 	title="Eliminar" 		oncomplete="dialogDel.show()">
+					<f:setPropertyActionListener value="#{item}" target="#{profesionProductivo.beanSelected}" />				
+				</p:commandButton> 
+	        	</p:column>
+	        	      	        
+				</p:dataTable> 
+			
+    		</p:tab>
+    		
+    		<p:tab id="tabRub" title="Rubros">
+			
+				<p:dataTable id="rubroList" var="item" value="#{profesionProductivo.rubroList}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true" scrollable="true">
+	     		
+	     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
+	     			<h:outputText value="UC#{item.nivelA}:" style="font-weight:bold"/>
+					<h:outputText value="  - Medios: #{item.descripcion}" title="Unidad de Competencia #{item.nivelA} - Rubro Medios y Materiales de Producción: #{item.descripcion}" rendered="#{item.nivelB eq 1}"/>					  
+					<h:outputText value="  - Resultados: #{item.descripcion}" title="Unidad de Competencia #{item.nivelA} - Rubro Principales Resultados del Trabajo: #{item.descripcion}" rendered="#{item.nivelB eq 2}"/>
+					<h:outputText value="  - Procesos: #{item.descripcion}" title="Unidad de Competencia #{item.nivelA} - Rubro Procesos Métodos y Procedimientos: #{item.descripcion}" rendered="#{item.nivelB eq 3}"/>
+					<h:outputText value="  - Información: #{item.descripcion}" title="Unidad de Competencia #{item.nivelA} - Rubro Información: #{item.descripcion}" rendered="#{item.nivelB eq 4}"/>
+				</p:column>	
+				
+				<p:column headerText="Opciones" style="width:10%">
+					<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{profesionProductivo.nativeLoad}" ajax="false" rendered="#{item.nivelB gt 0}">
+						<f:setPropertyActionListener value="#{item}" target="#{profesionProductivo.beanSelected}" />
+					</p:commandButton>
+	        	</p:column>
+	        	      	        
+				</p:dataTable> 
+    		</p:tab>
+    		
+    	</p:tabView>
+		</p:panel>
+     </h:form>
+    <!-- Eliminar -->
+	<p:confirmDialog widgetVar="dialogDel" width="350" appendToBody="true"
+		header="Mensaje de Confirmación" message="¿Estas seguro de eliminar este elemento?" style="font-size:13px;"
+       	closable="true" severity="alert" closeOnEscape="true">
+       	<h:form>	
+		<h:panelGroup style="text-align: right;" >
+			<p:commandButton value="Si" id="deleteButton" oncomplete="dialogDel.hide()"  actionListener="#{profesionProductivo.nativeRemove}"  update=":frmNew"/>
+       		<p:commandButton value="No" id="cancelButton" onclick="dialogDel.hide()"/>   
+		</h:panelGroup>
+		</h:form>	
+  	</p:confirmDialog>
+    </ui:define>
+</ui:composition>

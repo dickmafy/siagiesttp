@@ -1,0 +1,108 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>  
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">
+	    		<p:toolbarGroup align="left">
+	    		<p:commandButton title="Regresar" value="Regresar" icon="icn_bar_back" action="hor_meta_det" ajax="false" />
+			</p:toolbarGroup>  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+  
+  		<p:fieldset>      	
+    		<table class="form_table" style="width:100%">
+    		<tr>
+    			<td width="6%"><p:outputLabel styleClass="form_readonly_title" value="Año" /></td>
+    			<td width="8%"><p:outputLabel styleClass="form_readonly_value" value="#{horarioMetaDetalle.annio}" /></td>
+    			
+    			<td width="8%"><p:outputLabel styleClass="form_readonly_title" value="Profesión" /></td>
+    			<td width="66%"><p:outputLabel styleClass="form_readonly_value" value="#{horarioMetaDetalle.beanSelected.nombreProfesion}" /></td>
+    		</tr>
+    		<tr>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Proceso" /></td>
+    			<td>
+    				<p:outputLabel styleClass="form_readonly_value" value="Enero" 		rendered="#{horarioMetaDetalle.proceso eq 1}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Febrero" 	rendered="#{horarioMetaDetalle.proceso eq 2}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Marzo" 		rendered="#{horarioMetaDetalle.proceso eq 3}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Abril" 		rendered="#{horarioMetaDetalle.proceso eq 4}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Mayo" 		rendered="#{horarioMetaDetalle.proceso eq 5}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Junio" 		rendered="#{horarioMetaDetalle.proceso eq 6}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Julio" 		rendered="#{horarioMetaDetalle.proceso eq 7}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Agosto" 		rendered="#{horarioMetaDetalle.proceso eq 8}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Septiembre" 	rendered="#{horarioMetaDetalle.proceso eq 9}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Octubre" 	rendered="#{horarioMetaDetalle.proceso eq 10}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Noviembre" 	rendered="#{horarioMetaDetalle.proceso eq 11}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Diciembre" 	rendered="#{horarioMetaDetalle.proceso eq 12}" />
+    			</td>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Módulo" /></td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{horarioMetaDetalle.beanSelected.nombreModulo}" /></td>
+    		</tr>
+    		<tr>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Turno" /></td>
+    			<td>
+    				<p:outputLabel styleClass="form_readonly_value" value="Mañana" 	rendered="#{horarioMetaDetalle.turno eq 1}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Tarde" 	rendered="#{horarioMetaDetalle.turno eq 2}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Noche" 	rendered="#{horarioMetaDetalle.turno eq 3}" />
+    			</td>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Unidad Didáctica" /></td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{horarioMetaDetalle.beanSelected.nombreUnidad} (#{horarioMetaDetalle.beanSelected.valorHoras} horas) " /></td>
+    		</tr>
+    		</table>
+    	</p:fieldset>
+    	<p:spacer height="5px"/>
+    	
+   		<p:panel>
+		<table class="form_table">
+		<tr><td><p:outputLabel for="txtSec" value="Sección" /></td></tr>
+		<tr>
+			<td>
+        		<p:selectOneMenu id="txtSec" value="#{horarioSeccion.seccion}" style="width:220px;" >
+					<f:selectItems value="#{horarioSeccion.seccionList}"/>
+					<p:ajax event="change" update=":frmList" listener="#{horarioSeccion.selectSeccion}"/>
+				</p:selectOneMenu>
+			</td>
+		</tr>
+		</table>
+		</p:panel>
+		
+		<p:dataTable id="horarioList" var="item" value="#{horarioSeccion.ambienteTipoList}" emptyMessage="#{constante.LIST_EMPTY}" >
+     		
+     		<f:facet name="header">
+				<h:outputText value="Horarios por Tipo de Ambiente de la Unidad Didáctica" />  
+			</f:facet>
+							
+			<p:column headerText="Tipo" style="width:10%; align:center;" >   
+				<h:outputText value="#{item.nombreTipo}"/>
+			</p:column>		
+			
+			<p:column headerText="Ambiente" style="width:10%; align:center;" >   
+				<h:outputText value="#{item.nombreAmbiente}"/>
+			</p:column>
+			
+			<p:column headerText="Capacidad" style="width:10%; align:center;" >   
+				<h:outputText value="#{item.valorCapacidad}"/>
+			</p:column>				
+			
+			<p:column headerText="Horas" style="width:10%; align:center;" >   
+				<h:outputText value="#{item.horas}"/>
+			</p:column>
+			
+			<p:column headerText="Opciones" style="width:7%">  
+				<p:commandButton icon="icn_item_section" 	title="Actualizar Horario" 		action="#{horarioSeccion.optionHorario}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{horarioSeccion.beanSelected}" />
+				</p:commandButton>
+        	</p:column>  
+        	      	        
+		</p:dataTable>
+		
+	</h:form>
+    </ui:define>
+</ui:composition>

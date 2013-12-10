@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="applicationContextProvider" class="com.belogick.factory.util.support.ApplicationContextProvider"></bean>
+	
+	<bean id="taskExecutorOrder"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="10" />
+		<property name="maxPoolSize" value="15" />
+		<property name="queueCapacity" value="3000" />	
+	</bean>
+	
+	<!--Cron Task Defined-->
+    <bean id="jobDetailBean" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="com.aprolab.sicad.jobs.MatenimientoLog" />
+    </bean>
+	
+	<!--CronJobs Defined-->
+    <bean id="cronTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="jobDetailBean" />
+        <property name="cronExpression" value="0/59 * * * * ?" />
+    <!--Daily Morning 2-->
+    </bean>
+    
+	<!--Trigger for cronJobs-->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="cronTriggerBean"/>
+            </list>
+        </property>
+    </bean>
+	
+</beans>

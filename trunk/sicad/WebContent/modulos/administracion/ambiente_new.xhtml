@@ -1,0 +1,61 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+     
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="adm_amb_lst"       ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{adminAmbiente.nativeSave}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	<p:panel header="#{adminAmbiente.nombreInstitucion} - Local: #{adminAmbiente.nombreLocal} - Nuevo Ambiente">
+	      	<table>
+      		<tr>
+   		        <td><p:outputLabel for="txtTip" 	value="Tipo de Ambiente" /></td>
+   		        <td><p:outputLabel for="txtCod" 	value="Código"/></td>
+   		        <td><p:outputLabel for="txtNom" 	value="Nombre"/></td>
+   		        <td><p:outputLabel for="txtAre" 	value="Area (m2)"/></td>	
+   		        <td><p:outputLabel for="txtCap" 	value="Capacidad"/></td>   		              		        
+   		        <td><p:outputLabel for="txtObs" 	value="Observación"/></td>
+   		  	</tr>
+   		  	<tr>
+        		<td>
+        			<p:selectOneMenu id="txtTip" value="#{adminAmbiente.bean.tipo}" style="width:200px"> 
+						<f:selectItems value="#{adminAmbiente.ambienteTipoList}"/>
+        			</p:selectOneMenu>
+	    		</td>
+	    		<td><p:inputText  	id="txtCod"  value="#{adminAmbiente.bean.codigo}" size="10"/></td>
+	    		<td><p:inputText  	id="txtNom"  value="#{adminAmbiente.bean.nombre}" size="20"/></td>
+	    		<td><p:spinner  	id="txtAre"  value="#{adminAmbiente.bean.area}" size="5"/></td>
+	    		<td><p:spinner  	id="txtCap"  value="#{adminAmbiente.bean.capacidad}" size="3"/></td>	    		
+	    		<td><p:inputText  	id="txtObs"  value="#{adminAmbiente.bean.observacion}" size="40"/></td>
+	    	</tr>
+	    	
+	    	<tr>
+	    		<td><p:outputLabel for="txtRes" value="Resolucion" /></td>
+   		        <td colspan="5"><p:outputLabel for="txtSol" value="Solicitud"/></td>
+	    	</tr>
+	    	<tr>
+	    		<td>
+   					<p:selectOneMenu id="txtRes" value="#{adminAmbiente.bean.resolucion}" style="width:200px" filter="true" filterMatchMode="startsWith"> 
+						<f:selectItems value="#{adminAmbiente.resolucionList}"/>
+        		   	</p:selectOneMenu>
+   				</td>
+   				<td colspan="5">
+   					<p:selectOneMenu id="txtSol" value="#{adminAmbiente.bean.solicitud}" style="width:200px"> 
+						<f:selectItems value="#{adminAmbiente.solicitudList}"/>
+        			</p:selectOneMenu>
+   				</td>
+   			</tr>
+        	</table>
+ 		</p:panel> 		
+</h:form>
+</ui:define>        
+</ui:composition>

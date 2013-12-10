@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	   http://www.springframework.org/schema/aop
+	   http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	
+	<!-- Modulo Mantenimiento -->
+	<bean id="banco" 	 		class="modules.mantenimiento.domain.Banco" 					scope="session" />
+	<bean id="recurso" 	 		class="modules.mantenimiento.domain.Recurso" 				scope="session" />
+	<bean id="puesto" 	 		class="modules.mantenimiento.domain.Puesto" 				scope="session" />
+	<bean id="feriadoGeneral"  	class="modules.mantenimiento.domain.FeriadoGeneral"			scope="session" />
+	<bean id="supervision"		class="modules.mantenimiento.domain.Supervision"			scope="session" />
+	<bean id="requisito"		class="modules.mantenimiento.domain.Requisito"				scope="session" />
+	<bean id="empresa"   		class="modules.mantenimiento.domain.Empresa"				scope="session" />
+	<bean id="negocio"   		class="modules.mantenimiento.domain.GiroNegocio"			scope="session" />
+	<bean id="colegio"   		class="modules.mantenimiento.domain.Colegio"			    scope="session" />
+	<bean id="especialidad"   	class="modules.mantenimiento.domain.Especialidad"			scope="session" />
+	<bean id="resolucion"   	class="modules.mantenimiento.domain.Resolucion" 			scope="session" />
+	<bean id="profession"   	class="modules.mantenimiento.domain.Profession" 			scope="session" />
+	<bean id="tipoAmbiente"   	class="modules.mantenimiento.domain.TipoAmbiente" 			scope="session" />
+</beans>

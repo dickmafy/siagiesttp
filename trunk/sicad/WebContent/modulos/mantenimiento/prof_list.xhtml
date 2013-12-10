@@ -1,0 +1,67 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{mantenimientoProfesion.nativeNew}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+   		<p:dataTable id="itemList" var="item" value="#{mantenimientoProfesion.beanList}" 
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  
+   			paginator="true" rows="#{constante.LIST_SIZE}"    paginatorPosition="bottom" 
+        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+     		
+     		<f:facet name="header">
+				<h:outputText value="Lista de Profesiones (#{mantenimientoProfesion.defaultListSize})" />  
+			</f:facet>
+			<p:column headerText="Nombre" style="width:40%; align:center;" sortBy="#{item.nombre}" >   
+				<h:outputText value="#{item.nombre}" />  
+			</p:column>	
+			
+			<p:column headerText="Descripción" style="width:40%; align:center;" sortBy="#{item.descripcion}" >   
+				<h:outputText value="#{item.descripcion}" />  
+			</p:column>		
+			
+			<p:column headerText="Opciones" style="width:13%">  
+				<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{mantenimientoProfesion.nativeLoad}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{mantenimientoProfesion.beanSelected}" />
+				</p:commandButton>
+				
+                <p:commandButton icon="icn_item_disable" 	title="Habilitar" 		action="#{mantenimientoProfesion.nativeEnabled}"	 ajax="false"	
+                	update=":frmList:itemList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_DISABLED}">
+                	 <f:setPropertyActionListener value="#{item}" target="#{mantenimientoProfesion.beanSelected}" /> 
+                </p:commandButton>
+                <p:commandButton icon="icn_item_enable" 	title="Deshabilitar" 	action="#{mantenimientoProfesion.nativeDisabled}" ajax="false"	
+                	update=":frmList:itemList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_ENABLED}">
+                	 <f:setPropertyActionListener value="#{item}" target="#{mantenimientoProfesion.beanSelected}" /> 
+                </p:commandButton>
+                 <p:commandButton icon="icn_item_remove" 	title="Eliminar" 		oncomplete="dialogUsrDel.show()">
+					<f:setPropertyActionListener value="#{item}" target="#{mantenimientoProfesion.beanSelected}" />				
+				</p:commandButton> 
+        	</p:column>      	        
+		</p:dataTable> 
+	</h:form>
+		
+		<!-- Eliminar Usuario -->
+		<p:confirmDialog widgetVar="dialogUsrDel" width="350" appendToBody="true"
+			header="Mensaje de Confirmación" message="¿Estas seguro de eliminar?" style="font-size:13px;"
+        	closable="true" severity="alert" closeOnEscape="true">
+        	<h:form>	
+			<h:panelGroup style="text-align: right;" >
+				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogUsrDel.hide()"  actionListener="#{mantenimientoProfesion.nativeRemove}"  update=":frmList"/>
+        		<p:commandButton value="No" id="cancelButton" onclick="dialogUsrDel.hide()"/>   
+			</h:panelGroup>
+			</h:form>	
+   		</p:confirmDialog>
+    
+    </ui:define>
+</ui:composition>

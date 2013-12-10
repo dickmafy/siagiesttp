@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- Seguridad y Accesos -->
+	<bean id="evaluacionAspecto" class="modules.evaluaciones.controller.EvaluacionAspecto" scope="session" parent="genericController">
+	   	    <property name="bean" ref="aspecto"/>	    
+	</bean>
+	<bean id="evaluacionPregunta" class="modules.evaluaciones.controller.EvaluacionPregunta" scope="session" parent="genericController">
+	   	    <property name="bean" ref="pregunta"/>	    
+	</bean>
+	<bean id="evaluacionIndicador" class="modules.evaluaciones.controller.EvaluacionIndicador" scope="session" parent="genericController">
+	   	    <property name="bean" ref="indicadores"/>	    
+	</bean>
+	<bean id="evaluacionEscala" class="modules.evaluaciones.controller.EvaluacionEscala" scope="session" parent="genericController">
+	   	    <property name="bean" ref="escala"/>	    
+	</bean>
+	
+	<bean id="evaluacionInstrumento" class="modules.evaluaciones.controller.EvaluacionInstrumento" scope="session" parent="genericController">
+	   	    <property name="bean" ref="instrumento"/>	    
+	</bean>
+	<bean id="evaluacionUniverso" class="modules.evaluaciones.controller.EvaluacionUniverso" scope="session" parent="genericController">
+	   	    <property name="bean" ref="universo"/>	    
+	</bean>
+	<bean id="evaluacionEscalaDetalle" class="modules.evaluaciones.controller.EvaluacionEscalaDetalle" scope="session" parent="genericController">
+	   	    <property name="bean" ref="escalaDetalle"/>	    
+	</bean>
+	<bean id="evaluacionRango" class="modules.evaluaciones.controller.EvaluacionRango" scope="session" parent="genericController">
+	   	    <property name="bean" ref="rango"/>	    
+	</bean>
+	
+	<bean id="evaluacionBalotario" class="modules.evaluaciones.controller.EvaluacionBalotario" scope="session" parent="genericController">
+	   	    <property name="bean" ref="balotario"/>	  
+	   	 <!--  <property name="myPregunta" ref="pregunta"/> -->  
+	</bean>
+	
+	<bean id="evaluacionEncuesta" class="modules.evaluaciones.controller.EvaluacionEncuesta" scope="session" parent="genericController">
+	   	  <property name="bean" ref="balotario"/>	    
+	</bean>
+	
+</beans>

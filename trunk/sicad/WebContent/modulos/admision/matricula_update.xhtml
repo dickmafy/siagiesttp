@@ -1,0 +1,149 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmUpd" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
+  		
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+	    		<p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="adm_mat_lst"       ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{admisionMatricula.nativeUpdate}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>
+      	<p:spacer height="4px"/>
+			      			
+		<p:panel header="REGISTRO DE MATRICULA - #{admisionMatricula.bean.personaNombre} #{admisionMatricula.bean.personaPaterno} #{admisionMatricula.bean.personaMaterno}">		
+   		<p:tabView id="tabView">  
+    	   	<p:tab id="TabDatosGenerales" title="Datos Generales" >  
+   			<table class="form_table" style="width:100%">
+  			<tr>
+  			<td width="10%"><img alt="Foto" src="#{request.contextPath}/#{admisionMatricula.pic}"  height="128px" width="128px"/></td>
+   			<td width="90%">
+   				<table>
+   				<tr>
+	   				<td><p:outputLabel  value="Profesion" 	style="font-weight:bold"/></td>
+	   				<td><p:outputLabel  value="Turno" 		style="font-weight:bold"/></td>
+	   				<td><p:outputLabel  value="Seccion" 	style="font-weight:bold"/></td>
+  					</tr>
+	        	<tr>	
+        			<td><p:outputLabel  value="#{admisionMatricula.bean.nombreEspecialidad}" /><p:spacer width="14px"/></td>
+        			<td><p:outputLabel  value="#{admisionMatricula.bean.nombreTurno}" /><p:spacer width="14px"/></td>
+        			<td>
+  						<p:selectOneMenu   style="width:130px;"  value="#{admisionMatricula.bean.seccion}" >
+		    			   	<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+            		    	<f:selectItem itemLabel="101 A"	itemValue="1" />  
+            		    	<f:selectItem itemLabel="102 A"	itemValue="2" /> 
+            		    	<f:selectItem itemLabel="103 A"	itemValue="3" /> 
+        				</p:selectOneMenu>
+		        	</td>
+    	    	</tr>
+    	    	</table>
+    	
+	   			<p:spacer height="4px"/>
+	   			<table class="form_table" style="width:100%">
+   				<tr>
+   					<td width="12%"><p:outputLabel value="Nro Documento" style="font-weight:bold" /></td>
+   					<td width="10%"><p:outputLabel  value="Nombres  "  style="font-weight:bold"/></td>
+   					<td width="15%"><p:outputLabel  value="Apellido Paterno"  style="font-weight:bold" /></td>
+   					<td width="70%"><p:outputLabel   value="Apellido Materno" style="font-weight:bold" /></td>
+   				</tr>
+   				<tr>
+   					<td><p:outputLabel id="txtNdoc" value="#{admisionMatricula.bean.personaDni}" /></td>	
+   					<td><p:outputLabel   id="txtNom"  value="#{admisionMatricula.bean.personaNombre}"/></td>
+        			<td><p:outputLabel   id="txtApp"  value="#{admisionMatricula.bean.personaPaterno}"/></td>
+        			<td><p:outputLabel   id="txtApm"  value="#{admisionMatricula.bean.personaMaterno}"/></td>
+   				</tr>
+   				</table>
+   				<table class="form_table" style="width:100%">
+   				<tr>
+   					<td width="15%"><p:outputLabel value="Correo  " style="font-weight:bold"/></td>
+   					<td width="10%"><p:outputLabel  value="Celular " style="font-weight:bold"/></td>
+   					<td width="75%"><p:outputLabel  value="Telefonos  " style="font-weight:bold" /></td>
+   				</tr>
+   				<tr>
+   					<td><p:outputLabel   id="txtCor"  value="#{admisionMatricula.bean.personaCorreo}" size="40"/></td>
+   					<td><p:outputLabel   id="txtCel"  value="#{admisionMatricula.bean.personaCelular}" size="15"/></td>
+   					<td><p:outputLabel   id="txtTel"  value="#{admisionMatricula.bean.personaTelefono}" size="25"/></td>
+   				</tr>
+	   			</table>
+	   			<p:spacer height="4px"/>
+	   			<table class="form_table">
+	 				<tr><td><p:outputLabel value="Dirección " style="font-weight:bold"/></td></tr>
+	  				<tr><td><p:outputLabel id="txtDir" value="#{admisionMatricula.bean.personaDireccion}" style="width:400px;"/></td></tr>  				
+	 			</table>
+	 		</td>
+	 		</tr>
+		 	</table>
+ 			</p:tab>
+ 			<p:tab id="tab5" title="Detalle de Matricula" >  
+ 				
+ 				<table class="form_table">
+	 				<tr>
+	 					<td><p:outputLabel value="Tipo Módulo " style="font-weight:bold"/></td>
+	 					<td><p:outputLabel value="Módulo " style="font-weight:bold"/></td>
+	 				</tr>
+	  				<tr>
+	  					<td>
+	  					<p:selectOneMenu  id="txtTipMod" style="width:200px;"  value="#{admisionMatricula.tipo}" >
+		    			   	<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+            		    	<f:selectItem itemLabel="Módulo Profesional"	itemValue="1" />  
+            		    	<f:selectItem itemLabel="Módulo Transversal"	itemValue="2" />
+            		    	<p:ajax event="change" update=":frmUpd:tabView:txtMod" listener="#{admisionMatricula.selectTipo}"/>
+        				</p:selectOneMenu>
+        				</td>
+        				<td>
+        				<p:selectOneMenu id="txtMod" value="#{admisionMatricula.modulo}" style="width:550px;">
+							<f:selectItems value="#{admisionMatricula.moduloList}"/>
+						</p:selectOneMenu>	
+        				</td>
+	  				</tr>  				
+	 			</table>
+ 				
+ 				
+				 
+ 			</p:tab>
+ 			
+ 			<p:tab id="tab6" title="Requisitos Mínimos" >  
+ 				<p:dataTable id="requisitoList" var="item" value="#{admisionMatricula.requisitos}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  >
+	     		
+	     		<p:column style="width:9%; align:center;">   
+					<p:selectBooleanCheckbox value="#{item.check}"/>
+				</p:column>	
+				
+				<p:column headerText="Requisito" style="width:98%; align:center;">   
+					<h:outputText value="#{item.nombreRequisito}" />  
+				</p:column>	
+				</p:dataTable> 
+ 			</p:tab>
+ 			
+ 			<p:tab id="tabPagos" title="Pagos" >
+ 			<table class="form_table">
+   				<tr>
+   					<td><p:outputLabel value="Fecha" /></td>
+   					<td><p:outputLabel  value="Banco" /></td>
+   					<td><p:outputLabel  value="Recibo Nro."/></td>
+   				</tr>
+   				<tr>
+ 					<td><p:calendar    id="txtPagFec"  value="#{admisionMatricula.bean.pago_fecha}"  showOn="button" navigator="true" pattern="dd/mm/yyyy" readonlyInput="true" yearRange="c" size="10" /></td>
+ 					<td>
+ 						<p:selectOneMenu id="txtPagBco" value="#{admisionMatricula.bean.pago_banco}" style="width:280px;">
+							<f:selectItems value="#{admisionMatricula.bancoList}" var="lstBco" itemValue="#{lstBco.id}" itemLabel="#{lstBco.descripcion}"/>
+							<p:ajax event="change"/>
+						</p:selectOneMenu>
+	        		</td>
+ 					<td><p:inputText id="txtPagRec" value="#{admisionMatricula.bean.pago_recibo}" size="20"/></td>
+ 				</tr>
+   			</table>
+ 			</p:tab>
+ 			
+		</p:tabView>
+		</p:panel>
+	</h:form>
+    </ui:define>
+</ui:composition>

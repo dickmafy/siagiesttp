@@ -1,0 +1,152 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="#{profesionEducativo.returnPage}" ajax="false" />
+		        <p:commandButton title="Agregar" 	value="Agregar" 	icon="icn_bar_new" 	actionListener="#{profesionEducativo.nativeNew}" ajax="false" />
+		        
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:panel header="Referente Educativo - #{profesionEducativo.nombreProfesion}">
+      	<p:tabView id="tabOption" style="border:none;">
+      	  
+			<p:tab id="tabUnd" title="Modulos Profesionales">
+				<p:dataTable id="esquemaList" var="item" value="#{profesionEducativo.esquemaList}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+	     		
+	     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
+					<h:outputText value="MOD#{item.nivelA}: #{item.titulo}" title="MÓDULO #{item.nivelA}: #{item.titulo} - #{item.descripcion}" rendered="#{item.nivelB eq 0 and item.nivelC eq 0}" style="font-weight:bold"/>
+					<h:outputText value="    CT#{item.nivelB}: #{item.descripcion}" title="CAPACIDAD TERMINAL #{item.nivelB}: #{item.descripcion}" rendered="#{item.nivelB ne 0 and item.nivelC eq 0}"/>
+					<h:outputText value="        CE#{item.nivelC}: #{item.descripcion}" title="CRITERIO DE EVALUACIÓN #{item.nivelC}: #{item.descripcion}" rendered="#{item.nivelC ne 0}"/>					  
+				</p:column>	
+				
+				<p:column headerText="Opciones" style="width:10%">
+					<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{profesionEducativo.nativeLoad}" ajax="false">
+						<f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" />
+					</p:commandButton>
+					<p:commandButton icon="icn_item_disable" 	title="Habilitar" 		action="#{profesionEducativo.nativeEnabled}"	 ajax="false"	
+	                	update=":frmNew:tabOption:capacidadList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_DISABLED}">
+	                	 <f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" /> 
+	                </p:commandButton>
+	                <p:commandButton icon="icn_item_enable" 	title="Deshabilitar" 	action="#{profesionEducativo.nativeDisabled}" ajax="false"	
+	                	update=":frmNew:tabOption:capacidadList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_ENABLED}">
+	                	 <f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" /> 
+	                </p:commandButton>
+					<p:commandButton icon="icn_item_remove" 	title="Eliminar" 		oncomplete="dialogDel.show()">
+						<f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" />				
+					</p:commandButton> 
+	        	</p:column>
+	        	      	        
+				</p:dataTable> 
+			
+    		</p:tab>
+    		
+    		<p:tab id="tabBas" title="Contenidos Básicos - Profesionales">
+			
+				<p:dataTable id="contenidoList" var="item" value="#{profesionEducativo.contenidoList}"
+	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true" scrollable="true">
+	     		
+	     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
+	     			<h:outputText value="MOD#{item.nivelA}: #{item.descripcion}" title="MOD#{item.nivelA}: #{item.descripcion}"/>					
+				</p:column>	
+				
+				<p:column headerText="Opciones" style="width:10%">
+					<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{profesionEducativo.nativeLoad}" ajax="false" >
+						<f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" />
+					</p:commandButton>
+	        	</p:column>
+	        	      	        
+				</p:dataTable> 
+    		</p:tab>
+    		
+    		<p:tab id="tabTrs" title="Modulos Transversales">
+			
+				<p:dataTable id="transversalList" var="item" value="#{profesionEducativo.transversalList}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+	     		
+	     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">
+	     			<h:outputText value="MODT#{item.nivelA}: #{item.titulo}" title="MÓDULO TRANSVERSAL #{item.nivelA}: #{item.titulo} - #{item.descripcion}" rendered="#{item.nivelB eq 0 and item.nivelC eq 0}" style="font-weight:bold"/>
+					<h:outputText value="    CT#{item.nivelB}: #{item.descripcion}" title="CAPACIDAD TERMINAL #{item.nivelB}: #{item.descripcion}" rendered="#{item.nivelB ne 0 and item.nivelC eq 0}"/>
+					<h:outputText value="        CE#{item.nivelC}: #{item.descripcion}" title="CRITERIO DE EVALUACIÓN #{item.nivelC}: #{item.descripcion}" rendered="#{item.nivelC ne 0}"/>
+				</p:column>	
+				
+				<p:column headerText="Opciones" style="width:10%">
+					<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{profesionEducativo.nativeLoad}" ajax="false">
+						<f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" />
+					</p:commandButton>
+					<p:commandButton icon="icn_item_disable" 	title="Habilitar" 		action="#{profesionEducativo.nativeEnabled}"	 ajax="false"	
+	                	update=":frmNew:tabOption:capacidadList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_DISABLED}">
+	                	 <f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" /> 
+	                </p:commandButton>
+	                <p:commandButton icon="icn_item_enable" 	title="Deshabilitar" 	action="#{profesionEducativo.nativeDisabled}" ajax="false"	
+	                	update=":frmNew:tabOption:capacidadList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_ENABLED}">
+	                	 <f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" /> 
+	                </p:commandButton>
+					<p:commandButton icon="icn_item_remove" 	title="Eliminar" 		oncomplete="dialogDel.show()">
+						<f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" />				
+					</p:commandButton> 
+	        	</p:column>
+	        	      	        
+				</p:dataTable> 
+    		</p:tab>
+    		
+    		<p:tab id="tabBasT" title="Contenidos Básicos - Transversales">
+			
+				<p:dataTable id="contenidoTList" var="item" value="#{profesionEducativo.contenidoTList}"
+	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true" scrollable="true">
+	     		
+	     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
+	     			<h:outputText value="MODT#{item.nivelA}: #{item.descripcion}" title="MODT#{item.nivelA}: #{item.descripcion}"/>					
+				</p:column>	
+				
+				<p:column headerText="Opciones" style="width:10%">
+					<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{profesionEducativo.nativeLoad}" ajax="false" >
+						<f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" />
+					</p:commandButton>
+	        	</p:column>
+	        	      	        
+				</p:dataTable> 
+    		</p:tab>
+    		
+    		
+    		
+    		
+    		
+    	</p:tabView>
+		</p:panel>
+     </h:form>
+    <!-- Eliminar -->
+	<p:confirmDialog widgetVar="dialogDel" width="350" appendToBody="true"
+		header="Mensaje de Confirmación" message="¿Estas seguro de eliminar este elemento?" style="font-size:13px;"
+       	closable="true" severity="alert" closeOnEscape="true">
+       	<h:form>	
+		<h:panelGroup style="text-align: right;" >
+			<p:commandButton value="Si" id="deleteButton" oncomplete="dialogDel.hide()"  actionListener="#{profesionEducativo.nativeRemove}"  update=":frmNew"/>
+       		<p:commandButton value="No" id="cancelButton" onclick="dialogDel.hide()"/>   
+		</h:panelGroup>
+		</h:form>	
+  	</p:confirmDialog>
+  	
+  	 <!-- Eliminar -->
+	<p:confirmDialog widgetVar="dialogDelTra" width="350" appendToBody="true"
+		header="Mensaje de Confirmación" message="¿Estas seguro de eliminar este Modulo Transversal?" style="font-size:13px;"
+       	closable="true" severity="alert" closeOnEscape="true">
+       	<h:form>	
+		<h:panelGroup style="text-align: right;" >
+			<p:commandButton value="Si" id="deleteButton" oncomplete="dialogDelTra.hide()"  actionListener="#{profesionEducativo.optionRemove}"  update=":frmNew"/>
+       		<p:commandButton value="No" id="cancelButton" onclick="dialogDelTra.hide()"/>   
+		</h:panelGroup>
+		</h:form>	
+  	</p:confirmDialog>
+    </ui:define>
+</ui:composition>

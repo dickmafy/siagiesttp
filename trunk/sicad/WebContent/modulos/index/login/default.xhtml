@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"	
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view contentType="text/html">
+<h:head>   
+	<!-- metas -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="web_author" content="Carlos Sanchez Gonzales" />
+	<meta name="copyright" content="2013, PROYECTO APROLAB II" />	
+	<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />	
+	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/recursos/estilos/index.css" />	
+	<title>SICAD</title>
+</h:head>
+<h:body>
+	<p:layout fullPage="true">  
+  
+	    <p:layoutUnit id="tmp_header" position="north" style="background:white"> 
+	    <table width="100%" cellpadding="0" cellspacing="0" >
+		<tr>	
+			<td width="320px">
+			<img src="#{request.contextPath}/recursos/imagenes/sicad_1.png"/>
+			</td>
+			<td style="background:#59585d; background-repeat:repeat-x;"> 
+			<img src="#{request.contextPath}/recursos/imagenes/sicad_2.png"/>
+			</td>
+		</tr>
+		</table>
+	    </p:layoutUnit>  
+	    <p:layoutUnit position="center">  
+	    	<div style="margin-top: 15%; margin-left:35%; ">
+	        <h:form>
+	        <p:growl id="msgLogin" showDetail="false" life="4000" escape="true"/>  
+	      	<p:panel style="width:380px; background:white; border:1px solid #cccccc;" >
+				<p:spacer height="10" width="1" />
+				<h:panelGrid columns="2" style="background-color:white;">
+					<h:panelGrid columns="1" >
+						<img src="#{request.contextPath}/recursos/imagenes/login.png"/>							
+					</h:panelGrid>
+											
+					<h:panelGrid columns="1" >
+						<h:outputText value="Usuario"/>
+						<p:inputText label="Usuario" value="#{loginController.beanSearch.usuario}" style="width:180px" required="true"/>
+						<h:outputText value="Contrase&#241;a"/>
+						<p:password label="Contrase&#241;a" value="#{loginController.beanSearch.contrasena}" style="width:180px" required="true"/>
+						<p:spacer height="1" width="1" />
+						<p:commandButton value="Acceder" action="#{loginController.login}" update="msgLogin" ajax="false"/>  							 										
+					</h:panelGrid>		
+				</h:panelGrid>
+			</p:panel>
+	    	</h:form>
+	    	</div>
+	    </p:layoutUnit>
+	      
+  
+	</p:layout>	
+</h:body>
+</f:view>
+</html>

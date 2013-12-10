@@ -1,0 +1,54 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>  
+  		<p:spacer height="4px"/>
+  
+   		<p:dataTable id="itemList" var="item" value="#{institucionMetaIest.beanList}" filteredValue="#{institucionMetaIest.beanFilterList}"
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom"
+   			paginator="true" rows="7"  
+        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+     		
+     		<f:facet name="header">
+				<h:outputText value="Meta Institucional" />  
+			</f:facet>
+							
+			<p:column headerText="Profesión" style="width:23%; align:center;" >   
+				<h:outputText value="#{item.nombreProfesion}"/>
+			</p:column>		
+			
+			<p:column headerText="Año" style="width:15%; align:center;" >   
+				<h:outputText value="#{item.annio}"/>
+			</p:column>
+			
+			<p:column headerText="Proceso" style="width:15%; align:center;" >   
+				<h:outputText value="#{item.nombreProceso}"/>
+			</p:column>
+			
+			<p:column headerText="Turno" style="width:15%; align:center;" >   
+				<h:outputText value="#{item.nombreTurno}"/>
+			</p:column>
+			
+			<p:column headerText="Meta Matricula" style="width:15%; align:center;" >   
+				<h:outputText value="#{item.meta_matricula}"/>
+			</p:column>	
+			
+			<p:column headerText="Opciones" style="width:7%">  
+				<p:commandButton icon="icn_item_download" 	title="Descargar Resolución"  ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{institucionMetaIest.beanSelected}" />
+					<p:fileDownload value="#{institucionMetaIest.file}"/>
+				</p:commandButton>
+        	</p:column>
+        	      	        
+		</p:dataTable>
+		
+		
+	</h:form>
+    </ui:define>
+</ui:composition>

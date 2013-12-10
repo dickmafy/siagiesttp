@@ -1,0 +1,91 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+   
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="meta_institucional_list" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{adminMetaInstitucional.nativeSave}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:panel header="#{adminMetaInstitucional.nombreInstitucion} - Agregar Nueva Meta Institucional">
+    		<table class="form_table">
+    		<tr>
+   				<td>
+   				<table>
+   				<tr>
+   					
+   					<td><p:outputLabel value="Profesión" /></td>
+   					<td><p:outputLabel value="Año" /></td>
+   					<td><p:outputLabel value="Proceso" /></td>
+   					<td><p:outputLabel value="Turno" /></td>
+   					<td><p:outputLabel value="Meta Matricula" /></td>
+   					
+   					<td><p:outputLabel for="txtRes" value="Resolución" /></td>
+   					<td><p:outputLabel for="txtSol" value="Solicitud" /></td>
+   				</tr>
+   				<tr>
+   					<td>
+   						<p:selectOneMenu value="#{adminMetaInstitucional.bean.profesion}" style="width:145px"> 
+   							<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+							<f:selectItems value="#{adminMetaInstitucional.profesionList}"/>
+        			   	</p:selectOneMenu>
+   					</td>
+   					<td>
+   						<p:selectOneMenu id="txtPro" value="#{adminMetaInstitucional.bean.annio}" style="width:145px">
+   							<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" /> 
+							<f:selectItem itemLabel="2014" itemValue="2014" />
+							<f:selectItem itemLabel="2015" itemValue="2015" />
+							<f:selectItem itemLabel="2016" itemValue="2016" />
+							<f:selectItem itemLabel="2017" itemValue="2017" />
+							<f:selectItem itemLabel="2018" itemValue="2018" />
+							<f:selectItem itemLabel="2019" itemValue="2019" />
+							<f:selectItem itemLabel="2020" itemValue="2020" />
+        			   	</p:selectOneMenu>
+   					</td>
+   					<td>
+						<p:selectOneMenu  value="#{adminMetaInstitucional.bean.proceso}" size="140">
+	    			   		<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+	            		    <f:selectItems value="#{adminMetaInstitucional.listProceso}" var="item" itemValue="#{item.periodo}" itemLabel="#{item.nombrePeriodo}"/>	            		    
+	        			</p:selectOneMenu>
+   					</td>
+   					<td>
+						<p:selectOneMenu  value="#{adminMetaInstitucional.bean.turno}" size="40">
+	    			   		<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+	            		    <f:selectItem itemLabel="MAÑANA"			itemValue="1" />  
+	            		    <f:selectItem itemLabel="TARDE"		itemValue="2" />
+	            		    <f:selectItem itemLabel="NOCHE"			itemValue="3" />
+	        			</p:selectOneMenu>
+   					</td>
+   					<td><p:inputText   id="txtMinimo"  value="#{adminMetaInstitucional.bean.meta_matricula}" 	size="10"/></td>
+   					<td>
+   						<p:selectOneMenu id="txtRes" value="#{adminMetaInstitucional.bean.resolucion}" style="width:150px" filter="true" filterMatchMode="startsWith"> 
+							<f:selectItems value="#{adminMetaInstitucional.resolucionList}"/>
+        			   	</p:selectOneMenu>
+   					</td>
+   					
+        			
+        			<td>
+   						<p:selectOneMenu id="txtSol" value="#{adminMetaInstitucional.bean.solicitud}" style="width:150px"> 
+							<f:selectItems value="#{adminMetaInstitucional.solicitudList}"/>
+        			   	</p:selectOneMenu>
+   					</td>
+   				</tr>
+   				</table>
+   				</td>
+   			</tr>
+    		</table>
+    		
+    		
+		</p:panel> 		
+     </h:form>
+    </ui:define>
+</ui:composition>

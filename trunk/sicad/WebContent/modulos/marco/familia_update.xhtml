@@ -1,0 +1,44 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmUpd" ajaxSubmit="false">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+      	<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" actionListener="#{marcoFamilia.init}" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{marcoFamilia.nativeUpdate}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+    	<p:panel header="Actualizar Familia Profesional - #{marcoFamilia.bean.nombre}"> 
+    		<table class="form_table">
+    			<tr>
+    			<td><p:outputLabel for="txtSec" value="Sector" /></td>
+    			<td><p:outputLabel for="txtNom" value="Nombre" /></td>
+    			<td><p:outputLabel for="txtDes" value="Descripción" /></td>
+    			</tr>
+    			<tr>
+    			<td>
+    				<p:selectOneMenu id="txtSec" value="#{marcoFamilia.bean.sector}" style="width:130px;">  
+		         		<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+		         		<f:selectItem itemLabel="Servicios" 		itemValue="1" /> 
+		         		<f:selectItem itemLabel="Industria" 		itemValue="2" />
+		         		<f:selectItem itemLabel="Agricultura"		itemValue="3" />
+		         		<f:selectItem itemLabel="Mineria" 			itemValue="4" />
+	    			</p:selectOneMenu>
+	    		</td>	
+    			<td><p:inputText id="txtNom" value="#{marcoFamilia.bean.nombre}" 		size="50" readonly="true"/></td>
+    			<td><p:inputText id="txtDes" value="#{marcoFamilia.bean.descripcion}" 	size="120"/></td>
+    			</tr>
+    		</table>
+		</p:panel> 	
+		
+     </h:form>
+    </ui:define>
+</ui:composition>

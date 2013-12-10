@@ -1,0 +1,113 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmUpd" ajaxSubmit="false">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+      	<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" actionListener="#{evaluacionInstrumento.init}" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{evaluacionInstrumento.nativeUpdate}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+    	<p:panel header="Agregar Nuevo Instrumento">
+    		
+    		<table class="form_table">
+    			<tr>
+    			
+    			<td><p:outputLabel for="txtEsc" value="Escala" /></td> 	
+    			<td><p:outputLabel for="txtNom" value="Nombre" /></td>		
+    			
+    			</tr>
+    			
+    			<tr>
+	    			<td>
+	    				<p:selectOneMenu id="txtEsc" value="#{evaluacionInstrumento.bean.escala}" style="width:180px;">
+							<!-- <f:selectItems value="#{evaluacionInstrumento.escalaList}" var="lstEscala" itemValue="#{lstEscala.id}" itemLabel="#{lstEscala.nombre}"/>  -->
+							<f:selectItem itemLabel="Escala 4" itemValue="4" />
+               				<f:selectItem itemLabel="Escala 5" itemValue="5" />
+               				<f:selectItem itemLabel="Escala 6" itemValue="6" />	
+               			</p:selectOneMenu>
+	    			</td>
+    			<td><p:inputText id="txtNom" value="#{evaluacionInstrumento.bean.nombre}" size="60"/></td>
+    			    						
+				</tr>
+				
+				<tr> 	
+					<td><p:outputLabel for="txtObj" value="Objetivos" /></td>
+				</tr>
+				<tr> 	
+					<td colspan="2">
+    					<p:inputTextarea id="txtObj" value="#{evaluacionInstrumento.bean.objetivos}" style="width:99%"
+											  rows="2" autoResize="false"/>  
+    				</td>
+				</tr>
+				<tr> 	
+					<td><p:outputLabel for="txtIns" value="Instrucciones" /></td>
+				</tr>
+				<tr>					
+					<td colspan="2">
+    					<p:inputTextarea id="txtIns" value="#{evaluacionInstrumento.bean.instrucciones}" style="width:99%"
+											  rows="2" autoResize="false"/>  
+    				</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2"><p:outputLabel for="txtOrd" value="Orden de Respuestas" /></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<p:selectOneMenu id="txtOrd" value="#{evaluacionInstrumento.bean.orden}" style="width:180px;">
+							 <f:selectItem itemLabel="Ascendente" itemValue="true" />
+               				 <f:selectItem itemLabel="Descendente" itemValue="false" />
+						</p:selectOneMenu>
+					</td>
+				</tr>
+				<tr>
+					<td><p:outputLabel for="txtRb1" value="Mostrar Aspectos de Evaluación" /></td>
+					<td><p:outputLabel for="txtRb2" value="Mostrar respuestas al lado derecho de la pregunta" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p:selectOneRadio id="txtRb1" value="#{evaluacionInstrumento.bean.aspectos}">  
+				            <f:selectItem itemLabel="Si" itemValue="true" />  
+				            <f:selectItem itemLabel="No" itemValue="false" />  
+				        </p:selectOneRadio>  
+					</td>
+					<td>
+						<p:selectOneRadio id="txtRb2" value="#{evaluacionInstrumento.bean.alineado}">  
+				            <f:selectItem itemLabel="Si" itemValue="true" />  
+				            <f:selectItem itemLabel="No" itemValue="false" />  
+				        </p:selectOneRadio> 
+					</td>
+				</tr>
+				<tr>
+					<td><p:outputLabel for="txtRb3" value="Ingresar autoevaluación y/o comentario" /></td>
+					<td><p:outputLabel for="txtRb4" value="Ingresar aspectos observados y/o sugerencias" /></td>
+				</tr>
+				<tr>
+					<td>
+						<p:selectOneRadio id="txtRb3" value="#{evaluacionInstrumento.bean.autoevaluacion}">  
+				            <f:selectItem itemLabel="Si" itemValue="true" />  
+				            <f:selectItem itemLabel="No" itemValue="false" />  
+				        </p:selectOneRadio>  
+					</td>
+					<td>
+						<p:selectOneRadio id="txtRb4" value="#{evaluacionInstrumento.bean.observados}">  
+				            <f:selectItem itemLabel="Si" itemValue="true" />  
+				            <f:selectItem itemLabel="No" itemValue="false" />  
+				        </p:selectOneRadio> 
+					</td>
+				</tr>
+    		</table> 
+		</p:panel> 		
+		
+     </h:form>
+    </ui:define>
+</ui:composition>

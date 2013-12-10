@@ -1,0 +1,44 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/> 
+   		<p:toolbar>  
+	    	<p:toolbarGroup align="left">
+	    		<p:toolbarGroup align="left">
+	    		<p:commandButton title="Regresar" value="Regresar" icon="icn_bar_back" action="itc_oferta" ajax="false" />  
+			</p:toolbarGroup>  
+			</p:toolbarGroup>  
+  		</p:toolbar>  
+      	<p:spacer height="4px"/>
+      	
+   		<p:dataTable id="itemList" var="item" value="#{institucionUnidad.itinerarioList}" 
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  >
+     		
+     		<f:facet name="header">
+				<h:outputText value="#{institucionUnidad.nombreProfesion} - UNIDADES DIDÁCTICAS" />  
+			</f:facet>
+	
+			<p:column headerText="Módulo" style="width:5%; align:center;">   
+				<h:outputText value="#{item.modulo}" />  
+			</p:column>	
+			
+			<p:column headerText="Unidad Didáctica" style="width:90%; align:center;">   
+				<h:outputText value="#{item.titulo}" />  
+			</p:column>	
+			
+			<p:column headerText="Opciones" style="width:5%">  
+				<p:commandButton icon="icn_item_detail" 	title="Tipos de Ambiente"  action="#{institucionUnidad.optionAmbiente}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{institucionUnidad.itinerarioSelect}" />
+				</p:commandButton>
+        	</p:column>
+				        
+		</p:dataTable> 
+	</h:form>
+    </ui:define>
+</ui:composition>

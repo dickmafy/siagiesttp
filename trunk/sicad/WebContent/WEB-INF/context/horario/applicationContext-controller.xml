@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="horarioMetas" class="modules.horario.controller.HorarioMetas" scope="session" parent="genericController">
+		<property name="bean" ref="metaInstitucional"/>	  
+	    <property name="myService" 	ref="horarioService"/>	
+	</bean>
+	<bean id="horarioMetaDetalle" class="modules.horario.controller.HorarioMetaDetalle" scope="session" parent="genericController">
+		<property name="bean" ref="metaDetalle"/>	  
+	    <property name="myService" 	ref="horarioService"/>	
+	</bean>
+	<bean id="horarioSeccionDistribucion" class="modules.horario.controller.HorarioSeccionDistribucion" scope="session" parent="genericController">
+		<property name="bean" ref="seccion"/>
+	    <property name="myService" 	ref="horarioService"/>	
+	</bean>
+	<bean id="horarioSeccion" class="modules.horario.controller.HorarioSeccion" scope="session" parent="genericController">
+		<property name="bean" ref="seccion"/>
+	    <property name="myService" 	ref="horarioService"/>	
+	</bean>
+	<bean id="horarioSilabo" class="modules.horario.controller.HorarioSilabo" scope="session" parent="genericController">
+	    <property name="myService" 	ref="horarioService"/>	
+	</bean>
+	<bean id="horarioLectivas" class="modules.horario.controller.HorarioLectivas" scope="session" parent="genericController">
+		<property name="bean" ref="seccion"/>
+	    <property name="myService" 	ref="horarioService"/>	
+	</bean>
+	<bean id="horarioNoLectivas" class="modules.horario.controller.HorarioNoLectivas" scope="session" parent="genericController">
+	    <property name="myService" 	ref="horarioService"/>	
+	</bean>
+</beans>

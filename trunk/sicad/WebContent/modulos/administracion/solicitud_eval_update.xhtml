@@ -1,0 +1,102 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="solicitud_eval" ajax="false" />
+		      	<p:commandButton icon="icn_item_approve" value="Aprobar" 	title="Aprobar"  action="#{solicitudController.aprobarSolicitud}" rendered="#{solicitudController.bean.estado eq 2}" ajax="false"/>
+		      	<p:commandButton icon="icn_item_disapprove" value="Rechazar"	title="Rechazar"  oncomplete="dialogUsrDel.show()" rendered="#{solicitudController.bean.estado eq 2}" ajax="true"/>		
+				<p:commandButton id="downloadLink" value="Descargar Documento" ajax="false"   
+				        icon="ui-icon-arrowthichk-s" rendered="#{solicitudController.existeDoc}">  
+				    <p:fileDownload value="#{solicitudController.file}" />  
+				</p:commandButton>
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	<p:panel header="Detalle de la Solicitud">
+    		<table class="form_table">
+    			<tr>
+   					<td>
+   					<table>
+   						<tr>
+   							<td><p:outputLabel value="Código" /></td>
+   							<td><p:outputLabel  value="Solicitud" /></td>
+   							<td><p:outputLabel  value="Fecha de Ingreso" /></td>
+   						</tr>
+   						<tr>
+   							<td><p:inputText   value="#{solicitudController.bean.id}" disabled="true"   size="5"/></td>
+   							<td><p:inputText    value="#{solicitudController.bean.nombreTipo}" disabled="true" size="50"/></td>
+   							<td><p:inputText    value="#{solicitudController.bean.fechas}" disabled="true" size="20"/></td>
+						</tr>
+   					</table>
+   					</td>
+   				</tr>    		
+   				<tr>
+   					<td>
+   					<table>
+   						<tr>
+   							<td><p:outputLabel  value="Solicitante"/></td>
+   							<td><p:outputLabel value="Nombre Estado"/></td>
+   						</tr>
+   						<tr>
+   							<td><p:inputText    value="#{solicitudController.bean.nombreRegistrante}" disabled="true" size="50"/></td>
+		        			<td><p:inputText    value="#{solicitudController.bean.nombreEstado}" disabled="true" size="20"/></td>
+   						</tr>
+   						
+   					</table>
+   					</td>
+   				</tr>
+   				<tr>
+   					<td>
+   					<table>
+						<tr><td colspan="2"><p:outputLabel value="Descripción" /></td></tr>
+						<tr><td colspan="2"><p:inputTextarea value="#{solicitudController.bean.descripcion}" disabled="true" rows="4" cols="92"/></td></tr>
+						<tr><td colspan="2"><p:outputLabel value="Detalles de la Resolución de Autorización" /></td></tr>
+						<tr><td colspan="2"><p:inputTextarea value="#{solicitudController.bean.resolucion}" disabled="true" rows="4" cols="92"/></td></tr>
+					</table>
+   					</td>
+   				</tr>
+    		</table>
+		</p:panel> 		
+     </h:form>      
+           <!-- walter-->         
+		<p:dialog widgetVar="dialogUsrDel" width="500" appendToBody="false"
+			header="Motivo de Rechazo" style="font-size:13px;"
+        	closable="true" severity="alert" closeOnEscape="false" >
+        	<h:form>
+        	<p:growl id="msgSystem2" showDetail="true" life="4000" escape="true"/>  
+			<h:panelGroup style="text-align: left;" >
+				<table>
+					<tr>
+						<td><p:outputLabel value="Tipo de Inconveniente"/></td>
+						<td><p:outputLabel value="Comentarios"/></td>
+					</tr>
+					<tr>
+						<td>
+							<p:selectOneMenu   value="#{solicitudController.bean.motivo}"	style="width:200px;">
+								<f:selectItem itemLabel="Formato Incorrecto" itemValue="1"   />
+								<f:selectItem itemLabel="Pedido diferente a la solicitud" itemValue="2" />
+								<f:selectItem itemLabel="Fuera de fecha" itemValue="3" />	
+								<f:selectItem itemLabel="Falta sello" itemValue="4" />		
+							</p:selectOneMenu>
+						</td>
+						<td><p:inputTextarea value="#{solicitudController.bean.observacion}" style="width:250px;" ></p:inputTextarea></td>
+					</tr>
+					<tr>
+						<td align="left">
+							<p:commandButton value="Enviar" id="deleteButton" oncomplete="dialogUsrDel.hide()"   actionListener="#{solicitudController.rechazarSolicitud}" />
+        					<p:commandButton value="Cancelar" id="cancelButton" onclick="dialogUsrDel.hide()"/>
+        				</td>
+        			</tr>
+				</table>
+			</h:panelGroup>
+			</h:form>
+   		</p:dialog>
+    </ui:define>
+</ui:composition>

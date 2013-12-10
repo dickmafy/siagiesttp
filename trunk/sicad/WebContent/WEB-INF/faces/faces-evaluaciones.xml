@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+    
+    <!-- JSF and Spring are integrated -->
+     <application>
+  		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+  	</application>
+  	
+  	<!-- Aspecto -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>asp_list</from-outcome>
+			<to-view-id>/modulos/evaluaciones/aspecto_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>asp_new</from-outcome>
+			<to-view-id>/modulos/evaluaciones/aspecto_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>asp_update</from-outcome>
+			<to-view-id>/modulos/evaluaciones/aspecto_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Escala -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>esc_list</from-outcome>
+			<to-view-id>/modulos/evaluaciones/escala_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>esc_new</from-outcome>
+			<to-view-id>/modulos/evaluaciones/escala_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>esc_update</from-outcome>
+			<to-view-id>/modulos/evaluaciones/escala_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Balotario -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>balotario_list</from-outcome>
+			<to-view-id>/modulos/evaluaciones/balotario_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>balotario_new</from-outcome>
+			<to-view-id>/modulos/evaluaciones/balotario_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>balotario_update</from-outcome>
+			<to-view-id>/modulos/evaluaciones/balotario_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Indicador -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>ind_list</from-outcome>
+			<to-view-id>/modulos/evaluaciones/indicador_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>ind_new</from-outcome>
+			<to-view-id>/modulos/evaluaciones/indicador_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>ind_update</from-outcome>
+			<to-view-id>/modulos/evaluaciones/indicador_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Rango -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>ran_list</from-outcome>
+			<to-view-id>/modulos/evaluaciones/rango_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>ran_new</from-outcome>
+			<to-view-id>/modulos/evaluaciones/rango_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>ran_update</from-outcome>
+			<to-view-id>/modulos/evaluaciones/rango_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Instrumento -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>ins_list</from-outcome>
+			<to-view-id>/modulos/evaluaciones/instrumento_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>ins_new</from-outcome>
+			<to-view-id>/modulos/evaluaciones/instrumento_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>ins_update</from-outcome>
+			<to-view-id>/modulos/evaluaciones/instrumento_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	<!-- Pregunta -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>pre_list</from-outcome>
+			<to-view-id>/modulos/evaluaciones/pregunta_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>pre_new</from-outcome>
+			<to-view-id>/modulos/evaluaciones/pregunta_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>pre_update</from-outcome>
+			<to-view-id>/modulos/evaluaciones/pregunta_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	<!-- Universo -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>uni_list</from-outcome>
+			<to-view-id>/modulos/evaluaciones/universo_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>uni_new</from-outcome>
+			<to-view-id>/modulos/evaluaciones/universo_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>uni_update</from-outcome>
+			<to-view-id>/modulos/evaluaciones/universo_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+		
+		
+		
+	<!-- Escala  Detalle -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>esc_det_list</from-outcome>
+			<to-view-id>/modulos/evaluaciones/escala_detalle_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>esc_det_new</from-outcome>
+			<to-view-id>/modulos/evaluaciones/escala_detalle_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>esc_det_update</from-outcome>
+			<to-view-id>/modulos/evaluaciones/escala_detalle_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+</faces-config>
