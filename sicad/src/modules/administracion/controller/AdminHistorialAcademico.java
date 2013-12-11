@@ -41,6 +41,7 @@ public class AdminHistorialAcademico extends GenericController
 	@Override
 	public void afterNew() throws Exception
 	{
+		especialidadList=getListSelectItem(myService.listByObjectEnabled(new Especialidad()), "id", "nombre",true);
 		HistorialAcademico bean=new HistorialAcademico();
 		bean.setPersonal(personal);
 		bean.setEstado(Constante.ROW_STATUS_ENABLED);
