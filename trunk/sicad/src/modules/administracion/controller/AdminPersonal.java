@@ -42,6 +42,9 @@ public class AdminPersonal extends GenericController
 		defaultList();
 		
 		
+		instituciones=myService.listByObjectEnabledDisabled(new Institucion());
+		puestoList=getListSelectItem(new Puesto(), "id", "nombre",true);
+		institucionList=getListSelectItem(instituciones, "id", "nombre", true);
 		
 		page_new="adm_prs_new";
 		page_main="adm_prs_lst";
@@ -84,7 +87,7 @@ public class AdminPersonal extends GenericController
 	@Override
 	public void afterNew() throws Exception
 	{
-		//instituciones=myService.listByObjectEnabledDisabled(new Institucion());
+		instituciones=myService.listByObjectEnabledDisabled(new Institucion());
 		puestoList=getListSelectItem(new Puesto(), "id", "nombre",true);
 		institucionList=getListSelectItem(instituciones, "id", "nombre", true);
 				
