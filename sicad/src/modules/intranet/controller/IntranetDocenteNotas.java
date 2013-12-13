@@ -8,8 +8,6 @@ import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
 
 import dataware.service.IntranetService;
-import dataware.service.MarcoService;
-import modules.administracion.domain.Institucion;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
 
@@ -40,8 +38,8 @@ public class IntranetDocenteNotas extends GenericController
 		page_new="IntranetDocenteNotas_new";
 		page_update="IntranetDocenteNotas_update";
 		page_main="IntranetDocenteNotas_list";
-		//defaultList();		
-		forward(page_main);
+		defaultList();		
+		//forward(page_main);
 		optionCriterios();
 	}
 	
@@ -59,7 +57,7 @@ public class IntranetDocenteNotas extends GenericController
 		
 		filtrarModulo(criteriosList,modulo);
 		
-		forward("silabo_crit");
+		forward("IntranetDocenteNotas_list");
 	}
 	
 	public void filtrarModulo(List<ReferenteEducativo> educativoList, Long modulo) throws Exception
