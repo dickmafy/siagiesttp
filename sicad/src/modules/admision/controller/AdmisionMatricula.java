@@ -10,8 +10,10 @@ import javax.faces.model.SelectItem;
 import modules.admision.domain.Matricula;
 import modules.admision.domain.Proceso;
 import modules.admision.domain.Requisitos;
+import modules.horario.domain.Seccion;
 import modules.mantenimiento.domain.Banco;
 import modules.marco.domain.Itinerario;
+import modules.marco.domain.Profesion;
 import modules.seguridad.domain.Usuario;
 
 import com.belogick.factory.util.constant.Constante;
@@ -31,12 +33,14 @@ public class AdmisionMatricula extends GenericController
 	private List<SelectItem>    bancoList;
 	private List<SelectItem>    seccionList;
 	private List<SelectItem>    moduloList;
+	private	List<Seccion>		unidadesList;
 	
 	private boolean enabled;
 	private Long 	proceso;
 	private Long 	institucion;
 	private	Long	tipo;
 	private	Long	modulo;
+	private Long 	annio,mesProceso;
 	
 	public void init(Long id) throws Exception 
 	{
@@ -53,6 +57,7 @@ public class AdmisionMatricula extends GenericController
 		
 		
 		requisitos = new ArrayList();
+		unidadesList = new ArrayList();
 		procesoList=getListSelectItem(myService.listarProcesos(institucion),"id","annio,nombrePeriodo","-",true);
 		bancoList=getListSelectItem(new Banco(),"id","nombre",true);
 		optionSelectProceso();
@@ -75,7 +80,12 @@ public class AdmisionMatricula extends GenericController
 		if(proceso.longValue()>0L)
 		{
 			Proceso bean=(Proceso)myService.findById(Proceso.class, proceso);
-			if(bean.getEstado().longValue()==5L)	{enabled=true;}
+			if(bean.getEstado().longValue()==5L)	
+			{
+				annio=bean.getAnnio();
+				mesProceso=bean.getProceso();
+				enabled=true;				
+			}
 			bean=null;
 		}
 		else
@@ -97,6 +107,8 @@ public class AdmisionMatricula extends GenericController
 		//obtener secciones
 		bean=null;
 		
+		
+		
 		//Cleanning
 		tipo=-1L;
 		modulo=-1L;
@@ -117,6 +129,24 @@ public class AdmisionMatricula extends GenericController
 		}
 	}
 	
+	public void selectModulo() throws Exception
+	{
+		Matricula bean=(Matricula)getBean();
+		List<Seccion> unidades=new ArrayList<Seccion>();
+		unidadesList = myService.listarUnidades(institucion, annio, mesProceso, bean.getEspecialidad(), bean.getTurno(), modulo);
+		for(int i=0; i<unidadesList.size(); i++)
+		{
+			if(i>0){
+				if(!unidadesList.get(i).getNombreUnidad().equals(unidadesList.get(i-1).getNombreUnidad()))
+				{unidades.add(unidadesList.get(i));}
+			}
+			else{unidades.add(unidadesList.get(i));}
+		}
+		
+		unidadesList = unidades;
+		bean=null;
+	}
+	
 	public void beforeUpdate() throws Exception
 	{
 		Matricula bean=(Matricula)getBean();
@@ -124,6 +154,8 @@ public class AdmisionMatricula extends GenericController
 		setBean(bean);
 		myService.eliminarRequisito(false, bean.getId());
 		myService.insertarRequisitos(false, requisitos, bean.getId());
+		myService.actualizarMatriculaSeccion(unidadesList, bean.getId());
+		
 	}
 	
 	public void optionPublicar() throws Exception
@@ -186,10 +218,24 @@ public class AdmisionMatricula extends GenericController
 		
 		
 		forward("adm_mat_upd");
+	}	
+	
+	*/
+	
+	@Override
+	public boolean validation() throws Exception {
+		boolean success = true;
+        Matricula object = (Matricula)getBean();
+        if(!validateSelect(modulo))
+        {
+            setMessageError("Debe seleccionar el Módulo.");                 
+            success = false;
+        }
+        object=null;
+        return success;
 	}
 	
 	
-	*/
 	public String getPic()
 	{
 		try
@@ -232,4 +278,9 @@ public class AdmisionMatricula extends GenericController
 	
 	public Long getModulo() 													{return modulo;}
 	public void setModulo(Long modulo) 											{this.modulo = modulo;}
+	
+	public List<Seccion> getUnidadesList() 										{return unidadesList;}
+	public void setUnidadesList(List<Seccion> unidadesList) 					{this.unidadesList = unidadesList;}
+	
+	
 } 

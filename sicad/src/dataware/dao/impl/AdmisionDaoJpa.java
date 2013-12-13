@@ -13,6 +13,7 @@ import modules.admision.domain.Proceso;
 import modules.admision.domain.ProcesoCronograma;
 import modules.admision.domain.ProcesoOferta;
 import modules.admision.domain.Requisitos;
+import modules.horario.domain.Seccion;
 
 import org.hibernate.Query;
 
@@ -323,23 +324,23 @@ public class AdmisionDaoJpa extends HorarioDaoJpa implements AdmisionDao
 			if(objetos[1]!=null){field.setProceso(Long.parseLong(objetos[1].toString()));}
 			if(objetos[2]!=null){field.setEspecialidad(Long.parseLong(objetos[2].toString()));}
 			if(objetos[3]!=null){field.setTurno(Long.parseLong(objetos[3].toString()));}
-			//if(objetos[4]!=null){field.setSeccion(Long.parseLong(objetos[4].toString()));}
-			if(objetos[4]!=null){field.setPersona(Long.parseLong(objetos[4].toString()));}
-			if(objetos[5]!=null){field.setPago_fecha(dateFormat.parse(objetos[5].toString()));}
-			if(objetos[6]!=null){field.setPago_banco(Long.parseLong(objetos[6].toString()));}			
-			if(objetos[7]!=null){field.setPago_recibo(objetos[7].toString());}
-			if(objetos[8]!=null){field.setModalidad(Long.parseLong(objetos[8].toString()));}
-			if(objetos[9]!=null){field.setEstado(Long.parseLong(objetos[9].toString()));}
+			if(objetos[4]!=null){field.setSeccion(Long.parseLong(objetos[4].toString()));}
+			if(objetos[5]!=null){field.setPersona(Long.parseLong(objetos[5].toString()));}
+			if(objetos[6]!=null){field.setPago_fecha(dateFormat.parse(objetos[6].toString()));}
+			if(objetos[7]!=null){field.setPago_banco(Long.parseLong(objetos[7].toString()));}			
+			if(objetos[8]!=null){field.setPago_recibo(objetos[8].toString());}
+			if(objetos[9]!=null){field.setModalidad(Long.parseLong(objetos[9].toString()));}
+			if(objetos[10]!=null){field.setEstado(Long.parseLong(objetos[10].toString()));}
 			
-			if(objetos[10]!=null){field.setPersonaNombre(objetos[10].toString());}
-			if(objetos[11]!=null){field.setPersonaPaterno(objetos[11].toString());}
-			if(objetos[12]!=null){field.setPersonaMaterno(objetos[12].toString());}
-			if(objetos[13]!=null){field.setPersonaCorreo(objetos[13].toString());}
-			if(objetos[14]!=null){field.setPersonaTelefono(objetos[14].toString());}
-			if(objetos[15]!=null){field.setPersonaCelular(objetos[15].toString());}
-			if(objetos[16]!=null){field.setPersonaDireccion(objetos[16].toString());}
-			if(objetos[17]!=null){field.setPersonaDni(objetos[17].toString());}
-			if(objetos[18]!=null){field.setNombreEspecialidad(objetos[18].toString());}
+			if(objetos[11]!=null){field.setPersonaNombre(objetos[11].toString());}
+			if(objetos[12]!=null){field.setPersonaPaterno(objetos[12].toString());}
+			if(objetos[13]!=null){field.setPersonaMaterno(objetos[13].toString());}
+			if(objetos[14]!=null){field.setPersonaCorreo(objetos[14].toString());}
+			if(objetos[15]!=null){field.setPersonaTelefono(objetos[15].toString());}
+			if(objetos[16]!=null){field.setPersonaCelular(objetos[16].toString());}
+			if(objetos[17]!=null){field.setPersonaDireccion(objetos[17].toString());}
+			if(objetos[18]!=null){field.setPersonaDni(objetos[18].toString());}
+			if(objetos[19]!=null){field.setNombreEspecialidad(objetos[19].toString());}
 						
 			lista.add(field);
 		}
@@ -371,6 +372,49 @@ public class AdmisionDaoJpa extends HorarioDaoJpa implements AdmisionDao
 
 	public void eliminarRequisito(Requisitos bean) throws Exception 
 	{executeQueryUpdate("DELETE FROM administracion.m_requisito WHERE pk_requisitos='"+bean.getId()+"'; ");}
+	
+	
+	public List<Seccion> listarUnidades(Long institucion, Long annio, Long proceso, Long profesion, Long turno, Long modulo) throws Exception 
+	{
+		List<Seccion> lista=new ArrayList<Seccion>();
+		Query consulta=createQuery("SELECT * FROM admision.lst_unidades(:institucion, :annio, :proceso, :profesion, :turno, :modulo);");
+		consulta.setParameter("institucion", Integer.parseInt(institucion.toString()));
+		consulta.setParameter("annio", Integer.parseInt(annio.toString()));
+		consulta.setParameter("proceso", Integer.parseInt(proceso.toString()));
+		consulta.setParameter("profesion", Integer.parseInt(profesion.toString()));
+		consulta.setParameter("turno", Integer.parseInt(turno.toString()));
+		consulta.setParameter("modulo", Integer.parseInt(turno.toString()));
+		List rst=consulta.list();
+		
+		for(int i=0; i<rst.size(); i++)
+		{
+			Object[] objetos=(Object[])rst.get(i);
+			Seccion field=new Seccion();
+			if(objetos[0]!=null){field.setValorTipoModulo(Long.parseLong(objetos[0].toString()));}
+			if(objetos[1]!=null){field.setNombreModulo(objetos[1].toString());}
+			if(objetos[2]!=null){field.setValorModulo(Long.parseLong(objetos[2].toString()));}
+			if(objetos[3]!=null){field.setNombreUnidad(objetos[3].toString());}
+			if(objetos[4]!=null){field.setValorHoras(Long.parseLong(objetos[4].toString()));}
+			if(objetos[5]!=null){field.setDocente(Long.parseLong(objetos[5].toString()));}
+			if(objetos[6]!=null){field.setNombre(objetos[6].toString());}
+			if(objetos[7]!=null){field.setId(Long.parseLong(objetos[7].toString()));}
+			lista.add(field);
+		}
+		return lista;
+	}
+	
+	public void actualizarMatriculaSeccion(List<Seccion> lista, Long matricula) throws Exception 
+	{
+		StringBuilder query=new StringBuilder();
+		query.append("DELETE FROM admision.m_matricula_seccion WHERE pk_matricula='"+matricula+"'; ");
+		query.append("INSERT INTO admision.m_matricula_seccion(\"pk_matricula\",\"pk_seccion\") VALUES ");
+		for(int i=0; i<lista.size(); i++)
+		{
+			{query.append("('"+matricula+"','"+lista.get(i).getId()+"'),");}
+		}
+		executeQueryUpdate(query.toString().substring(0,query.toString().length()-1)+";");
+		query=null;
+	}
 	
 //	
 //	public List<MatriculaSeccion> listarUnidadesDisponibles(Long persona, Long institucion, Long profesion, Long modulo, Long tipo) throws Exception

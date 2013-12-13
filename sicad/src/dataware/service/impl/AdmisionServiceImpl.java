@@ -14,6 +14,7 @@ import modules.admision.domain.Proceso;
 import modules.admision.domain.ProcesoCronograma;
 import modules.admision.domain.ProcesoOferta;
 import modules.admision.domain.Requisitos;
+import modules.horario.domain.Seccion;
 import dataware.dao.AdmisionDao;
 import dataware.service.AdmisionService;
 
@@ -66,6 +67,11 @@ public class AdmisionServiceImpl extends HorarioServiceImpl implements AdmisionS
 	public void eliminarRequisito(boolean proceso, Long primaria) throws Exception
 	{getAdmisionDao().eliminarRequisito(proceso, primaria);}
 	
+	public List<Seccion> listarUnidades(Long institucion, Long annio, Long proceso, Long profesion, Long turno, Long modulo) throws Exception
+	{return getAdmisionDao().listarUnidades(institucion, annio, proceso, profesion, turno, modulo);}
+	
+	public void actualizarMatriculaSeccion(List<Seccion> lista, Long matricula) throws Exception 
+	{getAdmisionDao().actualizarMatriculaSeccion(lista, matricula);}
 	
 	
 	public void procesarIngresantes(Long proceso) throws Exception
