@@ -20,4 +20,81 @@
 	</navigation-rule>
 	
 	
+	<!-- INTRANET ALUMNO -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>IntranetAlumnoAsistencia_new</from-outcome>
+			<to-view-id>/modulos/intranet/IntranetAlumnoAsistencia_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>IntranetAlumnoAsistencia_list</from-outcome>
+			<to-view-id>/modulos/intranet/IntranetAlumnoAsistencia_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>IntranetAlumnoAsistencia_update</from-outcome>
+			<to-view-id>/modulos/intranet/IntranetAlumnoAsistencia_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- INTRANET DOCENTE ASISTENCIA -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>IntranetDocenteAsistencia_list</from-outcome>
+			<to-view-id>/modulos/intranet/IntranetDocenteAsistencia_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>IntranetDocenteAsistencia_new</from-outcome>
+			<to-view-id>/modulos/intranet/IntranetDocenteAsistencia_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>IntranetDocenteAsistencia_update</from-outcome>
+			<to-view-id>/modulos/intranet/IntranetDocenteAsistencia_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- INTRANET DOCENTE SILABO -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>intranetDocente_silabo_new</from-outcome>
+			<to-view-id>/modulos/intranet/intranetDocente_silabo_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>intranetDocente_silabo_update</from-outcome>
+			<to-view-id>/modulos/intranet/intranetDocente_silabo_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>intranetDocente_silabo_list</from-outcome>
+			<to-view-id>/modulos/intranet/intranetDocente_silabo_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	
 </faces-config>

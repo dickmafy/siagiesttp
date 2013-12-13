@@ -1,0 +1,103 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="7000" escape="true"/>  
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">
+	    		<p:spacer width="6px"/>
+	    		
+	    		<p:outputLabel for="txtAnn" value="Año  " style="position:relative;  top:-4px;"/>
+	    		<p:selectOneMenu id="txtAnn" value="#{docenteSilaboCronograma.annio}" style="position:relative;  top:2px; width:120px">
+                    <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        <f:selectItem itemLabel="2013"  itemValue="2013" />
+           	        <f:selectItem itemLabel="2014" 	itemValue="2014" />
+           	        <f:selectItem itemLabel="2015" 	itemValue="2015" />
+           	        <f:selectItem itemLabel="2016" 	itemValue="2016" />
+           	        <f:selectItem itemLabel="2017" 	itemValue="2017" /> 
+           	        <p:ajax event="change" update=":frmList" listener="#{docenteSilaboCronograma.selectAnnio}"/>       
+       	       	</p:selectOneMenu>
+       	       	
+       	       	<p:outputLabel for="txtPrc" value="     Proceso  " style="position:relative;  top:-4px;"/>
+		   		<p:selectOneMenu id="txtPrc" value="#{docenteSilaboCronograma.proceso}" style="position:relative;  top:3px; width:120px">
+		   			<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+					<f:selectItems value="#{docenteSilaboCronograma.procesoList}"/>
+					<p:ajax event="change" update=":frmList" listener="#{docenteSilaboCronograma.selectProceso}"/>
+				</p:selectOneMenu>
+				
+				<p:outputLabel for="txtPrf" value="        Profesión  " style="position:relative;  top:-4px;"/>
+		   		<p:selectOneMenu id="txtPrf" value="#{docenteSilaboCronograma.profesion}" style="position:relative;  top:3px; width:320px">
+		   			<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+					<f:selectItems value="#{docenteSilaboCronograma.profesionList}"/>
+					<p:ajax event="change" update=":frmList" listener="#{docenteSilaboCronograma.defaultList}"/>
+				</p:selectOneMenu>
+				
+				<p:outputLabel for="txtTur" value="        Turno  " style="position:relative;  top:-4px;"/>
+		   		<p:selectOneMenu id="txtTur" value="#{docenteSilaboCronograma.turno}" style="position:relative;  top:2px;  width:120px">
+                    <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        <f:selectItem itemLabel="Mañana"  	itemValue="1" />
+           	        <f:selectItem itemLabel="Tarde" 	itemValue="2" />
+           	        <f:selectItem itemLabel="Noche" 	itemValue="3" /> 
+           	        <p:ajax event="change" update=":frmList" listener="#{docenteSilaboCronograma.defaultList}"/>       
+       	       	</p:selectOneMenu>
+				
+				<p:spacer width="6px"/>
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+  
+   		<p:dataTable id="itemList" var="item" value="#{docenteSilaboCronograma.beanList}" filteredValue="#{docenteSilaboCronograma.beanFilterList}"
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom" >
+     		
+     		<f:facet name="header">
+				<h:outputText value="GENERACION DEL SILABO" />  
+			</f:facet>
+							
+			<p:column headerText="Módulo" style="width:5%; align:center;" >   
+				<h:outputText value="MP#{item.valorModulo}" title="MÓDULO PROFESIONAL: #{item.nombreModulo}" rendered="#{item.valorTipoModulo eq 1}"/>
+				<h:outputText value="MT" title="MÓDULO TRANSVERSAL: #{item.nombreModulo}" rendered="#{item.valorTipoModulo eq 2}"/>
+			</p:column>		
+			
+			<p:column headerText="Unidad" style="width:55%; align:center;" >   
+				<h:outputText value="#{item.nombreUnidad}" title="UNIDAD DIDACTICA: #{item.nombreUnidad}"/>
+			</p:column>
+			
+			<p:column headerText="Sección" style="width:5%; align:center;" >   
+				<h:outputText value="#{item.nombre}"/>
+			</p:column>	
+			
+			<p:column headerText="Horas" style="width:5%; align:center;" >   
+				<h:outputText value="#{item.valorHoras}"/>
+			</p:column>
+			
+			<p:column headerText="Docente" style="width:30%">
+				
+				<p:commandLink >
+					<p:selectOneMenu value="#{item.docente}" style="width:290px;" filter="true" filterMatchMode="startsWith" disabled="true">
+						<f:selectItems value="#{docenteSilaboCronograma.docenteList}"/>
+						<p:ajax event="change" listener="#{docenteSilaboCronograma.setDocente}" update=":frmList"/>
+					</p:selectOneMenu>
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboCronograma.beanSelected}" />
+				</p:commandLink>
+				   
+        	</p:column> 
+        	
+        	<p:column headerText="Operaciones" style="width:13%">  
+				<p:commandButton icon="icn_item_update" 	title="Creacion de Clases" 	   action="#{docenteSilaboCronograma.goCreacionClases}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboCronograma.beanSelected}" />
+				</p:commandButton>				
+                 
+        	</p:column>  
+        	 
+        	      	        
+		</p:dataTable>
+		
+		
+	</h:form>
+    </ui:define>
+</ui:composition>

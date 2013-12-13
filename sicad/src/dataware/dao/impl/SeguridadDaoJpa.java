@@ -86,7 +86,7 @@ public class SeguridadDaoJpa extends GenericDaoJpa implements SeguridadDao
 			field.setMenu(Long.parseLong(objetos[3].toString()));
 			field.setTitulo(objetos[4].toString());
 			field.setDescripcion(objetos[5].toString());
-			field.setAccion(objetos[6].toString());
+			if(objetos[6]!=null){field.setAccion(objetos[6].toString());}
 			field.setMetodo(objetos[7].toString());
 			field.setEstado(Long.parseLong(objetos[8].toString()));
 			menus.add(field);
