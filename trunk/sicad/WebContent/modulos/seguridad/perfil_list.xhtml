@@ -28,7 +28,9 @@
 				<h:outputText value="Sistema" rendered="#{item.tipo eq 1}" />  
 				<h:outputText value="Institucional" rendered="#{item.tipo eq 2}" />
 				<h:outputText value="UGEL" rendered="#{item.tipo eq 3}" />
-				<h:outputText value="DRE" rendered="#{item.tipo eq 4}" />
+				<h:outputText value="ALUMNO" rendered="#{item.tipo eq 4}" />
+				<h:outputText value="DOCENTE" rendered="#{item.tipo eq 10}" />
+				<h:outputText value="CETPRO" rendered="#{item.tipo eq 15}" />
 			</p:column>
 			
 			<p:column headerText="Nombres" style="width:30%; align:center;" sortBy="#{item.nombre}" >       

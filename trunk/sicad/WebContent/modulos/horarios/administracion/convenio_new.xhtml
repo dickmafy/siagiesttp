@@ -1,0 +1,98 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false" enctype="multipart/form-data">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="cnv_lst" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{adminConvenio.nativeSave}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:panel header="#{adminConvenio.nombreInstitucion} - Agregar Nuevo Convenio">
+       	<table>
+        <tr><td><p:outputLabel for="txtCon" value="Nombre del Convenio" /></td></tr>
+	    <tr><td><p:inputText id="txtCon" value="#{adminConvenio.bean.nombre}" size="123"/></td></tr>
+        <tr>
+   			<td>
+   			<table>
+	        <tr><td><p:outputLabel for="txtEmp" value="Aliado Estratégico" /></td></tr>
+	       	<tr>
+	       		<td>
+				<p:selectOneMenu id="txtEmp" value="#{adminConvenio.bean.empresa}" style="width:640px"> 
+					<f:selectItems value="#{adminConvenio.empresaList}"/>
+	        	</p:selectOneMenu>
+	        	</td>
+	      	</tr>
+	      	</table>
+	      	</td>
+	    </tr>
+	    <tr>
+   			<td>
+   			<table>
+	    	<tr>
+				<td><p:outputLabel for="txtMod" value="Modalidad" /></td>
+                <td><p:outputLabel for="txtAlc" value="Alcance" /></td>
+                <td><p:outputLabel for="txtTip" value="Tipo" /></td>
+	            <td><p:outputLabel for="txtFei" value="Fecha Inicio" /></td>
+	            <td><p:outputLabel for="txtFef" value="Fecha Fin" /></td>
+			</tr>
+			<tr>
+               	<td>
+               		<p:selectOneMenu id="txtMod" value="#{adminConvenio.bean.modalidad}">
+					<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        <f:selectItem itemLabel="EDUCATIVA"        itemValue="1" />
+           	        <f:selectItem itemLabel="EMPRESARIAL"      itemValue="2" />
+           	        <f:selectItem itemLabel="IGLESIA"          itemValue="3" />        
+					</p:selectOneMenu>
+				</td>
+                <td>
+                	<p:selectOneMenu id="txtAlc" value="#{adminConvenio.bean.alcance}">
+                    <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        <f:selectItem itemLabel="NACIONAL"          itemValue="1" />
+           	        <f:selectItem itemLabel="REGIONAL"          itemValue="2" />
+           	        <f:selectItem itemLabel="LOCAL"             itemValue="3" />
+           	        <f:selectItem itemLabel="INTERNACIONAL"     itemValue="4" />        
+       	            </p:selectOneMenu>
+       	      	</td>	            
+       	      	<td>
+	        		<p:selectOneMenu id="txtTip" value="#{adminConvenio.bean.tipo}">
+                    	<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        	<f:selectItem itemLabel="PRIVADO"        itemValue="1" />
+           	        	<f:selectItem itemLabel="PUBLICO"        itemValue="2" />        
+       	        	</p:selectOneMenu>
+       	      	</td>
+                <td><p:calendar id="txtFei" value="#{adminConvenio.bean.fecha_inicio}" showOn="button"  size="10"/></td>
+                <td><p:calendar id="txtFef" value="#{adminConvenio.bean.fecha_fin}" showOn="button"  size="10"/></td>       
+         	</tr>
+            </table> 
+            </td>
+		</tr> 
+		<tr>
+   			<td>
+			<table>
+	        <tr>
+	        	<td><p:outputLabel for="txtBen" value="Beneficios" /></td>
+	           	<td><p:outputLabel for="txtCom" value="Compromisos" /></td>	              
+	      	</tr>
+	        <tr>
+	        	<td><p:inputTextarea id="txtBen" value="#{adminConvenio.bean.beneficio}" rows="6" cols="58" /></td>
+	           	<td><p:inputTextarea id="txtCom" value="#{adminConvenio.bean.compromiso}"  rows="6" cols="58" /></td>
+			</tr>
+            </table>
+   			</td>
+   		</tr>
+   		<tr><td><p:outputLabel for="txtDoc"  value="Adjuntar Documento PDF" /></td></tr>
+	   	<tr><td><p:fileUpload value="#{adminConvenio.docpdf}" id="txtDoc" mode="simple" /></td></tr>
+		</table>
+</p:panel> 		
+</h:form>
+</ui:define>
+</ui:composition>

@@ -9,4 +9,23 @@
 	    <property name="myService" 	ref="intranetService"/>
 	</bean>
 	
+	<bean id="intranetDocenteAsistencia" class="modules.intranet.controller.IntranetDocenteAsistencia" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="intranetService"/>
+	</bean>
+	<bean id="intranetDocenteNotas" class="modules.intranet.controller.IntranetDocenteNotas" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="intranetService"/>
+	</bean>
+	<bean id="intranetAlumnoAsistencia" class="modules.intranet.controller.IntranetAlumnoAsistencia" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="intranetService"/>
+	</bean>
+	<bean id="intranetAlumnoNotas" class="modules.intranet.controller.IntranetAlumnoNotas" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="intranetService"/>
+	</bean>
+	
+	<bean id="docenteSilaboCronograma" class="modules.intranet.controller.DocenteSilaboCronograma" scope="session" parent="genericController">
+		<property name="bean" ref="seccion"/>
+	    <property name="myService" 	ref="horarioService"/>	
+	</bean>
+	
+	
 </beans>

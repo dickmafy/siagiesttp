@@ -1,0 +1,93 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+	   	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="meta_institucional_list" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:fieldset>      	
+    		<table class="form_table" style="width:100%">
+    		<tr>
+    			<td width="5%"><p:outputLabel styleClass="form_readonly_title" value="Año" /></td>
+    			<td width="8%"><p:outputLabel styleClass="form_readonly_title" value="Proceso" /></td>
+    			<td width="7%"><p:outputLabel styleClass="form_readonly_title" value="Turno" /></td>
+    			<td width="80%"><p:outputLabel styleClass="form_readonly_title" value="Profesión" /></td>
+    		</tr>
+    		<tr>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{adminMetaInstitucionalDetalle.annio}" /></td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{adminMetaInstitucional.beanSelected.nombreProceso}" /></td>
+    			<td>
+    				<p:outputLabel styleClass="form_readonly_value" value="Mañana" 	rendered="#{adminMetaInstitucionalDetalle.turno eq 1}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Tarde" 	rendered="#{adminMetaInstitucionalDetalle.turno eq 2}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Noche" 	rendered="#{adminMetaInstitucionalDetalle.turno eq 3}" />
+    			</td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{adminMetaInstitucional.beanSelected.nombreProfesion}" /></td>
+    		</tr>
+    		</table>
+    	</p:fieldset>
+    	<p:spacer height="4px"/>
+  
+   		<p:dataTable id="itemList" var="item" value="#{adminMetaInstitucionalDetalle.beanList}" filteredValue="#{adminMetaInstitucionalDetalle.beanFilterList}"
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom" >
+     		
+     		<f:facet name="header">
+				<h:outputText value="Detalle de Meta Institucional" />  
+			</f:facet>
+							
+			<p:column headerText="Módulo" style="width:5%; align:center;" >   
+				<h:outputText value="MP#{item.valorModulo}" title="MÓDULO PROFESIONAL: #{item.nombreModulo}" rendered="#{item.tipo eq 1}"/>
+				<h:outputText value="MT" title="MÓDULO TRANSVERSAL: #{item.nombreModulo}" rendered="#{item.tipo eq 2}"/>
+			</p:column>		
+			
+			<p:column headerText="Unidad" style="width:45%; align:center;" >   
+				<h:outputText value="#{item.nombreUnidad}" title="UNIDAD DIDACTICA: #{item.nombreUnidad}"/>
+			</p:column>
+			
+			<p:column headerText="Ingr." style="width:5%; align:center;" >   
+				<h:outputText value="#{item.ingresantes}"/>
+			</p:column>	
+			<p:column headerText="Reg." style="width:5%; align:center;" >   
+				<h:outputText value="#{item.regular}"/>
+			</p:column>
+			<p:column headerText="Rez." style="width:5%; align:center;" >   
+				<h:outputText value="#{item.rezagados}"/>
+			</p:column>
+			<p:column headerText="Ret." style="width:5%; align:center;" >   
+				<h:outputText value="#{item.retiros}"/>
+			</p:column>
+			<p:column headerText="Avn/Tot" style="width:6%; align:center;" >   
+				<h:outputText value="#{item.metaAvance}/#{item.metaTotal}"/>
+			</p:column>
+			
+			<p:column headerText="Permiso" style="width:7%; align:center;" >   
+				<h:outputText value="#{item.nombrePermiso}"/>
+				<h:outputText value=" (#{item.cantidad})" rendered="#{item.permiso eq 2}"/>
+			</p:column>
+			
+			<p:column headerText="Estado" style="width:10%; align:center;" >   
+				<h:outputText value="#{item.nombreEstado}"/>
+			</p:column>
+			
+			<p:column headerText="Opciones" style="width:7%">  
+				<p:commandButton icon="icn_item_detail" 	title="Actualizar Detalle de Meta" 		action="#{adminMetaInstitucionalDetalle.nativeLoad}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{adminMetaInstitucionalDetalle.beanSelected}" />
+				</p:commandButton> 
+				
+        	</p:column>  
+        	      	        
+		</p:dataTable>
+		
+		
+	</h:form>
+    </ui:define>
+</ui:composition>

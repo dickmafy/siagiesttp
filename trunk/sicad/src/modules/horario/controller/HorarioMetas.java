@@ -9,6 +9,7 @@ import com.belogick.factory.util.controller.GenericController;
 
 import dataware.service.HorarioService;
 import modules.administracion.domain.MetaInstitucional;
+import modules.intranet.controller.DocenteSilaboCronograma;
 import modules.seguridad.domain.Usuario;
 
 public class HorarioMetas extends GenericController   
@@ -85,7 +86,7 @@ public class HorarioMetas extends GenericController
 	}
 	public void optionGoSilabo() throws Exception
 	{
-		HorarioMetaDetalle go = (HorarioMetaDetalle)getSpringBean("horarioMetaDetalle");
+		DocenteSilaboCronograma go = (DocenteSilaboCronograma)getSpringBean("docenteSilaboCronograma");
 		go.init(annio, proceso, ((MetaInstitucional)getBeanSelected()).getProfesion(), ((MetaInstitucional)getBeanSelected()).getTurno());
 	}
 	

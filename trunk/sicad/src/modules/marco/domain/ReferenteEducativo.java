@@ -70,8 +70,8 @@ public class ReferenteEducativo implements Serializable
 	public void setEstado(Long estado) 				{this.estado = estado;}
 	
 	@Transient
-	public boolean isCheckItem() 					{return checkItem;}
-	public void setCheckItem(boolean checkItem) 	{this.checkItem = checkItem;}
+	public boolean getCheck() 					{return checkItem;}
+	public void setCheck(boolean checkItem) 	{this.checkItem = checkItem;}
 	
 	
 }

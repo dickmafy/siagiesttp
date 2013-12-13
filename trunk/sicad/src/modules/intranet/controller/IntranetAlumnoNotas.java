@@ -13,7 +13,7 @@ import modules.administracion.domain.Institucion;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
 
-public class DocenteSilabo extends GenericController   
+public class IntranetAlumnoNotas extends GenericController   
 {	
 	private IntranetService	myService;
 	private List<ReferenteEducativo> criteriosList;
@@ -37,11 +37,11 @@ public class DocenteSilabo extends GenericController
 		modulo=1L;
 		profesion=101L;
 		nombreUnidad= "Prueba";
-		page_new="intranetDocente_silabo_new";
-		page_update="intranetDocente_silabo_update";
-		page_main="intranetDocente_silabo_list";
-		defaultList();		
-		//forward(page_main);
+		page_new="IntranetAlumnoNotas_new";
+		page_update="IntranetAlumnoNotas_update";
+		page_main="IntranetAlumnoNotas_list";
+		//defaultList();		
+		forward(page_main);
 		optionCriterios();
 	}
 	
