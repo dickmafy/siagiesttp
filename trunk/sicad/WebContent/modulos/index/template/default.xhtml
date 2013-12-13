@@ -49,32 +49,32 @@
 		       		       	  
     		</c:if>
     		
-    		<c:if test="#{opcionController.codigoPerfil == 3}">
-    		
-		      	<c:forEach items="#{opcionController.menus}" var="menu"> 
-			   		<p:menuitem id="mnu_#{menu.id}" value="#{menu.titulo}" actionListener="#{opcionController.processAction}" style="#{opcionController.moduloSelected eq menu.id ? 'color:#87CEEB !important;':'' }" ajax="false"/>  
-		       	</c:forEach>
-		       		       	  
-    		</c:if>
-    		
         </p:menubar>  
     	</h:form>
 	    </p:layoutUnit>  
 	  
-	    <p:layoutUnit id="tmp_menu" position="west" size="178" header="Menus" collapsible="true">  
-	  	<h:form>
-	       <p:menu style="border:none;">  
-           	<c:forEach items="#{opcionController.menus}" var="menu">
-		   		<p:menuitem id="mnu_#{menu.id}" value="#{menu.titulo}"  actionListener="#{opcionController.processAction}" style="#{opcionController.menuSelected eq menu.id ? 'color:blue !important;':'color:black !important;' }" ajax="false"/>  
-	       	</c:forEach>
-	    	</p:menu>
-	    </h:form>
-	    </p:layoutUnit>  
-	  
-	    <p:layoutUnit id="tmp_body" position="center" style="background:white;">
-	     	<ui:insert name="body"/>
-	    </p:layoutUnit>
+	  	 <c:if test="#{opcionController.codigoPerfil ne 3}">
+		    <p:layoutUnit id="tmp_menu" position="west" size="178" header="Menus" collapsible="true">  
+		  	<h:form>
+		       <p:menu style="border:none;">  
+	           	<c:forEach items="#{opcionController.menus}" var="menu">
+			   		<p:menuitem id="mnu_#{menu.id}" value="#{menu.titulo}"  actionListener="#{opcionController.processAction}" style="#{opcionController.menuSelected eq menu.id ? 'color:blue !important;':'color:black !important;' }" ajax="false"/>  
+		       	</c:forEach>
+		    	</p:menu>
+		    </h:form>
+		    </p:layoutUnit>  
+		  
+		    <p:layoutUnit id="tmp_body" position="center" style="background:white;">
+		     	<ui:insert name="body"/>
+		    </p:layoutUnit>
+	    </c:if>
 	    
+	     <c:if test="#{opcionController.codigoPerfil eq 3}">
+	     	<p:layoutUnit id="tmp_body" position="center" style="background:white;">
+		     	<iframe src="http://192.168.1.49/SysCetpro/inicio.php" width="100%" height="100%"></iframe>
+		    </p:layoutUnit>
+	     </c:if>
+	     
 	    <p:layoutUnit id="tmp_footer" position="south" size="32">  
 	        <h:outputText value="© Derechos Reservados 2013 - APROLAB II" />  
 	    </p:layoutUnit>    
