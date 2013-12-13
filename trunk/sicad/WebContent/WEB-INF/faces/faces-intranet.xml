@@ -74,26 +74,47 @@
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>intranetDocente_silabo_new</from-outcome>
-			<to-view-id>/modulos/intranet/intranetDocente_silabo_new.xhtml</to-view-id>
+			<from-outcome>IntranetDocente_silabo_new</from-outcome>
+			<to-view-id>/modulos/intranet/IntranetDocente_silabo_new.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>intranetDocente_silabo_update</from-outcome>
-			<to-view-id>/modulos/intranet/intranetDocente_silabo_update.xhtml</to-view-id>
+			<from-outcome>IntranetDocente_silabo_update</from-outcome>
+			<to-view-id>/modulos/intranet/IntranetDocente_silabo_update.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>intranetDocente_silabo_list</from-outcome>
-			<to-view-id>/modulos/intranet/intranetDocente_silabo_list.xhtml</to-view-id>
+			<from-outcome>IntranetDocente_silabo_list</from-outcome>
+			<to-view-id>/modulos/intranet/IntranetDocente_silabo_list.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
+<!-- 	CreacionFechas -->
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>IntranetDocenteCreacionFechas_list</from-outcome>
+			<to-view-id>/modulos/intranet/IntranetDocenteCreacionFechas_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- 	CreacionFechas -->
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>IntranetCetpro</from-outcome>
+			<to-view-id>/modulos/intranet/IntranetCetpro.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
 	
 	
 	
