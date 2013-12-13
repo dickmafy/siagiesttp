@@ -3,12 +3,17 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ActionListener;
+
 import org.primefaces.component.menuitem.MenuItem;
+
 import com.belogick.factory.util.controller.GenericController;
+
 import modules.seguridad.domain.Menu;
 import modules.seguridad.domain.MenuAcceso;
+import modules.seguridad.domain.Usuario;
 public class OpcionController extends GenericController  implements ActionListener
 {
 	private List<Menu> 		sistemas;
@@ -19,9 +24,14 @@ public class OpcionController extends GenericController  implements ActionListen
 	private	Long	moduloSelected;
 	private	Long	sistemaSelected;
 	
+	private Usuario usuario;
+	private Long codigoPerfil;
+	
 	public void init() throws Exception
 	{
 		sistemas=((MenuAcceso)getSpringBean("menuSesion")).getSistemas();
+		usuario = (Usuario)getSpringBean("usuarioSesion");
+		codigoPerfil = usuario.getPerfil();
 		modulos=((MenuAcceso)getSpringBean("menuSesion")).getModulos(sistemas.get(0).getSistema());
 		menus=new ArrayList<Menu>();
 		moduloSelected=0L;
@@ -76,6 +86,25 @@ public class OpcionController extends GenericController  implements ActionListen
         }
     }
 
+	
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	
+	public Long getCodigoPerfil() {
+		return codigoPerfil;
+	}
+
+	public void setCodigoPerfil(Long codigoPerfil) {
+		this.codigoPerfil = codigoPerfil;
+	}
+
 	public List<Menu> getSistemas() 						{return sistemas;}
 	public void setSistemas(List<Menu> sistemas) 			{this.sistemas = sistemas;}
 	public List<Menu> getModulos() 							{return modulos;}
@@ -90,3 +119,4 @@ public class OpcionController extends GenericController  implements ActionListen
 	public Long getSistemaSelected() 						{return sistemaSelected;}
 	public void setSistemaSelected(Long sistemaSelected) 	{this.sistemaSelected = sistemaSelected;}
 }
+
