@@ -13,6 +13,7 @@ import modules.admision.domain.Proceso;
 import modules.admision.domain.ProcesoCronograma;
 import modules.admision.domain.ProcesoOferta;
 import modules.admision.domain.Requisitos;
+import modules.horario.domain.Seccion;
 
 public interface AdmisionDao extends HorarioDao
 {
@@ -30,7 +31,8 @@ public interface AdmisionDao extends HorarioDao
 	public List<Requisitos> listarRequisitosPostulante(Long postulante, Long institucion, Long modalidad) throws Exception;
 	public void insertarRequisitos(boolean proceso, List<Requisitos> lista, Long primaria) throws DaoException ;
 	public void eliminarRequisito(boolean proceso, Long primaria) throws Exception;
-	
+	public List<Seccion> listarUnidades(Long institucion, Long annio, Long proceso, Long profesion, Long turno, Long modulo) throws Exception;
+	public void actualizarMatriculaSeccion(List<Seccion> lista, Long matricula) throws Exception ;
 	
 	public void procesarIngresantes(Long proceso) throws Exception;
 	public List<Matricula> listarMatricula(Long proceso) throws Exception;

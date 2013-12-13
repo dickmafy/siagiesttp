@@ -28,19 +28,10 @@
    				<tr>
 	   				<td><p:outputLabel  value="Profesion" 	style="font-weight:bold"/></td>
 	   				<td><p:outputLabel  value="Turno" 		style="font-weight:bold"/></td>
-	   				<td><p:outputLabel  value="Seccion" 	style="font-weight:bold"/></td>
   					</tr>
 	        	<tr>	
         			<td><p:outputLabel  value="#{admisionMatricula.bean.nombreEspecialidad}" /><p:spacer width="14px"/></td>
         			<td><p:outputLabel  value="#{admisionMatricula.bean.nombreTurno}" /><p:spacer width="14px"/></td>
-        			<td>
-  						<p:selectOneMenu   style="width:130px;"  value="#{admisionMatricula.bean.seccion}" >
-		    			   	<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
-            		    	<f:selectItem itemLabel="101 A"	itemValue="1" />  
-            		    	<f:selectItem itemLabel="102 A"	itemValue="2" /> 
-            		    	<f:selectItem itemLabel="103 A"	itemValue="3" /> 
-        				</p:selectOneMenu>
-		        	</td>
     	    	</tr>
     	    	</table>
     	
@@ -93,18 +84,36 @@
 		    			   	<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
             		    	<f:selectItem itemLabel="Módulo Profesional"	itemValue="1" />  
             		    	<f:selectItem itemLabel="Módulo Transversal"	itemValue="2" />
-            		    	<p:ajax event="change" update=":frmUpd:tabView:txtMod" listener="#{admisionMatricula.selectTipo}"/>
+            		    	<p:ajax event="change" update=":frmUpd:tabView:txtMod, :frmUpd:tabView:itemList" listener="#{admisionMatricula.selectTipo}"/>
         				</p:selectOneMenu>
         				</td>
         				<td>
         				<p:selectOneMenu id="txtMod" value="#{admisionMatricula.modulo}" style="width:550px;">
 							<f:selectItems value="#{admisionMatricula.moduloList}"/>
+							<p:ajax event="change" update=":frmUpd:tabView:itemList" listener="#{admisionMatricula.selectModulo}"/>
 						</p:selectOneMenu>	
         				</td>
 	  				</tr>  				
 	 			</table>
  				
+ 				<p:spacer height="10px"/>
  				
+ 				<p:dataTable id="itemList" var="item" value="#{admisionMatricula.unidadesList}" 
+		   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom" >
+		     							
+					<p:column headerText="Unidad Didáctica" style="width:55%; align:center;" >   
+						<h:outputText value="#{item.nombreUnidad}" title="UNIDAD DIDACTICA: #{item.nombreUnidad}"/>
+					</p:column>
+					
+					<p:column headerText="Sección" style="width:5%; align:center;" >   
+						<h:outputText value="#{item.nombre}"/>
+					</p:column>	
+					
+					<p:column headerText="Horas" style="width:5%; align:center;" >   
+						<h:outputText value="#{item.valorHoras}"/>
+					</p:column>
+		        	      	        
+				</p:dataTable>
 				 
  			</p:tab>
  			
