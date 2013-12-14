@@ -374,16 +374,17 @@ public class AdmisionDaoJpa extends HorarioDaoJpa implements AdmisionDao
 	{executeQueryUpdate("DELETE FROM administracion.m_requisito WHERE pk_requisitos='"+bean.getId()+"'; ");}
 	
 	
-	public List<Seccion> listarUnidades(Long institucion, Long annio, Long proceso, Long profesion, Long turno, Long modulo) throws Exception 
+	public List<Seccion> listarUnidades(Long institucion, Long annio, Long proceso, Long profesion, Long turno, Long modulo, Long tipo) throws Exception 
 	{
 		List<Seccion> lista=new ArrayList<Seccion>();
-		Query consulta=createQuery("SELECT * FROM admision.lst_unidades(:institucion, :annio, :proceso, :profesion, :turno, :modulo);");
+		Query consulta=createQuery("SELECT * FROM admision.lst_unidades(:institucion, :annio, :proceso, :profesion, :turno, :modulo, :tipo);");
 		consulta.setParameter("institucion", Integer.parseInt(institucion.toString()));
 		consulta.setParameter("annio", Integer.parseInt(annio.toString()));
 		consulta.setParameter("proceso", Integer.parseInt(proceso.toString()));
 		consulta.setParameter("profesion", Integer.parseInt(profesion.toString()));
 		consulta.setParameter("turno", Integer.parseInt(turno.toString()));
 		consulta.setParameter("modulo", Integer.parseInt(turno.toString()));
+		consulta.setParameter("tipo", Integer.parseInt(turno.toString()));
 		List rst=consulta.list();
 		
 		for(int i=0; i<rst.size(); i++)

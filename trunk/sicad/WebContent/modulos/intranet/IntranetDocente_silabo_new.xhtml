@@ -13,49 +13,33 @@
 	    		<p:spacer width="6px"/>
 	    		
 	    		<p:outputLabel for="txtAnn" value="Año  " style="position:relative;  top:-4px;"/>
-	    		<p:selectOneMenu id="txtAnn" value="#{intranetDocenteSilaboNew.annio}" style="position:relative;  top:2px; width:120px">
+	    		<p:selectOneMenu id="txtAnn" value="#{intranetDocenteSilabo.annio}" style="position:relative;  top:2px; width:120px">
                     <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
            	        <f:selectItem itemLabel="2013"  itemValue="2013" />
            	        <f:selectItem itemLabel="2014" 	itemValue="2014" />
            	        <f:selectItem itemLabel="2015" 	itemValue="2015" />
            	        <f:selectItem itemLabel="2016" 	itemValue="2016" />
            	        <f:selectItem itemLabel="2017" 	itemValue="2017" /> 
-           	        <p:ajax event="change" update=":frmList" listener="#{intranetDocenteSilaboNew.selectAnnio}"/>       
+           	        <p:ajax event="change" update=":frmList" listener="#{intranetDocenteSilabo.selectAnnio}"/>       
        	       	</p:selectOneMenu>
        	       	
        	       	<p:outputLabel for="txtPrc" value="     Proceso  " style="position:relative;  top:-4px;"/>
-		   		<p:selectOneMenu id="txtPrc" value="#{intranetDocenteSilaboNew.proceso}" style="position:relative;  top:3px; width:120px">
+		   		<p:selectOneMenu id="txtPrc" value="#{intranetDocenteSilabo.proceso}" style="position:relative;  top:3px; width:120px">
 		   			<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
-					<f:selectItems value="#{intranetDocenteSilaboNew.procesoList}"/>
-					<p:ajax event="change" update=":frmList" listener="#{intranetDocenteSilaboNew.selectProceso}"/>
+					<f:selectItems value="#{intranetDocenteSilabo.procesoList}"/>
+					<p:ajax event="change" update=":frmList" listener="#{intranetDocenteSilabo.defaultList}"/>  
 				</p:selectOneMenu>
-				
-				<p:outputLabel for="txtPrf" value="        Profesión  " style="position:relative;  top:-4px;"/>
-		   		<p:selectOneMenu id="txtPrf" value="#{intranetDocenteSilaboNew.profesion}" style="position:relative;  top:3px; width:320px">
-		   			<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
-					<f:selectItems value="#{intranetDocenteSilaboNew.profesionList}"/>
-					<p:ajax event="change" update=":frmList" listener="#{intranetDocenteSilaboNew.defaultList}"/>
-				</p:selectOneMenu>
-				
-				<p:outputLabel for="txtTur" value="        Turno  " style="position:relative;  top:-4px;"/>
-		   		<p:selectOneMenu id="txtTur" value="#{intranetDocenteSilaboNew.turno}" style="position:relative;  top:2px;  width:120px">
-                    <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
-           	        <f:selectItem itemLabel="Mañana"  	itemValue="1" />
-           	        <f:selectItem itemLabel="Tarde" 	itemValue="2" />
-           	        <f:selectItem itemLabel="Noche" 	itemValue="3" /> 
-           	        <p:ajax event="change" update=":frmList" listener="#{intranetDocenteSilaboNew.defaultList}"/>       
-       	       	</p:selectOneMenu>
 				
 				<p:spacer width="6px"/>
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
   
-   		<p:dataTable id="itemList" var="item" value="#{intranetDocenteSilaboNew.beanList}" filteredValue="#{intranetDocenteSilaboNew.beanFilterList}"
+   		<p:dataTable id="itemList" var="item" value="#{intranetDocenteSilabo.beanList}" filteredValue="#{intranetDocenteSilabo.beanFilterList}"
    			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom" >
      		
      		<f:facet name="header">
-				<h:outputText value="Distribución de Horas Lectivas por Docente" />  
+				<h:outputText value="Unidades Didácticas" />  
 			</f:facet>
 							
 			<p:column headerText="Módulo" style="width:5%; align:center;" >   
@@ -78,18 +62,18 @@
 			<p:column headerText="Docente" style="width:30%">
 				
 				<p:commandLink >
-					<p:selectOneMenu value="#{item.docente}" style="width:290px;" filter="true" filterMatchMode="startsWith">
-						<f:selectItems value="#{intranetDocenteSilaboNew.docenteList}"/>
-						<p:ajax event="change" listener="#{intranetDocenteSilaboNew.setDocente}" update=":frmList"/>
+					<p:selectOneMenu value="#{item.docente}" style="width:290px;" filter="true" filterMatchMode="startsWith" disabled="true">
+						<f:selectItems value="#{intranetDocenteSilabo.docenteList}"/>
+						<p:ajax event="change" listener="#{intranetDocenteSilabo.setDocente}" update=":frmList"/>
 					</p:selectOneMenu>
-					<f:setPropertyActionListener value="#{item}" target="#{intranetDocenteSilaboNew.beanSelected}" />
+					<f:setPropertyActionListener value="#{item}" target="#{intranetDocenteSilabo.beanSelected}" />
 				</p:commandLink>
 				   
         	</p:column> 
         	
         	<p:column headerText="Operaciones" style="width:13%">  
-							<p:commandButton icon="icn_item_update" action="#{intranetDocenteSilaboNew.goCrearFechas}"	title="Crear Fechas De Clase" ajax="false">
-								<f:setPropertyActionListener value="#{item}" target="#{intranetDocenteSilaboNew.beanSelected}" />
+							<p:commandButton icon="icn_item_update" action="#{intranetDocenteSilabo.goCrearFechas}"	title="Crear Fechas De Clase" ajax="false">
+								<f:setPropertyActionListener value="#{item}" target="#{intranetDocenteSilabo.beanSelected}" />
 							</p:commandButton>				
 			               
 			</p:column> 

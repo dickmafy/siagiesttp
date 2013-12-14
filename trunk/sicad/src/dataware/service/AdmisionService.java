@@ -33,7 +33,7 @@ public interface AdmisionService extends HorarioService
 	public List<Requisitos> listarRequisitosPostulante(Long postulante, Long institucion, Long modalidad) throws Exception;
 	public void insertarRequisitos(boolean proceso, List<Requisitos> lista, Long primaria) throws DaoException;
 	public void eliminarRequisito(boolean proceso, Long primaria) throws Exception;
-	public List<Seccion> listarUnidades(Long institucion, Long annio, Long proceso, Long profesion, Long turno, Long modulo) throws Exception;
+	public List<Seccion> listarUnidades(Long institucion, Long annio, Long proceso, Long profesion, Long turno, Long modulo, Long tipo) throws Exception;
 	public void actualizarMatriculaSeccion(List<Seccion> lista, Long matricula) throws Exception ;
 	
 	public void procesarIngresantes(Long proceso) throws Exception;
