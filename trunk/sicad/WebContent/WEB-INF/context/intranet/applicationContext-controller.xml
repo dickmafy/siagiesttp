@@ -31,8 +31,8 @@
 		<property name="bean" ref="metaInstitucional"/>	  
 	    <property name="myService" 	ref="horarioService"/>		
 	</bean>
-		
-	<bean id="intranetDocenteCreacionFechas_list" class="modules.intranet.controller.IntranetDocenteCreacionFechas" scope="session" parent="genericController">
+	
+	<bean id="intranetDocenteCreacionFechas" class="modules.intranet.controller.IntranetDocenteCreacionFechas" scope="session" parent="genericController">
 		<property name="bean" ref="seccion"/>
 	    <property name="myService" 	ref="horarioService"/>	
 	</bean>

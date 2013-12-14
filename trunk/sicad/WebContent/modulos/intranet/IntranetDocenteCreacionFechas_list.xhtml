@@ -11,24 +11,62 @@
   		<p:toolbar>  
 	    	<p:toolbarGroup align="left">  
 		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="silabo_crit" ajax="false" />
-		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{intranetDocenteCreacionFechasguardarCriterios}" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{intranetDocenteCreacionFechas.guardarCreacionFechas}" ajax="false" />
 		        
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
       	
       	<p:tabView id="tabView"> 
-      	
-      		<p:tab id="notas" title="Notas por Fecha" >
-				
-			</p:tab>
-			 
-    		<p:tab id="TabDatosGenerales" title="CT- CE -INDICADORES" >  
-    	   	
-				
-			</p:tab>
+  		<p:tab id="creacionfechassilabo" title="Creacion de Fechas del Silabo" >  
+		</p:tab>
 			
 		</p:tabView>
+		
+		<h:outputText value="Fecha Inicio" />  
+		<p:calendar id="txtFei" value="#{intranetDocenteCreacionFechas.fecha_inicio}" showOn="button"  size="10"/>
+		
+		<h:outputText value="Cantidad de Clases" />  
+		<p:inputText value="#{intranetDocenteCreacionFechas.cantidad_clases}" />
+		
+		<h:outputText value="Dias" />
+		<p:selectCheckboxMenu value="#{intranetDocenteCreacionFechas.listaDiasSeleccionados}" label="Dias" filter="true" filterText="Filter" filterMatchMode="startsWith" panelStyle="width:220px">  
+        	<f:selectItems value="#{intranetDocenteCreacionFechas.listaDias}"  />  
+	    </p:selectCheckboxMenu>  
+    
+     	
+        <p:commandButton title="Crear Fechas" 	value="Crear Fechas" 	icon="icn_bar_new" actionListener="#{intranetDocenteCreacionFechas.generarFechas}" ajax="false" />  
+		
+      	<p:dataTable id="itemList" var="item" value="#{intranetDocenteCreacionFechas.listFechas}" filteredValue="#{intranetDocenteCreacionFechas.beanFilterList}"
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom"
+   			paginator="true" rows="20"  
+        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+     		
+     		<f:facet name="header">
+				<h:outputText value="Creacion de Fechas" />  
+			</f:facet>
+							
+			<p:column headerText="Dia" style="width:23%; align:center;" >   
+				<h:outputText value="#{item.dia}"/>
+			</p:column>		
+			
+			<p:column headerText="fechaListada" style="width:10%; align:center;" sortBy="#{item.fechaListada}" >   
+				<h:outputText value="#{item.fechaListada}"/>
+			</p:column>
+			
+			<p:column headerText=".fecha_inicio" style="width:15%; align:center;" >   
+				<h:outputText value="#{item.fechaInicial}"/>
+			</p:column>	
+			
+			<p:column headerText="Estado" style="width:20%; align:center;" >   
+				<h:outputText value="#{item.estado}"/>
+			</p:column>
+			
+        	      	        
+		</p:dataTable>
+		
+		
+		
 		
      </h:form>
      
