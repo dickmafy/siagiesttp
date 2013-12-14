@@ -33,6 +33,7 @@ public class Seccion implements Serializable
 	private	Long	valorCapacidad;
 	private	Long	valorModulo;
 	private Long	valorTipoModulo;
+	private Long	meta;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -108,4 +109,14 @@ public class Seccion implements Serializable
 		if(estado.longValue()==2L)		{return "PUBLICADO";}
 		return "";
 	}
+	
+	@Transient
+	public Long getMeta() {
+		return meta;
+	}
+	public void setMeta(Long meta) {
+		this.meta = meta;
+	}
+	
+	
 }
