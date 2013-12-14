@@ -24,4 +24,5 @@ public interface HorarioService extends MarcoService
 	public boolean validarDisponibilidad(Long seccion, Long docente) throws Exception;
 	public boolean validarHoras(Long docente, Long horas) throws Exception ;
 	public void actualizarDocente(Long seccion, Long docente) throws Exception;
+	public List<Seccion> listarSeccionesDocente(Long institucion, Long annio, Long proceso, Long docente) throws Exception;
 }

@@ -283,4 +283,31 @@ public class HorarioDaoJpa extends MarcoDaoJpa implements HorarioDao
 	
 	public void actualizarDocente(Long seccion, Long docente) throws Exception
 	{executeQueryUpdate("UPDATE horario.m_seccion SET docente='"+docente+"' WHERE pk_seccion='"+seccion+"';");}
+	
+	public List<Seccion> listarSeccionesDocente(Long institucion, Long annio, Long proceso, Long docente) throws Exception 
+	{
+		List<Seccion> lista=new ArrayList<Seccion>();
+		Query consulta=createQuery("SELECT * FROM horario.lst_seccionesdocente(:institucion, :annio, :proceso, :docente)");
+		consulta.setParameter("institucion", Integer.parseInt(institucion.toString()));
+		consulta.setParameter("annio", Integer.parseInt(annio.toString()));
+		consulta.setParameter("proceso", Integer.parseInt(proceso.toString()));
+		consulta.setParameter("docente", Integer.parseInt(docente.toString()));
+		List rst=consulta.list();
+		
+		for(int i=0; i<rst.size(); i++)
+		{
+			Object[] objetos=(Object[])rst.get(i);
+			Seccion field=new Seccion();
+			if(objetos[0]!=null){field.setValorTipoModulo(Long.parseLong(objetos[0].toString()));}
+			if(objetos[1]!=null){field.setNombreModulo(objetos[1].toString());}
+			if(objetos[2]!=null){field.setValorModulo(Long.parseLong(objetos[2].toString()));}
+			if(objetos[3]!=null){field.setNombreUnidad(objetos[3].toString());}
+			if(objetos[4]!=null){field.setValorHoras(Long.parseLong(objetos[4].toString()));}
+			if(objetos[5]!=null){field.setDocente(Long.parseLong(objetos[5].toString()));}
+			if(objetos[6]!=null){field.setNombre(objetos[6].toString());}
+			if(objetos[7]!=null){field.setId(Long.parseLong(objetos[7].toString()));}
+			lista.add(field);
+		}
+		return lista;
+	}
 }

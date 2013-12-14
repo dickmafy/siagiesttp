@@ -13,7 +13,7 @@ import modules.administracion.domain.Personal;
 import modules.horario.domain.Seccion;
 import modules.seguridad.domain.Usuario;
 
-public class IntranetDocenteSilaboNew extends GenericController   
+public class IntranetDocenteSilabo extends GenericController   
 {
 	private List<SelectItem>    profesionList;
 	private List<SelectItem>    procesoList;
@@ -21,22 +21,21 @@ public class IntranetDocenteSilaboNew extends GenericController
 	
 	List<MetaInstitucional> metas;
 	private Long annio,proceso,profesion,turno;
-	private Long institucion;
+	private Long institucion,docente;
 	private HorarioService	myService;
 	
-	public void init(Long ann, Long prc, Long prf, Long trn) throws Exception
+	public void init() throws Exception
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
 		appName="Horarios";
 		moduleName="Meta Detalle ";
 		userName=usr.getUsuario();
 		institucion=usr.getInstitucion();
+		docente=usr.getPertenencia();
 		
-		annio=ann;
-		proceso=prc;
-		profesion=prf;
-		turno=trn;
-		
+		annio = -1L;
+		proceso = -1L;
+				
 		if(annio>0L)
 		{metas=myService.listarMetaInstitucional(institucion,annio,-1L);}
 		
@@ -47,7 +46,6 @@ public class IntranetDocenteSilaboNew extends GenericController
 		obj=null;
 		
 		fillProcesos();
-		fillProfesion();
 		
 		defaultList();
 		page_new="";
@@ -56,8 +54,6 @@ public class IntranetDocenteSilaboNew extends GenericController
 		forward(page_main);
 	}
 	
-	public void init() throws Exception
-	{init(-1L,-1L,-1L,-1L);}
 	
 	public void selectAnnio() throws Exception
 	{
@@ -69,15 +65,7 @@ public class IntranetDocenteSilaboNew extends GenericController
 		turno=-1L;
 		defaultList();
 	}
-	
-	public void selectProceso() throws Exception
-	{
-		fillProfesion();
-		profesion=-1L;
-		turno=-1L;
-		defaultList();
-	}
-	
+		
 	public void fillProcesos() throws Exception
 	{
 		procesoList=new ArrayList<SelectItem>();
@@ -114,55 +102,13 @@ public class IntranetDocenteSilaboNew extends GenericController
 		hashSet=null;
 	}
 	
-	public void fillProfesion() throws Exception
-	{
-		profesionList=new ArrayList<SelectItem>();
-		
-		if(metas!=null)
-		{
-			for(int i=0; i<metas.size(); i++)
-			{
-				if(metas.get(i).getAnnio().longValue()==annio && metas.get(i).getProceso().longValue()==proceso)
-				{profesionList.add(new SelectItem(metas.get(i).getProfesion(),metas.get(i).getNombreProfesion()));}
-			}
-		}
-		HashSet<SelectItem> hashSet = new HashSet<SelectItem>(profesionList);
-		profesionList.clear();
-		profesionList.addAll(hashSet);
-		hashSet=null;
-	}
-	
 	@Override
 	public void defaultList() throws Exception
 	{
-		if(institucion.longValue()>0L && annio.longValue()>0L && proceso.longValue()>0L && profesion.longValue()>0L && turno.longValue()>0L)
-		{setBeanList(myService.listarSecciones(institucion, annio, proceso, profesion, turno));}
+		if(institucion.longValue()>0L && annio.longValue()>0L && proceso.longValue()>0L)
+		{setBeanList(myService.listarSeccionesDocente(institucion, annio, proceso,docente));}
 		else
 		{setBeanList(new ArrayList<Seccion>());}
-	}
-	
-	public void setDocente() throws Exception
-	{
-		Seccion sec=(Seccion)getBeanSelected();
-		boolean validar=true;
-		if(!myService.validarHoras(sec.getDocente(), sec.getValorHoras()))
-		{
-			setMessageError("Asignación Fallida: La sección a asignar implica que el Docente supere su Carga Lectiva de 20 horas.");
-			sec.setDocente(-1L);
-			validar=false;
-		}
-		else if(!myService.validarDisponibilidad(sec.getId(), sec.getDocente()))
-		{
-			setMessageError("Asignación Fallida: El docente no cuenta con disponibilidad horaria para esta sección.");
-			sec.setDocente(-1L);			
-			validar=false;
-		}
-		if(validar)
-		{
-			myService.actualizarDocente(sec.getId(), sec.getDocente());
-			setMessageSuccess("El docente fue asignado exitosamente.");
-		}
-		sec=null;
 	}
 	
 	public void goCrearFechas() throws Exception

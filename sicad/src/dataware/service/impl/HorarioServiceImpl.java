@@ -54,5 +54,8 @@ public class HorarioServiceImpl extends MarcoServiceImpl implements HorarioServi
 	
 	public void actualizarDocente(Long seccion, Long docente) throws Exception
 	{getHorarioDao().actualizarDocente(seccion, docente);}
+	
+	public List<Seccion> listarSeccionesDocente(Long institucion, Long annio, Long proceso, Long docente) throws Exception
+	{return getHorarioDao().listarSeccionesDocente(institucion, annio, proceso, docente);}
 }
 

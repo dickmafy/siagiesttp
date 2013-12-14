@@ -133,7 +133,7 @@ public class AdmisionMatricula extends GenericController
 	{
 		Matricula bean=(Matricula)getBean();
 		List<Seccion> unidades=new ArrayList<Seccion>();
-		unidadesList = myService.listarUnidades(institucion, annio, mesProceso, bean.getEspecialidad(), bean.getTurno(), modulo);
+		unidadesList = myService.listarUnidades(institucion, annio, mesProceso, bean.getEspecialidad(), bean.getTurno(), modulo, tipo);
 		for(int i=0; i<unidadesList.size(); i++)
 		{
 			if(i>0){
