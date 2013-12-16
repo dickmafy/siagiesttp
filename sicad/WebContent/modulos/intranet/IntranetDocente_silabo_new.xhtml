@@ -72,9 +72,12 @@
         	</p:column> 
         	
         	<p:column headerText="Operaciones" style="width:13%">  
-							<p:commandButton icon="icn_item_update" action="#{intranetDocenteSilabo.goCrearFechas}"	title="Crear Fechas De Clase" ajax="false">
-								<f:setPropertyActionListener value="#{item}" target="#{intranetDocenteSilabo.beanSelected}" />
-							</p:commandButton>				
+				<p:commandButton icon="icn_item_update" action="#{intranetDocenteSilabo.goCrearFechas}"	title="Crear Fechas De Clase" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{intranetDocenteSilabo.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_item_edit" action="#{intranetDocenteSilabo.goDocenteNotas}"	title="Notas" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{intranetDocenteSilabo.beanSelected}" />
+				</p:commandButton>				
 			               
 			</p:column> 
 	 

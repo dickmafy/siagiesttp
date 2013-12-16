@@ -10,6 +10,7 @@ import com.belogick.factory.util.controller.GenericController;
 import dataware.service.HorarioService;
 import modules.administracion.domain.MetaInstitucional;
 import modules.administracion.domain.Personal;
+import modules.admision.domain.Proceso;
 import modules.horario.domain.Seccion;
 import modules.seguridad.domain.Usuario;
 
@@ -116,6 +117,15 @@ public class IntranetDocenteSilabo extends GenericController
 		IntranetDocenteCreacionFechas go = (IntranetDocenteCreacionFechas)getSpringBean("intranetDocenteCreacionFechas");
 		//go.init(annio, proceso, ((MetaInstitucional)getBeanSelected()).getProfesion(), ((MetaInstitucional)getBeanSelected()).getTurno());
 		go.init((Seccion)getBeanSelected());
+	}
+	
+	public void goDocenteNotas()throws Exception{
+		IntranetDocenteNotas go = (IntranetDocenteNotas)getSpringBean("intranetDocenteNotas");
+		Proceso proceso = new Proceso();
+		proceso.setAnnio(annio);
+		proceso.setProceso(this.proceso);
+		proceso = (Proceso) myService.findByObject(proceso);
+		go.init((Seccion)getBeanSelected(),proceso);
 	}
 	
 	public HorarioService getMyService() 							{return myService;}
