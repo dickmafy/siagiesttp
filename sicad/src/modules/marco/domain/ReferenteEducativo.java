@@ -25,6 +25,7 @@ public class ReferenteEducativo implements Serializable
 	private String descripcion;
 	private Long estado;
 	
+	private String nombreTipo;
 	private boolean checkItem;
 	
 	@Id
@@ -70,8 +71,17 @@ public class ReferenteEducativo implements Serializable
 	public void setEstado(Long estado) 				{this.estado = estado;}
 	
 	@Transient
-	public boolean getCheck() 					{return checkItem;}
-	public void setCheck(boolean checkItem) 	{this.checkItem = checkItem;}
+	public boolean getCheck() 						{return checkItem;}
+	public void setCheck(boolean checkItem) 		{this.checkItem = checkItem;}
+	
+	@Transient
+	public String getNombreTipo() 					{
+								if(tipo.longValue()==1L)	return "Capacidad Terminal";
+								if(tipo.longValue()==2L)	return "Contenido Basico";
+								if(tipo.longValue()==3L)	return "Transversal";
+									return "";
+											}
+	public void setNombreTipo(String nombreTipo) 	{this.nombreTipo = nombreTipo;}
 	
 	
 }

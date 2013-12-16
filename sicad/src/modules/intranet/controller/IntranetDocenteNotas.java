@@ -1,6 +1,8 @@
 package modules.intranet.controller; 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.model.SelectItem;
 
@@ -16,6 +18,18 @@ public class IntranetDocenteNotas extends GenericController
 	private IntranetService	myService;
 	private List<ReferenteEducativo> criteriosList;
 	
+	private List<ReferenteEducativo> criteriosListCt;
+	
+	public List<ReferenteEducativo> getCriteriosListCt() {
+		return criteriosListCt;
+	}
+
+	public void setCriteriosListCt(List<ReferenteEducativo> criteriosListCt) {
+		this.criteriosListCt = criteriosListCt;
+	}
+
+	private List<String> selectCapacidades;
+	
 	private List<SelectItem> moduloProfesionalList;
 	private List<SelectItem> capacidadProfesionalList;
 	
@@ -25,6 +39,16 @@ public class IntranetDocenteNotas extends GenericController
 	private Long tipo=0L,seccion,modulo,profesion;
 	private String nombreUnidad;
 	
+	private Map<String,String> capacidadesu;
+	
+	public Map<String, String> getCapacidadesu() {
+		return capacidadesu;
+	}
+
+	public void setCapacidadesu(Map<String, String> capacidadesu) {
+		this.capacidadesu = capacidadesu;
+	}
+
 	public void init() throws Exception 
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
@@ -76,6 +100,22 @@ public class IntranetDocenteNotas extends GenericController
 	public void defaultList() throws Exception
 	{
 		
+		//listarCT();
+		
+		
+		
+	}
+
+	public void listarCT() {
+		 criteriosListCt=new ArrayList<ReferenteEducativo>();
+		for (ReferenteEducativo x: criteriosList) {
+			if(x.getCheck()){
+				
+				ReferenteEducativo re=new ReferenteEducativo();
+				re=x;
+				criteriosListCt.add(re);
+			}
+		}
 	}
 	
 	@Override
@@ -113,11 +153,11 @@ public class IntranetDocenteNotas extends GenericController
 	public List<ReferenteEducativo> getCriteriosList() 										{return criteriosList;}
 	public void setCriteriosList(List<ReferenteEducativo> criteriosList) 					{this.criteriosList = criteriosList;}
 
-	public String getNombreUnidad() 													{return nombreUnidad;}
-	public void setNombreUnidad(String nombreUnidad) 									{this.nombreUnidad = nombreUnidad;}
+	public String getNombreUnidad() 														{return nombreUnidad;}
+	public void setNombreUnidad(String nombreUnidad) 										{this.nombreUnidad = nombreUnidad;}
 
-	public List<SelectItem> getModuloProfesionalList() 									{return moduloProfesionalList;}
-	public void setModuloProfesionalList(List<SelectItem> moduloProfesionalList) 		{this.moduloProfesionalList = moduloProfesionalList;}
+	public List<SelectItem> getModuloProfesionalList() 										{return moduloProfesionalList;}
+	public void setModuloProfesionalList(List<SelectItem> moduloProfesionalList) 			{this.moduloProfesionalList = moduloProfesionalList;}
 
 	public List<SelectItem> getCapacidadProfesionalList() 								{return capacidadProfesionalList;}
 	public void setCapacidadProfesionalList(List<SelectItem> capacidadProfesionalList) 	{this.capacidadProfesionalList = capacidadProfesionalList;}
@@ -130,5 +170,32 @@ public class IntranetDocenteNotas extends GenericController
 	
 	public Long getTipo() 																{return tipo;}
 	public void setTipo(Long tipo) 														{this.tipo = tipo;}
+
+	public List<String> getSelectCapacidades() {
+		return selectCapacidades;
+	}
+
+	public void setSelectCapacidades(List<String> selectCapacidades) {
+		this.selectCapacidades = selectCapacidades;
+	}
+
+	public Map<String, String> getCapacidades() {
+		capacidadesu=new HashMap<String, String>();
+		
+		for(ReferenteEducativo x: criteriosList){
+			capacidadesu.put(x.getTitulo(), x.getTipo().toString());
+		}
+	
+		return capacidadesu;
+	}
+
+	public void setCapacidades(Map<String, String> capacidadesu) {
+		this.capacidadesu = capacidadesu;
+	}
+	
+	
+	
+	
+	
 
 } 
