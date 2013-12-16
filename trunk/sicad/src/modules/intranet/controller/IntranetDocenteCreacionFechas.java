@@ -3,6 +3,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -76,47 +78,29 @@ public class IntranetDocenteCreacionFechas extends GenericController
 	
 	
 	public void generarFechas() throws ParseException{
-	
-		
-		/* 
-		Iterator it = listaDias.entrySet().iterator();
-		while (it.hasNext()) {
-		Map.Entry e = (Map.Entry)it.next();
-		System.out.println(e.getKey() + " " + e.getValue());
-		}
-		
-		Iterator iter = listaDias.entrySet().iterator();
-		Map.Entry e;
-		while (iter.hasNext()) {
-		e = (Map.Entry)iter.next();
-		System.out.println("Clave: " + e.getKey() + " | Valor: " + e.getValue());
-		}
-		
-		
-		Iterator it1 = listaDias.entrySet().iterator();
-	    while (it1.hasNext()) {
-	        Map.Entry e2 = (Map.Entry)it1.next();
-	        System.out.println("["+e2.getKey() + "=" + e2.getValue()+"]");
-	   }
-
-	    
-	    for (Entry<String, String> e1: listaDias.entrySet()) {
-	        System.out.println("["+e1.getKey() + "=" + e1.getValue()+"]");
-	    }
-	    
-	    
-		*/
 		
 		listFechas = new ArrayList<>();
-		
-		for (int j = 0; j <= 7; j++) {
-			
-			try {
-				listFechas = getFechaConNombreDia(this.fecha_inicio, this.cantidad_clases,Integer.valueOf(listaDiasSeleccionados.get(j)));
-			} catch (NumberFormatException e) {
+
+			for (int j = 0; j <= 7; j++) 
+			{
+				try 
+				{
+
+					listFechas = getFechaConNombreDia(this.fecha_inicio, cantidad_clases,Integer.valueOf(listaDiasSeleccionados.get(j)));
+				} catch (NumberFormatException e) {
+				} catch (IndexOutOfBoundsException e) {
+				}
 			}
-		}
+			
+			
 		
+		
+		//Collections.sort(listFechas,Collections.reverseOrder());
+		Collections.sort(listFechas, new Comparator<Fecha>()
+		{
+			public int compare (Fecha m1, Fecha m2)
+	    	{return m1.getFechaListada().compareTo(m2.getFechaListada());     }
+		});
 		
 				
 	} 
@@ -125,24 +109,30 @@ public class IntranetDocenteCreacionFechas extends GenericController
 	
 	private  List<Fecha> getFechaConNombreDia(Date fechaInicial,Integer cantidad_clases,Integer numero_dia) throws ParseException  {
 
-		System.out.println("-------------------PARTE INTRANET DOCENTE CREACION FECHAS------------");
-
-		
+	
 		Fecha fecha = new Fecha();
 
 		GregorianCalendar gcalendarInicial = new GregorianCalendar();
 		gcalendarInicial.setTime(fechaInicial);
 		GregorianCalendar gcalendarFinal = new GregorianCalendar();
-		gcalendarFinal.add(Calendar.DAY_OF_WEEK, cantidad_clases-1); // # dias
-																	// hasta el
-																	// que va
-																	// calcular.
-		while (gcalendarInicial.before(gcalendarFinal)) {
+		gcalendarFinal.setTime(fechaInicial);
+		//# dias hasta el que va calcular.
+		
+		gcalendarFinal.add(Calendar.DAY_OF_WEEK, cantidad_clases);  
+				
+		
+		while (gcalendarInicial.before(gcalendarFinal)) 
+		{
+			
+			
+				
 			fecha = new Fecha();
-			gcalendarInicial.add(Calendar.DAY_OF_WEEK, 1);
+			//se va incrementando 1 dia
+			
 
 
-			switch (numero_dia) {
+			switch (numero_dia) 
+			{
 
 			case 1:
 				if (getDiaDeLaSemana(gcalendarInicial).equals("Lunes")) {
@@ -187,13 +177,23 @@ public class IntranetDocenteCreacionFechas extends GenericController
 			// sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss zzz");
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 
-			if (fecha.getDia() != null) {
+			if (fecha.getDia() != null) 
+			{
 				fecha.setFechaListada(dateFormat.parse(dateFormat.format(gcalendarInicial.getTime())));
 				listFechas.add(fecha);
+			}else{
+				//por cada dia que no escogio debe incrementarse +1
+				gcalendarFinal.add(Calendar.DAY_OF_WEEK,1);
 			}
-
-
-			}
+			
+			gcalendarInicial.add(Calendar.DAY_OF_WEEK, 1);
+			 
+			
+			
+		}
+			
+			
+		
 			return listFechas;
 }
 				
@@ -203,7 +203,21 @@ public class IntranetDocenteCreacionFechas extends GenericController
 	
 
 		
+		
+		
+		
+		
+		
+		
 		listFechas=null;
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	}

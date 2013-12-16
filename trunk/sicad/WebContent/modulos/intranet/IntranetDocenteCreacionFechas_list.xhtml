@@ -39,30 +39,28 @@
 		
       	<p:dataTable id="itemList" var="item" value="#{intranetDocenteCreacionFechas.listFechas}" filteredValue="#{intranetDocenteCreacionFechas.beanFilterList}"
    			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom"
-   			paginator="true" rows="20"  
+   			paginator="true" rows="20"  rowIndexVar="rowNumber" scrollable="true"
         	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
      		
      		<f:facet name="header">
 				<h:outputText value="Creacion de Fechas" />  
 			</f:facet>
-							
-			<p:column headerText="Dia" style="width:23%; align:center;" >   
+						
+			<p:column headerText="#" style="width:5%; align:center;">
+				<h:outputText value="#{rowNumber+1}"/>  
+			</p:column>
+				
+			<p:column headerText="Dia" style="width:5%; align:center;" sortBy="#{item.dia}">
 				<h:outputText value="#{item.dia}"/>
 			</p:column>		
 			
-			<p:column headerText="fechaListada" style="width:10%; align:center;" sortBy="#{item.fechaListada}" >   
-				<h:outputText value="#{item.fechaListada}"/>
+			<p:column headerText="fechaListada" style="width:50%; align:center;" sortBy="#{item.fechaListada}" >   
+				<h:outputText value="#{item.fechaListada}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
 			</p:column>
 			
-			<p:column headerText=".fecha_inicio" style="width:15%; align:center;" >   
-				<h:outputText value="#{item.fechaInicial}"/>
-			</p:column>	
-			
-			<p:column headerText="Estado" style="width:20%; align:center;" >   
-				<h:outputText value="#{item.estado}"/>
-			</p:column>
-			
-        	      	        
+		       	      	        
 		</p:dataTable>
 		
 		
