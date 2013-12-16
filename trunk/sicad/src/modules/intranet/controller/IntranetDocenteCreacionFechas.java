@@ -49,8 +49,6 @@ public class IntranetDocenteCreacionFechas extends GenericController
 		moduleName="Meta Detalle ";
 		userName=usr.getUsuario();
 		institucion=usr.getInstitucion();
-
-		
 		//defaultList();
 		page_new="";
 		page_main="IntranetDocenteCreacionFechas_list";
@@ -62,6 +60,23 @@ public class IntranetDocenteCreacionFechas extends GenericController
 		 
 	}
 
+    public void guardarCreacionFechas() throws ParseException
+	{
+    	
+    	Fecha fecha = new Fecha();
+    	
+    	
+    	for (Fecha item: listFechas) 
+    	{
+    		
+    		
+    		
+		}
+    	
+    	
+		listFechas=new ArrayList<Fecha>();
+	}
+    
 	private void llenarDias() {
 		listaDias = new HashMap<String, String>();  
 	        listaDias.put("Lunes", "1");  
@@ -198,29 +213,7 @@ public class IntranetDocenteCreacionFechas extends GenericController
 }
 				
 	
-	public void guardarCreacionFechas() throws ParseException
-	{
 	
-
-		
-		
-		
-		
-		
-		
-		
-		listFechas=null;
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	}
 	
 	
 	 public static String getDiaDeLaSemana(GregorianCalendar cal){
