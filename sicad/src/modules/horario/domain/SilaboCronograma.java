@@ -27,7 +27,7 @@ public class SilaboCronograma implements Serializable
 	private static final long serialVersionUID = 1L;
 	private Long    id;
 	private Long	pk_meta;
-	private	Long 	contenido;
+	private	String 	contenido;
 	private Long 	pk_unidad;
 	private Long 	pk_seccion;
 	private Long 	pk_docente;
@@ -47,12 +47,8 @@ public class SilaboCronograma implements Serializable
 	public void setPk_meta(Long pk_meta) {
 		this.pk_meta = pk_meta;
 	}
-	public Long getContenido() {
-		return contenido;
-	}
-	public void setContenido(Long contenido) {
-		this.contenido = contenido;
-	}
+	
+	
 	public Long getPk_unidad() {
 		return pk_unidad;
 	}
@@ -76,6 +72,12 @@ public class SilaboCronograma implements Serializable
 	}
 	public void setEstado(Long estado) {
 		this.estado = estado;
+	}
+	public String getContenido() {
+		return contenido;
+	}
+	public void setContenido(String contenido) {
+		this.contenido = contenido;
 	}
 	
 	
