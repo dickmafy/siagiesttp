@@ -12,11 +12,102 @@
 	    	<p:toolbarGroup align="left">  
 		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="silabo_crit" ajax="false" />
 		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{intranetDocenteNotas.guardarCriterios}" ajax="false" />
+		        <p:commandButton title="Registrar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{intranetDocenteNotas.listarCT}" ajax="false" />
+		       
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
       	
-      	<p:dataTable id="dt_notasFecha" var="item" value="#{intranetDocenteNotas.beanList}" 
+      	<p:tabView id="tabView"> 
+      	
+      		<p:tab id="notas" title="Notas por Fecha" >
+				<h:outputText value="SILABOS 100" />
+				<p:dataTable id="dt_notasFecha" var="item" value="#{intranetDocenteNotas.criteriosList}" 
+			   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+			     		
+			     		<p:column headerText="Fecha" style="width:90%; align:center;" >   
+							<h:outputText value="1/1/2013" />					  
+						</p:column>		        	      	        	        
+						
+						<p:column headerText="Alunos" style="width:90%; align:center;" >   
+							<h:outputText value="Walter" />					  
+						</p:column>
+						
+						
+						<p:column headerText="Operaciones" style="width:13%">  
+							<p:commandButton icon="icn_item_update" 	title="Calificar"  ajax="false">
+								<f:setPropertyActionListener value="#{item}" target="#{adminAmbiente.beanSelected}" />
+							</p:commandButton>				
+			               
+			        	</p:column>      
+						
+			        	      	        
+				</p:dataTable> 
+			
+			
+			
+			
+			  
+			</p:tab>
+			 
+    		<p:tab id="TabDatosGenerales" title="CT- CE -INDICADORES" >  
+    	   	
+		      	<p:panel header="Sílabo #{intranetDocenteNotas.nombreUnidad} - Criterios de Evaluación">
+		
+						<p:dataTable id="criteriosList" var="item" value="#{intranetDocenteNotas.criteriosList}" 
+			   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+			     		
+			     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
+							<h:outputText value="MOD#{item.nivelA}: #{item.titulo}" title="MÓDULO #{item.nivelA}: #{item.titulo} - #{item.descripcion}" rendered="false" style="font-weight:bold"/>
+							<h:outputText value="CT#{item.nivelB}: #{item.descripcion}" title="CAPACIDAD TERMINAL #{item.nivelB}: #{item.descripcion}" rendered="#{item.nivelB ne 0 and item.nivelC eq 0}" style="font-weight:bold"/>
+							<p:selectBooleanCheckbox value="#{item.check}" rendered="#{item.nivelC ne 0}"/>
+							<h:outputText value="CE#{item.nivelC}: #{item.descripcion}" title="CRITERIO DE EVALUACIÓN #{item.nivelC}: #{item.descripcion}" rendered="#{item.nivelC ne 0}"/>					  
+						</p:column>		        	      	        	        
+			        	      	        
+						</p:dataTable> 			
+		    		
+				</p:panel>
+			</p:tab>
+				<p:tab id="TabCapacidadesTerminales" title="CT- SELECCIONADAS" >  
+    	   	
+		      	<p:panel header="Sílabo #{intranetDocenteNotas.nombreUnidad} - Capacidades Seleccionadas">
+
+		<p:dataTable id="criteriosListct" var="item" value="#{intranetDocenteNotas.criteriosListCt}" 
+			   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+			     		
+			     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
+							<h:outputText value="MOD#{item.nivelA}: #{item.titulo}" title="MÓDULO #{item.nivelA}: #{item.titulo} - #{item.descripcion}" rendered="false" style="font-weight:bold"/>
+							<h:outputText value="CT#{item.nivelB}: #{item.descripcion}" title="CAPACIDAD TERMINAL #{item.nivelB}: #{item.descripcion}" rendered="#{item.nivelB ne 0 and item.nivelC eq 0}" style="font-weight:bold"/>
+							<p:selectBooleanCheckbox value="#{item.check}" rendered="#{item.nivelC ne 0}"/>
+							<h:outputText value="CE#{item.nivelC}: #{item.descripcion}" title="CRITERIO DE EVALUACIÓN #{item.nivelC}: #{item.descripcion}" rendered="#{item.nivelC ne 0}"/>					  
+						</p:column>		        	      	        	        
+			        	      	        
+						</p:dataTable> 		
+		    		
+				</p:panel>
+			</p:tab>
+			
+			<p:tab id="TabDatosGenerales" title="CT- CE -INDICADORES" >  
+    	   	
+		      	<p:panel header="Sílabo #{intranetDocenteNotas.nombreUnidad} - Criterios de Evaluación">
+		
+						<p:dataTable id="criteriosList" var="item" value="#{intranetDocenteNotas.criteriosList}" 
+			   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+			     		
+			     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
+							<h:outputText value="MOD#{item.nivelA}: #{item.titulo}" title="MÓDULO #{item.nivelA}: #{item.titulo} - #{item.descripcion}" rendered="false" style="font-weight:bold"/>
+							<h:outputText value="CT#{item.nivelB}: #{item.descripcion}" title="CAPACIDAD TERMINAL #{item.nivelB}: #{item.descripcion}" rendered="#{item.nivelB ne 0 and item.nivelC eq 0}" style="font-weight:bold"/>
+							<p:selectBooleanCheckbox value="#{item.check}" rendered="#{item.nivelC ne 0}"/>
+							<h:outputText value="CE#{item.nivelC}: #{item.descripcion}" title="CRITERIO DE EVALUACIÓN #{item.nivelC}: #{item.descripcion}" rendered="#{item.nivelC ne 0}"/>					  
+						</p:column>		        	      	        	        
+			        	      	        
+						</p:dataTable> 			
+		    		
+				</p:panel>
+			</p:tab>
+				<p:tab id="TabCapacidadesTerminales2" title="CT- SELECCIONADAS" >  
+    	   	
+			<p:dataTable id="dt_notasFecha" var="item" value="#{intranetDocenteNotas.beanList}" 
 	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
 	     		
 	     		<p:column headerText="Apellido Paterno" style="width:20%; align:center;" >   
@@ -34,7 +125,10 @@
 					        	      	        	        
 				          	        
 		</p:dataTable> 
-      
+			</p:tab>
+			
+			
+		</p:tabView>
 		
      </h:form>
      
