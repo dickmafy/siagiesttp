@@ -17,40 +17,8 @@
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
       	
-      	<p:tabView id="tabView"> 
-      	
-      		<p:tab id="notas" title="Notas por Fecha" >
-				<h:outputText value="SILABOS 100" />
-				<p:dataTable id="dt_notasFecha" var="item" value="#{intranetDocenteNotas.criteriosList}" 
-			   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
-			     		
-			     		<p:column headerText="Fecha" style="width:90%; align:center;" >   
-							<h:outputText value="1/1/2013" />					  
-						</p:column>		        	      	        	        
-						
-						<p:column headerText="Alunos" style="width:90%; align:center;" >   
-							<h:outputText value="Walter" />					  
-						</p:column>
-						
-						
-						<p:column headerText="Operaciones" style="width:13%">  
-							<p:commandButton icon="icn_item_update" 	title="Calificar"  ajax="false">
-								<f:setPropertyActionListener value="#{item}" target="#{adminAmbiente.beanSelected}" />
-							</p:commandButton>				
-			               
-			        	</p:column>      
-						
-			        	      	        
-				</p:dataTable> 
-			
-			
-			
-			
-			  
-			</p:tab>
-			 
-    		<p:tab id="TabDatosGenerales" title="CT- CE -INDICADORES" >  
-    	   	
+  
+	
 		      	<p:panel header="Sílabo #{intranetDocenteNotas.nombreUnidad} - Criterios de Evaluación">
 		
 						<p:dataTable id="criteriosList" var="item" value="#{intranetDocenteNotas.criteriosList}" 
@@ -66,9 +34,7 @@
 						</p:dataTable> 			
 		    		
 				</p:panel>
-			</p:tab>
 			
-		</p:tabView>
 		
      </h:form>
      

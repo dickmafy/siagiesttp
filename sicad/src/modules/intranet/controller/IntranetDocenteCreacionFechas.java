@@ -108,31 +108,36 @@ public class IntranetDocenteCreacionFechas extends GenericController
 	
 	
 	public void generarFechas() throws ParseException{
-		
 		listFechas = new ArrayList<>();
+		obtenerListaFechasxDia();
+		ordernarYRemoverFechasNoValidas();
+	}
 
-			for (int j = 0; j <= 7; j++) 
-			{
-				try 
-				{
-
-					listFechas = getFechaConNombreDia(this.fecha_inicio, cantidad_clases,Integer.valueOf(listaDiasSeleccionados.get(j)));
-				} catch (NumberFormatException e) {
-				} catch (IndexOutOfBoundsException e) {
-				}
-			}
-			
-			
-		
-		
-		//Collections.sort(listFechas,Collections.reverseOrder());
+	private void ordernarYRemoverFechasNoValidas() {
 		Collections.sort(listFechas, new Comparator<Fecha>()
 		{
 			public int compare (Fecha m1, Fecha m2)
 	    	{return m1.getFechaListada().compareTo(m2.getFechaListada());     }
 		});
 		
-				
+		
+		int size = listFechas.size();
+		for (int j = 0; j < size - cantidad_clases; j++) 
+		{
+			listFechas.remove(size-1-j);
+		}
+	}
+
+	private void obtenerListaFechasxDia() throws ParseException {
+		for (int j = 0; j <= 7; j++) 
+		{
+			try 
+			{
+				listFechas = getFechaConNombreDia(this.fecha_inicio, cantidad_clases,Integer.valueOf(listaDiasSeleccionados.get(j)));
+			} catch (NumberFormatException e) {
+			} catch (IndexOutOfBoundsException e) {
+			}
+		}
 	} 
 
 	
@@ -146,24 +151,18 @@ public class IntranetDocenteCreacionFechas extends GenericController
 		gcalendarInicial.setTime(fechaInicial);
 		GregorianCalendar gcalendarFinal = new GregorianCalendar();
 		gcalendarFinal.setTime(fechaInicial);
+
 		//# dias hasta el que va calcular.
-		
 		gcalendarFinal.add(Calendar.DAY_OF_WEEK, cantidad_clases);  
 				
 		
 		while (gcalendarInicial.before(gcalendarFinal)) 
 		{
-			
-			
-				
 			fecha = new Fecha();
 			//se va incrementando 1 dia
-			
-
 
 			switch (numero_dia) 
 			{
-
 			case 1:
 				if (getDiaDeLaSemana(gcalendarInicial).equals("Lunes")) {
 					fecha.setDia(getDiaDeLaSemana(gcalendarInicial));
@@ -203,7 +202,6 @@ public class IntranetDocenteCreacionFechas extends GenericController
 				break;
 			}
 
-
 			// sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss zzz");
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 
@@ -215,24 +213,14 @@ public class IntranetDocenteCreacionFechas extends GenericController
 				//por cada dia que no escogio debe incrementarse +1
 				gcalendarFinal.add(Calendar.DAY_OF_WEEK,1);
 			}
-			
 			gcalendarInicial.add(Calendar.DAY_OF_WEEK, 1);
-			 
-			
-			
 		}
-			
-			
-		
 			return listFechas;
 }
 				
 	
-	
-	
-	
-	 public static String getDiaDeLaSemana(GregorianCalendar cal){
-	    	
+	public static String getDiaDeLaSemana(GregorianCalendar cal)
+	{
 	    	//DOMINGO es 1 ,Lunes = 2...Sabado = 7
 	    	switch (cal.get(Calendar.DAY_OF_WEEK)-1) 
 	    	{
@@ -255,55 +243,7 @@ public class IntranetDocenteCreacionFechas extends GenericController
 				break;
 			}
 			return "";
-	    		
-	    			
-	    }
-	
-/*
-	@SuppressWarnings("unused")
-	private  List<Fecha> getFechaConNombreDia(Date fechaInicial,Integer cantidad_clases,Boolean lunes,
-						Boolean martes,Boolean miercoles,Boolean jueves,Boolean viernes,Boolean sabado,Boolean domingo) throws ParseException  {
-		
-		System.out.println("-------------------PARTE INTRANET DOCENTE CREACION FECHAS------------");
-		
-		List<Fecha> fechas = new ArrayList<>();
-		Fecha fecha = new Fecha();
-		
-		GregorianCalendar gcalendarInicial = new GregorianCalendar();
-		gcalendarInicial.setTime(fechaInicial); 
-		GregorianCalendar gcalendarFinal = new GregorianCalendar();
-		gcalendarFinal.add(Calendar.DAY_OF_WEEK, cantidad_clases); // # dias hasta el que va calcular.
-		while (gcalendarInicial.before(gcalendarFinal)) {
-			fecha = new Fecha();
-			gcalendarInicial.add(Calendar.DAY_OF_WEEK, 1);
-
-			
-			if(lunes){if(getDiaDeLaSemana(gcalendarInicial).equals("Lunes")){{fecha.setDia(getDiaDeLaSemana(gcalendarInicial));}}}
-			if(martes){if(getDiaDeLaSemana(gcalendarInicial).equals("Martes")){{fecha.setDia(getDiaDeLaSemana(gcalendarInicial));}}}
-			if(miercoles){if(getDiaDeLaSemana(gcalendarInicial).equals("Miercoles")){{fecha.setDia(getDiaDeLaSemana(gcalendarInicial));}}}
-			if(jueves){if(getDiaDeLaSemana(gcalendarInicial).equals("Jueves")){{fecha.setDia(getDiaDeLaSemana(gcalendarInicial));}}}
-			if(viernes){if(getDiaDeLaSemana(gcalendarInicial).equals("Viernes")){{fecha.setDia(getDiaDeLaSemana(gcalendarInicial));}}}
-			if(sabado){if(getDiaDeLaSemana(gcalendarInicial).equals("Sabado")){{fecha.setDia(getDiaDeLaSemana(gcalendarInicial));}}}
-			if(domingo){if(getDiaDeLaSemana(gcalendarInicial).equals("Domingo")){{fecha.setDia(getDiaDeLaSemana(gcalendarInicial));}}}
-
-			SimpleDateFormat sdf;
-			//sdf = new SimpleDateFormat("dd MMM yyyy hh:mm:ss zzz");
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-			
-			if (fecha.getDia()!=null)
-			{ 
-				fecha.setFechaListada(dateFormat.parse(dateFormat.format(gcalendarInicial.getTime())));
-				fechas.add(fecha);
-			}
-
-		
-			
-		}
-		return fechas;
-	}
-	*/
-
-	    
+    }
 	
 	public HorarioService getMyService() 							{return myService;}
 	public void setMyService(HorarioService myService) 				{this.myService = myService;}
@@ -372,3 +312,4 @@ public class IntranetDocenteCreacionFechas extends GenericController
 	}
 
 } 
+
