@@ -12,29 +12,29 @@
 	    	<p:toolbarGroup align="left">  
 		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="silabo_crit" ajax="false" />
 		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{intranetDocenteNotas.guardarCriterios}" ajax="false" />
-		        
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
       	
-  
-	
-		      	<p:panel header="Sílabo #{intranetDocenteNotas.nombreUnidad} - Criterios de Evaluación">
-		
-						<p:dataTable id="criteriosList" var="item" value="#{intranetDocenteNotas.criteriosList}" 
-			   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
-			     		
-			     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
-							<h:outputText value="MOD#{item.nivelA}: #{item.titulo}" title="MÓDULO #{item.nivelA}: #{item.titulo} - #{item.descripcion}" rendered="false" style="font-weight:bold"/>
-							<h:outputText value="CT#{item.nivelB}: #{item.descripcion}" title="CAPACIDAD TERMINAL #{item.nivelB}: #{item.descripcion}" rendered="#{item.nivelB ne 0 and item.nivelC eq 0}" style="font-weight:bold"/>
-							<p:selectBooleanCheckbox value="#{item.check}" rendered="#{item.nivelC ne 0}"/>
-							<h:outputText value="CE#{item.nivelC}: #{item.descripcion}" title="CRITERIO DE EVALUACIÓN #{item.nivelC}: #{item.descripcion}" rendered="#{item.nivelC ne 0}"/>					  
-						</p:column>		        	      	        	        
-			        	      	        
-						</p:dataTable> 			
-		    		
-				</p:panel>
-			
+      	<p:dataTable id="dt_notasFecha" var="item" value="#{intranetDocenteNotas.beanList}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+	     		
+	     		<p:column headerText="Apellido Paterno" style="width:20%; align:center;" >   
+					<h:outputText value="#{item.personaPaterno}" />					  
+				</p:column>
+				
+				<p:column headerText="Apellido Materno" style="width:20%; align:center;" >   
+					<h:outputText value="#{item.personaMaterno}" />					  
+				</p:column>
+	     		
+	     		<p:column headerText="Nombres" style="width:20%; align:center;" >   
+					<h:outputText value="#{item.personaNombre}" />					  
+				</p:column>
+				
+					        	      	        	        
+				          	        
+		</p:dataTable> 
+      
 		
      </h:form>
      
