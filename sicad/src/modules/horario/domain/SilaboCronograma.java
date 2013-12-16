@@ -12,29 +12,71 @@ import javax.persistence.Table;
 @Table(name="horario.m_silabo_cronograma")
 public class SilaboCronograma implements Serializable
 {
+	
+	//limpio
+	
+//	"pk_silabo_cronograma" SERIAL NOT NULL,
+//	"pk_meta" int4 NOT NULL,
+//	"contenido" text,
+//	"pk_unidad" int4,
+//	"pk_seccion" int4,
+//	"pk_docente" int4,
+//	"estado" int4,
+
+	
 	private static final long serialVersionUID = 1L;
 	private Long    id;
-	private Long	seccion;
-	private	Long 	sesion;
-	private Long 	contenido;
+	private Long	pk_meta;
+	private	Long 	contenido;
+	private Long 	pk_unidad;
+	private Long 	pk_seccion;
+	private Long 	pk_docente;
+	private Long 	estado;
+	
+	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="pk_conograma")
+	@Column(name="pk_silabo_cronograma")
 	public Long getId()								 		{return id;}
 	public void setId(Long id) 						 		{this.id = id;}
 	
-	@Column(name="pk_seccion")
-	public Long getSeccion() 								{return seccion;}
-	public void setSeccion(Long seccion) 					{this.seccion = seccion;}
-	
-	@Column(name="pk_sesion")
-	public Long getSesion() 								{return sesion;}
-	public void setSesion(Long sesion) 						{this.sesion = sesion;}
-	
-	@Column(name="pk_contenido")
-	public Long getContenido() 								{return contenido;}
-	public void setContenido(Long contenido) 				{this.contenido = contenido;}
+	public Long getPk_meta() {
+		return pk_meta;
+	}
+	public void setPk_meta(Long pk_meta) {
+		this.pk_meta = pk_meta;
+	}
+	public Long getContenido() {
+		return contenido;
+	}
+	public void setContenido(Long contenido) {
+		this.contenido = contenido;
+	}
+	public Long getPk_unidad() {
+		return pk_unidad;
+	}
+	public void setPk_unidad(Long pk_unidad) {
+		this.pk_unidad = pk_unidad;
+	}
+	public Long getPk_seccion() {
+		return pk_seccion;
+	}
+	public void setPk_seccion(Long pk_seccion) {
+		this.pk_seccion = pk_seccion;
+	}
+	public Long getPk_docente() {
+		return pk_docente;
+	}
+	public void setPk_docente(Long pk_docente) {
+		this.pk_docente = pk_docente;
+	}
+	public Long getEstado() {
+		return estado;
+	}
+	public void setEstado(Long estado) {
+		this.estado = estado;
+	}
 	
 	
 }

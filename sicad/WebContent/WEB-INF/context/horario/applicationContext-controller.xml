@@ -30,4 +30,7 @@
 	<bean id="horarioNoLectivas" class="modules.horario.controller.HorarioNoLectivas" scope="session" parent="genericController">
 	    <property name="myService" 	ref="horarioService"/>	
 	</bean>
+	
+	
+	
 </beans>
