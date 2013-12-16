@@ -44,8 +44,5 @@ public class detalle_silabo_docente implements Serializable
 		this.estado = estado;
 	}
 
-	
-	
-	
 }
 	

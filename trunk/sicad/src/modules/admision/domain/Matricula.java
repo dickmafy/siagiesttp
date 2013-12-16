@@ -2,6 +2,7 @@ package modules.admision.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -90,17 +91,21 @@ public class Matricula implements Serializable
 	public Long getEstado() 								{return estado;}	
 	public void setEstado(Long estado)	    				{this.estado = estado;}
 	
+	
+	
+	private static final String[] estadoVal = {
+		"PENDIENTE","PENDIENTE REQUISITOS",
+		"PENDIENTE PAGO","PRE MATRICULADO",
+		"MATRICULADO","RETIRADO"}; 
+	
 	@Transient
 	public String getNombreEstado() 
 	{
-		if(estado.longValue()==0L)	{return "PENDIENTE";}
-		if(estado.longValue()==1L)	{return "PENDIENTE REQUISITOS";}
-		if(estado.longValue()==2L)	{return "PENDIENTE PAGO";}
-		if(estado.longValue()==3L)	{return "PRE MATRICULADO";}
-		if(estado.longValue()==4L)	{return "MATRICULADO";}
-		if(estado.longValue()==5L)	{return "RETIRADO";}
-		return "";
+		return estadoVal[estado.intValue() % estadoVal.length];
 	}
+	
+	
+	
 	public void setNombreEstado(String nombreEstado) 
 	{this.nombreEstado = nombreEstado;}
 	
@@ -109,7 +114,7 @@ public class Matricula implements Serializable
 	public String getNombreTurno() 
 	{
 		if(turno==null)				{return "";}
-		if(turno.longValue()==1L)	{return "MAÑANA";}
+		if(turno.longValue()==1L)	{return "MAï¿½ANA";}
 		if(turno.longValue()==2L)	{return "TARDE";}
 		if(turno.longValue()==3L)	{return "NOCHE";}
 		else						{return "T";}

@@ -32,6 +32,7 @@ public class detalle_notas_docente implements Serializable
 	public Date getPk_silabo_cronograma() {
 		return pk_silabo_cronograma;
 	}
+	
 	public void setPk_silabo_cronograma(Date pk_silabo_cronograma) {
 		this.pk_silabo_cronograma = pk_silabo_cronograma;
 	}

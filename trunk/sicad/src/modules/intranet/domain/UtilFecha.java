@@ -3,15 +3,10 @@ package modules.intranet.domain;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.TimeZone;
-
-import antlr.collections.List;
 
 /**
  *
@@ -84,7 +79,7 @@ public class UtilFecha {
 
 
     public static void main(String[] args) {
-        getNumerodeDiaMesAñodeUnaFecha();
+        getNumerodeDiaMesAniodeUnaFecha();
         Date fechaHoy = new Date();
         System.out.println(">>>>" + getDiaDeLaSemana(fechaHoy));
         getConfiguracionHorariayHoraExacta();  
@@ -163,8 +158,9 @@ public class UtilFecha {
 	}
 
 	private static void getConfiguracionHorariayHoraExacta() {
-		TimeZone tz = Calendar.getInstance().getTimeZone();    
-        System.out.println(tz.getDisplayName()); // (i.e. Moscow Standard Time)    
+		
+	   TimeZone tz = Calendar.getInstance().getTimeZone();    
+       System.out.println(tz.getDisplayName()); // (i.e. Moscow Standard Time)    
        System.out.println(tz.getID()); 
        
        Date date = new Date();  
@@ -173,7 +169,7 @@ public class UtilFecha {
        System.out.println(sdf.format(date));
 	}
 
-	private static void getNumerodeDiaMesAñodeUnaFecha() {
+	private static void getNumerodeDiaMesAniodeUnaFecha() {
 		UtilFecha fecha = new UtilFecha();
         fecha.setFecha("28/03/2010");
         System.out.println(fecha.getAnio()+" "+fecha.getMes()+" "+fecha.getDia());
@@ -241,13 +237,7 @@ public class UtilFecha {
 		default:
 			break;
 		}
-    	
-    
-    		
     		
     	return cal.get(Calendar.DAY_OF_WEEK)-1;		
     }
-    
-
-
 }

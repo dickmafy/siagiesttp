@@ -1,21 +1,25 @@
 package modules.intranet.controller; 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.faces.model.SelectItem;
 
 import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
 
+import dataware.service.AdmisionService;
 import dataware.service.IntranetService;
+import modules.admision.domain.Matricula;
+import modules.admision.domain.Proceso;
+import modules.horario.domain.Seccion;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
 
 public class IntranetDocenteNotas extends GenericController   
 {	
 	private IntranetService	myService;
+	private AdmisionService myServiceAdmision;
+	
 	private List<ReferenteEducativo> criteriosList;
 	
 	private List<ReferenteEducativo> criteriosListCt;
@@ -37,23 +41,20 @@ public class IntranetDocenteNotas extends GenericController
 	private List<SelectItem> capacidadTransversalList;
 	
 	private Long tipo=0L,seccion,modulo,profesion;
+	private Proceso proceso;
 	private String nombreUnidad;
 	
-	private Map<String,String> capacidadesu;
+	private Seccion seccionObject;
 	
-	public Map<String, String> getCapacidadesu() {
-		return capacidadesu;
-	}
-
-	public void setCapacidadesu(Map<String, String> capacidadesu) {
-		this.capacidadesu = capacidadesu;
-	}
-
+	private int notas[][];
+	
+	private int numbCapTerminales;
+	
 	public void init() throws Exception 
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
 		appName="Intranet Docente";
-		moduleName="Sílabo";
+		moduleName="Silabo";
 		userName=usr.getUsuario();
 		seccion=1L;
 		modulo=1L;
@@ -65,6 +66,27 @@ public class IntranetDocenteNotas extends GenericController
 		defaultList();		
 		//forward(page_main);
 		optionCriterios();
+	}
+	
+	public void init(Seccion pseccion,Proceso proceso) throws Exception 
+	{
+		
+		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
+		appName="Intranet Docente";
+		moduleName="Notas";
+		userName=usr.getUsuario();
+		seccion=pseccion.getId();
+		modulo=1L;
+		profesion=101L;
+		nombreUnidad= "Prueba";
+		this.proceso = proceso;
+		page_new="IntranetDocenteNotas_new";
+		page_update="IntranetDocenteNotas_update";
+		page_main="IntranetDocenteNotas_list";
+		numbCapTerminales = 3;
+		defaultList();		
+		forward(page_main);
+		//optionCriterios();
 	}
 	
 	public void optionCriterios() throws Exception
@@ -99,9 +121,13 @@ public class IntranetDocenteNotas extends GenericController
 	@Override
 	public void defaultList() throws Exception
 	{
+		/*Criteria criteria = JPAPersistenceUtil.getSession().createCriteria(Matricula.class);
+		criteria.add(Expression.eq("estado",4))
+		.add(Expression.eq("estado",seccionObject.));*/
 		
-		//listarCT();
-		
+		List<Matricula> matriculas = myServiceAdmision.listarMatricula(proceso.getId());
+		notas = new int[matriculas.size()][numbCapTerminales];
+		setBeanList(matriculas);
 		
 		
 	}
@@ -135,7 +161,7 @@ public class IntranetDocenteNotas extends GenericController
 		}
 		else if(!validateEmpty(object.getTitulo()) && tipo.longValue()==1L)
 		{
-			setMessageError("Debe ingresar el Título.");			
+			setMessageError("Debe ingresar el Tï¿½tulo.");			
 			success = false;
 		}
 		else if(!validateEmpty(object.getDescripcion()))
@@ -153,11 +179,11 @@ public class IntranetDocenteNotas extends GenericController
 	public List<ReferenteEducativo> getCriteriosList() 										{return criteriosList;}
 	public void setCriteriosList(List<ReferenteEducativo> criteriosList) 					{this.criteriosList = criteriosList;}
 
-	public String getNombreUnidad() 														{return nombreUnidad;}
-	public void setNombreUnidad(String nombreUnidad) 										{this.nombreUnidad = nombreUnidad;}
+	public String getNombreUnidad() 													{return nombreUnidad;}
+	public void setNombreUnidad(String nombreUnidad) 									{this.nombreUnidad = nombreUnidad;}
 
-	public List<SelectItem> getModuloProfesionalList() 										{return moduloProfesionalList;}
-	public void setModuloProfesionalList(List<SelectItem> moduloProfesionalList) 			{this.moduloProfesionalList = moduloProfesionalList;}
+	public List<SelectItem> getModuloProfesionalList() 									{return moduloProfesionalList;}
+	public void setModuloProfesionalList(List<SelectItem> moduloProfesionalList) 		{this.moduloProfesionalList = moduloProfesionalList;}
 
 	public List<SelectItem> getCapacidadProfesionalList() 								{return capacidadProfesionalList;}
 	public void setCapacidadProfesionalList(List<SelectItem> capacidadProfesionalList) 	{this.capacidadProfesionalList = capacidadProfesionalList;}
@@ -171,6 +197,61 @@ public class IntranetDocenteNotas extends GenericController
 	public Long getTipo() 																{return tipo;}
 	public void setTipo(Long tipo) 														{this.tipo = tipo;}
 
+	public AdmisionService getMyServiceAdmision() {
+		return myServiceAdmision;
+	}
+
+	public void setMyServiceAdmision(AdmisionService myServiceAdmision) {
+		this.myServiceAdmision = myServiceAdmision;
+	}
+
+	public Long getSeccion() {
+		return seccion;
+	}
+
+	public void setSeccion(Long seccion) {
+		this.seccion = seccion;
+	}
+
+	public Long getModulo() {
+		return modulo;
+	}
+
+	public void setModulo(Long modulo) {
+		this.modulo = modulo;
+	}
+
+	public Long getProfesion() {
+		return profesion;
+	}
+
+	public void setProfesion(Long profesion) {
+		this.profesion = profesion;
+	}
+
+	public Seccion getSeccionObject() {
+		return seccionObject;
+	}
+
+	public void setSeccionObject(Seccion seccionObject) {
+		this.seccionObject = seccionObject;
+	}
+
+	public Proceso getProceso() {
+		return proceso;
+	}
+
+	public void setProceso(Proceso proceso) {
+		this.proceso = proceso;
+	}
+
+	public int[][] getNotas() {
+		return notas;
+	}
+
+	public void setNotas(int[][] notas) {
+		this.notas = notas;
+	}
 	public List<String> getSelectCapacidades() {
 		return selectCapacidades;
 	}
@@ -179,23 +260,8 @@ public class IntranetDocenteNotas extends GenericController
 		this.selectCapacidades = selectCapacidades;
 	}
 
-	public Map<String, String> getCapacidades() {
-		capacidadesu=new HashMap<String, String>();
-		
-		for(ReferenteEducativo x: criteriosList){
-			capacidadesu.put(x.getTitulo(), x.getTipo().toString());
-		}
-	
-		return capacidadesu;
-	}
-
-	public void setCapacidades(Map<String, String> capacidadesu) {
-		this.capacidadesu = capacidadesu;
-	}
 	
 	
 	
 	
-	
-
 } 
