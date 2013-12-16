@@ -17,11 +17,14 @@ import javax.faces.model.SelectItem;
 import javax.swing.text.StyledEditorKit.BoldAction;
 
 import com.belogick.factory.util.controller.GenericController;
+import com.belogick.factory.util.support.ServiceException;
 import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
 
 import dataware.service.HorarioService;
 import modules.administracion.domain.MetaInstitucional;
 import modules.horario.domain.Seccion;
+import modules.horario.domain.SilaboCalendario;
+import modules.horario.domain.SilaboCronograma;
 import modules.intranet.domain.Fecha;
 import modules.intranet.domain.UtilFecha;
 import modules.seguridad.domain.Usuario;
@@ -60,19 +63,31 @@ public class IntranetDocenteCreacionFechas extends GenericController
 		 
 	}
 
-    public void guardarCreacionFechas() throws ParseException
+    public void guardarCreacionFechas() throws ParseException, ServiceException
 	{
     	
     	Fecha fecha = new Fecha();
+   
+    	SilaboCronograma silaboCronograma =new SilaboCronograma();
+    	silaboCronograma.setPk_meta(1L);
+    	silaboCronograma.setContenido("-");
+    	silaboCronograma.setPk_unidad(1L);
+    	silaboCronograma.setPk_seccion(1L);
+    	silaboCronograma.setPk_docente(1L);
+    	silaboCronograma.setEstado(1L);
     	
-    	
+    	silaboCronograma = (SilaboCronograma) myService.save(silaboCronograma);
+    	SilaboCalendario silaboCalendario;
     	for (Fecha item: listFechas) 
     	{
-    		
-    		
-    		
+    		silaboCalendario = new SilaboCalendario();
+        	silaboCalendario.setPk_silabo_cronograma(silaboCronograma.getId());
+        	silaboCalendario.setFecha(item.getFechaListada());
+        	silaboCalendario.setEstado(1L);
+			myService.save(silaboCalendario);
 		}
     	
+    
     	
 		listFechas=new ArrayList<Fecha>();
 	}
