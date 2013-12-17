@@ -29,7 +29,7 @@ import modules.intranet.domain.Fecha;
 import modules.intranet.domain.UtilFecha;
 import modules.seguridad.domain.Usuario;
 
-public class IntranetDocenteCreacionFechas extends GenericController   
+public class DocenteSilaboFecha extends GenericController   
 {
 	private List<SelectItem>    profesionList;
 	private List<SelectItem>    procesoList;
@@ -54,7 +54,7 @@ public class IntranetDocenteCreacionFechas extends GenericController
 		institucion=usr.getInstitucion();
 		//defaultList();
 		page_new="";
-		page_main="IntranetDocenteCreacionFechas_list";
+		page_main="DocenteSilaboFecha";
 		page_update="";
 		forward(page_main);
 		

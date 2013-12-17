@@ -10,8 +10,8 @@
       	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
   		<p:toolbar>  
 	    	<p:toolbarGroup align="left">  
-		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="IntranetDocente_silabo_new" ajax="false" />
-		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{intranetDocenteNotas.guardarCriterios}" ajax="false" />
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="DocenteSilaboList" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{docenteSilaboNota.guardarCriterios}" ajax="false" />
 		        
 		       
 			</p:toolbarGroup>  
@@ -19,7 +19,7 @@
       	<p:spacer height="4px"/>
       	  
     	   	
-			<p:dataTable id="dt_notasFecha" var="item" value="#{intranetDocenteNotas.beanList}" 
+			<p:dataTable id="dt_notasFecha" var="item" value="#{docenteSilaboNota.beanList}" 
 	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
 	     		
 	     		<p:column headerText="Apellido Paterno" style="width:20%; align:center;" >   

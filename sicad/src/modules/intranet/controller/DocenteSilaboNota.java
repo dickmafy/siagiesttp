@@ -15,7 +15,7 @@ import modules.horario.domain.Seccion;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
 
-public class IntranetDocenteNotas extends GenericController   
+public class DocenteSilaboNota extends GenericController   
 {	
 	private IntranetService	myService;
 	private AdmisionService myServiceAdmision;
@@ -51,9 +51,8 @@ public class IntranetDocenteNotas extends GenericController
 		modulo=1L;
 		profesion=101L;
 		nombreUnidad= "Prueba";
-		page_new="IntranetDocenteNotas_new";
-		page_update="IntranetDocenteNotas_update";
-		page_main="IntranetDocenteNotas_list";
+	
+		page_main="DocenteSilaboNota";
 		defaultList();		
 		//forward(page_main);
 		optionCriterios();
@@ -75,7 +74,7 @@ public class IntranetDocenteNotas extends GenericController
 		nombreUnidad= "Prueba";
 		this.proceso = proceso;
 
-		page_main="IntranetDocenteNotasAlumno_list";
+		page_main="DocenteSilaboNota";
 		numbCapTerminales = 3;
 		defaultList();		
 		forward(page_main);
@@ -96,7 +95,7 @@ public class IntranetDocenteNotas extends GenericController
 		
 		filtrarModulo(criteriosList,modulo);
 		
-		forward("IntranetDocenteNotas_list");
+		forward("DocenteSilaboNota");
 	}
 	
 	public void filtrarModulo(List<ReferenteEducativo> educativoList, Long modulo) throws Exception
