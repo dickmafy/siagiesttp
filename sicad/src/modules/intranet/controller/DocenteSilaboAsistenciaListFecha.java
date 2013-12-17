@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.faces.model.SelectItem;
 
+import org.apache.catalina.Session;
+import org.hibernate.impl.CriteriaImpl;
+
 import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
 
@@ -13,11 +16,16 @@ import dataware.service.MarcoService;
 import modules.administracion.domain.Institucion;
 import modules.admision.domain.Matricula;
 import modules.admision.domain.Proceso;
+import modules.horario.domain.AsistenciaAlumnoCalendario;
 import modules.horario.domain.Seccion;
+import modules.horario.domain.SilaboAlumno;
+import modules.horario.domain.SilaboCalendario;
+import modules.horario.domain.SilaboCronograma;
+import modules.intranet.domain.Fecha;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
 
-public class IntranetDocenteAsistencia extends GenericController   
+public class DocenteSilaboAsistenciaListFecha extends GenericController   
 {	
 	private IntranetService	myService;
 	private List<ReferenteEducativo> criteriosList;
@@ -33,6 +41,12 @@ public class IntranetDocenteAsistencia extends GenericController
 	
 	private AdmisionService myServiceAdmision;
 	private Proceso proceso;
+	
+	private List<SilaboCronograma> listScro;
+	private List<SilaboCalendario> listCal;
+	
+
+	
 	public void init() throws Exception 
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
@@ -43,11 +57,9 @@ public class IntranetDocenteAsistencia extends GenericController
 		modulo=1L;
 		profesion=101L;
 		nombreUnidad= "Prueba";
-//		page_new="IntranetDocenteAsistencia_new";
-//		page_update="IntranetDocenteAsistencia_update";
-//		page_main="IntranetDocenteAsistencia_list";
+		page_main="DocenteSilaboAsistenciaListFecha";
 		defaultList();		
-//		forward(page_main);
+		forward(page_main);
 		
 	}
 	
@@ -57,22 +69,47 @@ public class IntranetDocenteAsistencia extends GenericController
 		this.proceso = proceso;
 		init();
 		
-	
-	
-		
-		
-		
+			
 	}
 	
 	@Override
 	public void defaultList() throws Exception
 	{
 		
-		List<Matricula> matriculas = myServiceAdmision.listarMatricula(proceso.getId());
-		setBeanList(matriculas);
+		
+		
+		
+		
+		listScro =new ArrayList<>();
+		SilaboCronograma scro = new SilaboCronograma();
+		scro.setPk_docente(27L);
+		scro.setPk_meta(1L);
+		scro.setPk_seccion(5L);
+		scro.setPk_unidad(5L);
+		
+		scro = (SilaboCronograma) myService.findByObject(scro);
+		
+		SilaboCalendario scal = new SilaboCalendario();
+		scal.setPk_silabo_cronograma(scro.getId());
+		listCal =  myService.listByObject(scal);
+				
+		
+		
+				
+		
 		
 	}
 	
+	public void goAlumno()throws Exception
+	{
+		DocenteSilaboAsistenciaListaAlumno go = (DocenteSilaboAsistenciaListaAlumno)getSpringBean("docenteSilaboAsistenciaListaAlumno");
+		
+		AsistenciaAlumnoCalendario aac = new AsistenciaAlumnoCalendario();
+		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();
+		
+		aac.setPk_silabo_calendario(temporalCalendario.getId());
+		go.init(temporalCalendario);
+	}
 	
 	
 	
@@ -114,6 +151,30 @@ public class IntranetDocenteAsistencia extends GenericController
 
 	public void setMyServiceAdmision(AdmisionService myServiceAdmision) {
 		this.myServiceAdmision = myServiceAdmision;
+	}
+
+
+
+	public List<SilaboCronograma> getListScro() {
+		return listScro;
+	}
+
+
+
+	public void setListScro(List<SilaboCronograma> listScro) {
+		this.listScro = listScro;
+	}
+
+
+
+	public List<SilaboCalendario> getListCal() {
+		return listCal;
+	}
+
+
+
+	public void setListCal(List<SilaboCalendario> listCal) {
+		this.listCal = listCal;
 	}
 
 
