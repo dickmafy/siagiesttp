@@ -7,6 +7,7 @@ import modules.administracion.domain.Ambiente;
 import modules.administracion.domain.AmbienteUnidad;
 import modules.administracion.domain.MetaDetalle;
 import modules.administracion.domain.MetaInstitucional;
+import modules.admision.domain.Matricula;
 import modules.horario.domain.HorarioDistribucion;
 import modules.horario.domain.Seccion;
 
@@ -25,4 +26,6 @@ public interface HorarioDao extends MarcoDao
 	public boolean validarHoras(Long docente, Long horas) throws Exception ;
 	public void actualizarDocente(Long seccion, Long docente) throws Exception;
 	public List<Seccion> listarSeccionesDocente(Long institucion, Long annio, Long proceso, Long docente) throws Exception;
+	public void insertSilaboAlumno (Long meta, Long unidad, Long seccion, Long docente) throws Exception;
+	public List<Matricula> listarAlumnosSeccion(Long meta, Long unidad, Long seccion, Long docente) throws Exception;
 }
