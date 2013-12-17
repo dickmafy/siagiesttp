@@ -1,27 +1,31 @@
 package modules.horario.domain;
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import modules.evaluaciones.domain.Pregunta;
+
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+import org.hibernate.bytecode.javassist.FieldHandler;
 
 @Entity
 @Table(name="horario.m_silabo_cronograma")
 public class SilaboCronograma implements Serializable
 {
 	
-	//limpio
-	
-//	"pk_silabo_cronograma" SERIAL NOT NULL,
-//	"pk_meta" int4 NOT NULL,
-//	"contenido" text,
-//	"pk_unidad" int4,
-//	"pk_seccion" int4,
-//	"pk_docente" int4,
-//	"estado" int4,
 
 	
 	private static final long serialVersionUID = 1L;
@@ -32,8 +36,7 @@ public class SilaboCronograma implements Serializable
 	private Long 	pk_seccion;
 	private Long 	pk_docente;
 	private Long 	estado;
-	
-	
+
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -79,6 +82,13 @@ public class SilaboCronograma implements Serializable
 	public void setContenido(String contenido) {
 		this.contenido = contenido;
 	}
+	
+	
+
+
+
+
+
 	
 	
 }

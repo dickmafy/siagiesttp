@@ -16,10 +16,46 @@
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
       	
-   		
+   		LISTA DE ASISTENCIA 
 		
 		
-		
+			<p:dataTable id="itemList" var="item" value="#{docenteSilaboAsistenciaListFecha.listCal}" filteredValue="#{docenteSilaboFecha.beanFilterList}"
+	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom"
+	   			paginator="true" rows="20"  rowIndexVar="rowNumber" scrollable="true"
+	        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+	     		
+	     		<f:facet name="header">
+					<h:outputText value="Creacion de Fechas" />  
+				</f:facet>
+							
+				<p:column headerText="#" style="width:5%; align:center;">
+					<h:outputText value="#{rowNumber+1}"/>  
+				</p:column>
+					
+				<p:column headerText="Dia Clase" style="width:5%; align:center;" sortBy="#{item.dia}">
+					<h:outputText value="#{item.fecha}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>		
+					
+				<p:column headerText="id" style="width:5%; align:center;" sortBy="#{item.id}">
+					<h:outputText value="#{item.id}">
+				
+					</h:outputText>
+				</p:column>		
+				
+				
+			<p:column headerText="Operaciones" style="width:33%">  
+				<p:commandButton icon="icn_item_new" action="#{docenteSilaboAsistenciaListFecha.goAlumno}"	title="Alumnos" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboAsistenciaListFecha.beanSelected}" />
+				</p:commandButton>				
+	
+			               
+			</p:column>     	       
+			       	      	        
+			</p:dataTable>
+			
+			
 	</h:form>
    		
    	

@@ -21,6 +21,20 @@
 	    <property name="myServiceAdmision" 	ref="admisionService"/>
 	</bean>
 	
+	<bean id="docenteSilaboAsistenciaListFecha" class="modules.intranet.controller.DocenteSilaboAsistenciaListFecha" scope="session" parent="genericController">	  
+	    <property name="bean" ref="silaboCalendario"/>
+	    <property name="myService" 	ref="intranetService"/>
+	    <property name="myServiceAdmision" 	ref="admisionService"/>
+	</bean>
+	
+	<bean id="docenteSilaboAsistenciaListaAlumno" class="modules.intranet.controller.DocenteSilaboAsistenciaListaAlumno" scope="session" parent="genericController">	  
+	    <property name="bean" ref="silaboCalendario"/>
+	    <property name="myService" 	ref="intranetService"/>
+
+	</bean>
+	
+
+
 
 	<!-- DOCENTE  OTROS-->
 	<bean id="docenteSilaboCronograma" class="modules.intranet.controller.DocenteSilaboCronograma" scope="session" parent="genericController">

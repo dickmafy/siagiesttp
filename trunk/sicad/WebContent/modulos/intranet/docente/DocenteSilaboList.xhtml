@@ -71,16 +71,20 @@
 				   
         	</p:column> 
         	
-        	<p:column headerText="Operaciones" style="width:13%">  
-				<p:commandButton icon="icn_item_update" action="#{docenteSilaboList.goCrearFechas}"	title="Crear Fechas De Clase" ajax="false">
+        	<p:column headerText="Operaciones" style="width:33%">  
+				<p:commandButton icon="icn_item_new" action="#{docenteSilaboList.goCrearFechas}"	title="Crear Fechas De Clase" ajax="false">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
 				</p:commandButton>				
 							
-				<p:commandButton icon="icn_item_edit" action="#{docenteSilaboList.goDocenteNotas}"	title="Notas" ajax="false">
+				<p:commandButton icon="icn_item_area" action="#{docenteSilaboList.goDocenteNotas}"	title="Notas" ajax="false">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
 				</p:commandButton>				
 
-				<p:commandButton icon="icn_item_update" action="#{docenteSilaboList.goAsistencia}"	title="Asistencia" ajax="false">
+				<p:commandButton icon="icn_item_teacher" action="#{docenteSilaboList.goAsistencia}"	title="Asistencia" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
+				</p:commandButton>
+				
+				<p:commandButton icon="icn_item_detail" action="#{docenteSilaboList.goCt}"	title="Ir a CT" ajax="false">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
 				</p:commandButton>
 							

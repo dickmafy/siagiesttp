@@ -1,25 +1,29 @@
 package modules.horario.domain;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import modules.evaluaciones.domain.Pregunta;
+
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+import org.hibernate.bytecode.javassist.FieldHandler;
 
 @Entity
 @Table(name="horario.m_silabo_calendario")
 public class SilaboCalendario implements Serializable
 {
-	//limpio
-	
-
-//	pk_silabo_calendario serial NOT NULL,
-//	  pk_silabo_cronograma integer NOT NULL,
-//	  fecha date,
-//	  estado integer,
 
 	
 	private static final long serialVersionUID = 1L;
@@ -27,6 +31,7 @@ public class SilaboCalendario implements Serializable
 	private Long	pk_silabo_cronograma;
 	private	Date 	fecha;
 	private Long 	estado;
+	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -54,6 +59,7 @@ public class SilaboCalendario implements Serializable
 	}
 	
 	
+		
 	
 	
 }

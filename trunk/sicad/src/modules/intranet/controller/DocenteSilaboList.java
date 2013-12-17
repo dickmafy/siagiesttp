@@ -130,7 +130,7 @@ public class DocenteSilaboList extends GenericController
 	
 	
 	public void goAsistencia()throws Exception{
-		IntranetDocenteAsistencia  go = (IntranetDocenteAsistencia)getSpringBean("intranetDocenteAsistencia");
+		DocenteSilaboAsistenciaListFecha  go = (DocenteSilaboAsistenciaListFecha)getSpringBean("docenteSilaboAsistenciaListFecha");
 		Proceso proceso = new Proceso();
 		proceso.setAnnio(annio);
 		proceso.setProceso(this.proceso);
@@ -138,6 +138,14 @@ public class DocenteSilaboList extends GenericController
 		go.init((Seccion)getBeanSelected(),proceso);
 	}
 	
+	public void goCt()throws Exception{
+		DocenteSilaboNota go = (DocenteSilaboNota)getSpringBean("docenteSilaboNota");
+		Proceso proceso = new Proceso();
+		proceso.setAnnio(annio);
+		proceso.setProceso(this.proceso);
+		proceso = (Proceso) myService.findByObject(proceso);
+		go.init((Seccion)getBeanSelected(),proceso);
+	}
 	
 	public HorarioService getMyService() 							{return myService;}
 	public void setMyService(HorarioService myService) 				{this.myService = myService;}
