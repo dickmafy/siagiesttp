@@ -36,7 +36,7 @@
       	<p:spacer height="4px"/>
   
    		<p:dataTable id="itemList" var="item" value="#{docenteSilaboList.beanList}" filteredValue="#{docenteSilaboList.beanFilterList}"
-   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom" >
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom" rowIndexVar="rowNumber" >
      		
      		<f:facet name="header">
 				<h:outputText value="Unidades Didácticas" />  
@@ -71,6 +71,18 @@
 				   
         	</p:column> 
         	
+        	<p:column headerText="Capacidades Terminales" style="width:30%">
+				
+				<p:selectOneMenu  value="#{docenteSilaboList.ctSeleccionado}" filter="true" filterMatchMode="startsWith" >
+					<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+					<f:selectItems value="#{docenteSilaboList.listarCT}" var="item" itemValue="#{item.id}" itemLabel="Cap.Ter. :#{item.pk_ct}"/>
+					<p:ajax event="change" listener="#{docenteSilaboList.goNotas(item)}"  />
+					
+				</p:selectOneMenu>
+				   
+        	</p:column> 
+        	
+        	
         	<p:column headerText="Operaciones" style="width:33%">  
 				<p:commandButton icon="icn_item_new" action="#{docenteSilaboList.goCrearFechas}"	title="Crear Fechas De Clase" ajax="false">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
@@ -80,13 +92,7 @@
 				<p:commandButton icon="icn_item_teacher" action="#{docenteSilaboList.goAsistencia}"	title="Asistencia" ajax="false">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
 				</p:commandButton>
-				
-				<p:selectOneMenu value="#{docenteSilaboList.ctSeleccionado}" filter="true" filterMatchMode="startsWith" >
-					<f:selectItems value="#{docenteSilaboList.listarCT}" var="item" itemValue="#{item.id}" itemLabel="#{item.pk_ct}"/>
-					<p:ajax event="change" listener="#{docenteSilaboList.goNotas(item)}"  />
-					
-				</p:selectOneMenu>
-					
+
 				
 				<p:commandButton icon="icn_item_detail" action="#{docenteSilaboList.goCt}"	title="Ir a CT" ajax="false">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
