@@ -4,41 +4,37 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<!-- Modulo Intranet -->
-	<bean id="docenteSilabo" class="modules.intranet.controller.DocenteSilabo" scope="session" parent="genericController">	  
-	    <property name="myService" 	ref="intranetService"/>
+	<!--  INTRANET -->
+	<!-- DOCENTE -->
+	<bean id="docenteSilaboList" class="modules.intranet.controller.DocenteSilaboList" scope="session" parent="genericController">
+		<property name="bean" ref="metaInstitucional"/>	  
+	    <property name="myService" 	ref="horarioService"/>		
 	</bean>
 	
-	<bean id="intranetDocenteAsistencia" class="modules.intranet.controller.IntranetDocenteAsistencia" scope="session" parent="genericController">	  
+	<bean id="docenteSilaboFecha" class="modules.intranet.controller.DocenteSilaboFecha" scope="session" parent="genericController">
+		<property name="bean" ref="seccion"/>
+	    <property name="myService" 	ref="horarioService"/>	
+	</bean>
+
+	<bean id="docenteSilaboNota" class="modules.intranet.controller.DocenteSilaboNota" scope="session" parent="genericController">	  
 	    <property name="myService" 	ref="intranetService"/>
 	    <property name="myServiceAdmision" 	ref="admisionService"/>
 	</bean>
-	<bean id="intranetDocenteNotas" class="modules.intranet.controller.IntranetDocenteNotas" scope="session" parent="genericController">	  
-	    <property name="myService" 	ref="intranetService"/>
-	    <property name="myServiceAdmision" 	ref="admisionService"/>
-	</bean>
-	<bean id="intranetAlumnoAsistencia" class="modules.intranet.controller.IntranetAlumnoAsistencia" scope="session" parent="genericController">	  
-	    <property name="myService" 	ref="intranetService"/>
-	</bean>
-	<bean id="intranetAlumnoNotas" class="modules.intranet.controller.IntranetAlumnoNotas" scope="session" parent="genericController">	  
-	    <property name="myService" 	ref="intranetService"/>
-	</bean>
 	
+
+	<!-- DOCENTE  OTROS-->
 	<bean id="docenteSilaboCronograma" class="modules.intranet.controller.DocenteSilaboCronograma" scope="session" parent="genericController">
 		<property name="bean" ref="seccion"/>
 	    <property name="myService" 	ref="horarioService"/>	
 	</bean>
 	
-	<bean id="intranetDocenteSilabo" class="modules.intranet.controller.IntranetDocenteSilabo" scope="session" parent="genericController">
-		<property name="bean" ref="metaInstitucional"/>	  
-	    <property name="myService" 	ref="horarioService"/>		
+	<bean id="docenteSilabo" class="modules.intranet.controller.DocenteSilabo" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="intranetService"/>
 	</bean>
 	
-	<bean id="intranetDocenteCreacionFechas" class="modules.intranet.controller.IntranetDocenteCreacionFechas" scope="session" parent="genericController">
-		<property name="bean" ref="seccion"/>
-	    <property name="myService" 	ref="horarioService"/>	
-	</bean>
-
+	
+	
+<!-- CETPRO -->
 	<bean id="intranetCetpro" class="modules.intranet.controller.IntranetCetpro" scope="session" parent="genericController">
 
 	</bean>

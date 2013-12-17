@@ -10,8 +10,8 @@
       	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
   		<p:toolbar>  
 	    	<p:toolbarGroup align="left">  
-		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="silabo_crit" ajax="false" />
-		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{intranetDocenteCreacionFechas.guardarCreacionFechas}" ajax="false" />
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="DocenteSilaboList" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{docenteSilaboFecha.guardarCreacionFechas}" ajax="false" />
 		        
 			</p:toolbarGroup>  
   		</p:toolbar>    		
@@ -20,20 +20,20 @@
       
 		
 		<h:outputText value="Fecha Inicio" />  
-		<p:calendar id="txtFei" value="#{intranetDocenteCreacionFechas.fecha_inicio}" showOn="button"  size="10"/>
+		<p:calendar id="txtFei" value="#{docenteSilaboFecha.fecha_inicio}" showOn="button"  size="10"/>
 		
 		<h:outputText value="Cantidad de Clases" />  
-		<p:inputText value="#{intranetDocenteCreacionFechas.cantidad_clases}" />
+		<p:inputText value="#{docenteSilaboFecha.cantidad_clases}" />
 		
 		<h:outputText value="Dias" />
-		<p:selectCheckboxMenu value="#{intranetDocenteCreacionFechas.listaDiasSeleccionados}" label="Dias" filter="true" filterText="Filter" filterMatchMode="startsWith" panelStyle="width:220px">  
-        	<f:selectItems value="#{intranetDocenteCreacionFechas.listaDias}"  />  
+		<p:selectCheckboxMenu value="#{docenteSilaboFecha.listaDiasSeleccionados}" label="Dias" filter="true" filterText="Filter" filterMatchMode="startsWith" panelStyle="width:220px">  
+        	<f:selectItems value="#{docenteSilaboFecha.listaDias}"  />  
 	    </p:selectCheckboxMenu>  
     
      	
-        <p:commandButton title="Crear Fechas" 	value="Crear Fechas" 	icon="icn_bar_new" actionListener="#{intranetDocenteCreacionFechas.generarFechas}" ajax="false" />  
+        <p:commandButton title="Crear Fechas" 	value="Crear Fechas" 	icon="icn_bar_new" actionListener="#{docenteSilaboFecha.generarFechas}" ajax="false" />  
 		
-	      	<p:dataTable id="itemList" var="item" value="#{intranetDocenteCreacionFechas.listFechas}" filteredValue="#{intranetDocenteCreacionFechas.beanFilterList}"
+	      	<p:dataTable id="itemList" var="item" value="#{docenteSilaboFecha.listFechas}" filteredValue="#{docenteSilaboFecha.beanFilterList}"
 	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom"
 	   			paginator="true" rows="20"  rowIndexVar="rowNumber" scrollable="true"
 	        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">

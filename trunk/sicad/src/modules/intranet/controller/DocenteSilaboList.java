@@ -14,7 +14,7 @@ import modules.admision.domain.Proceso;
 import modules.horario.domain.Seccion;
 import modules.seguridad.domain.Usuario;
 
-public class IntranetDocenteSilabo extends GenericController   
+public class DocenteSilaboList extends GenericController   
 {
 	private List<SelectItem>    profesionList;
 	private List<SelectItem>    procesoList;
@@ -50,7 +50,7 @@ public class IntranetDocenteSilabo extends GenericController
 		
 		defaultList();
 		page_new="";
-		page_main="IntranetDocente_silabo_new";
+		page_main="DocenteSilaboList";
 		page_update="";
 		forward(page_main);
 	}
@@ -114,13 +114,13 @@ public class IntranetDocenteSilabo extends GenericController
 	
 	public void goCrearFechas() throws Exception
 	{
-		IntranetDocenteCreacionFechas go = (IntranetDocenteCreacionFechas)getSpringBean("intranetDocenteCreacionFechas");
+		DocenteSilaboFecha go = (DocenteSilaboFecha)getSpringBean("docenteSilaboFecha");
 		//go.init(annio, proceso, ((MetaInstitucional)getBeanSelected()).getProfesion(), ((MetaInstitucional)getBeanSelected()).getTurno());
 		go.init((Seccion)getBeanSelected());
 	}
 	
 	public void goDocenteNotas()throws Exception{
-		IntranetDocenteNotas go = (IntranetDocenteNotas)getSpringBean("intranetDocenteNotas");
+		DocenteSilaboNota go = (DocenteSilaboNota)getSpringBean("docenteSilaboNota");
 		Proceso proceso = new Proceso();
 		proceso.setAnnio(annio);
 		proceso.setProceso(this.proceso);

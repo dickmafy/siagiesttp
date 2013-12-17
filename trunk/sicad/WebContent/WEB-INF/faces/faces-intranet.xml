@@ -10,22 +10,13 @@
   		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
   	</application>
   	
-  	<!-- Sílabo -->
-  	<navigation-rule>
-		<from-view-id>*</from-view-id>
-		<navigation-case>
-			<from-outcome>silabo_crit</from-outcome>
-			<to-view-id>/modulos/intranet/silabo_criterios.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	
 	
 	<!-- INTRANET ALUMNO -->
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>IntranetAlumnoAsistencia_new</from-outcome>
-			<to-view-id>/modulos/intranet/IntranetAlumnoAsistencia_new.xhtml</to-view-id>
+			<to-view-id>/modulos/intranet/alumno/IntranetAlumnoAsistencia_new.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -33,7 +24,7 @@
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>IntranetAlumnoAsistencia_list</from-outcome>
-			<to-view-id>/modulos/intranet/IntranetAlumnoAsistencia_list.xhtml</to-view-id>
+			<to-view-id>/modulos/intranet/alumno/IntranetAlumnoAsistencia_list.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -41,99 +32,60 @@
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>IntranetAlumnoAsistencia_update</from-outcome>
-			<to-view-id>/modulos/intranet/IntranetAlumnoAsistencia_update.xhtml</to-view-id>
+			<to-view-id>/modulos/intranet/alumno/IntranetAlumnoAsistencia_update.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
-	<!-- INTRANET DOCENTE ASISTENCIA -->
-	<navigation-rule>
-		<from-view-id>*</from-view-id>
-		<navigation-case>
-			<from-outcome>IntranetDocenteAsistencia_list</from-outcome>
-			<to-view-id>/modulos/intranet/IntranetDocenteAsistencia_list.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
+	
+	<!-- INTRANET DOCENTE-->
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>IntranetDocenteAsistencia_new</from-outcome>
-			<to-view-id>/modulos/intranet/IntranetDocenteAsistencia_new.xhtml</to-view-id>
+			<from-outcome>DocenteSilaboList</from-outcome>
+			<to-view-id>/modulos/intranet/docente/DocenteSilaboList.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>IntranetDocenteAsistencia_update</from-outcome>
-			<to-view-id>/modulos/intranet/IntranetDocenteAsistencia_update.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	
-	<!-- INTRANET DOCENTE SILABO -->
-	<navigation-rule>
-		<from-view-id>*</from-view-id>
-		<navigation-case>
-			<from-outcome>IntranetDocente_silabo_new</from-outcome>
-			<to-view-id>/modulos/intranet/IntranetDocente_silabo_new.xhtml</to-view-id>
+			<from-outcome>DocenteSilaboFecha</from-outcome>
+			<to-view-id>/modulos/intranet/docente/DocenteSilaboFecha.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>IntranetDocente_silabo_update</from-outcome>
-			<to-view-id>/modulos/intranet/IntranetDocente_silabo_update.xhtml</to-view-id>
+			<from-outcome>DocenteSilaboNota</from-outcome>
+			<to-view-id>/modulos/intranet/docente/DocenteSilaboNota.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>DocenteSilaboCT</from-outcome>
+			<to-view-id>/modulos/intranet/docente/DocenteSilaboCT.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>IntranetDocente_silabo_list</from-outcome>
-			<to-view-id>/modulos/intranet/IntranetDocente_silabo_list.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	
-<!-- 	CreacionFechas -->
-	
-	<navigation-rule>
-		<from-view-id>*</from-view-id>
-		<navigation-case>
-			<from-outcome>IntranetDocenteCreacionFechas_list</from-outcome>
-			<to-view-id>/modulos/intranet/IntranetDocenteCreacionFechas_list.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	
-	<!-- 	CreacionFechas -->
-	
-	<navigation-rule>
-		<from-view-id>*</from-view-id>
-		<navigation-case>
-			<from-outcome>IntranetCetpro</from-outcome>
-			<to-view-id>/modulos/intranet/IntranetCetpro.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	
-	<!-- 	Notas -->
-	
-	<navigation-rule>
-		<from-view-id>*</from-view-id>
-		<navigation-case>
-			<from-outcome>IntranetDocenteNotas_list</from-outcome>
-			<to-view-id>/modulos/intranet/IntranetDocenteNotas_list.xhtml</to-view-id>
+			<from-outcome>DocenteSilaboAsistenciaListaFecha</from-outcome>
+			<to-view-id>/modulos/intranet/docente/DocenteSilaboAsistenciaListaFecha.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>IntranetDocenteNotasAlumno_list</from-outcome>
-			<to-view-id>/modulos/intranet/IntranetDocenteNotasAlumno_list.xhtml</to-view-id>
+			<from-outcome>DocenteSilaboAsistenciaListaAlumno</from-outcome>
+			<to-view-id>/modulos/intranet/alumno/DocenteSilaboAsistenciaListaAlumno.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
-	
-	
 	
 </faces-config>
