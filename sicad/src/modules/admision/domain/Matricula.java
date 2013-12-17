@@ -44,6 +44,9 @@ public class Matricula implements Serializable
 	private String personaDireccion;
 	private String personaDni;
 	
+	private Long silabo;
+	private Long silaboAlumno;
+	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -166,5 +169,22 @@ public class Matricula implements Serializable
 	@Transient
 	public String getPersonaDni() 							{return personaDni;}
 	public void setPersonaDni(String personaDni) 			{this.personaDni = personaDni;}
+	
+	@Transient
+	public Long getSilabo() {
+		return silabo;
+	}
+	public void setSilabo(Long silabo) {
+		this.silabo = silabo;
+	}
+	@Transient
+	public Long getSilaboAlumno() {
+		return silaboAlumno;
+	}
+	public void setSilaboAlumno(Long silaboAlumno) {
+		this.silaboAlumno = silaboAlumno;
+	}
+	
+	
 
 }

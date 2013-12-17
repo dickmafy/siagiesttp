@@ -66,7 +66,7 @@ public class DocenteSilaboFecha extends GenericController
 		llenarDias();  		 
 	}
 
-    public void guardarCreacionFechas() throws ParseException, ServiceException
+    public void guardarCreacionFechas() throws Exception
 	{
     	
     	Fecha fecha = new Fecha();
@@ -90,8 +90,8 @@ public class DocenteSilaboFecha extends GenericController
 			myService.save(silaboCalendario);
 		}
     	
-    
-    	
+    	myService.insertSilaboAlumno(meta, unidad, seccion, docente);
+    	    	
 		listFechas=new ArrayList<Fecha>();
 	}
     

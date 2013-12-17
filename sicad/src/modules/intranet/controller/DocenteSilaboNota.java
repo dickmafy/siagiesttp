@@ -117,7 +117,7 @@ public class DocenteSilaboNota extends GenericController
 		criteria.add(Expression.eq("estado",4))
 		.add(Expression.eq("estado",seccionObject.));*/
 		
-		List<Matricula> matriculas = myServiceAdmision.listarMatricula(proceso.getId());
+		List<Matricula> matriculas = myService.listarAlumnosSeccion(meta, unidad, seccion, docente);
 		notas = new int[matriculas.size()][numbCapTerminales];
 		setBeanList(matriculas);
 		

@@ -6,6 +6,7 @@ import modules.administracion.domain.Ambiente;
 import modules.administracion.domain.AmbienteUnidad;
 import modules.administracion.domain.MetaDetalle;
 import modules.administracion.domain.MetaInstitucional;
+import modules.admision.domain.Matricula;
 import modules.horario.domain.HorarioDistribucion;
 import modules.horario.domain.Seccion;
 
@@ -308,6 +309,36 @@ public class HorarioDaoJpa extends MarcoDaoJpa implements HorarioDao
 			if(objetos[7]!=null){field.setId(Long.parseLong(objetos[7].toString()));}
 			if(objetos[8]!=null){field.setMeta(Long.parseLong(objetos[8].toString()));}
 			if(objetos[9]!=null){field.setValorUnidad(Long.parseLong(objetos[9].toString()));}
+			lista.add(field);
+		}
+		return lista;
+	}
+	
+	public void insertSilaboAlumno(Long meta, Long unidad, Long seccion, Long docente) throws Exception 
+	{
+		executeQueryUpdate("SELECT horario.ins_silabo_alumno("+meta+","+unidad+","+seccion+","+docente+");");
+	}
+	
+	public List<Matricula> listarAlumnosSeccion(Long meta, Long unidad, Long seccion, Long docente) throws Exception 
+	{
+		List<Matricula> lista=new ArrayList<Matricula>();
+		Query consulta=createQuery("SELECT * FROM horario.lst_silaboalumno(:meta, :unidad, :seccion, :docente)");
+		consulta.setParameter("meta", Integer.parseInt(meta.toString()));
+		consulta.setParameter("unidad", Integer.parseInt(unidad.toString()));
+		consulta.setParameter("seccion", Integer.parseInt(seccion.toString()));
+		consulta.setParameter("docente", Integer.parseInt(docente.toString()));
+		List rst=consulta.list();
+		
+		for(int i=0; i<rst.size(); i++)
+		{
+			Object[] objetos=(Object[])rst.get(i);
+			Matricula field=new Matricula();
+			if(objetos[0]!=null){field.setPersona(Long.parseLong(objetos[0].toString()));}
+			if(objetos[1]!=null){field.setPersonaNombre(objetos[1].toString());}
+			if(objetos[2]!=null){field.setPersonaPaterno(objetos[2].toString());}
+			if(objetos[3]!=null){field.setPersonaMaterno(objetos[3].toString());}
+			if(objetos[4]!=null){field.setSilabo(Long.parseLong(objetos[4].toString()));}
+			if(objetos[5]!=null){field.setSilaboAlumno(Long.parseLong(objetos[5].toString()));}
 			lista.add(field);
 		}
 		return lista;
