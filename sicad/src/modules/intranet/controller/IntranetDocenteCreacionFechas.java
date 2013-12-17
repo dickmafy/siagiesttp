@@ -36,7 +36,7 @@ public class IntranetDocenteCreacionFechas extends GenericController
 	private List<SelectItem>    docenteList;
 	
 	List<MetaInstitucional> metas;
-	private Long annio,proceso,profesion,turno;
+	private Long annio,proceso,profesion,turno,meta,seccion,docente,unidad;
 	private Long institucion;
 	private HorarioService	myService;
 	private Date fecha_inicio;
@@ -58,9 +58,12 @@ public class IntranetDocenteCreacionFechas extends GenericController
 		page_update="";
 		forward(page_main);
 		
+		seccion=pseccion.getId();
+		docente=pseccion.getDocente();
+		meta=pseccion.getMeta();
+		unidad=pseccion.getValorUnidad();		
 		
-		 llenarDias();  
-		 
+		llenarDias();  		 
 	}
 
     public void guardarCreacionFechas() throws ParseException, ServiceException
@@ -69,11 +72,11 @@ public class IntranetDocenteCreacionFechas extends GenericController
     	Fecha fecha = new Fecha();
    
     	SilaboCronograma silaboCronograma =new SilaboCronograma();
-    	silaboCronograma.setPk_meta(1L);
+    	silaboCronograma.setPk_meta(meta);
     	silaboCronograma.setContenido("-");
-    	silaboCronograma.setPk_unidad(1L);
-    	silaboCronograma.setPk_seccion(1L);
-    	silaboCronograma.setPk_docente(1L);
+    	silaboCronograma.setPk_unidad(unidad);
+    	silaboCronograma.setPk_seccion(seccion);
+    	silaboCronograma.setPk_docente(docente);
     	silaboCronograma.setEstado(1L);
     	
     	silaboCronograma = (SilaboCronograma) myService.save(silaboCronograma);
