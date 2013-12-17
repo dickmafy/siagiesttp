@@ -86,6 +86,13 @@ public class AdmisionServiceImpl extends HorarioServiceImpl implements AdmisionS
 	public void eliminarRequisito(Requisitos bean) throws Exception 
 	{getAdmisionDao().eliminarRequisito(bean);}
 	
+	@Override
+	public void eliminarAsistenciaAlumnoCalendario(Long id,Long pk_silabo_cronograma) throws DaoException {
+		 getAdmisionDao().eliminarAsistenciaAlumnoCalendario(id,pk_silabo_cronograma);
+
+		
+	}
+	
 	//public List<MatriculaSeccion> listarUnidadesDisponibles(Long persona, Long institucion, Long profesion, Long modulo, Long tipo) throws Exception 
 	//{return getAdmisionDao().listarUnidadesDisponibles(persona, institucion, profesion, modulo, tipo);}
 }

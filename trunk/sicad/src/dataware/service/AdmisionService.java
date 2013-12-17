@@ -41,4 +41,5 @@ public interface AdmisionService extends HorarioService
 	public List<Requisitos> listarRequisitosMatricula(Long matricula, Long institucion, Long modalidad) throws Exception;
 	public void eliminarRequisito(Requisitos bean) throws Exception;
 	//public List<MatriculaSeccion> listarUnidadesDisponibles(Long persona, Long institucion, Long profesion, Long modulo, Long tipo) throws Exception;
+	public void eliminarAsistenciaAlumnoCalendario(Long id,Long pk_silabo_cronograma) throws DaoException;
 }

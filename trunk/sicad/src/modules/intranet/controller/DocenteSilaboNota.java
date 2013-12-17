@@ -12,6 +12,7 @@ import dataware.service.IntranetService;
 import modules.admision.domain.Matricula;
 import modules.admision.domain.Proceso;
 import modules.horario.domain.Seccion;
+import modules.horario.domain.SilaboCronograma;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
 
@@ -40,8 +41,10 @@ public class DocenteSilaboNota extends GenericController
 	private int notas[][];
 	
 	private int numbCapTerminales;
+	private SilaboCronograma obtenerSilaboCronograma;
 	
-	public void init() throws Exception 
+	/*
+	public void init(Seccion seccion2, Proceso proceso2, SilaboCronograma pobtenerSilaboCronograma) throws Exception 
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
 		appName="Intranet Docente";
@@ -51,14 +54,17 @@ public class DocenteSilaboNota extends GenericController
 		modulo=1L;
 		profesion=101L;
 		nombreUnidad= "Prueba";
-	
+		
+		obtenerSilaboCronograma = pobtenerSilaboCronograma;
+		
 		page_main="DocenteSilaboNota";
 		defaultList();		
 		//forward(page_main);
 		optionCriterios();
 	}
+	*/
 	
-	public void init(Seccion pseccion,Proceso proceso) throws Exception 
+	public void init(Seccion pseccion,Proceso proceso,SilaboCronograma pobtenerSilaboCronograma, Long ctSeleccionado) throws Exception 
 	{
 		
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
@@ -136,34 +142,7 @@ public class DocenteSilaboNota extends GenericController
 		}
 	}
 	
-	@Override
-	public boolean validation() throws Exception 
-	{
-		boolean success = true;
-		ReferenteEducativo object = (ReferenteEducativo)getBean();
-		if(tipo.longValue()>2L && !validateSelect(object.getNivelA()))
-		{
-			setMessageError("Debe seleccionar una Modulo.");			
-			success = false;
-		}
-		else if(tipo.longValue()==4L && !validateSelect(object.getNivelB()))
-		{
-			setMessageError("Debe seleccionar una Capacidad Terminal.");			
-			success = false;
-		}
-		else if(!validateEmpty(object.getTitulo()) && tipo.longValue()==1L)
-		{
-			setMessageError("Debe ingresar el T�tulo.");			
-			success = false;
-		}
-		else if(!validateEmpty(object.getDescripcion()))
-		{
-			setMessageError("Debe ingresar la Descripcion.");			
-			success = false;
-		}
-		object=null;
-		return success;
-	}
+	
 	
 	public IntranetService getMyService() 													{return myService;}
 	public void setMyService(IntranetService myService) 									{this.myService = myService;}
@@ -260,6 +239,14 @@ public class DocenteSilaboNota extends GenericController
 
 	public void setCriteriosListCt(List<ReferenteEducativo> criteriosListCt) {
 		this.criteriosListCt = criteriosListCt;
+	}
+
+	public SilaboCronograma getObtenerSilaboCronograma() {
+		return obtenerSilaboCronograma;
+	}
+
+	public void setObtenerSilaboCronograma(SilaboCronograma obtenerSilaboCronograma) {
+		this.obtenerSilaboCronograma = obtenerSilaboCronograma;
 	}
 
 	

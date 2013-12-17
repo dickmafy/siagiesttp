@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="horario.m_silabo_alumno")
@@ -26,11 +27,13 @@ public class SilaboAlumno implements Serializable
 	private static final long serialVersionUID = 1L;
 	private Long    id;
 	private Long	pk_silabo_cronograma;
-	private	Date 	pk_alumno;
+	private	Long 	pk_alumno;
 	private	String nombre_completo;
 	private Long 	estado;
-
+	private Long asistio;
 	
+	
+	private String nombre;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -44,12 +47,7 @@ public class SilaboAlumno implements Serializable
 	public void setPk_silabo_cronograma(Long pk_silabo_cronograma) {
 		this.pk_silabo_cronograma = pk_silabo_cronograma;
 	}
-	public Date getPk_alumno() {
-		return pk_alumno;
-	}
-	public void setPk_alumno(Date pk_alumno) {
-		this.pk_alumno = pk_alumno;
-	}
+
 	
 	
 	public Long getEstado() {
@@ -63,6 +61,28 @@ public class SilaboAlumno implements Serializable
 	}
 	public void setNombre_completo(String nombre_completo) {
 		this.nombre_completo = nombre_completo;
+	}
+	
+	@Transient
+	public Long getAsistio() {
+		return asistio;
+	}
+	public void setAsistio(Long asistio) {
+		this.asistio = asistio;
+	}
+	public Long getPk_alumno() {
+		return pk_alumno;
+	}
+	public void setPk_alumno(Long pk_alumno) {
+		this.pk_alumno = pk_alumno;
+	}
+	
+	@Transient
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	
 	

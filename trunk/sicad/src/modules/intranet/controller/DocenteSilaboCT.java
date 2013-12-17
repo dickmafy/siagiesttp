@@ -6,12 +6,16 @@ import javax.faces.model.SelectItem;
 
 import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
+import com.belogick.factory.util.support.ServiceException;
 
 import dataware.service.AdmisionService;
 import dataware.service.IntranetService;
 import modules.admision.domain.Matricula;
 import modules.admision.domain.Proceso;
 import modules.horario.domain.Seccion;
+import modules.horario.domain.SilaboCronograma;
+import modules.horario.domain.SilaboUnidadCt;
+import modules.intranet.domain.silabo_docente;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
 
@@ -40,25 +44,25 @@ public class DocenteSilaboCT extends GenericController
 	private int notas[][];
 	
 	private int numbCapTerminales;
+	private SilaboCronograma obtenerSilaboCronograma;
+//	public void init() throws Exception 
+//	{
+//		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
+//		appName="Intranet Docente";
+//		moduleName="Silabo";
+//		userName=usr.getUsuario();
+//		seccion=1L;
+//		modulo=1L;
+//		profesion=101L;
+//		nombreUnidad= "Prueba";
+//	
+//		page_main="DocenteSilaboCT";
+//		defaultList();		
+//		//forward(page_main);
+//		optionCriterios();
+//	}
 	
-	public void init() throws Exception 
-	{
-		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
-		appName="Intranet Docente";
-		moduleName="Silabo";
-		userName=usr.getUsuario();
-		seccion=1L;
-		modulo=1L;
-		profesion=101L;
-		nombreUnidad= "Prueba";
-	
-		page_main="DocenteSilaboCT";
-		defaultList();		
-		//forward(page_main);
-		optionCriterios();
-	}
-	
-	public void init(Seccion pseccion,Proceso proceso) throws Exception 
+	public void init(Seccion pseccion,Proceso proceso, SilaboCronograma pobtenerSilaboCronograma) throws Exception 
 	{
 		
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
@@ -73,7 +77,10 @@ public class DocenteSilaboCT extends GenericController
 		profesion=101L;
 		nombreUnidad= "Prueba";
 		this.proceso = proceso;
-
+		
+		obtenerSilaboCronograma =  pobtenerSilaboCronograma;
+		
+		
 		page_main="DocenteSilaboCT";
 		numbCapTerminales = 3;
 		defaultList();		
@@ -136,34 +143,22 @@ public class DocenteSilaboCT extends GenericController
 		}
 	}
 	
-	@Override
-	public boolean validation() throws Exception 
-	{
-		boolean success = true;
-		ReferenteEducativo object = (ReferenteEducativo)getBean();
-		if(tipo.longValue()>2L && !validateSelect(object.getNivelA()))
-		{
-			setMessageError("Debe seleccionar una Modulo.");			
-			success = false;
+	
+	
+	public void guardarCT() throws ServiceException{
+		
+		for (ReferenteEducativo item : criteriosListCt) {
+			
+			SilaboUnidadCt ct = new SilaboUnidadCt();
+			ct.setPk_silabo_cronograma(obtenerSilaboCronograma.getId());
+			ct.setPk_ct(item.getId());
+			ct.setPrioridad(1L);
+			ct.setEstado(1L);
+			myService.save(ct);
 		}
-		else if(tipo.longValue()==4L && !validateSelect(object.getNivelB()))
-		{
-			setMessageError("Debe seleccionar una Capacidad Terminal.");			
-			success = false;
-		}
-		else if(!validateEmpty(object.getTitulo()) && tipo.longValue()==1L)
-		{
-			setMessageError("Debe ingresar el T�tulo.");			
-			success = false;
-		}
-		else if(!validateEmpty(object.getDescripcion()))
-		{
-			setMessageError("Debe ingresar la Descripcion.");			
-			success = false;
-		}
-		object=null;
-		return success;
+		
 	}
+	
 	
 	public IntranetService getMyService() 													{return myService;}
 	public void setMyService(IntranetService myService) 									{this.myService = myService;}
@@ -260,6 +255,14 @@ public class DocenteSilaboCT extends GenericController
 
 	public void setCriteriosListCt(List<ReferenteEducativo> criteriosListCt) {
 		this.criteriosListCt = criteriosListCt;
+	}
+
+	public SilaboCronograma getObtenerSilaboCronograma() {
+		return obtenerSilaboCronograma;
+	}
+
+	public void setObtenerSilaboCronograma(SilaboCronograma obtenerSilaboCronograma) {
+		this.obtenerSilaboCronograma = obtenerSilaboCronograma;
 	}
 
 	

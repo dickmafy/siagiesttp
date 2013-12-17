@@ -416,6 +416,18 @@ public class AdmisionDaoJpa extends HorarioDaoJpa implements AdmisionDao
 		executeQueryUpdate(query.toString().substring(0,query.toString().length()-1)+";");
 		query=null;
 	}
+
+	@Override
+	public void eliminarAsistenciaAlumnoCalendario(Long id,Long pk_silabo_cronograma) throws DaoException {
+		
+//		
+//		StringBuilder query=new StringBuilder();
+//		query.append("DELETE FROM horario.m_asistencia_alumno_calendario WHERE "
+//				+ " pk_silabo_calendario='"+id+"' and  pk_silabo_alumno='"+pk_silabo_cronograma+"' );");
+//		executeQueryUpdate(query.toString());
+//		query=null;
+//		
+	}
 	
 //	
 //	public List<MatriculaSeccion> listarUnidadesDisponibles(Long persona, Long institucion, Long profesion, Long modulo, Long tipo) throws Exception

@@ -104,11 +104,12 @@ public class DocenteSilaboFecha extends GenericController
 	        listaDias.put("Viernes", "5");
 	        listaDias.put("Sabado", "6");
 	        listaDias.put("Domingo", "7");
+	    
 	}
 	
-	public void init() throws Exception
-	{init(null);}
-	
+//	public void init() throws Exception
+//	{init(null);}
+//	
 	
 	public void generarFechas() throws ParseException{
 		listFechas = new ArrayList<>();

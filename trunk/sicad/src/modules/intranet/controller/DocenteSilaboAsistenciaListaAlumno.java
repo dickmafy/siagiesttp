@@ -69,7 +69,7 @@ public class DocenteSilaboAsistenciaListaAlumno extends GenericController
 	
 	public void init(SilaboCalendario temporalCalendario) {
 		
-		
+	
 		
 		forward("DocenteSilaboAsistenciaListaAlumno");
 	}
