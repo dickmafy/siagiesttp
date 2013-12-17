@@ -128,6 +128,17 @@ public class IntranetDocenteSilabo extends GenericController
 		go.init((Seccion)getBeanSelected(),proceso);
 	}
 	
+	
+	public void goAsistencia()throws Exception{
+		IntranetDocenteAsistencia  go = (IntranetDocenteAsistencia)getSpringBean("intranetDocenteAsistencia");
+		Proceso proceso = new Proceso();
+		proceso.setAnnio(annio);
+		proceso.setProceso(this.proceso);
+		proceso = (Proceso) myService.findByObject(proceso);
+		go.init((Seccion)getBeanSelected(),proceso);
+	}
+	
+	
 	public HorarioService getMyService() 							{return myService;}
 	public void setMyService(HorarioService myService) 				{this.myService = myService;}
 
