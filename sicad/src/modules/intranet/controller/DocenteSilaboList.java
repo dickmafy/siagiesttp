@@ -119,7 +119,7 @@ public class DocenteSilaboList extends GenericController
 		go.init((Seccion)getBeanSelected());
 	}
 	
-	public void goDocenteNotas()throws Exception{
+	public void goNotas()throws Exception{
 		DocenteSilaboNota go = (DocenteSilaboNota)getSpringBean("docenteSilaboNota");
 		Proceso proceso = new Proceso();
 		proceso.setAnnio(annio);
@@ -139,7 +139,7 @@ public class DocenteSilaboList extends GenericController
 	}
 	
 	public void goCt()throws Exception{
-		DocenteSilaboNota go = (DocenteSilaboNota)getSpringBean("docenteSilaboNota");
+		DocenteSilaboCT go = (DocenteSilaboCT)getSpringBean("docenteSilaboCT");
 		Proceso proceso = new Proceso();
 		proceso.setAnnio(annio);
 		proceso.setProceso(this.proceso);
