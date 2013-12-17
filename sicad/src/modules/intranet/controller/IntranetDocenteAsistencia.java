@@ -7,9 +7,13 @@ import javax.faces.model.SelectItem;
 import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
 
+import dataware.service.AdmisionService;
 import dataware.service.IntranetService;
 import dataware.service.MarcoService;
 import modules.administracion.domain.Institucion;
+import modules.admision.domain.Matricula;
+import modules.admision.domain.Proceso;
+import modules.horario.domain.Seccion;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
 
@@ -27,6 +31,8 @@ public class IntranetDocenteAsistencia extends GenericController
 	private Long tipo=0L,seccion,modulo,profesion;
 	private String nombreUnidad;
 	
+	private AdmisionService myServiceAdmision;
+	private Proceso proceso;
 	public void init() throws Exception 
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
@@ -37,77 +43,42 @@ public class IntranetDocenteAsistencia extends GenericController
 		modulo=1L;
 		profesion=101L;
 		nombreUnidad= "Prueba";
-		page_new="IntranetDocenteAsistencia_new";
-		page_update="IntranetDocenteAsistencia_update";
-		page_main="IntranetDocenteAsistencia_list";
-		//defaultList();		
-		forward(page_main);
-		optionCriterios();
+//		page_new="IntranetDocenteAsistencia_new";
+//		page_update="IntranetDocenteAsistencia_update";
+//		page_main="IntranetDocenteAsistencia_list";
+		defaultList();		
+//		forward(page_main);
+		
 	}
 	
-	public void optionCriterios() throws Exception
-	{
-		List<ReferenteEducativo> educativoList=myService.listarReferenteEducativo(profesion, 0, 1L);
-		criteriosList=new ArrayList<ReferenteEducativo>();
+
+
+	public void init(Seccion beanSelected, Proceso proceso) throws Exception {
+		this.proceso = proceso;
+		init();
 		
-		for(int i=0; i<educativoList.size(); i++)
-		{
-			if(educativoList.get(i).getTipo().longValue()==1L && educativoList.get(i).getEstado().longValue()!=Constante.ROW_STATUS_DELETE.longValue())
-			{criteriosList.add(educativoList.get(i));	}
-		}
-		educativoList=null;
-		
-		filtrarModulo(criteriosList,modulo);
-		
-		forward("silabo_crit");
-	}
 	
-	public void filtrarModulo(List<ReferenteEducativo> educativoList, Long modulo) throws Exception
-	{
-		ArrayList<ReferenteEducativo> filtro=new ArrayList<ReferenteEducativo>();	
-		for (ReferenteEducativo item : educativoList) 
-		{
-			if(item.getNivelA() == modulo)
-			{filtro.add(item);}						
-		}
+	
 		
-		criteriosList=filtro;
+		
+		
 	}
 	
 	@Override
 	public void defaultList() throws Exception
 	{
 		
+		List<Matricula> matriculas = myServiceAdmision.listarMatricula(proceso.getId());
+		setBeanList(matriculas);
+		
 	}
 	
-	@Override
-	public boolean validation() throws Exception 
-	{
-		boolean success = true;
-		ReferenteEducativo object = (ReferenteEducativo)getBean();
-		if(tipo.longValue()>2L && !validateSelect(object.getNivelA()))
-		{
-			setMessageError("Debe seleccionar una Modulo.");			
-			success = false;
-		}
-		else if(tipo.longValue()==4L && !validateSelect(object.getNivelB()))
-		{
-			setMessageError("Debe seleccionar una Capacidad Terminal.");			
-			success = false;
-		}
-		else if(!validateEmpty(object.getTitulo()) && tipo.longValue()==1L)
-		{
-			setMessageError("Debe ingresar el Título.");			
-			success = false;
-		}
-		else if(!validateEmpty(object.getDescripcion()))
-		{
-			setMessageError("Debe ingresar la Descripcion.");			
-			success = false;
-		}
-		object=null;
-		return success;
-	}
+	
+	
+	
+	
+	
+	
 	
 	public IntranetService getMyService() 													{return myService;}
 	public void setMyService(IntranetService myService) 									{this.myService = myService;}
@@ -132,5 +103,21 @@ public class IntranetDocenteAsistencia extends GenericController
 	
 	public Long getTipo() 																{return tipo;}
 	public void setTipo(Long tipo) 														{this.tipo = tipo;}
+
+
+
+	public AdmisionService getMyServiceAdmision() {
+		return myServiceAdmision;
+	}
+
+
+
+	public void setMyServiceAdmision(AdmisionService myServiceAdmision) {
+		this.myServiceAdmision = myServiceAdmision;
+	}
+
+
+
+
 
 } 

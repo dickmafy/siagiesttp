@@ -125,7 +125,13 @@
 		</navigation-case>
 	</navigation-rule>
 	
-	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>IntranetDocenteNotasAlumno_list</from-outcome>
+			<to-view-id>/modulos/intranet/IntranetDocenteNotasAlumno_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	
 	
 	

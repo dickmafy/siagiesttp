@@ -80,9 +80,8 @@ public class IntranetDocenteNotas extends GenericController
 		profesion=101L;
 		nombreUnidad= "Prueba";
 		this.proceso = proceso;
-		page_new="IntranetDocenteNotas_new";
-		page_update="IntranetDocenteNotas_update";
-		page_main="IntranetDocenteNotas_list";
+
+		page_main="IntranetDocenteNotasAlumno_list";
 		numbCapTerminales = 3;
 		defaultList();		
 		forward(page_main);
