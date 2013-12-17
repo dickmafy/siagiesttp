@@ -23,15 +23,6 @@ public class IntranetDocenteNotas extends GenericController
 	private List<ReferenteEducativo> criteriosList;
 	
 	private List<ReferenteEducativo> criteriosListCt;
-	
-	public List<ReferenteEducativo> getCriteriosListCt() {
-		return criteriosListCt;
-	}
-
-	public void setCriteriosListCt(List<ReferenteEducativo> criteriosListCt) {
-		this.criteriosListCt = criteriosListCt;
-	}
-
 	private List<String> selectCapacidades;
 	
 	private List<SelectItem> moduloProfesionalList;
@@ -40,7 +31,7 @@ public class IntranetDocenteNotas extends GenericController
 	private List<SelectItem> moduloTransversalList;
 	private List<SelectItem> capacidadTransversalList;
 	
-	private Long tipo=0L,seccion,modulo,profesion;
+	private Long tipo=0L,seccion,modulo,profesion,meta,docente,unidad;
 	private Proceso proceso;
 	private String nombreUnidad;
 	
@@ -75,7 +66,10 @@ public class IntranetDocenteNotas extends GenericController
 		appName="Intranet Docente";
 		moduleName="Notas";
 		userName=usr.getUsuario();
+		meta=pseccion.getMeta();
 		seccion=pseccion.getId();
+		docente=pseccion.getDocente();
+		unidad=pseccion.getValorUnidad();
 		modulo=1L;
 		profesion=101L;
 		nombreUnidad= "Prueba";
@@ -259,7 +253,16 @@ public class IntranetDocenteNotas extends GenericController
 		this.selectCapacidades = selectCapacidades;
 	}
 
+
 	
+	public List<ReferenteEducativo> getCriteriosListCt() {
+		return criteriosListCt;
+	}
+
+	public void setCriteriosListCt(List<ReferenteEducativo> criteriosListCt) {
+		this.criteriosListCt = criteriosListCt;
+	}
+
 	
 	
 	

@@ -33,6 +33,7 @@ public class Seccion implements Serializable
 	private	Long	valorCapacidad;
 	private	Long	valorModulo;
 	private Long	valorTipoModulo;
+	private Long	valorUnidad;
 	private Long	meta;
 	
 	@Id
@@ -116,6 +117,14 @@ public class Seccion implements Serializable
 	}
 	public void setMeta(Long meta) {
 		this.meta = meta;
+	}
+	
+	@Transient
+	public Long getValorUnidad() {
+		return valorUnidad;
+	}
+	public void setValorUnidad(Long valorUnidad) {
+		this.valorUnidad = valorUnidad;
 	}
 	
 	
