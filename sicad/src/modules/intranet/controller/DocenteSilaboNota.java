@@ -74,11 +74,11 @@ public class DocenteSilaboNota extends GenericController
 		nombreUnidad= "Prueba";
 		this.proceso = proceso;
 
-		page_main="DocenteSilaboNota";
+		page_main="DocenteSilaboCT";
 		numbCapTerminales = 3;
 		defaultList();		
 		forward(page_main);
-		//optionCriterios();
+		optionCriterios();
 	}
 	
 	public void optionCriterios() throws Exception
@@ -95,7 +95,7 @@ public class DocenteSilaboNota extends GenericController
 		
 		filtrarModulo(criteriosList,modulo);
 		
-		forward("DocenteSilaboNota");
+		forward("DocenteSilaboCT");
 	}
 	
 	public void filtrarModulo(List<ReferenteEducativo> educativoList, Long modulo) throws Exception
