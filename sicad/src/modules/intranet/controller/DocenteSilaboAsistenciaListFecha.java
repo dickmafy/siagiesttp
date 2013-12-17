@@ -9,18 +9,23 @@ import org.hibernate.impl.CriteriaImpl;
 
 import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
+import com.belogick.factory.util.support.DaoException;
+import com.belogick.factory.util.support.ServiceException;
 
 import dataware.service.AdmisionService;
 import dataware.service.IntranetService;
 import dataware.service.MarcoService;
 import modules.administracion.domain.Institucion;
 import modules.admision.domain.Matricula;
+import modules.admision.domain.Persona;
 import modules.admision.domain.Proceso;
+import modules.horario.domain.AsistenciaAlumno;
 import modules.horario.domain.AsistenciaAlumnoCalendario;
 import modules.horario.domain.Seccion;
 import modules.horario.domain.SilaboAlumno;
 import modules.horario.domain.SilaboCalendario;
 import modules.horario.domain.SilaboCronograma;
+import modules.intranet.domain.AsistenciaWrapper;
 import modules.intranet.domain.Fecha;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
@@ -44,10 +49,14 @@ public class DocenteSilaboAsistenciaListFecha extends GenericController
 	
 	private List<SilaboCronograma> listScro;
 	private List<SilaboCalendario> listCal;
+	private Long meta,docente,unidad;
+	private List<Matricula> matriculas;
+	private AsistenciaWrapper asistenciaWrapper;
 	
-
+	private List <SilaboAlumno> listSilaboAlumno; 
 	
-	public void init() throws Exception 
+	private SilaboCronograma obtenerSilaboCronograma;
+	public void init(Seccion beanSelected, Proceso proceso, SilaboCronograma pobtenerSilaboCronograma) throws Exception 
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
 		appName="Intranet Docente";
@@ -61,25 +70,22 @@ public class DocenteSilaboAsistenciaListFecha extends GenericController
 		defaultList();		
 		forward(page_main);
 		
+		this.proceso = proceso;
+		meta=beanSelected.getMeta();
+		seccion=beanSelected.getId();
+		docente=beanSelected.getDocente();
+		unidad=beanSelected.getValorUnidad();
+		
+		
 	}
 	
 
 
-	public void init(Seccion beanSelected, Proceso proceso) throws Exception {
-		this.proceso = proceso;
-		init();
-		
-			
-	}
 	
 	@Override
 	public void defaultList() throws Exception
 	{
-		
-		
-		
-		
-		
+
 		listScro =new ArrayList<>();
 		SilaboCronograma scro = new SilaboCronograma();
 		scro.setPk_docente(27L);
@@ -91,6 +97,9 @@ public class DocenteSilaboAsistenciaListFecha extends GenericController
 		
 		SilaboCalendario scal = new SilaboCalendario();
 		scal.setPk_silabo_cronograma(scro.getId());
+		
+		
+		
 		listCal =  myService.listByObject(scal);
 				
 		
@@ -108,12 +117,65 @@ public class DocenteSilaboAsistenciaListFecha extends GenericController
 		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();
 		
 		aac.setPk_silabo_calendario(temporalCalendario.getId());
-		go.init(temporalCalendario);
+		
+		forward("DocenteSilaboAsistenciaListaAlumno");
+		listarAlumnos();
 	}
 	
 	
+	@SuppressWarnings("unchecked")
+	public void listarAlumnos() throws Exception{
+		
+//		matriculas = myService.listarAlumnosSeccion(meta, unidad, seccion, docente);
+//		setBeanList(matriculas);
+		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();
+		SilaboAlumno silaboAlumno = new SilaboAlumno();
+		silaboAlumno.setPk_silabo_cronograma(temporalCalendario.getPk_silabo_cronograma());
+		listSilaboAlumno = myService.listByObject(silaboAlumno);
+		
+		for (SilaboAlumno item : listSilaboAlumno) {
+			Persona p = new Persona();
+			p.setId(item.getPk_alumno());
+			p = (Persona)myService.findById(p);
+			item.setNombre(p.getNombreCompleto() + p.getApellido_paterno() + p.getApellido_materno());
+			
+		}
+		
+	}
 	
+	public void guardarAsistencia() throws ServiceException, DaoException{
+		
+		AsistenciaAlumnoCalendario asistenciaAlumnoCalendario = new AsistenciaAlumnoCalendario();
+		
+		
+		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();		
+		//myServiceAdmision.eliminarAsistenciaAlumnoCalendario(temporalCalendario.getId(),listSilaboAlumno.get(0).getPk_silabo_cronograma());
+		
+		for (SilaboAlumno item : listSilaboAlumno) {
+		
+			asistenciaAlumnoCalendario = new AsistenciaAlumnoCalendario();
+					
+			temporalCalendario = (SilaboCalendario)getBeanSelected();
+			
+			asistenciaAlumnoCalendario.setPk_silabo_calendario(temporalCalendario.getId());
+			asistenciaAlumnoCalendario.setAsistencia(item.getAsistio());
+			asistenciaAlumnoCalendario.setEstado(1L);
+			asistenciaAlumnoCalendario.setPk_silabo_alumno(item.getId());
+			
+			
+			
+			myService.save(asistenciaAlumnoCalendario);
+			
+		}
 	
+		
+		forward("DocenteSilaboAsistenciaListaFecha");
+		
+		
+		
+		
+	}
+
 	
 	
 	
@@ -175,6 +237,30 @@ public class DocenteSilaboAsistenciaListFecha extends GenericController
 
 	public void setListCal(List<SilaboCalendario> listCal) {
 		this.listCal = listCal;
+	}
+
+
+
+	public List<SilaboAlumno> getListSilaboAlumno() {
+		return listSilaboAlumno;
+	}
+
+
+
+	public void setListSilaboAlumno(List<SilaboAlumno> listSilaboAlumno) {
+		this.listSilaboAlumno = listSilaboAlumno;
+	}
+
+
+
+	public SilaboCronograma getObtenerSilaboCronograma() {
+		return obtenerSilaboCronograma;
+	}
+
+
+
+	public void setObtenerSilaboCronograma(SilaboCronograma obtenerSilaboCronograma) {
+		this.obtenerSilaboCronograma = obtenerSilaboCronograma;
 	}
 
 

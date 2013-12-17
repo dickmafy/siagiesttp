@@ -27,7 +27,7 @@ public class SilaboUnidadCt implements Serializable
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="pk_nota")
+	@Column(name="pk_unidad_ct")
 	public Long getId()								 		{return id;}
 	public void setId(Long id) 						 		{this.id = id;}
 	

@@ -16,7 +16,7 @@
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
       	
-   		LISTA DE ASISTENCIA 
+   		LISTA DE SilaboCalendario 
 		
 		
 			<p:dataTable id="itemList" var="item" value="#{docenteSilaboAsistenciaListFecha.listCal}" filteredValue="#{docenteSilaboFecha.beanFilterList}"
@@ -46,7 +46,7 @@
 				
 				
 			<p:column headerText="Operaciones" style="width:33%">  
-				<p:commandButton icon="icn_item_new" action="#{docenteSilaboAsistenciaListFecha.goAlumno}"	title="Alumnos" ajax="false">
+				<p:commandButton rendered="true" icon="icn_item_new" action="#{docenteSilaboAsistenciaListFecha.goAlumno}"	title="Alumnos" ajax="false">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboAsistenciaListFecha.beanSelected}" />
 				</p:commandButton>				
 	
