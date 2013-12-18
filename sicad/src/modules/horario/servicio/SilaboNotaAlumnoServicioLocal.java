@@ -43,11 +43,11 @@ public class SilaboNotaAlumnoServicioLocal {
 					.add(Expression.eq("id",silaboAlumno.getPk_alumno())).uniqueResult();
 			PersonaAlumno personaAlumno = new PersonaAlumno(persona,silaboAlumno);
 			
-			personaAlumno.setNota(10.0);
-			/*try {
+			personaAlumno.setNota(0.0);
+			try {
 				personaAlumno.setNota(getSilaboNotaAlumno(silaboAlumno.getId(), pk_unidad_ct).getNota());
 			} catch (ServiceException e) {
-			}*/
+			}
 			
 			matriculados.add(personaAlumno);
 			
