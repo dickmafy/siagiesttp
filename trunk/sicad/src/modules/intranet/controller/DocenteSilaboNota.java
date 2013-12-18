@@ -3,24 +3,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.model.SelectItem;
-
 import com.aprolab.sicad.persistence.JPAPersistenceUtil;
+
 import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
 
 import dataware.service.AdmisionService;
 import dataware.service.IntranetService;
 import modules.admision.domain.Matricula;
-import modules.admision.domain.Persona;
 import modules.admision.domain.Proceso;
 import modules.horario.domain.Seccion;
-import modules.horario.domain.SilaboAlumno;
 import modules.horario.domain.SilaboCronograma;
-import modules.horario.domain.SilaboNotaAlumno;
-import modules.horario.servicio.PersonaAlumno;
-import modules.horario.servicio.SilaboNotaAlumnoServicioLocal;
+import modules.horario.domain.SilaboUnidadCt;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
+import modules.horario.domain.SilaboNotaAlumno;
+import modules.horario.servicio.PersonaAlumno;
+import modules.horario.servicio.PersonaAlumno;
+import modules.horario.servicio.SilaboNotaAlumnoServicioLocal;
 
 public class DocenteSilaboNota extends GenericController   
 {	
@@ -44,30 +44,15 @@ public class DocenteSilaboNota extends GenericController
 	
 	private Seccion seccionObject;
 	
-	private SilaboCronograma obtenerSilaboCronograma;
-	Long ctSeleccionado;
-	/*
-	public void init(Seccion seccion2, Proceso proceso2, SilaboCronograma pobtenerSilaboCronograma) throws Exception 
-	{
-		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
-		appName="Intranet Docente";
-		moduleName="Silabo";
-		userName=usr.getUsuario();
-		seccion=1L;
-		modulo=1L;
-		profesion=101L;
-		nombreUnidad= "Prueba";
-		
-		obtenerSilaboCronograma = pobtenerSilaboCronograma;
-		
-		page_main="DocenteSilaboNota";
-		defaultList();		
-		//forward(page_main);
-		optionCriterios();
-	}
-	*/
+	private int notas[][];
 	
-	public void init(Seccion pseccion,Proceso proceso,SilaboCronograma pobtenerSilaboCronograma, Long ctSeleccionado) throws Exception 
+	private int numbCapTerminales;
+	private SilaboCronograma obtenerSilaboCronograma;
+	
+	private Long ctSeleccionado;
+	private List<ReferenteEducativo> listarCT;
+	private SilaboCronograma silaboCronograma;
+	public void init(Seccion pseccion,Proceso proceso,SilaboCronograma pobtenerSilaboCronograma) throws Exception 
 	{
 		
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
@@ -82,14 +67,23 @@ public class DocenteSilaboNota extends GenericController
 		profesion=101L;
 		nombreUnidad= "Prueba";
 		this.proceso = proceso;
-
+		silaboCronograma = pobtenerSilaboCronograma;
+		
+		
 		page_main="DocenteSilaboNota";
 		this.obtenerSilaboCronograma = pobtenerSilaboCronograma;
 		this.ctSeleccionado =ctSeleccionado;
-		defaultList();		
+				
 		forward(page_main);
+		defaultList();
 		optionCriterios();
+		SilaboUnidadCt silaboUnidadCt = new SilaboUnidadCt();
+    	silaboUnidadCt.setPk_silabo_cronograma(silaboCronograma.getId());
+		listarCT = myService.listByObject(silaboUnidadCt);
+		
+		
 	}
+	
 	
 	public void optionCriterios() throws Exception
 	{
@@ -153,7 +147,6 @@ public class DocenteSilaboNota extends GenericController
 			}
 		}
 	}
-	
 	
 	
 	public IntranetService getMyService() 													{return myService;}
@@ -228,7 +221,13 @@ public class DocenteSilaboNota extends GenericController
 		this.proceso = proceso;
 	}
 
+	public int[][] getNotas() {
+		return notas;
+	}
 
+	public void setNotas(int[][] notas) {
+		this.notas = notas;
+	}
 	public List<String> getSelectCapacidades() {
 		return selectCapacidades;
 	}
@@ -255,7 +254,52 @@ public class DocenteSilaboNota extends GenericController
 		this.obtenerSilaboCronograma = obtenerSilaboCronograma;
 	}
 
+
+
+
+
+
+	public List<ReferenteEducativo> getListarCT() {
+		return listarCT;
+	}
+
+
+
+
+
+
+	public void setListarCT(List<ReferenteEducativo> listarCT) {
+		this.listarCT = listarCT;
+	}
+
+
+
+
+
+
+	public SilaboCronograma getSilaboCronograma() {
+		return silaboCronograma;
+	}
+
+
+
+
+
+
+	public void setSilaboCronograma(SilaboCronograma silaboCronograma) {
+		this.silaboCronograma = silaboCronograma;
+	}
+
 	
+
+	public Long getCtSeleccionado() {
+		return ctSeleccionado;
+	}
+
+
+	public void setCtSeleccionado(Long ctSeleccionado) {
+		this.ctSeleccionado = ctSeleccionado;
+	}
 	
 	
 } 
