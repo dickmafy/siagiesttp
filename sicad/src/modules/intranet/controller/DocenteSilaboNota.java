@@ -1,11 +1,10 @@
 package modules.intranet.controller; 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.faces.model.SelectItem;
 import com.aprolab.sicad.persistence.JPAPersistenceUtil;
 
-import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
 
 import dataware.service.AdmisionService;
