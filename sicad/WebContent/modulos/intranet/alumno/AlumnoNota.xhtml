@@ -1,0 +1,106 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="7000" escape="true"/>  
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">
+	    		<p:spacer width="6px"/>
+	    		
+	    		<p:outputLabel for="txtAnn" value="Año  " style="position:relative;  top:-4px;"/>
+	    		<p:selectOneMenu id="txtAnn" value="#{docenteSilaboList.annio}" style="position:relative;  top:2px; width:120px">
+                    <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        <f:selectItem itemLabel="2013"  itemValue="2013" />
+           	        <f:selectItem itemLabel="2014" 	itemValue="2014" />
+           	        <f:selectItem itemLabel="2015" 	itemValue="2015" />
+           	        <f:selectItem itemLabel="2016" 	itemValue="2016" />
+           	        <f:selectItem itemLabel="2017" 	itemValue="2017" /> 
+           	        <p:ajax event="change" update=":frmList" listener="#{docenteSilaboList.selectAnnio}"/>       
+       	       	</p:selectOneMenu>
+       	       	
+       	       	<p:outputLabel for="txtPrc" value="     Proceso  " style="position:relative;  top:-4px;"/>
+		   		<p:selectOneMenu id="txtPrc" value="#{docenteSilaboList.proceso}" style="position:relative;  top:3px; width:120px">
+		   			<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+					<f:selectItems value="#{docenteSilaboList.procesoList}"/>
+					<p:ajax event="change" update=":frmList" listener="#{docenteSilaboList.defaultList}"/>  
+				</p:selectOneMenu>
+				
+				<p:spacer width="6px"/>
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+  
+   		<p:dataTable id="itemList" var="item" value="#{docenteSilaboList.beanList}" filteredValue="#{docenteSilaboList.beanFilterList}"
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom" rowIndexVar="rowNumber" >
+     		
+     		<f:facet name="header">
+				<h:outputText value="Unidades Didácticas" />  
+			</f:facet>
+							
+			<p:column headerText="Módulo" style="width:5%; align:center;" >   
+				<h:outputText value="MP#{item.valorModulo}" title="MÓDULO PROFESIONAL: #{item.nombreModulo}" rendered="#{item.valorTipoModulo eq 1}"/>
+				<h:outputText value="MT" title="MÓDULO TRANSVERSAL: #{item.nombreModulo}" rendered="#{item.valorTipoModulo eq 2}"/>
+			</p:column>		
+			
+			<p:column headerText="Unidad" style="width:55%; align:center;" >   
+				<h:outputText value="#{item.nombreUnidad}" title="UNIDAD DIDACTICA: #{item.nombreUnidad}"/>
+			</p:column>
+			
+			<p:column headerText="Sección" style="width:5%; align:center;" >   
+				<h:outputText value="#{item.nombre}"/>
+			</p:column>	
+			
+			<p:column headerText="Horas" style="width:5%; align:center;" >   
+				<h:outputText value="#{item.valorHoras}"/>
+			</p:column>
+			
+			<p:column headerText="Docente" style="width:30%">
+				
+				<p:commandLink >
+					<p:selectOneMenu value="#{item.docente}" style="width:290px;" filter="true" filterMatchMode="startsWith" disabled="true">
+						<f:selectItems value="#{docenteSilaboList.docenteList}"/>
+						<p:ajax event="change" listener="#{docenteSilaboList.setDocente}" update=":frmList"/>
+					</p:selectOneMenu>
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
+				</p:commandLink>
+				   
+        	</p:column> 
+        	
+        	
+			
+        	
+        	
+        	<p:column headerText="Operaciones" style="width:33%">  
+				<p:commandButton icon="icn_item_new" action="#{docenteSilaboList.goCrearFechas}"	title="Crear Fechas De Clase" ajax="false" rendered="#{item.estadoSilabo ne 1 or item.estado ne 2}">
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
+				</p:commandButton>				
+							
+
+				<p:commandButton icon="icn_item_teacher" action="#{docenteSilaboList.goAsistencia}"	title="Asistencia" ajax="false" rendered="#{item.estadoSilabo eq 2}">
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
+				</p:commandButton>
+
+				<p:commandButton icon="icn_item_local" action="#{docenteSilaboList.goNotas}"	title="Notas" ajax="false" rendered="#{item.estadoSilabo eq 2}">
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
+				</p:commandButton>
+
+				
+				<p:commandButton icon="icn_item_detail"  action="#{docenteSilaboList.goCt}"	title="Ir a CT" ajax="false" rendered="#{item.estadoSilabo eq 1}">
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
+				</p:commandButton>
+							
+			               
+			</p:column> 
+	 
+        	      	        
+		</p:dataTable>
+		
+		
+	</h:form>
+    </ui:define>
+</ui:composition>

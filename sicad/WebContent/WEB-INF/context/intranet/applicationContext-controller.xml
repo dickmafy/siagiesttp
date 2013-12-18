@@ -5,6 +5,21 @@
 	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<!--  INTRANET -->
+	
+	<!-- ALUMNO -->
+	<bean id="alumnoList" class="modules.intranet.controller.AlumnoList" scope="session" parent="genericController">
+	    <property name="bean" ref="metaInstitucional"/>	  
+	    <property name="myService" 	ref="horarioService"/>			
+	</bean>
+	
+	<bean id="alumnoNota" class="modules.intranet.controller.AlumnoNota" scope="session" parent="genericController">
+	    <property name="myService" 	ref="horarioService"/>			
+	</bean>
+	
+	<bean id="alumnoAsistencia" class="modules.intranet.controller.AlumnoAsistencia" scope="session" parent="genericController">
+	    <property name="myService" 	ref="horarioService"/>			
+	</bean>
+	
 	<!-- DOCENTE -->
 	<bean id="docenteSilaboList" class="modules.intranet.controller.DocenteSilaboList" scope="session" parent="genericController">
 		<property name="bean" ref="metaInstitucional"/>	  
