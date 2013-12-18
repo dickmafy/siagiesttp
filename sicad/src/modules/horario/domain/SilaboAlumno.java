@@ -28,12 +28,15 @@ public class SilaboAlumno implements Serializable
 	private Long    id;
 	private Long	pk_silabo_cronograma;
 	private	Long 	pk_alumno;
+	
 	private	String nombre_completo;
 	private Long 	estado;
 	private Long asistio;
 	
 	
 	private String nombre;
+	
+	private	Long 	pk_usuario;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -83,6 +86,12 @@ public class SilaboAlumno implements Serializable
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public Long getPk_usuario() {
+		return pk_usuario;
+	}
+	public void setPk_usuario(Long pk_usuario) {
+		this.pk_usuario = pk_usuario;
 	}
 	
 	
