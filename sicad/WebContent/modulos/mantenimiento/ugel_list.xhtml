@@ -19,7 +19,9 @@
 					<p:ajax event="change" update=":frmList:itemList" listener="#{mantenimientoSupervision.defaultList}"/>
 				</p:selectOneMenu>
 				<p:spacer height="6px"/>				 		         
-		        <p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{mantenimientoSupervision.nativeNew}" ajax="false" />  
+		        <p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{mantenimientoSupervision.nativeNew}" ajax="false" />
+		        <p:spacer height="4px"/>
+		        <p:commandButton title="Listado de UGEL" value="Listado de UGEL" icon="icn_item_download"  ajax="false" />    
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
