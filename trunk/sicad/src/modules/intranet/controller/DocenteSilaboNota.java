@@ -10,7 +10,6 @@ import com.belogick.factory.util.controller.GenericController;
 
 import dataware.service.AdmisionService;
 import dataware.service.IntranetService;
-import modules.admision.domain.Matricula;
 import modules.admision.domain.Proceso;
 import modules.horario.domain.Seccion;
 import modules.horario.domain.SilaboCronograma;
@@ -18,7 +17,6 @@ import modules.horario.domain.SilaboUnidadCt;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
 import modules.horario.domain.SilaboNotaAlumno;
-import modules.horario.servicio.PersonaAlumno;
 import modules.horario.servicio.PersonaAlumno;
 import modules.horario.servicio.SilaboNotaAlumnoServicioLocal;
 
@@ -50,8 +48,11 @@ public class DocenteSilaboNota extends GenericController
 	private SilaboCronograma obtenerSilaboCronograma;
 	
 	private Long pk_unidad_ctSeleccionado;
+	
 	private List<ReferenteEducativo> listarCT;
+	
 	private SilaboCronograma silaboCronograma;
+	
 	public void init(Seccion pseccion,Proceso proceso,SilaboCronograma pobtenerSilaboCronograma) throws Exception 
 	{
 		
@@ -98,12 +99,17 @@ public class DocenteSilaboNota extends GenericController
 		List<PersonaAlumno> matriculados = (List<PersonaAlumno>)getBeanList();
 		
 		for (PersonaAlumno personaAlumno : matriculados) {
+			
 			SilaboNotaAlumno result = SilaboNotaAlumnoServicioLocal
 					.getSilaboNotaAlumno(personaAlumno.getSilaboAlumno().getId(), pk_unidad_ctSeleccionado);
 			
-			JPAPersistenceUtil.getSession().save(result);
+			result.setNota(personaAlumno.getNota());
+			System.out.println("id " + result.getId()+" nota "+result.getNota());
+			JPAPersistenceUtil.getSession().update(result);
+			
 			result=null;
 		}
+		
 		forward("DocenteSilaboList");
 		
 	}
