@@ -4,15 +4,21 @@ import java.util.List;
 
 import javax.faces.model.SelectItem;
 
+import com.aprolab.sicad.persistence.JPAPersistenceUtil;
 import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
 
 import dataware.service.AdmisionService;
 import dataware.service.IntranetService;
 import modules.admision.domain.Matricula;
+import modules.admision.domain.Persona;
 import modules.admision.domain.Proceso;
 import modules.horario.domain.Seccion;
+import modules.horario.domain.SilaboAlumno;
 import modules.horario.domain.SilaboCronograma;
+import modules.horario.domain.SilaboNotaAlumno;
+import modules.horario.servicio.PersonaAlumno;
+import modules.horario.servicio.SilaboNotaAlumnoServicioLocal;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
 
@@ -38,11 +44,8 @@ public class DocenteSilaboNota extends GenericController
 	
 	private Seccion seccionObject;
 	
-	private int notas[][];
-	
-	private int numbCapTerminales;
 	private SilaboCronograma obtenerSilaboCronograma;
-	
+	Long ctSeleccionado;
 	/*
 	public void init(Seccion seccion2, Proceso proceso2, SilaboCronograma pobtenerSilaboCronograma) throws Exception 
 	{
@@ -81,7 +84,8 @@ public class DocenteSilaboNota extends GenericController
 		this.proceso = proceso;
 
 		page_main="DocenteSilaboNota";
-		numbCapTerminales = 3;
+		this.obtenerSilaboCronograma = pobtenerSilaboCronograma;
+		this.ctSeleccionado =ctSeleccionado;
 		defaultList();		
 		forward(page_main);
 		optionCriterios();
@@ -95,8 +99,9 @@ public class DocenteSilaboNota extends GenericController
 		for(int i=0; i<educativoList.size(); i++)
 		{
 			if(educativoList.get(i).getTipo().longValue()==1L && educativoList.get(i).getEstado().longValue()!=Constante.ROW_STATUS_DELETE.longValue())
-			{criteriosList.add(educativoList.get(i));	}
+			{criteriosList.add(educativoList.get(i));}
 		}
+		
 		educativoList=null;
 		
 		filtrarModulo(criteriosList,modulo);
@@ -118,15 +123,22 @@ public class DocenteSilaboNota extends GenericController
 	
 	@Override
 	public void defaultList() throws Exception
-	{
-		/*Criteria criteria = JPAPersistenceUtil.getSession().createCriteria(Matricula.class);
-		criteria.add(Expression.eq("estado",4))
-		.add(Expression.eq("estado",seccionObject.));*/
+	{	
+		setBeanList(SilaboNotaAlumnoServicioLocal.findBySilaboCronograma(obtenerSilaboCronograma.getId(),ctSeleccionado));
+	}
+	
+	public void guardarNotas()  throws Exception {
 		
-		List<Matricula> matriculas = myService.listarAlumnosSeccion(meta, unidad, seccion, docente);
-		notas = new int[matriculas.size()][numbCapTerminales];
-		setBeanList(matriculas);
+		List<PersonaAlumno> matriculados = (List<PersonaAlumno>)getBeanList();
 		
+		for (PersonaAlumno personaAlumno : matriculados) {
+			SilaboNotaAlumno result = SilaboNotaAlumnoServicioLocal
+					.getSilaboNotaAlumno(personaAlumno.getSilaboAlumno().getId(), ctSeleccionado);
+			
+			JPAPersistenceUtil.getSession().save(result);
+			result=null;
+		}
+		forward("DocenteSilaboList");
 		
 	}
 
@@ -216,13 +228,7 @@ public class DocenteSilaboNota extends GenericController
 		this.proceso = proceso;
 	}
 
-	public int[][] getNotas() {
-		return notas;
-	}
 
-	public void setNotas(int[][] notas) {
-		this.notas = notas;
-	}
 	public List<String> getSelectCapacidades() {
 		return selectCapacidades;
 	}
