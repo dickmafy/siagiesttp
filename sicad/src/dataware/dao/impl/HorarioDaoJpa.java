@@ -316,6 +316,7 @@ public class HorarioDaoJpa extends MarcoDaoJpa implements HorarioDao
 	
 	public void insertSilaboAlumno(Long meta, Long unidad, Long seccion, Long docente) throws Exception 
 	{
+		// J : dice , sino es un select ,entonces que es!
 		executeQueryUpdate("SELECT horario.ins_silabo_alumno("+meta+","+unidad+","+seccion+","+docente+");");
 	}
 	

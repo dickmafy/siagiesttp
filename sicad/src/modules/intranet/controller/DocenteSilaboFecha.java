@@ -45,6 +45,7 @@ public class DocenteSilaboFecha extends GenericController
     private Map<String,String> listaDias;  
     private Integer cantidad_clases;
     private List<Fecha> listFechas;
+    private SilaboCronograma silaboCronograma;
     public void init(Seccion pseccion) throws Exception
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
@@ -57,7 +58,7 @@ public class DocenteSilaboFecha extends GenericController
 		page_main="DocenteSilaboFecha";
 		page_update="";
 		forward(page_main);
-		
+		//silaboCronograma = psilaboCronograma;
 		seccion=pseccion.getId();
 		docente=pseccion.getDocente();
 		meta=pseccion.getMeta();
@@ -70,7 +71,6 @@ public class DocenteSilaboFecha extends GenericController
 	{
     	
     	Fecha fecha = new Fecha();
-   
     	SilaboCronograma silaboCronograma =new SilaboCronograma();
     	silaboCronograma.setPk_meta(meta);
     	silaboCronograma.setContenido("-");
@@ -79,7 +79,7 @@ public class DocenteSilaboFecha extends GenericController
     	silaboCronograma.setPk_docente(docente);
     	silaboCronograma.setEstado(1L);
     	
-    	silaboCronograma = (SilaboCronograma) myService.save(silaboCronograma);
+    	silaboCronograma = (SilaboCronograma) myService.save(silaboCronograma); 	
     	SilaboCalendario silaboCalendario;
     	for (Fecha item: listFechas) 
     	{
@@ -313,6 +313,14 @@ public class DocenteSilaboFecha extends GenericController
 
 	public void setCantidad_clases(Integer cantidad_clases) {
 		this.cantidad_clases = cantidad_clases;
+	}
+
+	public SilaboCronograma getSilaboCronograma() {
+		return silaboCronograma;
+	}
+
+	public void setSilaboCronograma(SilaboCronograma silaboCronograma) {
+		this.silaboCronograma = silaboCronograma;
 	}
 
 } 
