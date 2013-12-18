@@ -27,8 +27,8 @@ public class SilaboNotaAlumnoServicioLocal {
 		result.setPk_unidad_ct(pk_unidad_ct);
 		result.setEstado(1L);
 		result.setNota(0.0);
-		
-		return (SilaboNotaAlumno) JPAPersistenceUtil.getSession().save(result); 
+		JPAPersistenceUtil.getSession().save(result);
+		return result; 
 	}
 	
 	public static List<PersonaAlumno> findBySilaboCronograma(Long silaboCronogramaId,Long pk_unidad_ct) {
@@ -44,10 +44,10 @@ public class SilaboNotaAlumnoServicioLocal {
 			PersonaAlumno personaAlumno = new PersonaAlumno(persona,silaboAlumno);
 			
 			personaAlumno.setNota(10.0);
-			try {
+			/*try {
 				personaAlumno.setNota(getSilaboNotaAlumno(silaboAlumno.getId(), pk_unidad_ct).getNota());
 			} catch (ServiceException e) {
-			}
+			}*/
 			
 			matriculados.add(personaAlumno);
 			
