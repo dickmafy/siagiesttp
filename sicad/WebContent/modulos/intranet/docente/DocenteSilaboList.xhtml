@@ -76,16 +76,16 @@
         	
         	
         	<p:column headerText="Operaciones" style="width:33%">  
-				<p:commandButton icon="icn_item_new" action="#{docenteSilaboList.goCrearFechas}"	title="Crear Fechas De Clase" ajax="false" rendered="#{item.estado ne 1}">
+				<p:commandButton icon="icn_item_new" action="#{docenteSilaboList.goCrearFechas}"	title="Crear Fechas De Clase" ajax="false" rendered="#{item.estado ne 1 or item.estado ne 2}">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
 				</p:commandButton>				
 							
 
-				<p:commandButton icon="icn_item_teacher" action="#{docenteSilaboList.goAsistencia}"	title="Asistencia" ajax="false" rendered="#{item.estado eq 1}">
+				<p:commandButton icon="icn_item_teacher" action="#{docenteSilaboList.goAsistencia}"	title="Asistencia" ajax="false" rendered="#{item.estado eq 2}">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
 				</p:commandButton>
 
-				<p:commandButton icon="icn_item_local" action="#{docenteSilaboList.goNotas}"	title="Notas" ajax="false" rendered="#{item.estado eq 1}">
+				<p:commandButton icon="icn_item_local" action="#{docenteSilaboList.goNotas}"	title="Notas" ajax="false" rendered="#{item.estado eq 2}">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
 				</p:commandButton>
 
