@@ -18,6 +18,9 @@
 					<f:selectItems value="#{admisionMatricula.procesoList}" var="lstPro" itemValue="#{lstPro.id}" itemLabel="#{lstPro.descripcion}"/>
 					<p:ajax event="change" update=":frmList" listener="#{admisionMatricula.optionSelectProceso}"/>
 				</p:selectOneMenu>
+			<p:spacer height="4px"/>
+		        <p:commandButton title="Ver Nómina de Matricula" value="Nómina de Matricula" icon="icn_item_download"  ajax="false" />  
+			
 				
 			</p:toolbarGroup>  
   		</p:toolbar>    		

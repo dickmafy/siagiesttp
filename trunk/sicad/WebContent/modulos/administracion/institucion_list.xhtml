@@ -10,7 +10,9 @@
    		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
   		<p:toolbar>  
 	    	<p:toolbarGroup align="left">  
-		        <p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{adminInstitucion.nativeNew}" ajax="false" />  
+		        <p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{adminInstitucion.nativeNew}" ajax="false" />
+		         <p:spacer height="4px"/>
+		        <p:commandButton title="Listado de Institutos" value="Listado de Institutos" icon="icn_item_download"  ajax="false" />   
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
