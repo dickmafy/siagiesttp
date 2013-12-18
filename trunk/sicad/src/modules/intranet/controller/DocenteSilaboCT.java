@@ -132,7 +132,7 @@ public class DocenteSilaboCT extends GenericController
 	}
 
 	public void listarCT() {
-		 criteriosListCt=new ArrayList<ReferenteEducativo>();
+		criteriosListCt=new ArrayList<ReferenteEducativo>();
 		for (ReferenteEducativo x: criteriosList) {
 			if(x.getCheck()){
 				
@@ -145,9 +145,9 @@ public class DocenteSilaboCT extends GenericController
 	
 	
 	
-	public void guardarCT() throws ServiceException{
+	public void guardarCT() throws Exception {
 		
-		for (ReferenteEducativo item : criteriosListCt) {
+		for (ReferenteEducativo item : criteriosList) {
 			
 			SilaboUnidadCt ct = new SilaboUnidadCt();
 			ct.setPk_silabo_cronograma(obtenerSilaboCronograma.getId());
@@ -157,6 +157,10 @@ public class DocenteSilaboCT extends GenericController
 			myService.save(ct);
 		}
 		
+		DocenteSilaboList go = (DocenteSilaboList)getSpringBean("docenteSilaboList");
+		go.init();
+		
+		//forward("DocenteSilaboList");
 	}
 	
 	

@@ -45,13 +45,11 @@
 				</p:column>		
 				
 				
-			<p:column headerText="Operaciones" style="width:33%">  
-				<p:commandButton rendered="true" icon="icn_item_new" action="#{docenteSilaboAsistenciaListFecha.goAlumno}"	title="Alumnos" ajax="false">
-					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboAsistenciaListFecha.beanSelected}" />
-				</p:commandButton>				
-	
-			               
-			</p:column>     	       
+				<p:column headerText="Operaciones" style="width:33%">  
+					<p:commandButton rendered="#{item.estado eq 1}" icon="icn_item_new" action="#{docenteSilaboAsistenciaListFecha.goAlumno}"	title="Alumnos" ajax="false">
+						<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboAsistenciaListFecha.beanSelected}" />
+					</p:commandButton>				
+				</p:column>     	       
 			       	      	        
 			</p:dataTable>
 			

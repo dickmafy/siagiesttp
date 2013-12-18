@@ -11,57 +11,27 @@
   		<p:toolbar>  
 	    	<p:toolbarGroup align="left">  
 		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="DocenteSilaboList" ajax="false" />
-		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{docenteSilaboCT.guardarCT}" ajax="false" />
-		        <p:commandButton title="SELECCIONAR CT" 	value="SELECCIONAR CT" 	icon="icn_bar_new" 	actionListener="#{docenteSilaboCT.listarCT}" ajax="false" />
-		       
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{docenteSilaboCT.guardarCT}" ajax="false" />		       
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
       	
-      	<p:tabView id="tabView"> 
-      	
-      	
-			 
-    		<p:tab id="TabDatosGenerales2" title="CT- CE -INDICADORES" >  
     	   	
-		      	<p:panel header="Sílabo #{docenteSilaboCT.nombreUnidad} - Criterios de Evaluación">
-		
-						<p:dataTable id="criteriosList" var="item" value="#{docenteSilaboCT.criteriosList}" 
-			   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
-			     		
-			     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
-							<h:outputText value="MOD#{item.nivelA}: #{item.titulo}" title="MÓDULO #{item.nivelA}: #{item.titulo} - #{item.descripcion}" rendered="false" style="font-weight:bold"/>
-							<h:outputText value="CT#{item.nivelB}: #{item.descripcion}" title="CAPACIDAD TERMINAL #{item.nivelB}: #{item.descripcion}" rendered="#{item.nivelB ne 0 and item.nivelC eq 0}" style="font-weight:bold"/>
-							<p:selectBooleanCheckbox value="#{item.check}" rendered="#{item.nivelC ne 0}"/>
-							<h:outputText value="CE#{item.nivelC}: #{item.descripcion}" title="CRITERIO DE EVALUACIÓN #{item.nivelC}: #{item.descripcion}" rendered="#{item.nivelC ne 0}"/>					  
-						</p:column>		        	      	        	        
-			        	      	        
-						</p:dataTable> 			
-		    		
-				</p:panel>
-			</p:tab>
-				<p:tab id="TabCapacidadesTerminales" title="CT- SELECCIONADAS" >  
-    	   	
-		      	<p:panel header="Sílabo #{docenteSilaboCT.nombreUnidad} - Capacidades Seleccionadas">
+      	<p:panel header="Sílabo #{docenteSilaboCT.nombreUnidad} - Criterios de Evaluación">
 
-				<p:dataTable id="criteriosListct" var="item" value="#{docenteSilaboCT.criteriosListCt}" 
-			   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
-			     		
-			     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
-							<h:outputText value="MOD#{item.nivelA}: #{item.titulo}" title="MÓDULO #{item.nivelA}: #{item.titulo} - #{item.descripcion}" rendered="false" style="font-weight:bold"/>
-							<h:outputText value="CT#{item.nivelB}: #{item.descripcion}" title="CAPACIDAD TERMINAL #{item.nivelB}: #{item.descripcion}" rendered="#{item.nivelB ne 0 and item.nivelC eq 0}" style="font-weight:bold"/>
-							<p:selectBooleanCheckbox value="#{item.check}" rendered="#{item.nivelC ne 0}"/>
-							<h:outputText value="CE#{item.nivelC}: #{item.descripcion}" title="CRITERIO DE EVALUACIÓN #{item.nivelC}: #{item.descripcion}" rendered="#{item.nivelC ne 0}"/>					  
-						</p:column>		        	      	        	        
-			        	      	        
-				</p:dataTable> 		
-		    		
-				</p:panel>
-			</p:tab>
-			
-			
-			
-		</p:tabView>
+				<p:dataTable id="criteriosList" var="item" value="#{docenteSilaboCT.criteriosList}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+	     		
+	     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
+					<h:outputText value="MOD#{item.nivelA}: #{item.titulo}" title="MÓDULO #{item.nivelA}: #{item.titulo} - #{item.descripcion}" rendered="false" style="font-weight:bold"/>
+					<h:outputText value="CT#{item.nivelB}: #{item.descripcion}" title="CAPACIDAD TERMINAL #{item.nivelB}: #{item.descripcion}" rendered="#{item.nivelB ne 0 and item.nivelC eq 0}" style="font-weight:bold"/>
+					<p:selectBooleanCheckbox value="#{item.check}" rendered="#{item.nivelC ne 0}"/>
+					<h:outputText value="CE#{item.nivelC}: #{item.descripcion}" title="CRITERIO DE EVALUACIÓN #{item.nivelC}: #{item.descripcion}" rendered="#{item.nivelC ne 0}"/>					  
+				</p:column>		        	      	        	        
+	        	      	        
+				</p:dataTable> 			
+    		
+		</p:panel>
 		
      </h:form>
      

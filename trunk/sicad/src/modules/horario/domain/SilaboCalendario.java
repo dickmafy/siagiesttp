@@ -31,6 +31,7 @@ public class SilaboCalendario implements Serializable
 	private Long	pk_silabo_cronograma;
 	private	Date 	fecha;
 	private Long 	estado;
+	// estado = 2 = fecha no aparece en asistencia 
 	
 	
 	@Id
