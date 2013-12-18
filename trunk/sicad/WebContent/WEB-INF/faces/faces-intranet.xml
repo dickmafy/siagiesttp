@@ -15,24 +15,24 @@
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>IntranetAlumnoAsistencia_new</from-outcome>
-			<to-view-id>/modulos/intranet/alumno/IntranetAlumnoAsistencia_new.xhtml</to-view-id>
+			<from-outcome>AlumnoList</from-outcome>
+			<to-view-id>/modulos/intranet/alumno/AlumnoList.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>IntranetAlumnoAsistencia_list</from-outcome>
-			<to-view-id>/modulos/intranet/alumno/IntranetAlumnoAsistencia_list.xhtml</to-view-id>
+			<from-outcome>AlumnoNota</from-outcome>
+			<to-view-id>/modulos/intranet/alumno/AlumnoNota.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>IntranetAlumnoAsistencia_update</from-outcome>
-			<to-view-id>/modulos/intranet/alumno/IntranetAlumnoAsistencia_update.xhtml</to-view-id>
+			<from-outcome>AlumnoAsistencia</from-outcome>
+			<to-view-id>/modulos/intranet/alumno/AlumnoAsistencia.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
