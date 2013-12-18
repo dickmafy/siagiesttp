@@ -30,7 +30,7 @@ public class DocenteSilaboList extends GenericController
 	private HorarioService	myService;
 	
 	private List<ReferenteEducativo> listarCT;
-	private Long ctSeleccionado;
+	
 	private Long meta,seccion,unidad;
 	
 	
@@ -148,9 +148,9 @@ public class DocenteSilaboList extends GenericController
 		go.init((Seccion)getBeanSelected());
 	}
 	
-	public void goNotas(Seccion item)throws Exception{
+	public void goNotas()throws Exception{
 		
-		setBeanSelected(item);
+		
 		
 		SilaboCronograma silaboCronograma = obtenerSilaboCronograma();    	
 		silaboCronograma = (SilaboCronograma) myService.findByObject(silaboCronograma);
@@ -160,7 +160,7 @@ public class DocenteSilaboList extends GenericController
 		proceso.setAnnio(annio);
 		proceso.setProceso(this.proceso);
 		proceso = (Proceso) myService.findByObject(proceso);
-		go.init((Seccion)getBeanSelected(),proceso,silaboCronograma,ctSeleccionado);
+		go.init((Seccion)getBeanSelected(),proceso,silaboCronograma);
 	}
 	
 	
@@ -252,13 +252,5 @@ public class DocenteSilaboList extends GenericController
 	}
 
 
-	public Long getCtSeleccionado() {
-		return ctSeleccionado;
-	}
-
-
-	public void setCtSeleccionado(Long ctSeleccionado) {
-		this.ctSeleccionado = ctSeleccionado;
-	}
 
 } 
