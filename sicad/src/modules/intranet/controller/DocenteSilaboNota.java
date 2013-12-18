@@ -40,10 +40,7 @@ public class DocenteSilaboNota extends GenericController
 	private String nombreUnidad;
 	
 	private Seccion seccionObject;
-	
-	private int notas[][];
-	
-	private int numbCapTerminales;
+
 	private SilaboCronograma obtenerSilaboCronograma;
 	
 	private Long pk_unidad_ctSeleccionado;
@@ -198,13 +195,7 @@ public class DocenteSilaboNota extends GenericController
 		this.proceso = proceso;
 	}
 
-	public int[][] getNotas() {
-		return notas;
-	}
-
-	public void setNotas(int[][] notas) {
-		this.notas = notas;
-	}
+	
 	public List<String> getSelectCapacidades() {
 		return selectCapacidades;
 	}
