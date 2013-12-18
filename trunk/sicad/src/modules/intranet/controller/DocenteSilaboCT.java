@@ -148,21 +148,26 @@ public class DocenteSilaboCT extends GenericController
 	public void guardarCT() throws Exception {
 		
 		for (ReferenteEducativo item : criteriosList) {
-			
-			SilaboUnidadCt ct = new SilaboUnidadCt();
-			ct.setPk_silabo_cronograma(obtenerSilaboCronograma.getId());
-			ct.setPk_ct(item.getId());
-			ct.setPrioridad(1L);
-			ct.setEstado(1L);
-			myService.save(ct);
+			if(item.getCheck()){
+				SilaboUnidadCt ct = new SilaboUnidadCt();
+				ct.setPk_silabo_cronograma(obtenerSilaboCronograma.getId());
+				ct.setPk_ct(item.getId());
+				ct.setPrioridad(1L);
+				ct.setEstado(1L);
+				myService.save(ct);
+			}
 		}
+		
+		SilaboCronograma bean = (SilaboCronograma)myService.findByObject(obtenerSilaboCronograma);
+		bean.setEstado(2L);
+		myService.save(bean); 
 		
 		DocenteSilaboList go = (DocenteSilaboList)getSpringBean("docenteSilaboList");
 		go.init();
 		
 		//forward("DocenteSilaboList");
 	}
-	
+
 	
 	public IntranetService getMyService() 													{return myService;}
 	public void setMyService(IntranetService myService) 									{this.myService = myService;}
