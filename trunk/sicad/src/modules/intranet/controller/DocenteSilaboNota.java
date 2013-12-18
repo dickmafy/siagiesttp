@@ -72,9 +72,9 @@ public class DocenteSilaboNota extends GenericController
 		
 		page_main="DocenteSilaboNota";
 		this.obtenerSilaboCronograma = pobtenerSilaboCronograma;
-		this.pk_unidad_ctSeleccionado =pk_unidad_ctSeleccionado;
+		
 				
-		this.pk_unidad_ctSeleccionado = 36L;
+		pk_unidad_ctSeleccionado = 36L;
 		
 		forward(page_main);
 		defaultList();
@@ -87,36 +87,6 @@ public class DocenteSilaboNota extends GenericController
 	}
 	
 	
-//	public void optionCriterios() throws Exception
-//	{
-//		List<ReferenteEducativo> educativoList=myService.listarReferenteEducativo(profesion, 0, 1L);
-//		criteriosList=new ArrayList<ReferenteEducativo>();
-//		
-//		for(int i=0; i<educativoList.size(); i++)
-//		{
-//			if(educativoList.get(i).getTipo().longValue()==1L && educativoList.get(i).getEstado().longValue()!=Constante.ROW_STATUS_DELETE.longValue())
-//			{criteriosList.add(educativoList.get(i));}
-//		}
-//		
-//		educativoList=null;
-//		
-//		filtrarModulo(criteriosList,modulo);
-//		
-//		forward("DocenteSilaboNota");
-//	}
-	
-//	public void filtrarModulo(List<ReferenteEducativo> educativoList, Long modulo) throws Exception
-//	{
-//		ArrayList<ReferenteEducativo> filtro=new ArrayList<ReferenteEducativo>();	
-//		for (ReferenteEducativo item : educativoList) 
-//		{
-//			if(item.getNivelA() == modulo)
-//			{filtro.add(item);}						
-//		}
-//		
-//		criteriosList=filtro;
-//	}
-//	
 	@Override
 	public void defaultList() throws Exception
 	{	
@@ -292,16 +262,19 @@ public class DocenteSilaboNota extends GenericController
 		this.silaboCronograma = silaboCronograma;
 	}
 
-	
 
-	public Long getCtSeleccionado() {
+	public Long getPk_unidad_ctSeleccionado() {
 		return pk_unidad_ctSeleccionado;
 	}
 
 
-	public void setCtSeleccionado(Long ctSeleccionado) {
-		this.pk_unidad_ctSeleccionado = ctSeleccionado;
+	public void setPk_unidad_ctSeleccionado(Long pk_unidad_ctSeleccionado) {
+		this.pk_unidad_ctSeleccionado = pk_unidad_ctSeleccionado;
 	}
+
+	
+
+	
 	
 	
 } 
