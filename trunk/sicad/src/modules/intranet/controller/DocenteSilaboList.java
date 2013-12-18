@@ -33,6 +33,8 @@ public class DocenteSilaboList extends GenericController
 	
 	private Long meta,seccion,unidad;
 	
+	private String docente_nombre;
+	private Long docente_id;
 	
 	public void init() throws Exception
 	{
@@ -45,7 +47,10 @@ public class DocenteSilaboList extends GenericController
 		
 		annio = -1L;
 		proceso = -1L;
-				
+		
+		docente_nombre = usr.getNombres();
+		//docente_id = usr.getId();
+		
 		if(annio>0L)
 		{metas=myService.listarMetaInstitucional(institucion,annio,-1L);}
 		
@@ -54,6 +59,9 @@ public class DocenteSilaboList extends GenericController
 		obj.setPuesto(6L);
 		docenteList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "apepat,apemat,nombres"," ",true);
 		obj=null;
+		
+		
+		
 		
 		fillProcesos();
 		
@@ -64,20 +72,6 @@ public class DocenteSilaboList extends GenericController
 		forward(page_main);
 		
 		
-//		SilaboCronograma silaboCronograma =new SilaboCronograma();
-//		silaboCronograma.setPk_meta(meta);
-//    	silaboCronograma.setContenido("-");
-//    	silaboCronograma.setPk_unidad(unidad);
-//    	silaboCronograma.setPk_seccion(seccion);
-//    	silaboCronograma.setPk_docente(docente);
-//    	silaboCronograma.setEstado(1L);
-//    	
-//    	SilaboCronograma obtenerSilaboCronograma = (SilaboCronograma) myService.findByObject(silaboCronograma);
-//    	
-//    	SilaboUnidadCt silaboUnidadCt = new SilaboUnidadCt();
-//    	
-//    	silaboUnidadCt.setPk_silabo_cronograma(obtenerSilaboCronograma.getId());
-//		listarCT = myService.listByObject(silaboUnidadCt);
 		
 	}
 	
@@ -249,6 +243,26 @@ public class DocenteSilaboList extends GenericController
 
 	public void setListarCT(List<ReferenteEducativo> listarCT) {
 		this.listarCT = listarCT;
+	}
+
+
+	public String getDocente_nombre() {
+		return docente_nombre;
+	}
+
+
+	public void setDocente_nombre(String docente_nombre) {
+		this.docente_nombre = docente_nombre;
+	}
+
+
+	public Long getDocente_id() {
+		return docente_id;
+	}
+
+
+	public void setDocente_id(Long docente_id) {
+		this.docente_id = docente_id;
 	}
 
 
