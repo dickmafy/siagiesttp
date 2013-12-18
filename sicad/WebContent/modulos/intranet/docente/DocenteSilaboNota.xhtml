@@ -22,7 +22,7 @@
   				
       	<p:spacer height="4px"/>
       	  
-    	   		<p:selectOneMenu  value="#{docenteSilaboNota.ctSeleccionado}" filter="true" filterMatchMode="startsWith" >
+    	   		<p:selectOneMenu  value="#{docenteSilaboNota.pk_unidad_ctSeleccionado}" filter="true" filterMatchMode="startsWith" >
 					<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
 					<f:selectItems value="#{docenteSilaboNota.listarCT}" var="item" itemValue="#{item.id}" itemLabel="Cap.Ter. :#{item.pk_ct}"/>
 					<p:ajax update="frmNew:dt_notasFecha"></p:ajax>
@@ -66,7 +66,7 @@
 		       
 		       
 		       <p:column headerText="Capacidades Terminales" style="width:30%">
-					<p:selectOneMenu  value="#{docenteSilaboNota.ctSeleccionado}" filter="true" filterMatchMode="startsWith" >
+					<p:selectOneMenu  value="#{docenteSilaboNota.pk_unidad_ctSeleccionado}" filter="true" filterMatchMode="startsWith" >
 					<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
 					<f:selectItems value="#{docenteSilaboNota.listarCT}" var="item" itemValue="#{item.id}" itemLabel="Cap.Ter. :#{item.pk_ct}"/>
 					</p:selectOneMenu>

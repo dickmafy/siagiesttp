@@ -49,7 +49,7 @@ public class DocenteSilaboNota extends GenericController
 	private int numbCapTerminales;
 	private SilaboCronograma obtenerSilaboCronograma;
 	
-	private Long ctSeleccionado;
+	private Long pk_unidad_ctSeleccionado;
 	private List<ReferenteEducativo> listarCT;
 	private SilaboCronograma silaboCronograma;
 	public void init(Seccion pseccion,Proceso proceso,SilaboCronograma pobtenerSilaboCronograma) throws Exception 
@@ -72,11 +72,13 @@ public class DocenteSilaboNota extends GenericController
 		
 		page_main="DocenteSilaboNota";
 		this.obtenerSilaboCronograma = pobtenerSilaboCronograma;
-		this.ctSeleccionado =ctSeleccionado;
+		this.pk_unidad_ctSeleccionado =pk_unidad_ctSeleccionado;
 				
+		this.pk_unidad_ctSeleccionado = 36L;
+		
 		forward(page_main);
 		defaultList();
-		optionCriterios();
+		//optionCriterios();
 		SilaboUnidadCt silaboUnidadCt = new SilaboUnidadCt();
     	silaboUnidadCt.setPk_silabo_cronograma(silaboCronograma.getId());
 		listarCT = myService.listByObject(silaboUnidadCt);
@@ -85,40 +87,40 @@ public class DocenteSilaboNota extends GenericController
 	}
 	
 	
-	public void optionCriterios() throws Exception
-	{
-		List<ReferenteEducativo> educativoList=myService.listarReferenteEducativo(profesion, 0, 1L);
-		criteriosList=new ArrayList<ReferenteEducativo>();
-		
-		for(int i=0; i<educativoList.size(); i++)
-		{
-			if(educativoList.get(i).getTipo().longValue()==1L && educativoList.get(i).getEstado().longValue()!=Constante.ROW_STATUS_DELETE.longValue())
-			{criteriosList.add(educativoList.get(i));}
-		}
-		
-		educativoList=null;
-		
-		filtrarModulo(criteriosList,modulo);
-		
-		forward("DocenteSilaboNota");
-	}
+//	public void optionCriterios() throws Exception
+//	{
+//		List<ReferenteEducativo> educativoList=myService.listarReferenteEducativo(profesion, 0, 1L);
+//		criteriosList=new ArrayList<ReferenteEducativo>();
+//		
+//		for(int i=0; i<educativoList.size(); i++)
+//		{
+//			if(educativoList.get(i).getTipo().longValue()==1L && educativoList.get(i).getEstado().longValue()!=Constante.ROW_STATUS_DELETE.longValue())
+//			{criteriosList.add(educativoList.get(i));}
+//		}
+//		
+//		educativoList=null;
+//		
+//		filtrarModulo(criteriosList,modulo);
+//		
+//		forward("DocenteSilaboNota");
+//	}
 	
-	public void filtrarModulo(List<ReferenteEducativo> educativoList, Long modulo) throws Exception
-	{
-		ArrayList<ReferenteEducativo> filtro=new ArrayList<ReferenteEducativo>();	
-		for (ReferenteEducativo item : educativoList) 
-		{
-			if(item.getNivelA() == modulo)
-			{filtro.add(item);}						
-		}
-		
-		criteriosList=filtro;
-	}
-	
+//	public void filtrarModulo(List<ReferenteEducativo> educativoList, Long modulo) throws Exception
+//	{
+//		ArrayList<ReferenteEducativo> filtro=new ArrayList<ReferenteEducativo>();	
+//		for (ReferenteEducativo item : educativoList) 
+//		{
+//			if(item.getNivelA() == modulo)
+//			{filtro.add(item);}						
+//		}
+//		
+//		criteriosList=filtro;
+//	}
+//	
 	@Override
 	public void defaultList() throws Exception
 	{	
-		setBeanList(SilaboNotaAlumnoServicioLocal.findBySilaboCronograma(obtenerSilaboCronograma.getId(),ctSeleccionado));
+		setBeanList(SilaboNotaAlumnoServicioLocal.findBySilaboCronograma(obtenerSilaboCronograma.getId(),pk_unidad_ctSeleccionado));
 	}
 	
 	public void guardarNotas()  throws Exception {
@@ -127,7 +129,7 @@ public class DocenteSilaboNota extends GenericController
 		
 		for (PersonaAlumno personaAlumno : matriculados) {
 			SilaboNotaAlumno result = SilaboNotaAlumnoServicioLocal
-					.getSilaboNotaAlumno(personaAlumno.getSilaboAlumno().getId(), ctSeleccionado);
+					.getSilaboNotaAlumno(personaAlumno.getSilaboAlumno().getId(), pk_unidad_ctSeleccionado);
 			
 			JPAPersistenceUtil.getSession().save(result);
 			result=null;
@@ -136,17 +138,17 @@ public class DocenteSilaboNota extends GenericController
 		
 	}
 
-	public void listarCT() {
-		 criteriosListCt=new ArrayList<ReferenteEducativo>();
-		for (ReferenteEducativo x: criteriosList) {
-			if(x.getCheck()){
-				
-				ReferenteEducativo re=new ReferenteEducativo();
-				re=x;
-				criteriosListCt.add(re);
-			}
-		}
-	}
+//	public void listarCT() {
+//		 criteriosListCt=new ArrayList<ReferenteEducativo>();
+//		for (ReferenteEducativo x: criteriosList) {
+//			if(x.getCheck()){
+//				
+//				ReferenteEducativo re=new ReferenteEducativo();
+//				re=x;
+//				criteriosListCt.add(re);
+//			}
+//		}
+//	}
 	
 	
 	public IntranetService getMyService() 													{return myService;}
@@ -293,12 +295,12 @@ public class DocenteSilaboNota extends GenericController
 	
 
 	public Long getCtSeleccionado() {
-		return ctSeleccionado;
+		return pk_unidad_ctSeleccionado;
 	}
 
 
 	public void setCtSeleccionado(Long ctSeleccionado) {
-		this.ctSeleccionado = ctSeleccionado;
+		this.pk_unidad_ctSeleccionado = ctSeleccionado;
 	}
 	
 	
