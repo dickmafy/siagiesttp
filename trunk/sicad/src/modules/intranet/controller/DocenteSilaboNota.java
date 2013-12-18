@@ -3,9 +3,10 @@ package modules.intranet.controller;
 import java.util.List;
 
 import javax.faces.model.SelectItem;
-import com.aprolab.sicad.persistence.JPAPersistenceUtil;
 
+import com.aprolab.sicad.persistence.JPAPersistenceUtil;
 import com.belogick.factory.util.controller.GenericController;
+import com.belogick.factory.util.support.ServiceException;
 
 import dataware.service.AdmisionService;
 import dataware.service.IntranetService;
@@ -69,9 +70,8 @@ public class DocenteSilaboNota extends GenericController
 		
 		page_main="DocenteSilaboNota";
 		this.obtenerSilaboCronograma = pobtenerSilaboCronograma;
-		
 				
-		pk_unidad_ctSeleccionado = 36L;
+		pk_unidad_ctSeleccionado = -1l;
 		
 		forward(page_main);
 		defaultList();
@@ -80,7 +80,9 @@ public class DocenteSilaboNota extends GenericController
     	silaboUnidadCt.setPk_silabo_cronograma(silaboCronograma.getId());
 		listarCT = myService.listByObject(silaboUnidadCt);
 		
-		
+		if (listarCT.size()>0) {
+			pk_unidad_ctSeleccionado = listarCT.get(0).getId();
+		}
 	}
 	
 	
@@ -88,6 +90,19 @@ public class DocenteSilaboNota extends GenericController
 	public void defaultList() throws Exception
 	{	
 		setBeanList(SilaboNotaAlumnoServicioLocal.findBySilaboCronograma(obtenerSilaboCronograma.getId(),pk_unidad_ctSeleccionado));
+	}
+	
+	public void reloadNotas() throws ServiceException{
+		
+		List<PersonaAlumno> matriculados = (List<PersonaAlumno>)getBeanList();
+		
+		for (PersonaAlumno personaAlumno : matriculados) {
+			
+			SilaboNotaAlumno result = SilaboNotaAlumnoServicioLocal
+					.getSilaboNotaAlumno(personaAlumno.getSilaboAlumno().getId(), pk_unidad_ctSeleccionado);
+			personaAlumno.setNota(result.getNota());
+			result=null;
+		}
 	}
 	
 	public void guardarNotas()  throws Exception {
@@ -204,8 +219,6 @@ public class DocenteSilaboNota extends GenericController
 		this.selectCapacidades = selectCapacidades;
 	}
 
-
-	
 	public List<ReferenteEducativo> getCriteriosListCt() {
 		return criteriosListCt;
 	}
