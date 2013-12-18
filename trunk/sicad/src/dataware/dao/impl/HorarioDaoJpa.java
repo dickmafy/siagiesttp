@@ -309,7 +309,7 @@ public class HorarioDaoJpa extends MarcoDaoJpa implements HorarioDao
 			if(objetos[7]!=null){field.setId(Long.parseLong(objetos[7].toString()));}
 			if(objetos[8]!=null){field.setMeta(Long.parseLong(objetos[8].toString()));}
 			if(objetos[9]!=null){field.setValorUnidad(Long.parseLong(objetos[9].toString()));}
-			if(objetos[10]!=null){field.setEstado(Long.parseLong(objetos[10].toString()));}
+			if(objetos[10]!=null){field.setEstadoSilabo(Long.parseLong(objetos[10].toString()));}
 			lista.add(field);
 		}
 		return lista;
