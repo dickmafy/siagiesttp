@@ -186,7 +186,7 @@ public class DocenteSilaboList extends GenericController
     	silaboCronograma.setPk_unidad(bean.getValorUnidad());
     	silaboCronograma.setPk_seccion(bean.getId());
     	silaboCronograma.setPk_docente(bean.getDocente());
-    	silaboCronograma.setEstado(1L);
+    	silaboCronograma.setEstado(bean.getEstadoSilabo());
 		return silaboCronograma;
 	}
 	
