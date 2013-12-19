@@ -46,22 +46,7 @@ public class DocenteSilaboCT extends GenericController
 	
 	private int numbCapTerminales;
 	private SilaboCronograma obtenerSilaboCronograma;
-//	public void init() throws Exception 
-//	{
-//		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
-//		appName="Intranet Docente";
-//		moduleName="Silabo";
-//		userName=usr.getUsuario();
-//		seccion=1L;
-//		modulo=1L;
-//		profesion=101L;
-//		nombreUnidad= "Prueba";
-//	
-//		page_main="DocenteSilaboCT";
-//		defaultList();		
-//		//forward(page_main);
-//		optionCriterios();
-//	}
+
 	
 	public void init(Seccion pseccion,Proceso proceso, SilaboCronograma pobtenerSilaboCronograma) throws Exception 
 	{

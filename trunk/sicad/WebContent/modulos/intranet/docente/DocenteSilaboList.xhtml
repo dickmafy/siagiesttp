@@ -50,23 +50,21 @@
 				<h:outputText value="MT" title="MÓDULO TRANSVERSAL: #{item.nombreModulo}" rendered="#{item.valorTipoModulo eq 2}"/>
 			</p:column>		
 			
-			<p:column headerText="Unidad" style="width:55%; align:center;" >   
+			<p:column headerText="Unidad" style="width:35%; align:center;" >   
 				<h:outputText value="#{item.nombreUnidad}" title="UNIDAD DIDACTICA: #{item.nombreUnidad}"/>
 			</p:column>
 			
-			<p:column headerText="Sección" style="width:5%; align:center;" >   
+			<p:column headerText="Sección" style="width:10%; align:center;" >   
 				<h:outputText value="#{item.nombre}"/>
 			</p:column>	
 			
-			<p:column headerText="Horas" style="width:5%; align:center;" >   
+			<p:column headerText="Horas" style="width:9%; align:center;" >   
 				<h:outputText value="#{item.valorHoras}"/>
-			</p:column>       	
-        	
-			
-        	
+			</p:column>
+		        	
         	
         	<p:column headerText="Operaciones" style="width:33%">  
-				<p:commandButton icon="icn_item_new" action="#{docenteSilaboList.goCrearFechas}"	title="Crear Fechas De Clase" ajax="false" rendered="#{empty item.estadoSilabo}">
+				<p:commandButton icon="icn_item_calendar" action="#{docenteSilaboList.goCrearFechas}"	title="Crear Fechas De Clase" ajax="false" rendered="#{empty item.estadoSilabo}">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
 				</p:commandButton>				
 							
@@ -75,12 +73,12 @@
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
 				</p:commandButton>
 
-				<p:commandButton icon="icn_item_local" action="#{docenteSilaboList.goNotas}"	title="Notas" ajax="false" rendered="#{item.estadoSilabo eq 2}">
+				<p:commandButton icon="icn_item_results" action="#{docenteSilaboList.goNotas}"	title="Notas" ajax="false" rendered="#{item.estadoSilabo eq 2}">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
 				</p:commandButton>
 
 				
-				<p:commandButton icon="icn_item_detail"  action="#{docenteSilaboList.goCt}"	title="Ir a CT" ajax="false" rendered="#{item.estadoSilabo eq 1}">
+				<p:commandButton icon="icn_item_sillabo"  action="#{docenteSilaboList.goCt}"	title="Seleccionar Capacidades Terminales" ajax="false" rendered="#{item.estadoSilabo eq 1}">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
 				</p:commandButton>
 							

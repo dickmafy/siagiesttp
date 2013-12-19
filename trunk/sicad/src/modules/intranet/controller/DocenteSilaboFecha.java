@@ -9,9 +9,13 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import javax.faces.model.SelectItem;
 import javax.swing.text.StyledEditorKit.BoldAction;
@@ -96,8 +100,8 @@ public class DocenteSilaboFecha extends GenericController
     	
     	myService.insertSilaboAlumno(meta, unidad, seccion, docente);
     	
-
-		listFechas=new ArrayList<Fecha>();
+    	
+    	listFechas=new ArrayList<Fecha>();
 		
 		DocenteSilaboList go = (DocenteSilaboList)getSpringBean("docenteSilaboList");
 		go.init(annio,proceso);
@@ -112,12 +116,24 @@ public class DocenteSilaboFecha extends GenericController
 	        listaDias.put("Viernes", "5");
 	        listaDias.put("Sabado", "6");
 	        listaDias.put("Domingo", "7");
-	    
+
+
+	        //ordenamiento del Hashmap
+	        HashMap mapResultado = new LinkedHashMap();
+	        List misMapKeys = new ArrayList(listaDias.keySet());
+	        List misMapValues = new ArrayList(listaDias.values());
+	        TreeSet conjuntoOrdenado = new TreeSet(misMapValues);
+	        Object[] arrayOrdenado = conjuntoOrdenado.toArray();
+	        int size = arrayOrdenado.length;
+	        for (int i=0; i<size; i++) 
+	        {
+	        mapResultado.put(misMapKeys.get(misMapValues.indexOf(arrayOrdenado[i])),arrayOrdenado[i]);
+	        }
+	        listaDias = mapResultado;
+	        
 	}
 	
-//	public void init() throws Exception
-//	{init(null);}
-//	
+
 	
 	public void generarFechas() throws ParseException{
 		listFechas = new ArrayList<>();
