@@ -345,4 +345,35 @@ public class HorarioDaoJpa extends MarcoDaoJpa implements HorarioDao
 		}
 		return lista;
 	}
+	
+	public List<Seccion> listarUnidadesAlumno(Long institucion, Long annio, Long proceso, Long alumno) throws Exception 
+	{
+		List<Seccion> lista=new ArrayList<Seccion>();
+		Query consulta=createQuery("SELECT * FROM horario.lst_unidadesalumno(:institucion, :annio, :proceso, :alumno)");
+		consulta.setParameter("institucion", Integer.parseInt(institucion.toString()));
+		consulta.setParameter("annio", Integer.parseInt(annio.toString()));
+		consulta.setParameter("proceso", Integer.parseInt(proceso.toString()));
+		consulta.setParameter("alumno", Integer.parseInt(alumno.toString()));
+		List rst=consulta.list();
+		
+		for(int i=0; i<rst.size(); i++)
+		{
+			Object[] objetos=(Object[])rst.get(i);
+			Seccion field=new Seccion();
+			if(objetos[0]!=null){field.setValorTipoModulo(Long.parseLong(objetos[0].toString()));}
+			if(objetos[1]!=null){field.setNombreModulo(objetos[1].toString());}
+			if(objetos[2]!=null){field.setValorModulo(Long.parseLong(objetos[2].toString()));}
+			if(objetos[3]!=null){field.setNombreUnidad(objetos[3].toString());}
+			if(objetos[4]!=null){field.setValorHoras(Long.parseLong(objetos[4].toString()));}
+			if(objetos[5]!=null){field.setDocente(Long.parseLong(objetos[5].toString()));}
+			if(objetos[6]!=null){field.setNombre(objetos[6].toString());}
+			if(objetos[7]!=null){field.setId(Long.parseLong(objetos[7].toString()));}
+			if(objetos[8]!=null){field.setMeta(Long.parseLong(objetos[8].toString()));}
+			if(objetos[9]!=null){field.setValorUnidad(Long.parseLong(objetos[9].toString()));}
+			if(objetos[10]!=null){field.setEstadoSilabo(Long.parseLong(objetos[10].toString()));}
+			if(objetos[11]!=null){field.setAlumno(Long.parseLong(objetos[11].toString()));}
+			lista.add(field);
+		}
+		return lista;
+	}
 }

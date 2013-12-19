@@ -64,5 +64,8 @@ public class HorarioServiceImpl extends MarcoServiceImpl implements HorarioServi
 	
 	public List<Matricula> listarAlumnosSeccion(Long meta, Long unidad, Long seccion, Long docente) throws Exception 
 	{return getHorarioDao().listarAlumnosSeccion(meta, unidad, seccion, docente);}
+	
+	public List<Seccion> listarUnidadesAlumno(Long institucion, Long annio, Long proceso, Long alumno) throws Exception 
+	{return getHorarioDao().listarUnidadesAlumno(institucion, annio, proceso, alumno);}
 }
 
