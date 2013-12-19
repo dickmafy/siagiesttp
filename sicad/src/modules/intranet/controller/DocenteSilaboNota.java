@@ -126,17 +126,7 @@ public class DocenteSilaboNota extends GenericController
 		
 	}
 
-//	public void listarCT() {
-//		 criteriosListCt=new ArrayList<ReferenteEducativo>();
-//		for (ReferenteEducativo x: criteriosList) {
-//			if(x.getCheck()){
-//				
-//				ReferenteEducativo re=new ReferenteEducativo();
-//				re=x;
-//				criteriosListCt.add(re);
-//			}
-//		}
-//	}
+
 	
 	
 	public IntranetService getMyService() 													{return myService;}

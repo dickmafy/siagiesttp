@@ -23,9 +23,11 @@
 		<p:calendar id="txtFei" value="#{docenteSilaboFecha.fecha_inicio}" showOn="button"  size="10"/>
 		
 		<h:outputText value="Cantidad de Clases" />  
-		<p:inputText value="#{docenteSilaboFecha.cantidad_clases}" />
-		
-		<p:selectCheckboxMenu value="#{docenteSilaboFecha.listaDiasSeleccionados}" label="Dias" filter="true" filterText="Filter" filterMatchMode="startsWith" panelStyle="width:220px">  
+		<p:inputText value="#{docenteSilaboFecha.cantidad_clases}" style="width:90px" />
+		 
+		 
+		<p:selectCheckboxMenu value="#{docenteSilaboFecha.listaDiasSeleccionados}" 
+		label="Dias" filter="true" filterText="Filter" filterMatchMode="startsWith"   style="position:relative;  top:+14px;">  
         	<f:selectItems value="#{docenteSilaboFecha.listaDias}"  />  
 	    </p:selectCheckboxMenu>  
     

@@ -15,38 +15,35 @@
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
-      	
-   		LISTA DE SilaboCalendario 
-		
-		
+     
 			<p:dataTable id="itemList" var="item" value="#{docenteSilaboAsistenciaListFecha.listCal}" filteredValue="#{docenteSilaboFecha.beanFilterList}"
 	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom"
 	   			paginator="true" rows="20"  rowIndexVar="rowNumber" scrollable="true"
 	        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
 	     		
 	     		<f:facet name="header">
-					<h:outputText value="Creacion de Fechas" />  
+					<h:outputText value="Lista de Clases" />  
 				</f:facet>
 							
 				<p:column headerText="#" style="width:5%; align:center;">
 					<h:outputText value="#{rowNumber+1}"/>  
 				</p:column>
 					
-				<p:column headerText="Dia Clase" style="width:5%; align:center;" sortBy="#{item.dia}">
+				<p:column headerText="Dia Clase" style="width:55%; align:center;" sortBy="#{item.dia}">
 					<h:outputText value="#{item.fecha}">
 						<f:convertDateTime pattern="dd/MM/yyyy"/>
 					</h:outputText>
 				</p:column>		
 					
-				<p:column headerText="id" style="width:5%; align:center;" sortBy="#{item.id}">
+				<p:column headerText="id" style="width:5%; align:center;" sortBy="#{item.id}" rendered="false">
 					<h:outputText value="#{item.id}">
 				
 					</h:outputText>
 				</p:column>		
 				
 				
-				<p:column headerText="Operaciones" style="width:33%">  
-					<p:commandButton rendered="#{item.estado eq 1}" icon="icn_item_new" action="#{docenteSilaboAsistenciaListFecha.goAlumno}"	title="Alumnos" ajax="false">
+				<p:column headerText="Tomar Asistencia" style="width:33%">  
+					<p:commandButton rendered="#{item.estado eq 1}" icon="icn_item_historial" action="#{docenteSilaboAsistenciaListFecha.goAlumno}"	title="Tomar Asistencia" ajax="false">
 						<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboAsistenciaListFecha.beanSelected}" />
 					</p:commandButton>				
 				</p:column>     	       
