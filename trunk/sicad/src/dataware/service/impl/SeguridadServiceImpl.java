@@ -1,6 +1,7 @@
 package dataware.service.impl;
 import java.util.Date;
 import java.util.List;
+
 import dataware.dao.SeguridadDao;
 import modules.administracion.domain.Convenio;
 import modules.administracion.domain.Cronograma;
@@ -9,6 +10,7 @@ import modules.administracion.domain.MetaInstitucional;
 import modules.administracion.domain.MetaOcupacional;
 import modules.administracion.domain.Oferta;
 import modules.administracion.domain.Solicitud;
+import modules.admision.domain.Matricula;
 import modules.admision.domain.Postulante;
 import modules.admision.domain.Proceso;
 import modules.admision.domain.Retiro;
@@ -86,7 +88,8 @@ public class SeguridadServiceImpl extends GenericServiceImpl implements Segurida
 	public List<HistorialLaboral> listarHistorialLaboral(Long personal) throws Exception
 	{return getSeguridadDao().listarHistorialLaboral(personal); }
 	
-	
+	public List<Matricula> listMatriculaInstitucion(Long institucion) throws Exception
+	{return getSeguridadDao().listMatriculaInstitucion(institucion);}
 
 }
 
