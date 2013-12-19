@@ -60,20 +60,7 @@
 			
 			<p:column headerText="Horas" style="width:5%; align:center;" >   
 				<h:outputText value="#{item.valorHoras}"/>
-			</p:column>
-			
-			<p:column rendered="true" headerText="Docente" style="width:30%">
-				
-				<p:commandLink >
-					<p:selectOneMenu value="#{item.docente}" style="width:290px;" filter="true" filterMatchMode="startsWith" disabled="true">
-						<f:selectItems value="#{docenteSilaboList.docenteList}"/>
-						<p:ajax event="change" listener="#{docenteSilaboList.setDocente}" update=":frmList"/>
-					</p:selectOneMenu>
-					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
-				</p:commandLink>
-				   
-        	</p:column> 
-        	
+			</p:column>       	
         	
 			
         	
