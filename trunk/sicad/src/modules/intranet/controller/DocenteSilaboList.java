@@ -36,7 +36,7 @@ public class DocenteSilaboList extends GenericController
 	private String docente_nombre;
 	private Long docente_id;
 	
-	public void init() throws Exception
+	public void init(Long anio, Long proc) throws Exception
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
 		appName="Horarios";
@@ -45,8 +45,8 @@ public class DocenteSilaboList extends GenericController
 		institucion=usr.getInstitucion();
 		docente=usr.getPertenencia();
 		
-		annio = -1L;
-		proceso = -1L;
+		annio = anio;
+		proceso = proc;
 		
 		docente_nombre = usr.getNombres();
 		//docente_id = usr.getId();
@@ -59,10 +59,6 @@ public class DocenteSilaboList extends GenericController
 		obj.setPuesto(6L);
 		docenteList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "apepat,apemat,nombres"," ",true);
 		obj=null;
-		
-		
-		
-		
 		fillProcesos();
 		
 		defaultList();
@@ -70,11 +66,10 @@ public class DocenteSilaboList extends GenericController
 		page_main="DocenteSilaboList";
 		page_update="";
 		forward(page_main);
-		
-		
-		
 	}
 	
+	public void init() throws Exception
+	{init(-1L,-1L);}
 	
 	public void selectAnnio() throws Exception
 	{

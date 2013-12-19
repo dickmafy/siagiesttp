@@ -10,6 +10,7 @@ import com.belogick.factory.util.support.ServiceException;
 
 import dataware.service.AdmisionService;
 import dataware.service.IntranetService;
+import modules.administracion.domain.MetaInstitucional;
 import modules.admision.domain.Matricula;
 import modules.admision.domain.Proceso;
 import modules.horario.domain.Seccion;
@@ -35,7 +36,7 @@ public class DocenteSilaboCT extends GenericController
 	private List<SelectItem> moduloTransversalList;
 	private List<SelectItem> capacidadTransversalList;
 	
-	private Long tipo=0L,seccion,modulo,profesion,meta,docente,unidad;
+	private Long tipo=0L,seccion,modulo,profesion,meta,docente,unidad,annio,process;
 	private Proceso proceso;
 	private String nombreUnidad;
 	
@@ -80,6 +81,9 @@ public class DocenteSilaboCT extends GenericController
 		
 		obtenerSilaboCronograma =  pobtenerSilaboCronograma;
 		
+		MetaInstitucional met = (MetaInstitucional) myService.findById(MetaInstitucional.class, meta);		
+		annio=met.getAnnio();
+		process=met.getProceso();
 		
 		page_main="DocenteSilaboCT";
 		numbCapTerminales = 3;
@@ -163,7 +167,7 @@ public class DocenteSilaboCT extends GenericController
 		myService.save(bean); 
 		
 		DocenteSilaboList go = (DocenteSilaboList)getSpringBean("docenteSilaboList");
-		go.init();
+		go.init(annio,process);
 		
 		//forward("DocenteSilaboList");
 	}
