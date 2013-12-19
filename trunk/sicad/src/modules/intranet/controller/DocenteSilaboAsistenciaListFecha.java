@@ -124,7 +124,7 @@ public class DocenteSilaboAsistenciaListFecha extends GenericController
 			Persona p = new Persona();
 			p.setId(item.getPk_alumno());
 			p = (Persona)myService.findById(p);
-			item.setNombre(p.getNombreCompleto() + p.getApellido_paterno() + p.getApellido_materno());
+			item.setNombre(p.getNombreCompleto());
 			
 		}
 		
