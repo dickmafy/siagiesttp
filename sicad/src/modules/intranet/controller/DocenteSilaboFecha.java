@@ -62,7 +62,11 @@ public class DocenteSilaboFecha extends GenericController
 		seccion=pseccion.getId();
 		docente=pseccion.getDocente();
 		meta=pseccion.getMeta();
-		unidad=pseccion.getValorUnidad();		
+		unidad=pseccion.getValorUnidad();	
+		
+		MetaInstitucional met = (MetaInstitucional) myService.findById(MetaInstitucional.class, meta);		
+		annio=met.getAnnio();
+		proceso=met.getProceso();
 		
 		llenarDias();  		 
 	}
@@ -92,14 +96,11 @@ public class DocenteSilaboFecha extends GenericController
     	
     	myService.insertSilaboAlumno(meta, unidad, seccion, docente);
     	
-    	
-    	Usuario usuario = new Usuario();
-    	usuario.setPerfil(4L);
-    	usuario.setUsuario("");
-    	myService.save(usuario);
-    	
-    	
+
 		listFechas=new ArrayList<Fecha>();
+		
+		DocenteSilaboList go = (DocenteSilaboList)getSpringBean("docenteSilaboList");
+		go.init(annio,proceso);
 	}
     
 	private void llenarDias() {
