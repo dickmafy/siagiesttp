@@ -28,4 +28,5 @@ public interface HorarioDao extends MarcoDao
 	public List<Seccion> listarSeccionesDocente(Long institucion, Long annio, Long proceso, Long docente) throws Exception;
 	public void insertSilaboAlumno (Long meta, Long unidad, Long seccion, Long docente) throws Exception;
 	public List<Matricula> listarAlumnosSeccion(Long meta, Long unidad, Long seccion, Long docente) throws Exception;
+	public List<Seccion> listarUnidadesAlumno(Long institucion, Long annio, Long proceso, Long alumno) throws Exception;
 }

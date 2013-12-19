@@ -26,7 +26,7 @@ public class AlumnoList extends GenericController
 	
 	List<MetaInstitucional> metas;
 	private Long annio,proceso,profesion,turno;
-	private Long institucion,docente;
+	private Long institucion,alumno;
 	private HorarioService	myService;
 	
 	private List<ReferenteEducativo> listarCT;
@@ -41,7 +41,7 @@ public class AlumnoList extends GenericController
 		moduleName="Meta Detalle ";
 		userName=usr.getUsuario();
 		institucion=usr.getInstitucion();
-		docente=usr.getPertenencia();
+		alumno=usr.getPertenencia();
 		
 		annio = -1L;
 		proceso = -1L;
@@ -59,25 +59,9 @@ public class AlumnoList extends GenericController
 		
 		defaultList();
 		page_new="";
-		page_main="DocenteSilaboList";
+		page_main="AlumnoList";
 		page_update="";
 		forward(page_main);
-		
-		
-//		SilaboCronograma silaboCronograma =new SilaboCronograma();
-//		silaboCronograma.setPk_meta(meta);
-//    	silaboCronograma.setContenido("-");
-//    	silaboCronograma.setPk_unidad(unidad);
-//    	silaboCronograma.setPk_seccion(seccion);
-//    	silaboCronograma.setPk_docente(docente);
-//    	silaboCronograma.setEstado(1L);
-//    	
-//    	SilaboCronograma obtenerSilaboCronograma = (SilaboCronograma) myService.findByObject(silaboCronograma);
-//    	
-//    	SilaboUnidadCt silaboUnidadCt = new SilaboUnidadCt();
-//    	
-//    	silaboUnidadCt.setPk_silabo_cronograma(obtenerSilaboCronograma.getId());
-//		listarCT = myService.listByObject(silaboUnidadCt);
 		
 	}
 	
@@ -133,7 +117,7 @@ public class AlumnoList extends GenericController
 	public void defaultList() throws Exception
 	{
 		if(institucion.longValue()>0L && annio.longValue()>0L && proceso.longValue()>0L)
-		{setBeanList(myService.listarSeccionesDocente(institucion, annio, proceso,docente));}
+		{setBeanList(myService.listarUnidadesAlumno(institucion, annio, proceso,alumno));}
 		else
 		{setBeanList(new ArrayList<Seccion>());}
 	}
@@ -190,32 +174,6 @@ public class AlumnoList extends GenericController
 		return silaboCronograma;
 	}
 	
-	public void goCt()throws Exception{
-		
-//		seccion=pseccion.getId();
-//		docente=pseccion.getDocente();
-//		meta=pseccion.getMeta();
-//		unidad=pseccion.getValorUnidad();
-//		
-		//en la seccion esta el silabocronograma id
-    	SilaboCronograma silaboCronograma =new SilaboCronograma();
-		silaboCronograma.setPk_meta(meta);
-    	silaboCronograma.setContenido("-");
-    	silaboCronograma.setPk_unidad(unidad);
-    	silaboCronograma.setPk_seccion(seccion);
-    	silaboCronograma.setPk_docente(docente);
-    	silaboCronograma.setEstado(1L);
-    	
-    	SilaboCronograma obtenerSilaboCronograma = (SilaboCronograma) myService.findByObject(silaboCronograma);
-    	
-    	
-		DocenteSilaboCT go = (DocenteSilaboCT)getSpringBean("docenteSilaboCT");
-		Proceso proceso = new Proceso();
-		proceso.setAnnio(annio);
-		proceso.setProceso(this.proceso);
-		proceso = (Proceso) myService.findByObject(proceso);
-		go.init((Seccion)getBeanSelected(),proceso,obtenerSilaboCronograma);
-	}
 	
 	public HorarioService getMyService() 							{return myService;}
 	public void setMyService(HorarioService myService) 				{this.myService = myService;}

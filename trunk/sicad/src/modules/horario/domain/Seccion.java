@@ -36,6 +36,7 @@ public class Seccion implements Serializable
 	private Long	valorUnidad;
 	private Long	meta;
 	private Long 	estadoSilabo;
+	private Long 	alumno;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -134,6 +135,14 @@ public class Seccion implements Serializable
 	}
 	public void setEstadoSilabo(Long estadoSilabo) {
 		this.estadoSilabo = estadoSilabo;
+	}
+	
+	@Transient
+	public Long getAlumno() {
+		return alumno;
+	}
+	public void setAlumno(Long alumno) {
+		this.alumno = alumno;
 	}
 	
 	
