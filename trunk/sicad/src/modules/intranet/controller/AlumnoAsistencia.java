@@ -1,255 +1,259 @@
 package modules.intranet.controller; 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.faces.model.SelectItem;
 
-import com.belogick.factory.util.controller.GenericController;
+import org.apache.catalina.Session;
+import org.hibernate.impl.CriteriaImpl;
 
-import dataware.service.HorarioService;
-import modules.administracion.domain.MetaInstitucional;
-import modules.administracion.domain.Personal;
+import com.belogick.factory.util.constant.Constante;
+import com.belogick.factory.util.controller.GenericController;
+import com.belogick.factory.util.support.DaoException;
+import com.belogick.factory.util.support.ServiceException;
+
+import dataware.service.AdmisionService;
+import dataware.service.IntranetService;
+import dataware.service.MarcoService;
+import modules.administracion.domain.Institucion;
+import modules.admision.domain.Matricula;
+import modules.admision.domain.Persona;
 import modules.admision.domain.Proceso;
+import modules.horario.domain.AsistenciaAlumno;
+import modules.horario.domain.AsistenciaAlumnoCalendario;
 import modules.horario.domain.Seccion;
+import modules.horario.domain.SilaboAlumno;
+import modules.horario.domain.SilaboCalendario;
 import modules.horario.domain.SilaboCronograma;
-import modules.horario.domain.SilaboUnidadCt;
-import modules.intranet.domain.silabo_docente;
+import modules.intranet.domain.AsistenciaWrapper;
+import modules.intranet.domain.Fecha;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
 
 public class AlumnoAsistencia extends GenericController   
-{
-	private List<SelectItem>    profesionList;
-	private List<SelectItem>    procesoList;
-	private List<SelectItem>    docenteList;
+{	
+	private IntranetService	myService;
+	private List<ReferenteEducativo> criteriosList;
 	
-	List<MetaInstitucional> metas;
-	private Long annio,proceso,profesion,turno;
-	private Long institucion,docente;
-	private HorarioService	myService;
+	private List<SelectItem> moduloProfesionalList;
+	private List<SelectItem> capacidadProfesionalList;
 	
-	private List<ReferenteEducativo> listarCT;
+	private List<SelectItem> moduloTransversalList;
+	private List<SelectItem> capacidadTransversalList;
 	
-	private Long meta,seccion,unidad;
+	private Long tipo=0L,seccion,modulo,profesion,alumno;
+	private String nombreUnidad;
 	
+	private AdmisionService myServiceAdmision;
+	private Proceso proceso;
 	
-	public void init() throws Exception
+	private List<SilaboCronograma> listScro;
+	private List<SilaboCalendario> listCal;
+	private Long meta,docente,unidad;
+	private List<Matricula> matriculas;
+	private AsistenciaWrapper asistenciaWrapper;
+	
+	private List <SilaboAlumno> listSilaboAlumno; 
+	
+	private SilaboCronograma obtenerSilaboCronograma;
+	
+	public void init(Seccion beanSelected, Proceso proceso, SilaboCronograma pobtenerSilaboCronograma) throws Exception 
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
-		appName="Horarios";
-		moduleName="Meta Detalle ";
+		appName="Intranet Alumno";
+		moduleName="Asistencia";
 		userName=usr.getUsuario();
-		institucion=usr.getInstitucion();
-		docente=usr.getPertenencia();
+		alumno=usr.getPertenencia();
 		
-		annio = -1L;
-		proceso = -1L;
-				
-		if(annio>0L)
-		{metas=myService.listarMetaInstitucional(institucion,annio,-1L);}
+		nombreUnidad= "Prueba";
+		page_main="AlumnoAsistencia";				
 		
-		Personal obj=new Personal();
-		obj.setInstitucion(institucion);
-		obj.setPuesto(6L);
-		docenteList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "apepat,apemat,nombres"," ",true);
-		obj=null;
+		this.proceso = proceso;
+		meta=beanSelected.getMeta();
+		seccion=beanSelected.getId();
+		docente=beanSelected.getDocente();
+		unidad=beanSelected.getValorUnidad();
 		
-		fillProcesos();
+		obtenerSilaboCronograma= pobtenerSilaboCronograma;
 		
 		defaultList();
-		page_new="";
-		page_main="DocenteSilaboList";
-		page_update="";
 		forward(page_main);
-		
-		
-//		SilaboCronograma silaboCronograma =new SilaboCronograma();
-//		silaboCronograma.setPk_meta(meta);
-//    	silaboCronograma.setContenido("-");
-//    	silaboCronograma.setPk_unidad(unidad);
-//    	silaboCronograma.setPk_seccion(seccion);
-//    	silaboCronograma.setPk_docente(docente);
-//    	silaboCronograma.setEstado(1L);
-//    	
-//    	SilaboCronograma obtenerSilaboCronograma = (SilaboCronograma) myService.findByObject(silaboCronograma);
-//    	
-//    	SilaboUnidadCt silaboUnidadCt = new SilaboUnidadCt();
-//    	
-//    	silaboUnidadCt.setPk_silabo_cronograma(obtenerSilaboCronograma.getId());
-//		listarCT = myService.listByObject(silaboUnidadCt);
-		
-	}
-	
-	
-	public void selectAnnio() throws Exception
-	{
-		metas=myService.listarMetaInstitucional(institucion,annio,-1L);
-		fillProcesos();
-		proceso=-1L;
-		profesionList=new ArrayList<SelectItem>();
-		profesion=-1L;
-		turno=-1L;
-		defaultList();
 	}
 		
-	public void fillProcesos() throws Exception
-	{
-		procesoList=new ArrayList<SelectItem>();
-		List<Integer> procesos=new ArrayList<Integer>();
-		
-		if(metas!=null)
-		{
-			for(int i=0; i<metas.size(); i++)
-			{
-				if(metas.get(i).getAnnio().longValue()==annio)
-				{procesos.add(Integer.parseInt(metas.get(i).getProceso().toString()));}
-			}
-		}
-		HashSet<Integer> hashSet = new HashSet<Integer>(procesos);
-		procesos.clear();
-		procesos.addAll(hashSet);
-		
-		for(int j=0; j<procesos.size(); j++)
-		{
-			if(procesos.get(j)==1)	{procesoList.add(new SelectItem(1,"Enero"));}
-			if(procesos.get(j)==2)	{procesoList.add(new SelectItem(2,"Febrero"));}
-			if(procesos.get(j)==3)	{procesoList.add(new SelectItem(3,"Marzo"));}
-			if(procesos.get(j)==4)	{procesoList.add(new SelectItem(4,"Abril"));}
-			if(procesos.get(j)==5)	{procesoList.add(new SelectItem(5,"Mayo"));}
-			if(procesos.get(j)==6)	{procesoList.add(new SelectItem(6,"Junio"));}
-			if(procesos.get(j)==7)	{procesoList.add(new SelectItem(7,"Julio"));}
-			if(procesos.get(j)==8)	{procesoList.add(new SelectItem(8,"Agosto"));}
-			if(procesos.get(j)==9)	{procesoList.add(new SelectItem(9,"Septiembre"));}
-			if(procesos.get(j)==10)	{procesoList.add(new SelectItem(10,"Octubre"));}
-			if(procesos.get(j)==11)	{procesoList.add(new SelectItem(11,"Noviembre"));}
-			if(procesos.get(j)==12)	{procesoList.add(new SelectItem(12,"Diciembre"));}
-		}
-		procesos=null;
-		hashSet=null;
-	}
-	
 	@Override
 	public void defaultList() throws Exception
 	{
-		if(institucion.longValue()>0L && annio.longValue()>0L && proceso.longValue()>0L)
-		{setBeanList(myService.listarSeccionesDocente(institucion, annio, proceso,docente));}
-		else
-		{setBeanList(new ArrayList<Seccion>());}
+/*
+		listScro =new ArrayList<>();
+		SilaboCronograma scro = new SilaboCronograma();
+		scro.setPk_docente(docente);
+		scro.setPk_meta(meta);
+		scro.setPk_seccion(seccion);
+		scro.setPk_unidad(unidad);
+		
+		scro = (SilaboCronograma) myService.findByObject(scro);
+		
+		SilaboCalendario scal = new SilaboCalendario();
+		scal.setPk_silabo_cronograma(scro.getId());
+*/
+		listCal =  myService.listarAsistenciaAlumno(obtenerSilaboCronograma.getId(), alumno);
+				
+		
 	}
 	
-	public void goCrearFechas() throws Exception
+	public void goAlumno()throws Exception
 	{
-//		SilaboCronograma silaboCronograma = obtenerSilaboCronograma();    	
-//		silaboCronograma = (SilaboCronograma) myService.findByObject(silaboCronograma);
+		AsistenciaAlumnoCalendario aac = new AsistenciaAlumnoCalendario();
+		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();
 		
-		DocenteSilaboFecha go = (DocenteSilaboFecha)getSpringBean("docenteSilaboFecha");
-		//go.init(annio, proceso, ((MetaInstitucional)getBeanSelected()).getProfesion(), ((MetaInstitucional)getBeanSelected()).getTurno());
-		go.init((Seccion)getBeanSelected());
-	}
-	
-	public void goNotas()throws Exception{
+		aac.setPk_silabo_calendario(temporalCalendario.getId());
 		
-		
-		
-		SilaboCronograma silaboCronograma = obtenerSilaboCronograma();    	
-		silaboCronograma = (SilaboCronograma) myService.findByObject(silaboCronograma);
-		
-		DocenteSilaboNota go = (DocenteSilaboNota)getSpringBean("docenteSilaboNota");
-		Proceso proceso = new Proceso();
-		proceso.setAnnio(annio);
-		proceso.setProceso(this.proceso);
-		proceso = (Proceso) myService.findByObject(proceso);
-		go.init((Seccion)getBeanSelected(),proceso,silaboCronograma);
+		forward("DocenteSilaboAsistenciaListaAlumno");
+		listarAlumnos();
 	}
 	
 	
-	public void goAsistencia()throws Exception{
-		SilaboCronograma silaboCronograma = obtenerSilaboCronograma();    	
-		silaboCronograma = (SilaboCronograma) myService.findByObject(silaboCronograma);
-    	
-		DocenteSilaboAsistenciaListFecha  go = (DocenteSilaboAsistenciaListFecha)getSpringBean("docenteSilaboAsistenciaListFecha");
-		Proceso proceso = new Proceso();
-		proceso.setAnnio(annio);
-		proceso.setProceso(this.proceso);
-		proceso = (Proceso) myService.findByObject(proceso);
-		go.init((Seccion)getBeanSelected(),proceso,silaboCronograma);
-	}
-
-
-	private SilaboCronograma obtenerSilaboCronograma() {
-		Seccion bean = (Seccion)getBeanSelected();
-		SilaboCronograma silaboCronograma =new SilaboCronograma();
+	@SuppressWarnings("unchecked")
+	public void listarAlumnos() throws Exception{
+		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();
+		SilaboAlumno silaboAlumno = new SilaboAlumno();
+		silaboAlumno.setPk_silabo_cronograma(temporalCalendario.getPk_silabo_cronograma());
+		listSilaboAlumno = myService.listByObject(silaboAlumno);
 		
-		silaboCronograma.setPk_meta(bean.getMeta());
-    	silaboCronograma.setContenido("-");
-    	silaboCronograma.setPk_unidad(bean.getValorUnidad());
-    	silaboCronograma.setPk_seccion(bean.getId());
-    	silaboCronograma.setPk_docente(bean.getDocente());
-    	silaboCronograma.setEstado(bean.getEstadoSilabo());
-		return silaboCronograma;
-	}
-	
-	public void goCt()throws Exception{
+		for (SilaboAlumno item : listSilaboAlumno) {
+			Persona p = new Persona();
+			p.setId(item.getPk_alumno());
+			p = (Persona)myService.findById(p);
+			item.setNombre(p.getNombreCompleto());
+			
+		}
 		
-//		seccion=pseccion.getId();
-//		docente=pseccion.getDocente();
-//		meta=pseccion.getMeta();
-//		unidad=pseccion.getValorUnidad();
-//		
-		//en la seccion esta el silabocronograma id
-    	SilaboCronograma silaboCronograma =new SilaboCronograma();
-		silaboCronograma.setPk_meta(meta);
-    	silaboCronograma.setContenido("-");
-    	silaboCronograma.setPk_unidad(unidad);
-    	silaboCronograma.setPk_seccion(seccion);
-    	silaboCronograma.setPk_docente(docente);
-    	silaboCronograma.setEstado(1L);
-    	
-    	SilaboCronograma obtenerSilaboCronograma = (SilaboCronograma) myService.findByObject(silaboCronograma);
-    	
-    	
-		DocenteSilaboCT go = (DocenteSilaboCT)getSpringBean("docenteSilaboCT");
-		Proceso proceso = new Proceso();
-		proceso.setAnnio(annio);
-		proceso.setProceso(this.proceso);
-		proceso = (Proceso) myService.findByObject(proceso);
-		go.init((Seccion)getBeanSelected(),proceso,obtenerSilaboCronograma);
 	}
 	
-	public HorarioService getMyService() 							{return myService;}
-	public void setMyService(HorarioService myService) 				{this.myService = myService;}
-
-	public Long getAnnio() 											{return annio;}
-	public void setAnnio(Long annio) 								{this.annio = annio;}
-
-	public Long getProceso() 										{return proceso;}
-	public void setProceso(Long proceso) 							{this.proceso = proceso;}
-
-	public Long getProfesion() 										{return profesion;}
-	public void setProfesion(Long profesion) 						{this.profesion = profesion;}
-
-	public Long getTurno() 											{return turno;}
-	public void setTurno(Long turno) 								{this.turno = turno;}
+	public void guardarAsistencia() throws ServiceException, DaoException{
+		
+		AsistenciaAlumnoCalendario asistenciaAlumnoCalendario = new AsistenciaAlumnoCalendario();
+		
+		
+		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();		
+		
+		
+		for (SilaboAlumno item : listSilaboAlumno) {
+		
+			asistenciaAlumnoCalendario = new AsistenciaAlumnoCalendario();
+					
+			temporalCalendario = (SilaboCalendario)getBeanSelected();
+			
+			asistenciaAlumnoCalendario.setPk_silabo_calendario(temporalCalendario.getId());
+			asistenciaAlumnoCalendario.setAsistencia(item.getAsistio());
+			asistenciaAlumnoCalendario.setEstado(1L);
+			asistenciaAlumnoCalendario.setPk_silabo_alumno(item.getId());
+			
+			
+			
+			myService.save(asistenciaAlumnoCalendario);
+			
+		}
 	
-	public List<SelectItem> getProfesionList() 						{return profesionList;}
-	public void setProfesionList(List<SelectItem> profesionList) 	{this.profesionList = profesionList;}
+		//cerrar la fecha
+		temporalCalendario.setEstado(2L);
+		myService.save(temporalCalendario);
+		
+		forward("DocenteSilaboAsistenciaListaFecha");
+		
+		
+		
+		
+	}
+
 	
-	public List<SelectItem> getProcesoList() 						{return procesoList;}
-	public void setProcesoList(List<SelectItem> procesoList) 		{this.procesoList = procesoList;}
+	
+	
+	public IntranetService getMyService() 													{return myService;}
+	public void setMyService(IntranetService myService) 									{this.myService = myService;}
 
-	public List<SelectItem> getDocenteList() 						{return docenteList;}
-	public void setDocenteList(List<SelectItem> docenteList) 		{this.docenteList = docenteList;}
+	public List<ReferenteEducativo> getCriteriosList() 										{return criteriosList;}
+	public void setCriteriosList(List<ReferenteEducativo> criteriosList) 					{this.criteriosList = criteriosList;}
+
+	public String getNombreUnidad() 													{return nombreUnidad;}
+	public void setNombreUnidad(String nombreUnidad) 									{this.nombreUnidad = nombreUnidad;}
+
+	public List<SelectItem> getModuloProfesionalList() 									{return moduloProfesionalList;}
+	public void setModuloProfesionalList(List<SelectItem> moduloProfesionalList) 		{this.moduloProfesionalList = moduloProfesionalList;}
+
+	public List<SelectItem> getCapacidadProfesionalList() 								{return capacidadProfesionalList;}
+	public void setCapacidadProfesionalList(List<SelectItem> capacidadProfesionalList) 	{this.capacidadProfesionalList = capacidadProfesionalList;}
+
+	public List<SelectItem> getModuloTransversalList() 									{return moduloTransversalList;}
+	public void setModuloTransversalList(List<SelectItem> moduloTransversalList) 		{this.moduloTransversalList = moduloTransversalList;}
+	
+	public List<SelectItem> getCapacidadTransversalList() 								{return capacidadTransversalList;}
+	public void setCapacidadTransversalList(List<SelectItem> capacidadTransversalList) 	{this.capacidadTransversalList = capacidadTransversalList;}
+	
+	public Long getTipo() 																{return tipo;}
+	public void setTipo(Long tipo) 														{this.tipo = tipo;}
 
 
-	public List<ReferenteEducativo> getListarCT() {
-		return listarCT;
+
+	public AdmisionService getMyServiceAdmision() {
+		return myServiceAdmision;
 	}
 
 
-	public void setListarCT(List<ReferenteEducativo> listarCT) {
-		this.listarCT = listarCT;
+
+	public void setMyServiceAdmision(AdmisionService myServiceAdmision) {
+		this.myServiceAdmision = myServiceAdmision;
 	}
+
+
+
+	public List<SilaboCronograma> getListScro() {
+		return listScro;
+	}
+
+
+
+	public void setListScro(List<SilaboCronograma> listScro) {
+		this.listScro = listScro;
+	}
+
+
+
+	public List<SilaboCalendario> getListCal() {
+		return listCal;
+	}
+
+
+
+	public void setListCal(List<SilaboCalendario> listCal) {
+		this.listCal = listCal;
+	}
+
+
+
+	public List<SilaboAlumno> getListSilaboAlumno() {
+		return listSilaboAlumno;
+	}
+
+
+
+	public void setListSilaboAlumno(List<SilaboAlumno> listSilaboAlumno) {
+		this.listSilaboAlumno = listSilaboAlumno;
+	}
+
+
+
+	public SilaboCronograma getObtenerSilaboCronograma() {
+		return obtenerSilaboCronograma;
+	}
+
+
+
+	public void setObtenerSilaboCronograma(SilaboCronograma obtenerSilaboCronograma) {
+		this.obtenerSilaboCronograma = obtenerSilaboCronograma;
+	}
+
+
 
 
 

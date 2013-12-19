@@ -1,4 +1,5 @@
 package dataware.dao.impl;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import modules.administracion.domain.MetaInstitucional;
 import modules.admision.domain.Matricula;
 import modules.horario.domain.HorarioDistribucion;
 import modules.horario.domain.Seccion;
+import modules.horario.domain.SilaboCalendario;
 
 import org.hibernate.Query;
 
@@ -372,6 +374,30 @@ public class HorarioDaoJpa extends MarcoDaoJpa implements HorarioDao
 			if(objetos[9]!=null){field.setValorUnidad(Long.parseLong(objetos[9].toString()));}
 			if(objetos[10]!=null){field.setEstadoSilabo(Long.parseLong(objetos[10].toString()));}
 			if(objetos[11]!=null){field.setAlumno(Long.parseLong(objetos[11].toString()));}
+			lista.add(field);
+		}
+		return lista;
+	}
+	
+	public List<SilaboCalendario> listarAsistenciaAlumno(Long silabo, Long alumno) throws Exception 
+	{
+		List<SilaboCalendario> lista=new ArrayList<SilaboCalendario>();
+		Query consulta=createQuery("SELECT * FROM horario.lst_asistenciaalumno(:silabo, :alumno)");
+		consulta.setParameter("silabo", Integer.parseInt(silabo.toString()));
+		consulta.setParameter("alumno", Integer.parseInt(alumno.toString()));
+		List rst=consulta.list();
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		for(int i=0; i<rst.size(); i++)
+		{
+			Object[] objetos=(Object[])rst.get(i);
+			SilaboCalendario field=new SilaboCalendario();
+			field.setFecha(dateFormat.parse(objetos[0].toString()));			
+			if(objetos[1]!=null){field.setAsistencia(Long.parseLong(objetos[1].toString()));}
+			if(objetos[2]!=null){field.setAlumno(Long.parseLong(objetos[2].toString()));}
+			if(objetos[3]!=null){field.setSilaboCalendario(Long.parseLong(objetos[3].toString()));}
+			if(objetos[4]!=null){field.setAsistenciaAlumno(Long.parseLong(objetos[4].toString()));}
 			lista.add(field);
 		}
 		return lista;

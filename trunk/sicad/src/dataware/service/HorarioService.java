@@ -10,6 +10,7 @@ import modules.administracion.domain.MetaInstitucional;
 import modules.admision.domain.Matricula;
 import modules.horario.domain.HorarioDistribucion;
 import modules.horario.domain.Seccion;
+import modules.horario.domain.SilaboCalendario;
 
 public interface HorarioService extends MarcoService
 {
@@ -29,4 +30,5 @@ public interface HorarioService extends MarcoService
 	public void insertSilaboAlumno (Long meta, Long unidad, Long seccion, Long docente) throws Exception;
 	public List<Matricula> listarAlumnosSeccion(Long meta, Long unidad, Long seccion, Long docente) throws Exception;
 	public List<Seccion> listarUnidadesAlumno(Long institucion, Long annio, Long proceso, Long alumno) throws Exception;
+	public List<SilaboCalendario> listarAsistenciaAlumno(Long silabo, Long alumno) throws Exception ;
 }

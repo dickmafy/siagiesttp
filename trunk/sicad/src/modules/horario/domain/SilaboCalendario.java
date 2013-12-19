@@ -32,6 +32,10 @@ public class SilaboCalendario implements Serializable
 	private	Date 	fecha;
 	private Long 	estado;
 	// estado = 2 = fecha no aparece en asistencia 
+	private Long 	alumno;
+	private Long	asistencia;
+	private Long	silaboCalendario;
+	private Long	asistenciaAlumno;
 	
 	
 	@Id
@@ -57,6 +61,36 @@ public class SilaboCalendario implements Serializable
 	}
 	public void setEstado(Long estado) {
 		this.estado = estado;
+	}
+	
+	
+	@Transient
+	public Long getAlumno() {
+		return alumno;
+	}
+	public void setAlumno(Long alumno) {
+		this.alumno = alumno;
+	}
+	@Transient
+	public Long getAsistencia() {
+		return asistencia;
+	}
+	public void setAsistencia(Long asistencia) {
+		this.asistencia = asistencia;
+	}
+	@Transient
+	public Long getSilaboCalendario() {
+		return silaboCalendario;
+	}
+	public void setSilaboCalendario(Long silaboCalendario) {
+		this.silaboCalendario = silaboCalendario;
+	}
+	@Transient
+	public Long getAsistenciaAlumno() {
+		return asistenciaAlumno;
+	}
+	public void setAsistenciaAlumno(Long asistenciaAlumno) {
+		this.asistenciaAlumno = asistenciaAlumno;
 	}
 	
 	
