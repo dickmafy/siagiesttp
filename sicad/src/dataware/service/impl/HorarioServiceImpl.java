@@ -10,6 +10,7 @@ import modules.administracion.domain.MetaInstitucional;
 import modules.admision.domain.Matricula;
 import modules.horario.domain.HorarioDistribucion;
 import modules.horario.domain.Seccion;
+import modules.horario.domain.SilaboCalendario;
 import dataware.dao.HorarioDao;
 import dataware.service.HorarioService;
 
@@ -67,5 +68,8 @@ public class HorarioServiceImpl extends MarcoServiceImpl implements HorarioServi
 	
 	public List<Seccion> listarUnidadesAlumno(Long institucion, Long annio, Long proceso, Long alumno) throws Exception 
 	{return getHorarioDao().listarUnidadesAlumno(institucion, annio, proceso, alumno);}
+	
+	public List<SilaboCalendario> listarAsistenciaAlumno(Long silabo, Long alumno) throws Exception 
+	{return getHorarioDao().listarAsistenciaAlumno(silabo, alumno);}
 }
 
