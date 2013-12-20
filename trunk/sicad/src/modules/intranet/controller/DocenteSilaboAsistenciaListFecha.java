@@ -112,6 +112,16 @@ public class DocenteSilaboAsistenciaListFecha extends GenericController
 		listarAlumnos();
 	}
 	
+	public void goDetail()throws Exception
+	{
+		AsistenciaAlumnoCalendario aac = new AsistenciaAlumnoCalendario();
+		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();
+		
+		aac.setPk_silabo_calendario(temporalCalendario.getId());
+		listarAlumnos();
+		forward("DocenteAsistenciaAlumnoDetail");		
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public void listarAlumnos() throws Exception{
@@ -125,23 +135,18 @@ public class DocenteSilaboAsistenciaListFecha extends GenericController
 			p.setId(item.getPk_alumno());
 			p = (Persona)myService.findById(p);
 			item.setNombre(p.getNombreCompleto());
-			
 		}
 		
 	}
 	
 	public void guardarAsistencia() throws ServiceException, DaoException{
 		
-		AsistenciaAlumnoCalendario asistenciaAlumnoCalendario = new AsistenciaAlumnoCalendario();
-		
-		
-		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();		
-		
+		AsistenciaAlumnoCalendario asistenciaAlumnoCalendario = new AsistenciaAlumnoCalendario();	
+		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();				
 		
 		for (SilaboAlumno item : listSilaboAlumno) {
 		
-			asistenciaAlumnoCalendario = new AsistenciaAlumnoCalendario();
-					
+			asistenciaAlumnoCalendario = new AsistenciaAlumnoCalendario();					
 			temporalCalendario = (SilaboCalendario)getBeanSelected();
 			
 			asistenciaAlumnoCalendario.setPk_silabo_calendario(temporalCalendario.getId());
@@ -149,10 +154,7 @@ public class DocenteSilaboAsistenciaListFecha extends GenericController
 			asistenciaAlumnoCalendario.setEstado(1L);
 			asistenciaAlumnoCalendario.setPk_silabo_alumno(item.getId());
 			
-			
-			
-			myService.save(asistenciaAlumnoCalendario);
-			
+			myService.save(asistenciaAlumnoCalendario);			
 		}
 	
 		//cerrar la fecha

@@ -35,7 +35,7 @@
 	     		<p:columnGroup type="header">  
 		            <p:row>  
 		                <p:column colspan="3" headerText="Alumnos" />  
-		                <p:column rowspan="2" headerText="Capacidad Terminal" />  
+		                <p:column rowspan="2" headerText="Nota" />  
 		            </p:row>  
 		  
 		            <p:row>
@@ -61,7 +61,8 @@
 				</p:column>
 				
 				<p:column >  
-	                   <p:inputText  value="#{item.nota}"  maxlength="4" style="background-color : #{item.nota lt 13 ? '#FE2E2E' : '#81F781' }" />
+	                   <p:inputText  value="#{item.nota}"  maxlength="4" style="width:40px; background-color : #{item.nota lt 13 ? '#F78181' : '#81F781' }" >
+	                   </p:inputText>
 				</p:column>
 		       	    
 		           	      

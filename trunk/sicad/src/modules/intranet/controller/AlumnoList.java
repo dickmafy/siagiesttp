@@ -24,7 +24,7 @@ public class AlumnoList extends GenericController
 	private List<SelectItem>    procesoList;
 	private List<SelectItem>    docenteList;
 	
-	List<MetaInstitucional> metas;
+	private List<MetaInstitucional> metas;
 	private Long annio,proceso,profesion,turno;
 	private Long institucion,alumno;
 	private HorarioService	myService;
@@ -152,7 +152,7 @@ public class AlumnoList extends GenericController
 		SilaboCronograma silaboCronograma = obtenerSilaboCronograma();    	
 		silaboCronograma = (SilaboCronograma) myService.findByObject(silaboCronograma);
     	
-		DocenteSilaboAsistenciaListFecha  go = (DocenteSilaboAsistenciaListFecha)getSpringBean("docenteSilaboAsistenciaListFecha");
+		AlumnoAsistencia  go = (AlumnoAsistencia)getSpringBean("alumnoAsistencia");
 		Proceso proceso = new Proceso();
 		proceso.setAnnio(annio);
 		proceso.setProceso(this.proceso);
