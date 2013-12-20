@@ -50,20 +50,26 @@
 				<h:outputText value="MT" title="MÓDULO TRANSVERSAL: #{item.nombreModulo}" rendered="#{item.valorTipoModulo eq 2}"/>
 			</p:column>		
 			
-			<p:column headerText="Unidad" style="width:35%; align:center;" >   
+			<p:column headerText="Unidad" style="width:25%; align:center;" >   
 				<h:outputText value="#{item.nombreUnidad}" title="UNIDAD DIDACTICA: #{item.nombreUnidad}"/>
 			</p:column>
 			
-			<p:column headerText="Sección" style="width:10%; align:center;" >   
+			<p:column headerText="Sección" style="width:5%; align:center;" >   
 				<h:outputText value="#{item.nombre}"/>
 			</p:column>	
 			
-			<p:column headerText="Horas" style="width:9%; align:center;" >   
+			<p:column headerText="Horas" style="width:5%; align:center;" >   
 				<h:outputText value="#{item.valorHoras}"/>
+			</p:column>
+			
+			<p:column headerText="Estado" style="width:15%; align:center;" >   
+				<h:outputText value="PENDIENTE FECHAS DE CLASE" rendered="#{empty item.estadoSilabo}"/>
+				<h:outputText value="PENDIENTE CAPACIDADES TERMINALES" rendered="#{item.estadoSilabo eq 1}"/>
+				<h:outputText value="PUBLICADO" rendered="#{item.estadoSilabo eq 2}"/>
 			</p:column>
 		        	
         	
-        	<p:column headerText="Operaciones" style="width:33%">  
+        	<p:column headerText="Operaciones" style="width:7%">  
 				<p:commandButton icon="icn_item_calendar" action="#{docenteSilaboList.goCrearFechas}"	title="Crear Fechas De Clase" ajax="false" rendered="#{empty item.estadoSilabo}">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboList.beanSelected}" />
 				</p:commandButton>				

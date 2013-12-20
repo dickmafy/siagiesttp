@@ -13,6 +13,7 @@ import com.belogick.factory.util.support.DaoException;
 import com.belogick.factory.util.support.ServiceException;
 
 import dataware.service.AdmisionService;
+import dataware.service.HorarioService;
 import dataware.service.IntranetService;
 import dataware.service.MarcoService;
 import modules.administracion.domain.Institucion;
@@ -32,7 +33,7 @@ import modules.seguridad.domain.Usuario;
 
 public class AlumnoAsistencia extends GenericController   
 {	
-	private IntranetService	myService;
+	private HorarioService	myService;
 	private List<ReferenteEducativo> criteriosList;
 	
 	private List<SelectItem> moduloProfesionalList;
@@ -169,8 +170,8 @@ public class AlumnoAsistencia extends GenericController
 	
 	
 	
-	public IntranetService getMyService() 													{return myService;}
-	public void setMyService(IntranetService myService) 									{this.myService = myService;}
+	public HorarioService getMyService() 													{return myService;}
+	public void setMyService(HorarioService myService) 									{this.myService = myService;}
 
 	public List<ReferenteEducativo> getCriteriosList() 										{return criteriosList;}
 	public void setCriteriosList(List<ReferenteEducativo> criteriosList) 					{this.criteriosList = criteriosList;}
