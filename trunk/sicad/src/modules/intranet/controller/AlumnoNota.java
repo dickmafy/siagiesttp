@@ -18,6 +18,7 @@ import modules.horario.domain.SilaboNotaAlumno;
 import modules.horario.domain.SilaboUnidadCt;
 import modules.horario.servicio.PersonaAlumno;
 import modules.horario.servicio.SilaboNotaAlumnoServicioLocal;
+import modules.intranet.servicio.VistaReferenteEducativo;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
 
@@ -47,7 +48,7 @@ public class AlumnoNota extends GenericController
 	
 	private Long pk_unidad_ctSeleccionado;
 	
-	private List<SilaboUnidadCt> listarCT;
+	private List<VistaReferenteEducativo> listarCT;
 	
 	private SilaboCronograma silaboCronograma;
 	private Long pk_pertenancia;
@@ -74,13 +75,24 @@ public class AlumnoNota extends GenericController
 		page_main="AlumnoNota";
 		this.obtenerSilaboCronograma = pobtenerSilaboCronograma;
 		//optionCriterios();
+		
 		SilaboUnidadCt silaboUnidadCt = new SilaboUnidadCt();
     	silaboUnidadCt.setPk_silabo_cronograma(silaboCronograma.getId());		
-		listarCT = myService.listByObject(silaboUnidadCt);
+		
+    	List<SilaboUnidadCt> listaActual = myService.listByObject(silaboUnidadCt);
+		
 		pk_unidad_ctSeleccionado = -1l;
-		if (listarCT.size()>0) {
-			pk_unidad_ctSeleccionado = listarCT.get(0).getId();
+		if (listaActual.size()>0) {
+			listarCT = new ArrayList<VistaReferenteEducativo>();
+			pk_unidad_ctSeleccionado = listaActual.get(0).getId();
+			ReferenteEducativo referenteEducativo; 
+			for (SilaboUnidadCt siCt : listaActual) {
+				referenteEducativo = (ReferenteEducativo) 
+						myService.findById(ReferenteEducativo.class, siCt.getPk_ct());
+				listarCT.add(new VistaReferenteEducativo(siCt, referenteEducativo));
+			}
 		}
+		
 		
 		forward(page_main);
 		defaultList();
@@ -245,19 +257,9 @@ public class AlumnoNota extends GenericController
 		this.obtenerSilaboCronograma = obtenerSilaboCronograma;
 	}
 
-
-
-
-
-
 	public SilaboCronograma getSilaboCronograma() {
 		return silaboCronograma;
 	}
-
-
-
-
-
 
 	public void setSilaboCronograma(SilaboCronograma silaboCronograma) {
 		this.silaboCronograma = silaboCronograma;
@@ -274,12 +276,12 @@ public class AlumnoNota extends GenericController
 	}
 
 
-	public List<SilaboUnidadCt> getListarCT() {
+	public List<VistaReferenteEducativo> getListarCT() {
 		return listarCT;
 	}
 
 
-	public void setListarCT(List<SilaboUnidadCt> listarCT) {
+	public void setListarCT(List<VistaReferenteEducativo> listarCT) {
 		this.listarCT = listarCT;
 	}
 
@@ -292,9 +294,5 @@ public class AlumnoNota extends GenericController
 	public void setPk_pertenancia(Long pk_pertenancia) {
 		this.pk_pertenancia = pk_pertenancia;
 	}
-
-	
-
-	
 
 } 
