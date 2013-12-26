@@ -1,14 +1,37 @@
 package modules.mantenimiento.controller; 
-import java.util.ArrayList;
-import java.util.List;
 
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
+import resouces.ConnPg;
+import resouces.Fecha;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import modules.mantenimiento.domain.Supervision;
 import modules.mantenimiento.domain.Ubigeo;
 import modules.seguridad.domain.Usuario;
 
+import javax.faces.event.ActionEvent;
+
 import com.belogick.factory.util.controller.GenericController;
+import com.belogick.factory.util.support.ServiceException;
 
 import dataware.service.GeneralService;
 
@@ -23,6 +46,9 @@ public class MantenimientoSupervision extends GenericController
 	private GeneralService	myService;
 	private boolean tipo;
 	private Long dre;
+	private String urlRpt; // Codigo Ericson Huamani
+	private String nombreUsuario; // Codigo Ericson Huamani
+	private Supervision supervision; // Codigo Ericson Huamani
 	
 	@Override
 	public void init() throws Exception
@@ -34,6 +60,8 @@ public class MantenimientoSupervision extends GenericController
 		defaultList();
 		forward(page_main);
 		
+		urlRpt = "/modulos/reportes/pdf/NOMINA.pdf"; // Codigo Ericson Huamaní
+		nombreUsuario=usr.getNombres(); // Codigo Ericson Huamaní
 	}
 	
 	public void initUgel() throws Exception 
@@ -203,4 +231,98 @@ public class MantenimientoSupervision extends GenericController
 
 	public Long getDre() 										{return dre;}
 	public void setDre(Long dre) 								{this.dre = dre;}
+
+	public String getUrlRpt() {
+		return urlRpt;
+	}
+
+	public void setUrlRpt(String urlRpt) {
+		this.urlRpt = urlRpt;
+	}
+	
+	// Inicio Codigo Ericson Huamaní 19-12-2013 11:00
+				@SuppressWarnings("unchecked")
+				public void generarReporte(ActionEvent evt) {
+					try {
+						String rutaAplicacion = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+						
+						@SuppressWarnings("rawtypes")
+						Map parametro = new HashMap();
+						parametro.put("USUARIO", nombreUsuario);
+						parametro.put("RUTA_IMAGEN",rutaAplicacion+"/recursos/imagenes/sicad_1_rpt.jpg");
+						
+						String nombreArchivoPdf = new Fecha().getFecha(new Date(),
+								Fecha.PATTERN_DDMMYYYYHHMMS, Fecha.LOCALE_ES) + ".pdf";
+						JasperPrint print = null;
+						File fp = new File(rutaAplicacion
+								+ "/modulos/reportes/jasper/rpt_dre.jasper");
+						InputStream reportSt = new BufferedInputStream(new FileInputStream(
+								fp));
+						print = JasperFillManager.fillReport(reportSt, parametro,
+								ConnPg.getConexion());
+						OutputStream output = new FileOutputStream(new File(rutaAplicacion
+								+ "/modulos/reportes/pdf/" + nombreArchivoPdf));
+						JasperExportManager.exportReportToPdfStream(print, output);
+						setUrlRpt("/modulos/reportes/pdf/"+nombreArchivoPdf);
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (JRException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+				
+				@SuppressWarnings("unchecked")
+				public void generarReporteUgel(ActionEvent evt){
+					try {
+						JasperPrint print = null;
+						File fp;
+						String rutaAplicacion = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
+						String nombreArchivoPdf = new Fecha().getFecha(new Date(), Fecha.PATTERN_DDMMYYYYHHMMS, Fecha.LOCALE_ES) + ".pdf";
+						
+						if(dre!=null && dre!=-1){
+							supervision = new Supervision();
+							supervision.setNivel(dre);
+							supervision.setSubnivel(0L);
+							supervision =(Supervision) myService.findByObject(supervision);
+						}
+						
+						@SuppressWarnings("rawtypes")
+						Map parametro = new HashMap();
+						parametro.put("USUARIO", nombreUsuario);
+						parametro.put("RUTA_IMAGEN",rutaAplicacion+"/recursos/imagenes/sicad_1_rpt.jpg");
+						parametro.put("NOMBRE_DRE", supervision!=null?supervision.getNombre():"");
+						parametro.put("NIVEL_DRE", dre);
+						
+						if(dre!=null && dre!=-1)
+							fp = new File(rutaAplicacion + "/modulos/reportes/jasper/rpt_ugel_x_dre.jasper");
+						else
+							fp = new File(rutaAplicacion + "/modulos/reportes/jasper/rpt_ugel_all.jasper");
+						
+						InputStream reportSt = new BufferedInputStream(new FileInputStream(fp));
+						print = JasperFillManager.fillReport(reportSt, parametro,ConnPg.getConexion());
+						OutputStream output = new FileOutputStream(new File(rutaAplicacion + "/modulos/reportes/pdf/" + nombreArchivoPdf));
+						JasperExportManager.exportReportToPdfStream(print, output);
+						setUrlRpt("/modulos/reportes/pdf/"+nombreArchivoPdf);
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					} catch (JRException e) {
+						e.printStackTrace();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}catch (ServiceException e) {
+						e.printStackTrace();
+					}
+				}
+				// Fin codigo Ericson Huamaní
 } 
