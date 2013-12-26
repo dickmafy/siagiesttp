@@ -21,7 +21,10 @@
 				<p:spacer height="6px"/>				 		         
 		        <p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{mantenimientoSupervision.nativeNew}" ajax="false" />
 		        <p:spacer height="4px"/>
-		        <p:commandButton title="Listado de UGEL" value="Listado de UGEL" icon="icn_item_download"  ajax="false" />    
+		        <p:commandButton title="Listado de UGEL" value="Listado de UGEL"
+						icon="icn_item_download" oncomplete="wvReporte.show()" 
+						actionListener="#{mantenimientoSupervision.generarReporteUgel}" 
+						update=":dlgReporte"/>
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
@@ -77,6 +80,13 @@
 			</h:form>	
    		</p:confirmDialog>
    		
-   	
+   		<!--  muestra del reporte -->
+		<p:dialog widgetVar="wvReporte" id="dlgReporte" header="Reporte de UGEL" closable="true" appendToBody="true"
+			showEffect="fade" resizable="false" modal="true" width="1000px" height="500px" >
+			<p:media value="#{mantenimientoSupervision.urlRpt}" width="976px" height="476px"
+				id="mdPdf">
+                Su navegador no cuenta con un visor de archivos PDFs, por favor descarguelo para que pueda visualizar el archivo
+            </p:media>
+		</p:dialog>
     </ui:define>
 </ui:composition>
