@@ -1,5 +1,6 @@
 package modules.intranet.controller; 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.model.SelectItem;
@@ -19,6 +20,7 @@ import modules.seguridad.domain.Usuario;
 import modules.horario.domain.SilaboNotaAlumno;
 import modules.horario.servicio.PersonaAlumno;
 import modules.horario.servicio.SilaboNotaAlumnoServicioLocal;
+import modules.intranet.servicio.VistaReferenteEducativo;
 
 public class DocenteSilaboNota extends GenericController   
 {	
@@ -46,7 +48,7 @@ public class DocenteSilaboNota extends GenericController
 	
 	private Long pk_unidad_ctSeleccionado;
 	
-	private List<SilaboUnidadCt> listarCT;
+	private List<VistaReferenteEducativo> listarCT;
 	
 	private SilaboCronograma silaboCronograma;
 	
@@ -72,11 +74,20 @@ public class DocenteSilaboNota extends GenericController
 		this.obtenerSilaboCronograma = pobtenerSilaboCronograma;
 		//optionCriterios();
 		SilaboUnidadCt silaboUnidadCt = new SilaboUnidadCt();
-    	silaboUnidadCt.setPk_silabo_cronograma(silaboCronograma.getId());		
-		listarCT = myService.listByObject(silaboUnidadCt);
+    	silaboUnidadCt.setPk_silabo_cronograma(silaboCronograma.getId());	
+    	
+    	List<SilaboUnidadCt> listaActual = myService.listByObject(silaboUnidadCt);
+		
 		pk_unidad_ctSeleccionado = -1l;
-		if (listarCT.size()>0) {
-			pk_unidad_ctSeleccionado = listarCT.get(0).getId();
+		if (listaActual.size()>0) {
+			listarCT = new ArrayList<VistaReferenteEducativo>();
+			pk_unidad_ctSeleccionado = listaActual.get(0).getId();
+			ReferenteEducativo referenteEducativo; 
+			for (SilaboUnidadCt siCt : listaActual) {
+				referenteEducativo = (ReferenteEducativo) 
+						myService.findById(ReferenteEducativo.class, siCt.getPk_ct());
+				listarCT.add(new VistaReferenteEducativo(siCt, referenteEducativo));
+			}
 		}
 		
 		forward(page_main);
@@ -255,16 +266,15 @@ public class DocenteSilaboNota extends GenericController
 	}
 
 
-	public List<SilaboUnidadCt> getListarCT() {
+	public List<VistaReferenteEducativo> getListarCT() {
 		return listarCT;
 	}
 
 
-	public void setListarCT(List<SilaboUnidadCt> listarCT) {
+	public void setListarCT(List<VistaReferenteEducativo> listarCT) {
 		this.listarCT = listarCT;
 	}
 
-	
 
 	
 	

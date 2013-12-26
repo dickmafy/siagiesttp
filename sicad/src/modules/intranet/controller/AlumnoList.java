@@ -10,6 +10,7 @@ import com.belogick.factory.util.controller.GenericController;
 import dataware.service.HorarioService;
 import modules.administracion.domain.MetaInstitucional;
 import modules.administracion.domain.Personal;
+import modules.admision.domain.Persona;
 import modules.admision.domain.Proceso;
 import modules.horario.domain.Seccion;
 import modules.horario.domain.SilaboCronograma;
@@ -43,7 +44,9 @@ public class AlumnoList extends GenericController
 		userName=usr.getUsuario();
 		institucion=usr.getInstitucion();
 		alumno=usr.getPertenencia();
-		alumnoNombre = usr.getNombres();
+		
+		alumnoNombre = ((Persona)myService.findById(Persona.class, usr.getPertenencia())).getNombreCompleto();
+		
 		annio = -1L;
 		proceso = -1L;
 				
