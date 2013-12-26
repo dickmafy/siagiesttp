@@ -33,6 +33,7 @@ public class AlumnoList extends GenericController
 	
 	private Long meta,seccion,unidad;
 	
+	private String alumnoNombre;
 	
 	public void init() throws Exception
 	{
@@ -42,7 +43,7 @@ public class AlumnoList extends GenericController
 		userName=usr.getUsuario();
 		institucion=usr.getInstitucion();
 		alumno=usr.getPertenencia();
-		
+		alumnoNombre = usr.getNombres();
 		annio = -1L;
 		proceso = -1L;
 				
@@ -208,6 +209,12 @@ public class AlumnoList extends GenericController
 		this.listarCT = listarCT;
 	}
 
-
+	public void setAlumnoNombre(String alumnoNombre) {
+		this.alumnoNombre = alumnoNombre;
+	}
+	
+	public String getAlumnoNombre() {
+		return alumnoNombre;
+	}
 
 } 

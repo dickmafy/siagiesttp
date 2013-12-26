@@ -10,6 +10,7 @@ import com.aprolab.sicad.persistence.JPAPersistenceUtil;
 import modules.horario.domain.Seccion;
 import modules.horario.domain.SilaboAlumno;
 import modules.horario.domain.SilaboCronograma;
+import modules.horario.domain.SilaboNotaAlumno;
 
 public class AlumnoIntranetServicioLocal {
 	
@@ -36,4 +37,14 @@ public class AlumnoIntranetServicioLocal {
 		return alumnoIntranets;
 	}
 	
+	
+	public static List<AlumnoIntranetNota> findNotas(Long pk_silabo_alumno){
+		List<AlumnoIntranetNota> alumnoIntranetNotas = new ArrayList<AlumnoIntranetNota>();
+		List<SilaboNotaAlumno> silaboNotaAlumnos = JPAPersistenceUtil.getSession().createCriteria(SilaboNotaAlumno.class)
+				.add(Expression.eq("pk_silabo_alumno", pk_silabo_alumno)).list();
+		for (int i = 0; i < silaboNotaAlumnos.size(); i++) {
+			alumnoIntranetNotas.add(new AlumnoIntranetNota("Unidad Didactica "+(i+1), silaboNotaAlumnos.get(i)));
+		}
+		return alumnoIntranetNotas;
+	}
 }

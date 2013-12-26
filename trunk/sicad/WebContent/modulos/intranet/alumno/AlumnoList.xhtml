@@ -34,7 +34,10 @@
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
-  
+      	
+      	<h:outputText value="ALUMNO:  #{alumnoList.alumnoNombre}."/>
+      	
+      	
    		<p:dataTable id="itemList" var="item" value="#{alumnoList.beanList}" filteredValue="#{alumnoList.beanFilterList}"
    			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom" rowIndexVar="rowNumber" >
      		
