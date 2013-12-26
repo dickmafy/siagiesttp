@@ -13,7 +13,8 @@
 	</bean>
 	
 	<bean id="alumnoNota" class="modules.intranet.controller.AlumnoNota" scope="session" parent="genericController">
-	    <property name="myService" 	ref="horarioService"/>			
+	    <property name="myService" 	ref="intranetService"/>
+	    <property name="myServiceAdmision" 	ref="admisionService"/>			
 	</bean>
 	
 	<bean id="alumnoAsistencia" class="modules.intranet.controller.AlumnoAsistencia" scope="session" parent="genericController">

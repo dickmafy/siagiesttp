@@ -64,6 +64,7 @@
 		<tr><td><p:outputLabel for="txtSec" value="Sección" /></td></tr>
 		<tr>
 			<td>
+				<p:outputLabel  value="#{horarioSeccion.seccion}" />
         		<p:selectOneMenu id="txtSec" value="#{horarioSeccion.seccion}" style="width:220px;" >
 					<f:selectItems value="#{horarioSeccion.seccionList}"/>
 					<p:ajax event="change" update=":frmList" listener="#{horarioSeccion.selectSeccion}"/>
