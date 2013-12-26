@@ -30,6 +30,7 @@ import com.belogick.factory.util.controller.GenericController;
 import dataware.service.HorarioService;
 import modules.administracion.domain.MetaInstitucional;
 import modules.administracion.domain.Personal;
+import modules.admision.domain.Persona;
 import modules.admision.domain.Proceso;
 import modules.horario.domain.Seccion;
 import modules.horario.domain.SilaboCronograma;
@@ -71,7 +72,7 @@ public class DocenteSilaboList extends GenericController
 		annio = anio;
 		proceso = proc;
 		
-		docente_nombre = usr.getNombres();
+		docente_nombre = ((Personal)myService.findById(Personal.class, usr.getPertenencia())).getNombreCompleto();
 		//docente_id = usr.getId();
 		
 		if(annio>0L)
@@ -90,8 +91,9 @@ public class DocenteSilaboList extends GenericController
 		page_update="";
 		forward(page_main);
 		
-		setUrlRpt("/modulos/reportes/pdf/NOMINA.pdf"); // Codigo Ericson Huamaní
-		nombreUsuario=usr.getNombres(); // Codigo Ericson Huamaní
+		setUrlRpt("/modulos/reportes/pdf/NOMINA.pdf"); // Codigo Ericson Huamanï¿½
+		nombreUsuario=usr.getNombres(); // Codigo Ericson Huamanï¿½
+
 	}
 	
 	public void init() throws Exception
@@ -286,7 +288,9 @@ public class DocenteSilaboList extends GenericController
 		this.docente_id = docente_id;
 	}
 
-	// Inicio Codigo Ericson Huamaní 19-12-2013 11:00
+
+
+	// Inicio Codigo Ericson Huamanï¿½ 19-12-2013 11:00
 		@SuppressWarnings("unchecked")
 		public void generarReporte(ActionEvent evt) {
 				try {
