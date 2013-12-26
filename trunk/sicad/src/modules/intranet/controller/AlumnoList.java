@@ -133,13 +133,12 @@ public class AlumnoList extends GenericController
 	}
 	
 	public void goNotas()throws Exception{
-		
-		
+	
 		
 		SilaboCronograma silaboCronograma = obtenerSilaboCronograma();    	
 		silaboCronograma = (SilaboCronograma) myService.findByObject(silaboCronograma);
 		
-		DocenteSilaboNota go = (DocenteSilaboNota)getSpringBean("docenteSilaboNota");
+		AlumnoNota go = (AlumnoNota)getSpringBean("alumnoNota");
 		Proceso proceso = new Proceso();
 		proceso.setAnnio(annio);
 		proceso.setProceso(this.proceso);
