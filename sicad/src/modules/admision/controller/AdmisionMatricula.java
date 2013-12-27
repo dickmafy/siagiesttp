@@ -178,6 +178,15 @@ public class AdmisionMatricula extends GenericController
 		return 3L;
 	}
 	
+	public void optionGoDetalle() throws Exception 
+	{
+		setBean(getBeanSelected());
+		
+		
+		forward("adm_mat_det");
+	}
+	
+	
 	/*
 	
 		public void optionGoMatricula() throws Exception 
