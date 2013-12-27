@@ -15,6 +15,7 @@ public class VistaReferenteEducativo {
 		this.referenteEducativo = referenteEducativo;
 	}
 	
+	
 	public SilaboUnidadCt getCtSilaboUnidadCt() {
 		return ctSilaboUnidadCt;
 	}
