@@ -29,13 +29,13 @@
 					<h:outputText value="#{rowNumber+1}"/>  
 				</p:column>
 					
-				<p:column headerText="Dia Clase" style="width:55%; align:center;">
+				<p:column headerText="Dia Clase" style="width:45%; align:center;">
 					<h:outputText value="#{item.fecha}">
 						<f:convertDateTime pattern="dd/MM/yyyy"/>
 					</h:outputText>
 				</p:column>		
 					
-				<p:column headerText="Asistencia" style="width:5%; align:center;">
+				<p:column headerText="Asistencia" style="width:40%; align:center;">
 					<h:outputText value="Asistió" rendered="#{item.asistencia eq 1}"/>	
 					<h:outputText value="NSP" rendered="#{item.asistencia ne 1}"/>	
 				</p:column>		
