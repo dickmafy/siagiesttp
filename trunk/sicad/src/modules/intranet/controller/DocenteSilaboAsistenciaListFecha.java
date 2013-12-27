@@ -130,11 +130,20 @@ public class DocenteSilaboAsistenciaListFecha extends GenericController
 		silaboAlumno.setPk_silabo_cronograma(temporalCalendario.getPk_silabo_cronograma());
 		listSilaboAlumno = myService.listByObject(silaboAlumno);
 		
+		
 		for (SilaboAlumno item : listSilaboAlumno) {
+			AsistenciaAlumnoCalendario asiscale=new AsistenciaAlumnoCalendario();
+			asiscale.setPk_silabo_alumno(item.getId());
+			asiscale.setPk_silabo_calendario(temporalCalendario.getId());
+			
 			Persona p = new Persona();
 			p.setId(item.getPk_alumno());
 			p = (Persona)myService.findById(p);
 			item.setNombre(p.getNombreCompleto());
+			
+			AsistenciaAlumnoCalendario temp;
+			temp=(AsistenciaAlumnoCalendario)myService.findByObject(asiscale);
+			item.setAsistio((long)temp.getAsistencia());
 		}
 		
 	}
