@@ -13,7 +13,6 @@
 	    	<p:toolbarGroup align="left"> 
 	    	 
 		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="AlumnoList" ajax="false" />
-		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{alumnoNota.guardarNotas}" ajax="false" />
 		     
 			</p:toolbarGroup>
 			  
@@ -32,37 +31,37 @@
 			<p:dataTable id="dt_notasFecha" var="item" value="#{alumnoNota.beanList}" 
 	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
 	     		
-	     		<p:columnGroup type="header">  
+	     		<p:columnGroup type="header" >  
 		            <p:row>  
-		                <p:column colspan="3" headerText="Alumnos" />  
+		                <p:column colspan="3" headerText="CE - Indicadores" />  
 		                <p:column rowspan="2" headerText="Nota" />  
 		            </p:row>  
 		  
 		            <p:row>
 		            
-		            	<p:column headerText="Apellido Paterno" />
-		            	<p:column headerText="Apellido Materno" />
-		            	<p:column headerText="Nombres" />
+		            	<p:column headerText="CT" />
+		            	<p:column headerText="CE" />
+		            	<p:column headerText="INDICADORES" />
 		            	
 		            </p:row>
 		              
 		        </p:columnGroup>
         
 				<p:column>   
-					<h:outputText value="#{item.persona.apellido_paterno}" />					  
+					<h:outputText value="#{item.persona.apellido_paterno}"  rendered="false"/>					  
 				</p:column>
 				
 				<p:column>   
-					<h:outputText value="#{item.persona.apellido_materno}" />					  
+					<h:outputText value="#{item.persona.apellido_materno}" rendered="false" />					  
 				</p:column>
 	     		
 	     		<p:column>   
-					<h:outputText value="#{item.persona.nombres}" />					  
+					<h:outputText value="#{item.persona.nombres}" rendered="false" />					  
 				</p:column>
 				
 				<p:column >  
-	                   <p:inputText  value="#{item.nota}"  maxlength="4" style="width:40px; background-color : #{item.nota lt 13 ? '#F78181' : '#81F781' }" >
-	                   </p:inputText>
+	                   <p:inputText   readonly="true" value="#{item.nota}"  maxlength="4" style="width:40px; background-color : #{item.nota lt 13 ? '#F78181' : '#81F781' }" />
+	                   
 				</p:column>
 		       	    
 		           	      
