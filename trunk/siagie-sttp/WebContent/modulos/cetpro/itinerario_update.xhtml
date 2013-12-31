@@ -1,0 +1,42 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+   
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="itnr_list" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{cetproItinerario.nativeUpdate}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:panel header="Modificar Unidad Didáctica">
+    		
+    		<table class="form_table">
+    		<tr>
+   				<td><p:outputLabel for="txtTit" value="Título" /></td>
+   				<td><p:outputLabel for="txtSes" value="Sesiones" /></td>
+   				<td><p:outputLabel for="txtHor" value="Horas" /></td>
+   			</tr>
+   			<tr>
+				<td><p:inputText id="txtTit" value="#{cetproItinerario.bean.titulo}" size="120"/></td>
+				<td><p:inputText id="txtSes" value="#{cetproItinerario.bean.sesiones}" size="80"/></td>
+				<td><p:inputText id="txtHor" value="#{cetproItinerario.bean.horas}" size="80"/></td>
+   			</tr>
+    		</table>
+    		
+    		<table class="form_table">
+    		<tr><td><p:outputLabel for="txtDes" value="Descripción" /></td></tr>
+   			<tr><td><p:inputTextarea id="txtDes" value="#{cetproItinerario.bean.descripcion}" rows="3" cols="166" autoResize="false"/></td></tr>
+   			</table>
+    		
+		</p:panel> 		
+     </h:form>
+    </ui:define>
+</ui:composition>

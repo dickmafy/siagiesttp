@@ -1,0 +1,150 @@
+/* PRIME FACES STYLES */
+.ui-layout, .ui-layout-doc, .ui-layout-unit, .ui-layout-wrap, .ui-layout-bd, .ui-layout-hd
+{
+    font-size:13px;
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	text-align:justify;
+}
+.ui-corner-all
+{
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+/* GROWL STYLE */
+.ui-growl 
+{   
+    width: 300px;
+    height: 120px;
+    z-index:9999; 
+}
+.ui-growl-title 
+{
+	text-align:justify;
+	width: 200px;
+	padding:0 0 7px 0;
+	font-size:14px;
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+.ui-growl-image-info 
+{background: url("../iconos/growl_info.png") no-repeat;}
+
+.ui-growl-image-warn 
+{background: url("../iconos/growl_warm.png") no-repeat;}
+
+.ui-growl-image-error 
+{background: url("../iconos/growl_error.png") no-repeat;}
+
+.ui-confirm-dialog .ui-dialog-content p span 
+{
+	background: url("../iconos/growl_warm.png") no-repeat;
+	padding:7px;
+}
+
+.ui-menuitem-text
+{
+	padding-left:5px;
+	padding-right:5px;
+	font-size:13px;
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	text-align:justify;
+}
+
+div#tmp_header div
+{
+	overflow:visible;
+	border:none;
+	background: white;
+}
+div#tmp_header
+{
+	z-index:2 !important;
+	background: white;
+	border:none;
+}
+
+div#tmp_footer div
+{
+	background: #f2f2f2;
+	color:#787878;
+}
+div#tmp_footer
+{background: #f2f2f2;}
+
+.ui-menuitem-link
+{color: white !important;}
+
+.ui-corner-all.ui-state-hover 
+{color: black !important;}
+
+.breadcumb
+{
+	color:#74a6cc !important; 
+	font-size:11px; 
+	font-weight:normal; 
+	position:relative; 
+	bottom:1.5px;
+}
+
+.ui-datatable-even 
+{background: #fbf9f9;}
+
+.ui-datatable-odd 
+{background: white;}
+
+.ui-widget
+{
+	font-size:12px;
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+tr.ui-datatable-even:hover, tr.ui-datatable-even:active,
+tr.ui-datatable-odd:hover, tr.ui-datatable-odd:active {
+   background: #eaeda0;
+}
+
+.form_table
+{
+	font-size:12px;
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	text-align:justify;
+	color: black;	
+	border:0px;
+}
+
+.ui-selectonemenu-label, .ui-selectonemenu-list 
+{ 
+	font-size:12px;
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+.form_readonly_value
+{
+	font-size:12px;
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	color:#6a6868;
+}
+
+.form_readonly_title
+{
+	font-size:12px;
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	color:#005089;
+}
+
+.ui-toolbar
+{
+	background:#f2f2f2 !important; 
+	border:1px solid #a5a5a5; 
+	padding:3px;
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; 
+	font-size:13px;
+}
+
+.ui-button-text
+{
+	font-family:Tahoma, Verdana, Arial, Helvetica, sans-serif; 
+	font-size:13px;
+	bottom:1px;
+	position:relative;
+}

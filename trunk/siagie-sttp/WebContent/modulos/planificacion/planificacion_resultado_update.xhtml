@@ -1,0 +1,82 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false" enctype="multipart/form-data">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="planificacion_resultado_list" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{planificacionResultado.nativeUpdate}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:panel header=" Agregar Nuevo Resultado">
+       	<table>
+      
+	    
+	    <tr>
+   			<td>
+   			<table>
+	    	<tr>
+				<td><p:outputLabel  value="Año" /></td>
+                <td><p:outputLabel  value="Semestre" /></td>
+                <td><p:outputLabel  value="Tipo" /></td>
+			</tr>
+			<tr>
+               	<td>
+					<p:selectOneMenu  value="#{planificacionResultado.bean.annio}">
+						<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+	           	        <f:selectItem itemLabel="2014"        itemValue="2014" />
+	           	        <f:selectItem itemLabel="2015"        itemValue="2015" />
+					</p:selectOneMenu>
+				</td>
+				<td>
+					<p:selectOneMenu  value="#{planificacionResultado.bean.semestre}">
+						<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+	           	        <f:selectItem itemLabel="semestre1"        itemValue="1" />
+	           	        <f:selectItem itemLabel="semestre2"        itemValue="2" />
+					</p:selectOneMenu>
+				</td>
+				<td>
+					<p:selectOneMenu  value="#{planificacionResultado.bean.tipo}">
+						<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+	           	        <f:selectItem itemLabel="tipo1"        itemValue="1" />
+	           	        <f:selectItem itemLabel="tipo2"        itemValue="2" />
+					</p:selectOneMenu>
+				</td>
+				
+         	</tr>
+         	
+         	<tr>
+				<td><p:outputLabel  value="Cuantificacion" /></td>
+                <td><p:outputLabel  value="Descripcion" /></td>
+			</tr>
+			<tr>
+               	<td>
+					<p:selectOneMenu  value="#{planificacionResultado.bean.cuantificacion}">
+						<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+	           	        <f:selectItem itemLabel="indicador1"        itemValue="1" />
+	           	        <f:selectItem itemLabel="indicador2"        itemValue="2" />
+					</p:selectOneMenu>
+				</td>
+				 <td>
+                <p:inputTextarea value="#{planificacionResultado.bean.descripcion}" cols="25" rows="3" />
+				</td>
+				
+         	</tr>
+         	
+            </table> 
+            </td>
+		</tr> 
+   		
+		</table>
+</p:panel> 		
+</h:form>
+</ui:define>
+</ui:composition>

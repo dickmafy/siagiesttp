@@ -1,0 +1,50 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmUpd" ajaxSubmit="false">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>    	        
+      	<p:breadCrumb style="background:#d5dfeb !important; border:1px solid #5880b3;">  
+    		<p:menuitem value="Seguridad" url="#" />  
+    		<p:menuitem value="Lista de variables (#{variableController.sizeBeanList})" actionListener="#{variableController.init}" style="color:#74a6cc !important; text-decoration:none; font-size:11px; font-weight:normal; position:relative; bottom:1.5px;" ajax="false"/>
+    		<p:menuitem value="Actualizar Variable - #{variableController.bean.nombre}" 		actionListener="#{variableController.nativeLoad}" 	style="color:#74a6cc !important; text-decoration:none; font-size:11px; font-weight:normal; position:relative; bottom:1.5px;" ajax="false"/>
+		</p:breadCrumb> 
+		
+      	<p:spacer height="4px"/>
+      	<p:menubar style="background:#f2f2f2 !important; border:1px solid #a5a5a5;">
+		   	<p:menuitem value="Regresar" 	actionListener="#{variableController.init}"			icon="icn_bar_back" 	style="color:black !important;" ajax="false"/>
+		   	<p:menuitem value="Guardar" 	actionListener="#{variableController.nativeUpdate}"	icon="icn_bar_save" 	style="color:black !important;" ajax="false"/>
+    	</p:menubar>  
+    	
+    	<p:spacer height="4px"/>    	
+    	<p:fieldset>  
+    	
+    		<table class="form_table">
+    			<tr>
+    			<td><p:outputLabel for="txtCod" value="Codigo" /></td>
+    			<td><p:outputLabel for="txtNom" value="Nombre" /></td>
+    			<td><p:outputLabel for="txtVal" value="Valor" /></td>
+    			</tr>
+    			
+    			<tr>
+    			<td><p:inputText id="txtCod" value="#{variableController.bean.codigo}" style="width:50px;" 	disabled="true"/></td>
+    			<td><p:inputText id="txtNom" value="#{variableController.bean.nombre}" style="width:200px;" disabled="true"/></td>
+    			<td><p:inputText id="txtVal" value="#{variableController.bean.valor}"  style="width:200px;"/></td>    			
+				</tr>
+				
+				<tr><td colspan="3"><p:outputLabel for="txtDes" value="Descripción"/></td></tr>
+				<tr><td colspan="3"><p:inputText id="txtDes" value="#{variableController.bean.descripcion}"  disabled="true" style="width:600px;"/></td></tr>
+    		</table>
+    		  
+		</p:fieldset> 
+      	
+      	
+		
+     </h:form>
+    </ui:define>
+        
+</ui:composition>

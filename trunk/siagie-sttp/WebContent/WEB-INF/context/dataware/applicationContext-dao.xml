@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="seguridadDAO" class="dataware.dao.impl.SeguridadDaoJpa"
+		scope="singleton" parent="genericDAO">
+	</bean>
+	
+	<bean id="generalDAO" class="dataware.dao.impl.GeneralDaoJpa"
+		scope="singleton" parent="seguridadDAO">
+	</bean>		
+	
+	<bean id="institucionDAO" class="dataware.dao.impl.InstitucionDaoJpa"
+		scope="singleton" parent="generalDAO">
+	</bean>
+	
+	<bean id="marcoDAO" class="dataware.dao.impl.MarcoDaoJpa"
+		scope="singleton" parent="institucionDAO">
+	</bean>
+	
+	<bean id="horarioDAO" class="dataware.dao.impl.HorarioDaoJpa"
+		scope="singleton" parent="marcoDAO">
+	</bean>
+	
+	<bean id="intranetDAO" class="dataware.dao.impl.IntranetDaoJpa"
+		scope="singleton" parent="horarioDAO">
+	</bean>
+	
+	<bean id="admisionDAO" class="dataware.dao.impl.AdmisionDaoJpa"
+		scope="singleton" parent="horarioDAO">
+	</bean>
+	
+	<bean id="planificacionDAO" class="dataware.dao.impl.PlanificacionDaoJpa"
+		scope="singleton" parent="generalDAO">
+	</bean>
+
+</beans>

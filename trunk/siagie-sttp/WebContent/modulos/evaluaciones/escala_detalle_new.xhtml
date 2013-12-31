@@ -1,0 +1,43 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+     
+     
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="esc_det_list" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{evaluacionEscalaDetalle.nativeSave}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:panel header="Agregar Nueva Escala">     	
+    		<table class="form_table">
+    			
+    			
+    			<tr>    			
+    			   	<td><p:outputLabel for="txtNom" value="Nombre" /></td>
+    			   	<td><p:outputLabel for="txtLet" value="Letra" /></td>
+    			   	<td><p:outputLabel for="txtVal" value="Valor" /></td>		
+    			</tr>
+    			<tr>    			
+    			   	<td>
+    			    <p:inputText id="txtNom" value="#{evaluacionEscalaDetalle.bean.nombre}"  size="60"/>
+					</td>
+					<td><p:inputText id="txtLet" value="#{evaluacionEscalaDetalle.bean.letra}"  size="60"/></td>
+					<td><p:inputText id="txtVal" value="#{evaluacionEscalaDetalle.bean.valor}"  size="60"/></td>			
+    			</tr>   		
+    						
+    		</table>    		  
+		</p:panel> 		
+     </h:form>
+    </ui:define>
+        
+</ui:composition>

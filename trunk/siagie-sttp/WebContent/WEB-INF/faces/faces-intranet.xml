@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+    
+    <!-- JSF and Spring are integrated -->
+    <application>
+  		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+  	</application>
+  	
+  	<!-- Docente -->
+  	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>docente_silabo</from-outcome>
+			<to-view-id>/modulos/intranet/docente_silabo.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+  	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case> 
+			<from-outcome>docente_silabo_crit</from-outcome>
+			<to-view-id>/modulos/intranet/docente_silabo_criterios.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>docente_silabo_cont</from-outcome>
+			<to-view-id>/modulos/intranet/docente_silabo_contenido.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>docente_silabo_cont_new</from-outcome>
+			<to-view-id>/modulos/intranet/docente_silabo_contenido_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>docente_silabo_cont_upd</from-outcome>
+			<to-view-id>/modulos/intranet/docente_silabo_contenido_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>docente_silabo_dat</from-outcome>
+			<to-view-id>/modulos/intranet/docente_silabo_datos.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>docente_asistencia</from-outcome>
+			<to-view-id>/modulos/intranet/docente_asistencia.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>docente_asistencia_ambiente</from-outcome>
+			<to-view-id>/modulos/intranet/docente_asistencia_ambiente.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>docente_asistencia_alumno</from-outcome>
+			<to-view-id>/modulos/intranet/docente_asistencia_alumno.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<!-- INTRANET ALUMNO -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>AlumnoList</from-outcome>
+			<to-view-id>/modulos/intranet/alumno/AlumnoList.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>AlumnoNota</from-outcome>
+			<to-view-id>/modulos/intranet/alumno/AlumnoNota.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>AlumnoAsistencia</from-outcome>
+			<to-view-id>/modulos/intranet/alumno/AlumnoAsistencia.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<!-- INTRANET DOCENTE-->
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>DocenteSilaboList</from-outcome>
+			<to-view-id>/modulos/intranet/docente/DocenteSilaboList.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>DocenteSilaboFecha</from-outcome>
+			<to-view-id>/modulos/intranet/docente/DocenteSilaboFecha.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>DocenteSilaboNota</from-outcome>
+			<to-view-id>/modulos/intranet/docente/DocenteSilaboNota.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>DocenteSilaboCT</from-outcome>
+			<to-view-id>/modulos/intranet/docente/DocenteSilaboCT.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>DocenteSilaboAsistenciaListFecha</from-outcome>
+			<to-view-id>/modulos/intranet/docente/DocenteSilaboAsistenciaListaFecha.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>DocenteSilaboAsistenciaListaAlumno</from-outcome>
+			<to-view-id>/modulos/intranet/docente/DocenteSilaboAsistenciaListaAlumno.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>DocenteAsistenciaAlumnoDetail</from-outcome>
+			<to-view-id>/modulos/intranet/docente/DocenteAsistenciaAlumnoDetail.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	
+</faces-config>

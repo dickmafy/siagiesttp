@@ -1,0 +1,130 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>  
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">
+	    		<p:spacer width="6px"/>
+	    		<p:outputLabel for="txtAnn" value="Año" style="position:relative;  top:-4px;"/>
+	    		<p:spacer width="6px"/>
+	    		<p:selectOneMenu id="txtAnn" value="#{horarioMetas.annio}" style="position:relative;  top:2px;">
+                    <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        <f:selectItem itemLabel="2013"  itemValue="2013" />
+           	        <f:selectItem itemLabel="2014" 	itemValue="2014" />
+           	        <f:selectItem itemLabel="2015" 	itemValue="2015" />
+           	        <f:selectItem itemLabel="2016" 	itemValue="2016" />
+           	        <f:selectItem itemLabel="2017" 	itemValue="2017" /> 
+           	        <p:ajax event="change" update=":frmList:txtPrc" listener="#{horarioMetas.selectAnnio}"/>       
+       	       	</p:selectOneMenu>
+       	       	<p:spacer width="11px"/>
+		        <p:outputLabel for="txtPrc" value="Proceso" style="position:relative;  top:-4px;"/>
+		   		<p:selectOneMenu id="txtPrc" value="#{horarioMetas.proceso}" style="position:relative;  top:3px; left:15px; width:270px">
+		   			<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+					<f:selectItems value="#{horarioMetas.procesoList}"/>
+					<p:ajax event="change" update=":frmList" listener="#{horarioMetas.defaultList}"/>
+				</p:selectOneMenu>
+				<p:spacer width="6px"/>
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+  
+   		<p:dataTable id="itemList" var="item" value="#{horarioMetas.beanList}" filteredValue="#{horarioMetas.beanFilterList}"
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom"
+   			paginator="true" rows="7"  
+        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+     		
+     		<f:facet name="header">
+				<h:outputText value="Meta Institucional" />  
+			</f:facet>
+							
+			<p:column headerText="Profesión" style="width:23%; align:center;" >   
+				<h:outputText value="#{item.nombreProfesion}"/>
+			</p:column>		
+			
+			<p:column headerText="Turno" style="width:10%; align:center;" >   
+				<h:outputText value="#{item.nombreTurno}"/>
+			</p:column>
+			
+			<p:column headerText="Meta Matricula" style="width:15%; align:center;" >   
+				<h:outputText value="#{item.meta_matricula}"/>
+			</p:column>	
+			
+			<p:column headerText="Estado" style="width:20%; align:center;" >   
+				<h:outputText value="#{item.nombreEstado}"/>
+			</p:column>
+			
+			<p:column headerText="Opciones" style="width:10%">  
+				<p:commandButton icon="icn_item_detail" 	title="Detalle de Metas" 	action="#{horarioMetas.optionGoDetalle}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{horarioMetas.beanSelected}" />
+				</p:commandButton> 
+				
+				<p:commandButton icon="icn_item_process" 	title="Iniciar Etapa Asignación Docentes" oncomplete="dialogDocMet.show()" rendered="#{item.estado eq 1}">
+					<f:setPropertyActionListener value="#{item}" target="#{horarioMetas.beanSelected}" />				
+				</p:commandButton>
+				
+				<p:commandButton icon="icn_item_teacher" 	title="Asignación de Docentes" 	action="#{horarioMetas.optionGoLectiva}" ajax="false" rendered="#{item.estado gt 1}">
+					<f:setPropertyActionListener value="#{item}" target="#{horarioMetas.beanSelected}" />
+				</p:commandButton>
+				
+				<p:commandButton icon="icn_item_process" 	title="Iniciar Etapa Registro de Silabos" oncomplete="dialogSilMet.show()" rendered="#{item.estado eq 2}">
+					<f:setPropertyActionListener value="#{item}" target="#{horarioMetas.beanSelected}" />				
+				</p:commandButton>
+				
+				<p:commandButton icon="icn_item_sillabo" 	title="Silabos" 	action="#{horarioMetas.optionGoSilabo}" ajax="false" rendered="#{item.estado gt 2}">
+					<f:setPropertyActionListener value="#{item}" target="#{horarioMetas.beanSelected}" />
+				</p:commandButton>  
+				
+				<p:commandButton icon="icn_item_process" 	title="Iniciar Etapa de Admisión" oncomplete="dialogAdmMet.show()" rendered="#{item.estado eq 3}">
+					<f:setPropertyActionListener value="#{item}" target="#{horarioMetas.beanSelected}" />				
+				</p:commandButton>
+        	</p:column>  
+        	      	        
+		</p:dataTable>
+		
+		
+	</h:form>
+		
+		<!-- Asignación Docente -->
+		<p:confirmDialog widgetVar="dialogDocMet" width="350" appendToBody="true"
+			header="Mensaje de Confirmacion" message="¿Estas seguro de iniciar con el Proceso de Asignación Docente?" style="font-size:13px;"
+        	closable="true" severity="alert" closeOnEscape="true">
+        	<h:form>	
+			<h:panelGroup style="text-align: right;" >
+				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogDocMet.hide()"  actionListener="#{horarioMetas.procesoAsignacion}"  update=":frmList"/>
+        		<p:commandButton value="No" id="cancelButton" onclick="dialogDocMet.hide()"/>   
+			</h:panelGroup>
+			</h:form>	
+   		</p:confirmDialog>
+   		
+   		<!-- Silabos Docente -->
+		<p:confirmDialog widgetVar="dialogSilMet" width="350" appendToBody="true"
+			header="Mensaje de Confirmacion" message="¿Estas seguro de iniciar con e Proceso de Registro de Sílabos?" style="font-size:13px;"
+        	closable="true" severity="alert" closeOnEscape="true">
+        	<h:form>	
+			<h:panelGroup style="text-align: right;" >
+				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogSilMet.hide()"  actionListener="#{horarioMetas.procesoSilabo}"  update=":frmList"/>
+        		<p:commandButton value="No" id="cancelButton" onclick="dialogSilMet.hide()"/>   
+			</h:panelGroup>
+			</h:form>	
+   		</p:confirmDialog>
+   		
+   		<!-- Proceso de Admisión -->
+		<p:confirmDialog widgetVar="dialogAdmMet" width="350" appendToBody="true"
+			header="Mensaje de Confirmacion" message="¿Estas seguro de iniciar con el Proceso de Admisión?" style="font-size:13px;"
+        	closable="true" severity="alert" closeOnEscape="true">
+        	<h:form>	
+			<h:panelGroup style="text-align: right;" >
+				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogAdmMet.hide()"  actionListener="#{horarioMetas.procesoAdmision}"  update=":frmList"/>
+        		<p:commandButton value="No" id="cancelButton" onclick="dialogAdmMet.hide()"/>   
+			</h:panelGroup>
+			</h:form>	
+   		</p:confirmDialog>
+   		
+    </ui:define>
+</ui:composition>

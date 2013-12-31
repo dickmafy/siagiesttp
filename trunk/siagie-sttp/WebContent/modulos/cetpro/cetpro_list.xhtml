@@ -1,0 +1,74 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>  
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">
+	    	<p:spacer height="6px"/>
+		   		<p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{cetproOferta.nativeNew}"  ajax="false" style="position:relative;  top:-4px;"/>
+	    		<p:spacer width="6px"/>		
+	    			<p:selectOneMenu id="txtAnn" value="#{cetproOferta.annio}" style="position:relative;  top:2px;">
+                   		<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        	<f:selectItem itemLabel="2013"  itemValue="2013" />
+           	        	<f:selectItem itemLabel="2014" 	itemValue="2014" />
+           	       	 	<f:selectItem itemLabel="2015" 	itemValue="2015" />
+           	        	<f:selectItem itemLabel="2016" 	itemValue="2016" />
+           	        	<f:selectItem itemLabel="2017" 	itemValue="2017" /> 
+       	       		</p:selectOneMenu>		
+				<p:spacer width="6px"/>
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+  
+   		<p:dataTable id="itemList" var="item" value="#{cetproOferta.beanList}" filteredValue="#{cetproOferta.beanFilterList}"
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom" >
+     		
+     		<f:facet name="header">
+				<h:outputText value="Listado de Oferta por Contextualización" />  
+			</f:facet>
+								
+			<p:column headerText="Tipo" style="width:15%; align:center;" >   
+				<h:outputText value="#{item.nombreTipo}" title="UNIDAD DIDÁCTICA: #{item.nombreTipo}"/>
+			</p:column>
+			
+			<p:column headerText="Responsable" style="width:35%; align:center;" >   
+				<h:outputText value="#{item.beanResponsable.nombres} #{item.beanResponsable.apepat} #{item.beanResponsable.apemat}"/>
+			</p:column>	
+			<p:column headerText="Titulo" style="width:25%; align:center;" >   
+				<h:outputText value="#{item.titulo}"/>
+			</p:column>
+			<p:column headerText="Fecha Inicio" style="width:15%; align:center;" >   
+				<h:outputText value="#{item.fecha_inicio}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+   				</h:outputText>	 
+			</p:column>
+			<p:column headerText="Fecha Termino" style="width:15%; align:center;" >   
+				<h:outputText value="#{item.fecha_termino}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Estado" style="width:15%; align:center;" >   
+				<h:outputText value="#{item.nombreEstado}"/>
+			</p:column>
+			
+			<p:column headerText="Opciones" style="width:7%">  
+				<p:commandButton icon="icn_item_update" 	title="Datos Generales" 		action="#{cetproOferta.nativeLoad}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{cetproOferta.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_prf_educativo" 	title="Itinerario" 		action="#{cetproOferta.optionGoItinerario}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{cetproOferta.beanSelected}" />
+				</p:commandButton>
+        	</p:column>  
+        	      	        
+		</p:dataTable>
+		
+		
+	</h:form>
+    </ui:define>
+</ui:composition>

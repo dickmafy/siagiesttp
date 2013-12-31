@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+    
+    <!-- JSF and Spring are integrated -->
+     <application>
+  		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+  	</application>
+  	
+
+	<!-- Institución -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>itc_lst</from-outcome>
+			<to-view-id>/modulos/administracion/institucion_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>itc_new</from-outcome>
+			<to-view-id>/modulos/administracion/institucion_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>itc_upd</from-outcome>
+			<to-view-id>/modulos/administracion/institucion_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Local por Institución -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_loc_lst</from-outcome>
+			<to-view-id>/modulos/administracion/local_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_loc_new</from-outcome>
+			<to-view-id>/modulos/administracion/local_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_loc_upd</from-outcome>
+			<to-view-id>/modulos/administracion/local_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Ambiente por Institución -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_amb_lst</from-outcome>
+			<to-view-id>/modulos/administracion/ambiente_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_amb_new</from-outcome>
+			<to-view-id>/modulos/administracion/ambiente_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_amb_upd</from-outcome>
+			<to-view-id>/modulos/administracion/ambiente_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Oferta Educativa por Institución -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_ofer_lst</from-outcome>
+			<to-view-id>/modulos/administracion/oferta_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_ofer_new</from-outcome>
+			<to-view-id>/modulos/administracion/oferta_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_ofer_upd</from-outcome>
+			<to-view-id>/modulos/administracion/oferta_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Cronograma de Admisión por Institución -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_crn_lst</from-outcome>
+			<to-view-id>/modulos/administracion/cronograma_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_crn_new</from-outcome>
+			<to-view-id>/modulos/administracion/cronograma_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_crn_upd</from-outcome>
+			<to-view-id>/modulos/administracion/cronograma_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Personal por Institución -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_prs_lst</from-outcome>
+			<to-view-id>/modulos/administracion/personal_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_prs_new</from-outcome>
+			<to-view-id>/modulos/administracion/personal_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_prs_upd</from-outcome>
+			<to-view-id>/modulos/administracion/personal_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Historial Laboral por Personal -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>prs_lab_list</from-outcome>
+			<to-view-id>/modulos/administracion/historial_laboral_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>prs_lab_new</from-outcome>
+			<to-view-id>/modulos/administracion/historial_laboral_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>prs_lab_update</from-outcome>
+			<to-view-id>/modulos/administracion/historial_laboral_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Historial Academico por Personal -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>prs_acd_list</from-outcome>
+			<to-view-id>/modulos/administracion/historial_academico_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>prs_acd_new</from-outcome>
+			<to-view-id>/modulos/administracion/historial_academico_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>prs_acd_update</from-outcome>
+			<to-view-id>/modulos/administracion/historial_academico_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Usuario por Institución -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_usr_lst</from-outcome>
+			<to-view-id>/modulos/administracion/usuario_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_usr_new</from-outcome>
+			<to-view-id>/modulos/administracion/usuario_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>adm_usr_upd</from-outcome>
+			<to-view-id>/modulos/administracion/usuario_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- EVALUACION -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>solicitud_eval</from-outcome>
+			<to-view-id>/modulos/administracion/solicitud_eval.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>solicitud_eval_update</from-outcome>
+			<to-view-id>/modulos/administracion/solicitud_eval_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Convenio -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cnv_lst</from-outcome>
+			<to-view-id>/modulos/administracion/convenio_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cnv_new</from-outcome>
+			<to-view-id>/modulos/administracion/convenio_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cnv_upd</from-outcome>
+			<to-view-id>/modulos/administracion/convenio_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- MetaOcupacional -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>metaocup_lst</from-outcome>
+			<to-view-id>/modulos/administracion/meta_ocupacional_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>metaocup_new</from-outcome>
+			<to-view-id>/modulos/administracion/meta_ocupacional_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>metaocup_upd</from-outcome>
+			<to-view-id>/modulos/administracion/meta_ocupacional_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Meta Institucional -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>meta_institucional_list</from-outcome>
+			<to-view-id>/modulos/administracion/meta_institucional_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>meta_institucional_new</from-outcome>
+			<to-view-id>/modulos/administracion/meta_institucional_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>meta_institucional_update</from-outcome>
+			<to-view-id>/modulos/administracion/meta_institucional_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Meta Institucional DETALLE -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>meta_institucional_list_detail</from-outcome>
+			<to-view-id>/modulos/administracion/meta_institucional_list_detail.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>meta_institucional_list_detail_update</from-outcome>
+			<to-view-id>/modulos/administracion/meta_institucional_list_detail_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	
+</faces-config>

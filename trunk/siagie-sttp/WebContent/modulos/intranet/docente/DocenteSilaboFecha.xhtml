@@ -1,0 +1,69 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="DocenteSilaboList" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{docenteSilaboFecha.guardarCreacionFechas}" ajax="false" />
+		        
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      
+		
+		<h:outputText value="Fecha Inicio" />  
+		<p:calendar id="txtFei" value="#{docenteSilaboFecha.fecha_inicio}" showOn="button"  size="10"/>
+		
+		<h:outputText value="Cantidad de Clases" />  
+		<p:inputText value="#{docenteSilaboFecha.cantidad_clases}" style="width:90px" />
+		 
+		 
+		<p:selectCheckboxMenu value="#{docenteSilaboFecha.listaDiasSeleccionados}" 
+		label="Dias" filter="true" filterText="Filter" filterMatchMode="startsWith"   style="position:relative;  top:+14px;">  
+        	<f:selectItems value="#{docenteSilaboFecha.listaDias}"  />  
+	    </p:selectCheckboxMenu>  
+    
+     	
+        <p:commandButton title="Crear Fechas" 	value="Crear Fechas" 	icon="icn_bar_new" actionListener="#{docenteSilaboFecha.generarFechas}" ajax="false" />  
+		
+	      	<p:dataTable id="itemList" var="item" value="#{docenteSilaboFecha.listFechas}" filteredValue="#{docenteSilaboFecha.beanFilterList}"
+	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom"
+	   			paginator="true" rows="20"  rowIndexVar="rowNumber" scrollable="true"
+	        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+	     		
+	     		<f:facet name="header">
+					<h:outputText value="Creacion de Fechas" />  
+				</f:facet>
+							
+				<p:column headerText="#" style="width:5%; align:center;">
+					<h:outputText value="#{rowNumber+1}"/>  
+				</p:column>
+					
+				<p:column headerText="Dia" style="width:5%; align:center;" sortBy="#{item.dia}">
+					<h:outputText value="#{item.dia}"/>
+				</p:column>		
+				
+				<p:column headerText="fechaListada" style="width:50%; align:center;" sortBy="#{item.fechaListada}" >   
+					<h:outputText value="#{item.fechaListada}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>
+				
+			       	      	        
+			</p:dataTable>
+		
+		
+		
+		
+     </h:form>
+     
+    </ui:define>
+</ui:composition>

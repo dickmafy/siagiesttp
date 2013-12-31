@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+    
+    <!-- JSF and Spring are integrated -->
+     <application>
+  		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+  	</application>
+  	
+
+	<!-- Meta -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>hor_meta_list</from-outcome>
+			<to-view-id>/modulos/horarios/meta_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Detalle de Meta -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>hor_meta_det</from-outcome>
+			<to-view-id>/modulos/horarios/meta_detail.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Secciones -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>hor_meta_sec</from-outcome>
+			<to-view-id>/modulos/horarios/meta_seccion.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Horario -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>hor_meta_hor</from-outcome>
+			<to-view-id>/modulos/horarios/meta_seccion_horario.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Horas Lectivas -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>hor_meta_lec</from-outcome>
+			<to-view-id>/modulos/horarios/meta_lectivas.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Silabo -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>hor_meta_sil</from-outcome>
+			<to-view-id>/modulos/horarios/meta_silabo.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Docente -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>hor_asis_doc</from-outcome>
+			<to-view-id>/modulos/horarios/horario_recuperacion_docente.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>docente_recuperacion</from-outcome>
+			<to-view-id>/modulos/horarios/docente_recuperacion.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>hor_just_doc</from-outcome>
+			<to-view-id>/modulos/horarios/horario_justificacion_docente.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>docente_justificacion</from-outcome>
+			<to-view-id>/modulos/horarios/docente_justificacion.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+</faces-config>

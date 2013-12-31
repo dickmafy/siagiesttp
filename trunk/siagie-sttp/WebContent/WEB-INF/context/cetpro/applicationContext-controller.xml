@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="cetproOferta" class="modules.cetpro.controller.CetproOferta" scope="session" parent="genericController">	  
+	    <property name="bean" ref="ofertaEducativa"/>
+	  	<property name="myService" 	ref="seguridadService"/>
+	</bean>
+	
+	<bean id="cetproItinerario" class="modules.cetpro.controller.CetproItinerario" scope="session" parent="genericController">	  
+	    <property name="bean" ref="itinerarioCetpro"/>
+	  	<property name="myService" 	ref="seguridadService"/>
+	</bean>
+	
+	<bean id="cetproContex" class="modules.cetpro.controller.CetproContex" scope="session" parent="genericController">	  
+	    <property name="bean" ref="contexCetpro"/>
+	  	<property name="myService" 	ref="seguridadService"/>
+	</bean>
+	
+	<bean id="cetproCrono" class="modules.cetpro.controller.CetproCrono" scope="session" parent="genericController">	  
+	    <property name="bean" ref="cronoCetpro"/>
+	  	<property name="myService" 	ref="seguridadService"/>
+	</bean>
+	
+	<bean id="cetproProg" class="modules.cetpro.controller.CetproProg" scope="session" parent="genericController">	  
+	    <property name="bean" ref="progCetpro"/>
+	  	<property name="myService" 	ref="seguridadService"/>
+	</bean>
+	
+
+
+</beans>

@@ -1,0 +1,75 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+     
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left"> 
+	    	 
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="DocenteSilaboList" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{docenteSilaboNota.guardarNotas}" ajax="false" />
+		     
+			</p:toolbarGroup>
+			  
+  		</p:toolbar>
+  		
+  				
+      	<p:spacer height="4px"/>
+      	  
+    	   		<p:selectOneMenu  value="#{docenteSilaboNota.pk_unidad_ctSeleccionado}" filter="true" filterMatchMode="startsWith" >
+					<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+					<f:selectItems value="#{docenteSilaboNota.listarCT}" var="item" itemValue="#{item.ctSilaboUnidadCt.id}" itemLabel="CT: #{item.referenteEducativo.descripcion}"/>
+					<p:ajax update="frmNew:dt_notasFecha" listener="#{docenteSilaboNota.reloadNotas}"></p:ajax>
+				</p:selectOneMenu>
+				
+				
+			<p:dataTable id="dt_notasFecha" var="item" value="#{docenteSilaboNota.beanList}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+	     		
+	     		<p:columnGroup type="header">  
+		            <p:row>  
+		                <p:column colspan="3" headerText="Alumnos" />  
+		                <p:column rowspan="2" headerText="Nota" />  
+		            </p:row>  
+		  
+		            <p:row>
+		            
+		            	<p:column headerText="Apellido Paterno" />
+		            	<p:column headerText="Apellido Materno" />
+		            	<p:column headerText="Nombres" />
+		            	
+		            </p:row>
+		              
+		        </p:columnGroup>
+        
+				<p:column>   
+					<h:outputText value="#{item.persona.apellido_paterno}" />					  
+				</p:column>
+				
+				<p:column>   
+					<h:outputText value="#{item.persona.apellido_materno}" />					  
+				</p:column>
+	     		
+	     		<p:column>   
+					<h:outputText value="#{item.persona.nombres}" />					  
+				</p:column>
+				
+				<p:column >  
+	                   <p:inputText  value="#{item.nota}"  maxlength="4" style="width:40px; background-color : #{item.nota lt 13 ? '#F78181' : '#81F781' }" >
+	                   </p:inputText>
+				</p:column>
+		       	    
+		           	      
+		</p:dataTable> 
+			
+		
+     </h:form>
+     
+    </ui:define>
+</ui:composition>

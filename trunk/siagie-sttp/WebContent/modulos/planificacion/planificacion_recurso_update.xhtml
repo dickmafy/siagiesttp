@@ -1,0 +1,104 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false" enctype="multipart/form-data">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="planificacion_recurso_list" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{planificacionRecurso.nativeUpdate}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:panel header=" Agregar Nuevo Recurso">
+       	<table>
+      
+	    
+	    <tr>
+   			<td>
+   			<table>
+	    	<tr>
+				<td><p:outputLabel  value="Año" /></td>
+                <td><p:outputLabel  value="Concepto" /></td>
+			</tr>
+			<tr>
+               	<td>
+					<p:selectOneMenu  value="#{planificacionRecurso.bean.anio}">
+						<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+	           	        <f:selectItem itemLabel="2014"        itemValue="2014" />
+	           	        <f:selectItem itemLabel="2015"        itemValue="2015" />
+	           	        <f:selectItem itemLabel="2016"        itemValue="2016" />
+	           	        <f:selectItem itemLabel="2017"        itemValue="2017" />
+	           	        
+					</p:selectOneMenu>
+				</td>
+				 <td>
+				 <p:selectOneMenu  value="#{planificacionRecurso.bean.concepto}">
+						<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+	           	        <f:selectItem itemLabel="concepto1"        itemValue="1" />
+	           	        <f:selectItem itemLabel="concepto2"        itemValue="2" />
+	           	        <f:selectItem itemLabel="concepto3"        itemValue="3" />
+	           	        <f:selectItem itemLabel="concepto4"        itemValue="4" />
+	           	        
+					</p:selectOneMenu>
+				</td>
+				
+				<td>
+				<p:inputTextarea value="#{planificacionRecurso.bean.descripcion}" cols="25" rows="3" />
+				</td>
+				
+				<td>
+				<p:inputText value="#{planificacionRecurso.bean.arrendante_contratante}"  />
+				</td>
+				
+			</tr>
+			
+			<tr>
+				<td><p:outputLabel  value="Periodicidad" /></td>
+                <td><p:outputLabel  value="Merced Ingreso" /></td>
+                <td><p:outputLabel  value="Fecha Inicio" /></td>
+                <td><p:outputLabel  value="Fecha Fin" /></td>
+                
+			</tr>
+			
+			<tr>
+			
+				<td>
+				 <p:selectOneMenu  value="#{planificacionRecurso.bean.periodicidad}">
+						<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+	           	        <f:selectItem itemLabel="prioricidad1"        itemValue="1" />
+	           	        <f:selectItem itemLabel="prioricidad2"        itemValue="2" />
+	           	        <f:selectItem itemLabel="prioricidad3"        itemValue="3" />
+	           	        <f:selectItem itemLabel="prioricidad4"        itemValue="4" />
+	           	        
+					</p:selectOneMenu>
+				</td>
+				
+				<td>
+				<p:inputText value="#{planificacionRecurso.bean.merced_ingreso}"  />
+				</td>
+				
+				<td><p:calendar    value="#{planificacionRecurso.bean.fecha_inicio}"  showOn="button" navigator="true" pattern="dd/MM/yyyy" yearRange="c-60" size="10" /></td>
+				
+				<td><p:calendar    value="#{planificacionRecurso.bean.fecha_fin}"  showOn="button" navigator="true" pattern="dd/MM/yyyy"  yearRange="c-60" size="10" /></td>
+				
+         	</tr>
+         	
+         	<tr><td><p:outputLabel for="txtDoc"  value="Adjuntar Documento PDF" /></td></tr>
+	   		<tr><td><p:fileUpload value="#{planificacionRecurso.docpdf}" id="txtDoc" mode="simple" /></td></tr>
+	   	
+            </table> 
+            </td>
+		</tr> 
+   		
+		</table>
+</p:panel> 		
+</h:form>
+</ui:define>
+</ui:composition>

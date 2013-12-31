@@ -1,0 +1,106 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="7000" escape="true"/>  
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">
+	    		<p:spacer width="6px"/>
+	    		
+	    		<p:outputLabel for="txtAnn" value="Año  " style="position:relative;  top:-4px;"/>
+	    		<p:selectOneMenu id="txtAnn" value="#{docenteSilabo.annio}" style="position:relative;  top:2px; width:120px">
+                    <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        <f:selectItem itemLabel="2013"  itemValue="2013" />
+           	        <f:selectItem itemLabel="2014" 	itemValue="2014" />
+           	        <f:selectItem itemLabel="2015" 	itemValue="2015" />
+           	        <f:selectItem itemLabel="2016" 	itemValue="2016" />
+           	        <f:selectItem itemLabel="2017" 	itemValue="2017" /> 
+           	        <p:ajax event="change" update=":frmList" listener="#{docenteSilabo.selectAnnio}"/>       
+       	       	</p:selectOneMenu>
+       	       	
+       	       	<p:outputLabel for="txtPrc" value="     Proceso  " style="position:relative;  top:-4px;"/>
+		   		<p:selectOneMenu id="txtPrc" value="#{docenteSilabo.proceso}" style="position:relative;  top:3px; width:120px">
+		   			<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+					<f:selectItems value="#{docenteSilabo.procesoList}"/>
+					<p:ajax event="change" update=":frmList" listener="#{docenteSilabo.defaultList}"/>
+				</p:selectOneMenu>
+				
+				<p:spacer width="6px"/>
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+  
+   		<p:dataTable id="itemList" var="item" value="#{docenteSilabo.beanList}"
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom" >
+     		
+     		<f:facet name="header">
+				<h:outputText value="Lista de Silabos" />  
+			</f:facet>
+							
+			<p:column headerText="Profesión" style="width:20%; align:center;" >   
+				<h:outputText value="#{item.nombreProfesion}" title="#{item.nombreProfesion}"/>
+			</p:column>
+			
+			<p:column headerText="Turno" style="width:5%; align:center;" >   
+				<h:outputText value="#{item.nombreTurno}"/>
+			</p:column>
+				
+			<p:column headerText="Módulo" style="width:5%; align:center;" >   
+				<h:outputText value="MP#{item.valorModulo}" title="MÓDULO PROFESIONAL: #{item.nombreModulo}" rendered="#{item.valorTipoModulo eq 1}"/>
+				<h:outputText value="MT" title="MÓDULO TRANSVERSAL: #{item.nombreModulo}" rendered="#{item.valorTipoModulo eq 2}"/>
+			</p:column>		
+			
+			<p:column headerText="Unidad Didactica" style="width:40%; align:center;" >   
+				<h:outputText value="#{item.nombreUnidad} (Horas: #{item.valorHoras})" title="UNIDAD DIDACTICA: #{item.nombreUnidad} "/>
+			</p:column>
+			
+			<p:column headerText="Sección" style="width:5%; align:center;" >   
+				<h:outputText value="#{item.nombre}"/>
+			</p:column>	
+			
+			<p:column headerText="Estado" style="width:25%; align:center;" >   
+				<h:outputText value="#{item.nombreEstado}"/>
+			</p:column>
+			
+			<p:column headerText="Opciones" style="width:12%">
+								
+				<p:commandButton icon="icn_item_sillabo" 	title="Ver Sílabo" 	action="#{docenteSilabo.optionGoSilabo}" ajax="false" rendered="#{item.estado gt 1}">
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilabo.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_item_update" 	title="Datos Generales" 	action="#{docenteSilabo.optionGoDetalle}" ajax="false" rendered="#{item.estado lt 2}">
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilabo.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="book_contenido" 		title="Contenido Básico" 	action="#{docenteSilabo.optionGoContenido}" ajax="false" rendered="#{item.estado lt 2}">
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilabo.beanSelected}" />
+				</p:commandButton> 
+				<p:commandButton icon="book_criterio" 		title="Criterios de Evaluación" 	action="#{docenteSilabo.optionGoCriterio}" ajax="false" rendered="#{item.estado lt 2}">
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilabo.beanSelected}" />
+				</p:commandButton>
+				
+				<p:commandButton icon="icn_item_send" 	title="Enviar" 	oncomplete="dialogSilSend.show()" rendered="#{item.estado lt 2}">
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilabo.beanSelected}" />				
+				</p:commandButton>
+			</p:column>     
+		</p:dataTable>
+		
+		
+	</h:form>
+	
+		<p:confirmDialog widgetVar="dialogSilSend" width="350" appendToBody="true"
+			header="Mensaje de Confirmacion" message="¿Estas seguro de enviar el Silabo para su evaluación?" style="font-size:13px;"
+        	closable="true" severity="alert" closeOnEscape="true">
+        	<h:form>	
+			<h:panelGroup style="text-align: right;" >
+				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogSilSend.hide()"  actionListener="#{docenteSilabo.optionSend}"  update=":frmList"/>
+        		<p:commandButton value="No" id="cancelButton" onclick="dialogSilSend.hide()"/>   
+			</h:panelGroup>
+			</h:form>	
+   		</p:confirmDialog>
+   		
+    </ui:define>
+</ui:composition>
