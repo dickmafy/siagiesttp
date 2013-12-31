@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="docente_silabo::#modulos#intranet#docente_silabo.xhtml"
+    NAME="output" PATH="/modulos/intranet/docente_silabo.xhtml"
+    TARGET="rules:#modulos#intranet#docente_silabo.xhtml"
+    TITLE="docente_silabo" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:1" PATH="*" SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:1" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="docente_silabo_crit::#modulos#intranet#docente_silabo_criterios.xhtml"
+    NAME="output"
+    PATH="/modulos/intranet/docente_silabo_criterios.xhtml"
+    TARGET="rules:#modulos#intranet#docente_silabo_criterios.xhtml"
+    TITLE="docente_silabo_crit" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:2" PATH="*" SHAPE="32,241,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:2" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="docente_silabo_cont::#modulos#intranet#docente_silabo_contenido.xhtml"
+    NAME="output"
+    PATH="/modulos/intranet/docente_silabo_contenido.xhtml"
+    TARGET="rules:#modulos#intranet#docente_silabo_contenido.xhtml"
+    TITLE="docente_silabo_cont" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:3" PATH="*" SHAPE="32,353,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:3" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="docente_silabo_cont_new::#modulos#intranet#docente_silabo_contenido_new.xhtml"
+    NAME="output"
+    PATH="/modulos/intranet/docente_silabo_contenido_new.xhtml"
+    TARGET="rules:#modulos#intranet#docente_silabo_contenido_new.xhtml"
+    TITLE="docente_silabo_cont_new" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:4" PATH="*" SHAPE="32,465,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:4" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="docente_silabo_cont_upd::#modulos#intranet#docente_silabo_contenido_update.xhtml"
+    NAME="output"
+    PATH="/modulos/intranet/docente_silabo_contenido_update.xhtml"
+    TARGET="rules:#modulos#intranet#docente_silabo_contenido_update.xhtml"
+    TITLE="docente_silabo_cont_upd" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:5" PATH="*" SHAPE="32,577,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:5" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="docente_silabo_dat::#modulos#intranet#docente_silabo_datos.xhtml"
+    NAME="output" PATH="/modulos/intranet/docente_silabo_datos.xhtml"
+    TARGET="rules:#modulos#intranet#docente_silabo_datos.xhtml"
+    TITLE="docente_silabo_dat" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:6" PATH="*" SHAPE="32,689,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:6" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="docente_asistencia::#modulos#intranet#docente_asistencia.xhtml"
+    NAME="output" PATH="/modulos/intranet/docente_asistencia.xhtml"
+    TARGET="rules:#modulos#intranet#docente_asistencia.xhtml"
+    TITLE="docente_asistencia" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:7" PATH="*" SHAPE="32,801,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:7" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="docente_asistencia_ambiente::#modulos#intranet#docente_asistencia_ambiente.xhtml"
+    NAME="output"
+    PATH="/modulos/intranet/docente_asistencia_ambiente.xhtml"
+    TARGET="rules:#modulos#intranet#docente_asistencia_ambiente.xhtml"
+    TITLE="docente_asistencia_ambiente" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:8" PATH="*" SHAPE="32,913,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:8" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="docente_asistencia_alumno::#modulos#intranet#docente_asistencia_alumno.xhtml"
+    NAME="output"
+    PATH="/modulos/intranet/docente_asistencia_alumno.xhtml"
+    TARGET="rules:#modulos#intranet#docente_asistencia_alumno.xhtml"
+    TITLE="docente_asistencia_alumno" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#modulos#intranet#docente_silabo.xhtml"
+  PATH="/modulos/intranet/docente_silabo.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modulos#intranet#docente_asistencia.xhtml"
+  PATH="/modulos/intranet/docente_asistencia.xhtml" SHAPE="240,705,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modulos#intranet#docente_silabo_datos.xhtml"
+  PATH="/modulos/intranet/docente_silabo_datos.xhtml"
+  SHAPE="240,593,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modulos#intranet#docente_silabo_criterios.xhtml"
+  PATH="/modulos/intranet/docente_silabo_criterios.xhtml"
+  SHAPE="240,145,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modulos#intranet#docente_silabo_contenido.xhtml"
+  PATH="/modulos/intranet/docente_silabo_contenido.xhtml"
+  SHAPE="240,257,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modulos#intranet#docente_asistencia_ambiente.xhtml"
+  PATH="/modulos/intranet/docente_asistencia_ambiente.xhtml"
+  SHAPE="240,817,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modulos#intranet#docente_silabo_contenido_update.xhtml"
+  PATH="/modulos/intranet/docente_silabo_contenido_update.xhtml"
+  SHAPE="240,481,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modulos#intranet#docente_asistencia_alumno.xhtml"
+  PATH="/modulos/intranet/docente_asistencia_alumno.xhtml"
+  SHAPE="240,929,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modulos#intranet#docente_silabo_contenido_new.xhtml"
+  PATH="/modulos/intranet/docente_silabo_contenido_new.xhtml"
+  SHAPE="240,369,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:*:9" PATH="*" SHAPE="32,1025,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:9" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="AlumnoList::#modulos#intranet#alumno#AlumnoList.xhtml"
+    NAME="output" PATH="/modulos/intranet/alumno/AlumnoList.xhtml"
+    TARGET="rules:#modulos#intranet#alumno#AlumnoList.xhtml"
+    TITLE="AlumnoList" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:10" PATH="*" SHAPE="32,1137,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:10" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="AlumnoNota::#modulos#intranet#alumno#AlumnoNota.xhtml"
+    NAME="output" PATH="/modulos/intranet/alumno/AlumnoNota.xhtml"
+    TARGET="rules:#modulos#intranet#alumno#AlumnoNota.xhtml"
+    TITLE="AlumnoNota" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:11" PATH="*" SHAPE="32,1249,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:11" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="AlumnoAsistencia::#modulos#intranet#alumno#AlumnoAsistencia.xhtml"
+    NAME="output" PATH="/modulos/intranet/alumno/AlumnoAsistencia.xhtml"
+    TARGET="rules:#modulos#intranet#alumno#AlumnoAsistencia.xhtml"
+    TITLE="AlumnoAsistencia" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:12" PATH="*" SHAPE="32,1361,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:12" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="DocenteSilaboList::#modulos#intranet#docente#DocenteSilaboList.xhtml"
+    NAME="output"
+    PATH="/modulos/intranet/docente/DocenteSilaboList.xhtml"
+    TARGET="rules:#modulos#intranet#docente#DocenteSilaboList.xhtml"
+    TITLE="DocenteSilaboList" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:13" PATH="*" SHAPE="32,1473,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:13" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="DocenteSilaboFecha::#modulos#intranet#docente#DocenteSilaboFecha.xhtml"
+    NAME="output"
+    PATH="/modulos/intranet/docente/DocenteSilaboFecha.xhtml"
+    TARGET="rules:#modulos#intranet#docente#DocenteSilaboFecha.xhtml"
+    TITLE="DocenteSilaboFecha" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:14" PATH="*" SHAPE="32,1585,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:14" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="DocenteSilaboNota::#modulos#intranet#docente#DocenteSilaboNota.xhtml"
+    NAME="output"
+    PATH="/modulos/intranet/docente/DocenteSilaboNota.xhtml"
+    TARGET="rules:#modulos#intranet#docente#DocenteSilaboNota.xhtml"
+    TITLE="DocenteSilaboNota" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:15" PATH="*" SHAPE="32,1697,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:15" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="DocenteSilaboCT::#modulos#intranet#docente#DocenteSilaboCT.xhtml"
+    NAME="output" PATH="/modulos/intranet/docente/DocenteSilaboCT.xhtml"
+    TARGET="rules:#modulos#intranet#docente#DocenteSilaboCT.xhtml"
+    TITLE="DocenteSilaboCT" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:16" PATH="*" SHAPE="32,1809,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:16" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="DocenteSilaboAsistenciaListFecha::#modulos#intranet#docente#DocenteSilaboAsistenciaListaFecha.xhtml"
+    NAME="output"
+    PATH="/modulos/intranet/docente/DocenteSilaboAsistenciaListaFecha.xhtml"
+    TARGET="rules:#modulos#intranet#docente#DocenteSilaboAsistenciaListaFecha.xhtml"
+    TITLE="DocenteSilaboAsistenciaListFecha" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:17" PATH="*" SHAPE="32,1921,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:17" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="DocenteSilaboAsistenciaListaAlumno::#modulos#intranet#docente#DocenteSilaboAsistenciaListaAlumno.xhtml"
+    NAME="output"
+    PATH="/modulos/intranet/docente/DocenteSilaboAsistenciaListaAlumno.xhtml"
+    TARGET="rules:#modulos#intranet#docente#DocenteSilaboAsistenciaListaAlumno.xhtml"
+    TITLE="DocenteSilaboAsistenciaListaAlumno" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:*:18" PATH="*" SHAPE="32,2033,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:18" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="DocenteAsistenciaAlumnoDetail::#modulos#intranet#docente#DocenteAsistenciaAlumnoDetail.xhtml"
+    NAME="output"
+    PATH="/modulos/intranet/docente/DocenteAsistenciaAlumnoDetail.xhtml"
+    TARGET="rules:#modulos#intranet#docente#DocenteAsistenciaAlumnoDetail.xhtml"
+    TITLE="DocenteAsistenciaAlumnoDetail" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM
+  NAME="rules:#modulos#intranet#alumno#AlumnoAsistencia.xhtml"
+  PATH="/modulos/intranet/alumno/AlumnoAsistencia.xhtml"
+  SHAPE="240,1265,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modulos#intranet#docente#DocenteSilaboNota.xhtml"
+  PATH="/modulos/intranet/docente/DocenteSilaboNota.xhtml"
+  SHAPE="240,1601,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modulos#intranet#docente#DocenteAsistenciaAlumnoDetail.xhtml"
+  PATH="/modulos/intranet/docente/DocenteAsistenciaAlumnoDetail.xhtml"
+  SHAPE="240,2049,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modulos#intranet#alumno#AlumnoList.xhtml"
+  PATH="/modulos/intranet/alumno/AlumnoList.xhtml" SHAPE="240,1041,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modulos#intranet#docente#DocenteSilaboAsistenciaListaFecha.xhtml"
+  PATH="/modulos/intranet/docente/DocenteSilaboAsistenciaListaFecha.xhtml"
+  SHAPE="240,1825,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modulos#intranet#alumno#AlumnoNota.xhtml"
+  PATH="/modulos/intranet/alumno/AlumnoNota.xhtml" SHAPE="240,1153,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modulos#intranet#docente#DocenteSilaboCT.xhtml"
+  PATH="/modulos/intranet/docente/DocenteSilaboCT.xhtml"
+  SHAPE="240,1713,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modulos#intranet#docente#DocenteSilaboList.xhtml"
+  PATH="/modulos/intranet/docente/DocenteSilaboList.xhtml"
+  SHAPE="240,1377,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modulos#intranet#docente#DocenteSilaboAsistenciaListaAlumno.xhtml"
+  PATH="/modulos/intranet/docente/DocenteSilaboAsistenciaListaAlumno.xhtml"
+  SHAPE="240,1937,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modulos#intranet#docente#DocenteSilaboFecha.xhtml"
+  PATH="/modulos/intranet/docente/DocenteSilaboFecha.xhtml"
+  SHAPE="240,1489,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

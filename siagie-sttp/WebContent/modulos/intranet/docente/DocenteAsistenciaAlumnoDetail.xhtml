@@ -1,0 +1,56 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		          <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="DocenteSilaboAsistenciaListaFecha" ajax="false" />
+		          <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{docenteSilaboAsistenciaListFecha.guardarAsistencia}" ajax="false" />
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+	
+		<p:dataTable id="dt_notasFecha" var="item" value="#{docenteSilaboAsistenciaListFecha.listSilaboAlumno}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+	     		
+	     		<f:facet name="header">
+				<h:outputText value="Lista de Asistencias" />  
+				</f:facet>
+			
+	     		<p:column headerText="pk_alumno " style="width:20%; align:center;"  rendered="false">   
+					<h:outputText value="#{item.pk_alumno}" />					  
+				</p:column>
+				
+				<p:column headerText="Alumno " style="width:20%; align:center;" >   
+					<h:outputText value="#{item.nombre}" />					  
+				</p:column>
+				
+				<p:column headerText="ok silabo cronograma" style="width:20%; align:center;"  rendered="false">   
+					<h:outputText value="#{item.pk_silabo_cronograma}" />					  
+				</p:column>
+	     		
+				<p:column headerText="Asistencia" style="width:33%">  
+					
+					<p:selectOneMenu id="asistencia" value="#{item.asistio}" style="width:150px; " disabled="true"> 
+               					 <f:selectItem itemLabel="Asistio" itemValue="1"  />
+               					 <f:selectItem itemLabel="No Asistio" itemValue="2"  />
+               		</p:selectOneMenu>
+
+				</p:column>		
+					        	      	        	        
+				          	        
+		</p:dataTable> 
+		
+		
+	</h:form>
+   		
+   	
+    </ui:define>
+</ui:composition>

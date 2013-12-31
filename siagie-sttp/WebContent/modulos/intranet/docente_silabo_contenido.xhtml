@@ -1,0 +1,131 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="docente_silabo" ajax="false" />
+		        <p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{docenteSilaboContenido.optionNew}" ajax="false" />
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	<p:fieldset>      	
+    		<table class="form_table" style="width:100%">
+    		<tr>
+    			<td width="5%"><p:outputLabel styleClass="form_readonly_title" value="Año" /></td>
+    			<td width="8%"><p:outputLabel styleClass="form_readonly_value" value="#{docenteSilabo.annio}" /></td>
+    			
+    			<td width="9%"><p:outputLabel styleClass="form_readonly_title" value="Profesión" /></td>
+    			<td width="66%"><p:outputLabel styleClass="form_readonly_value" value="#{docenteSilabo.beanSelected.nombreProfesion}" /></td>
+    		</tr>
+    		<tr>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Proceso" /></td>
+    			<td>
+    				<p:outputLabel styleClass="form_readonly_value" value="Enero" 		rendered="#{docenteSilabo.proceso eq 1}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Febrero" 	rendered="#{docenteSilabo.proceso eq 2}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Marzo" 		rendered="#{docenteSilabo.proceso eq 3}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Abril" 		rendered="#{docenteSilabo.proceso eq 4}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Mayo" 		rendered="#{docenteSilabo.proceso eq 5}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Junio" 		rendered="#{docenteSilabo.proceso eq 6}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Julio" 		rendered="#{docenteSilabo.proceso eq 7}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Agosto" 		rendered="#{docenteSilabo.proceso eq 8}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Septiembre" 	rendered="#{docenteSilabo.proceso eq 9}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Octubre" 	rendered="#{docenteSilabo.proceso eq 10}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Noviembre" 	rendered="#{docenteSilabo.proceso eq 11}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Diciembre" 	rendered="#{docenteSilabo.proceso eq 12}" />
+    			</td>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Módulo" /></td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{docenteSilabo.beanSelected.nombreModulo}" /></td>
+    		</tr>
+    		<tr>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Turno" /></td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{docenteSilabo.beanSelected.nombreTurno}"/></td>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Unidad Didáctica" /></td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{docenteSilabo.beanSelected.nombreUnidad} (#{docenteSilabo.beanSelected.valorHoras} horas) " /></td>
+    		</tr>
+    		<tr>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Sección" /></td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{docenteSilabo.beanSelected.nombre}"/></td>
+    		</tr>
+    		</table>
+    	</p:fieldset>
+    	<p:spacer height="4px"/>
+      	
+      	<p:dataTable id="esquemaList" var="item" value="#{docenteSilaboContenido.beanList}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+	     		
+     		<f:facet name="header">
+				<h:outputText value="CONTENIDO DE SILABO" />  
+			</f:facet>
+		
+			<p:column headerText="Semana" style="width:12%">
+				<p:commandLink >
+					<p:selectOneMenu value="#{item.semana}" style="width:120px;" rendered="#{item.actividad ne 0}">
+						<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        	<f:selectItem itemLabel="Semana 01"  	itemValue="1" />
+           	        	<f:selectItem itemLabel="Semana 02"  	itemValue="2" />
+           	        	<f:selectItem itemLabel="Semana 03"  	itemValue="3" />
+           	        	<f:selectItem itemLabel="Semana 04"  	itemValue="4" />
+           	        	<f:selectItem itemLabel="Semana 05"  	itemValue="5" />
+           	        	<f:selectItem itemLabel="Semana 06"  	itemValue="6" />
+           	        	<f:selectItem itemLabel="Semana 07"  	itemValue="7" />
+           	        	<f:selectItem itemLabel="Semana 08"  	itemValue="8" />
+           	        	<f:selectItem itemLabel="Semana 09"  	itemValue="9" />
+           	        	<f:selectItem itemLabel="Semana 10"  	itemValue="10" />
+           	        	<f:selectItem itemLabel="Semana 11"  	itemValue="11" />
+           	        	<f:selectItem itemLabel="Semana 12"  	itemValue="12" />
+           	        	<f:selectItem itemLabel="Semana 13"  	itemValue="13" />
+           	        	<f:selectItem itemLabel="Semana 14"  	itemValue="14" />
+           	        	<f:selectItem itemLabel="Semana 15"  	itemValue="15" />
+           	        	<f:selectItem itemLabel="Semana 16"  	itemValue="16" />
+           	        	<f:selectItem itemLabel="Semana 17"  	itemValue="17" />
+           	        	<f:selectItem itemLabel="Semana 18"  	itemValue="18" />
+						<p:ajax event="change" listener="#{docenteSilaboContenido.setSemana}" update=":frmNew"/>
+					</p:selectOneMenu>
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboContenido.beanSelected}" />
+				</p:commandLink>
+        	</p:column>  
+        	
+     		<p:column headerText="Descripción" style="width:45%; align:center;" sortBy="#{item.descripcion}">   
+				<h:outputText value="EC#{item.elemento}: #{item.descripcion}" title="ELEMENTO DE CAPACIDAD #{item.elemento}: #{item.descripcion}" rendered="#{item.actividad eq 0}" style="font-weight:bold"/>
+				<h:outputText value="    AA#{item.actividad}: #{item.descripcion}" title="ACTIVIDAD DE APRENDIZAJE #{item.actividad}: #{item.descripcion}" rendered="#{item.actividad ne 0}"/>		  
+			</p:column>	
+			
+			<p:column headerText="Contenido Básico" style="width:35%; align:center;" sortBy="#{item.contenido}">   
+				<h:outputText value="#{item.contenido}" title="#{item.contenido}"/>		  
+			</p:column>
+			
+			<p:column headerText="Opciones" style="width:8%">
+				<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{docenteSilaboContenido.nativeLoad}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboContenido.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_item_remove" 	title="Eliminar" 		oncomplete="dialogDelCnt.show()">
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilaboContenido.beanSelected}" />				
+				</p:commandButton> 
+        	</p:column>        	      	        
+		</p:dataTable>
+		
+     </h:form>
+     
+     <!-- Eliminar -->
+	<p:confirmDialog widgetVar="dialogDelCnt" width="350" appendToBody="true"
+		header="Mensaje de Confirmación" message="¿Estas seguro de eliminar este Contenido Básico?" style="font-size:13px;"
+       	closable="true" severity="alert" closeOnEscape="true">
+       	<h:form>	
+		<h:panelGroup style="text-align: right;" >
+			<p:commandButton value="Si" id="deleteButton" oncomplete="dialogDelCnt.hide()"  actionListener="#{docenteSilaboContenido.optionDelete}"  update=":frmNew"/>
+       		<p:commandButton value="No" id="cancelButton" onclick="dialogDelCnt.hide()"/>   
+		</h:panelGroup>
+		</h:form>	
+  	</p:confirmDialog>
+  	
+  	
+  	
+    </ui:define>
+</ui:composition>

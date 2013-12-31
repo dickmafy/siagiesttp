@@ -1,0 +1,152 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmUpd" ajaxSubmit="false" enctype="multipart/form-data">
+     
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+    		<p:toolbar>  
+	    	<p:toolbarGroup align="left">
+	    	    <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="ceo_list"       ajax="false" />  
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{cetproOferta.nativeSave}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	
+      	<p:spacer height="4px"/>
+      	
+      	<p:tabView id="tabView">  
+    	<p:tab id="tab1" title="Datos Generales" >  
+    	   	<table class="form_table">
+   				<tr>
+   					<td><p:outputLabel for="txtTdoc" value="Tipo" /></td>
+   				
+   					<td><p:outputLabel for="txtMod" value="Módulo" rendered="#{cetproOferta.bean.tipo eq 1}"/></td>
+   	
+   				</tr>
+   				<tr>
+   					<td>
+        				<p:selectOneMenu id="txtTdoc" value="#{cetproOferta.bean.tipo}" size="30">
+	    			   		<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+	            		    <f:selectItem itemLabel="Modulo Ocupacional"	itemValue="1" />
+	            		    <f:selectItem itemLabel="Capacitación" itemValue="2" />  
+	            		    <f:selectItem itemLabel="Actualización" itemValue="3" />
+	            		    <p:ajax event="change" update=":frmUpd"/>
+	        			</p:selectOneMenu>
+        			</td>
+        			<td>
+        			
+	        			 	<p:selectOneMenu id="txtMod" value="#{cetproOferta.bean.modulo}" style="width:350px" rendered="#{cetproOferta.bean.tipo eq 1}">
+		  			   		<f:selectItems value="#{cetproOferta.moduloList}" />
+						</p:selectOneMenu>	
+        			</td>
+   				</tr>
+   			</table>
+   			
+      		 <table class="form_table">
+   				<tr>
+   					<td><p:outputLabel for="txtTitulo" value="Titulo" /></td>
+   					<td><p:outputLabel for="txtRes" value="Responsable" /></td>		
+   					<td><p:outputLabel for="txtDura" value="Duración (Semestres)" /></td>
+   				</tr>
+   				<tr>
+   					<td>
+        			<p:inputText id="txtTitulo" value="#{cetproOferta.bean.titulo}" size="30"></p:inputText>
+        			</td>
+        			<td>
+        				<p:selectOneMenu id="txtRes" value="#{cetproOferta.bean.responsable}" style="width:300px">
+	    			   		<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+	            		    <f:selectItems value="#{cetproOferta.personalList}"	itemValue="1" />
+	            		 
+	        			</p:selectOneMenu>
+        			</td>
+        			<td>
+        			<p:spinner id="txtDura" value="#{cetproOferta.bean.duracion}" size="3"></p:spinner>
+        				
+        			</td>
+   				</tr>
+   			</table>
+  
+  		
+      		 <table class="form_table">
+   				<tr>
+   					<td><p:outputLabel for="txtReso" value="Resolución" /></td>
+   					<td><p:outputLabel for="txtfechini" value="Fecha Inicio"  /></td>		
+   					<td><p:outputLabel for="txtfechfin" value="Fecha Fin" /></td>
+   					<td><p:outputLabel for="txtPart" value="Participantes" /></td>
+   					<td><p:outputLabel for="txtCost" value="Costo (S/.)" /></td>
+   				</tr>
+   				<tr>
+   					<td>
+        			<p:selectOneMenu id="txtReso" value="#{cetproOferta.bean.resolucion}" size="30">
+	    			   		<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+	            		    <f:selectItem itemLabel="#{cetproOferta.resolucionList}"	itemValue="1" />
+	        			</p:selectOneMenu>
+        			</td>
+        			<td>
+        				<p:calendar id="txtfechini" size="10" value="#{cetproOferta.bean.fecha_inicio}"></p:calendar>
+        			</td>
+        			<td>
+        				<p:calendar id="txtfechfin" size="10" value="#{cetproOferta.bean.fecha_termino}"></p:calendar>
+        			</td>
+        			<td>
+   						<p:spinner id="txtPart" size="3" value="#{cetproOferta.bean.participantes}"></p:spinner>
+        			</td>
+        			<td>
+        			<p:inputText id="txtCost" size="10" value="#{cetproOferta.bean.costos}"></p:inputText>
+        				
+        			</td>
+   				</tr>
+   			</table>
+   			
+   			<table class="form_table">
+   				<tr>
+   					<td><p:outputLabel for="txtDescri" value="Descripción" /></td>
+   					
+   				</tr>
+   				<tr>
+   					<td>
+   					<p:inputTextarea id="txtDescri" value="#{cetproOferta.bean.descripcion}" rows="4" cols="92" ></p:inputTextarea>
+        			
+        			</td>
+        		
+   				</tr>
+   			</table>
+      		 	
+		</p:tab>
+		<p:tab id="tab2" title="Legitimidad">
+		   	   	<table class="form_table">
+   				<tr>
+   					<td><p:outputLabel for="txtFunda" value="Fundamentación" /></td>
+   					
+   				</tr>
+   				<tr>
+   					<td>
+   					<p:inputTextarea id="txtFunda" rows="4" cols="92" value="#{cetproOferta.bean.fundamentacion}"></p:inputTextarea>
+        			
+        			</td>
+        		
+   				</tr>
+   			</table>
+   				<table class="form_table">
+   				<tr>
+   					<td><p:outputLabel for="txtMLegal" value="Marco Legal" /></td>
+   					
+   				</tr>
+   				<tr>
+   					<td>
+   					<p:inputTextarea id="txtMLegal" rows="4" cols="92" value="#{cetproOferta.bean.marco_legal}"></p:inputTextarea>
+        			
+        			</td>
+        		
+   				</tr>
+   			</table>
+   				
+    	</p:tab>
+    
+		</p:tabView>
+</h:form>
+</ui:define>        
+</ui:composition>

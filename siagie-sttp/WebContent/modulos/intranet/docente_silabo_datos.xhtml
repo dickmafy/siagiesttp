@@ -1,0 +1,74 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="docente_silabo" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{docenteSilabo.nativeUpdate}" ajax="false" />
+		        
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	<p:fieldset>      	
+    		<table class="form_table" style="width:100%">
+    		<tr>
+    			<td width="5%"><p:outputLabel styleClass="form_readonly_title" value="Año" /></td>
+    			<td width="8%"><p:outputLabel styleClass="form_readonly_value" value="#{docenteSilabo.annio}" /></td>
+    			
+    			<td width="9%"><p:outputLabel styleClass="form_readonly_title" value="Profesión" /></td>
+    			<td width="66%"><p:outputLabel styleClass="form_readonly_value" value="#{docenteSilabo.beanSelected.nombreProfesion}" /></td>
+    		</tr>
+    		<tr>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Proceso" /></td>
+    			<td>
+    				<p:outputLabel styleClass="form_readonly_value" value="Enero" 		rendered="#{docenteSilabo.proceso eq 1}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Febrero" 	rendered="#{docenteSilabo.proceso eq 2}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Marzo" 		rendered="#{docenteSilabo.proceso eq 3}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Abril" 		rendered="#{docenteSilabo.proceso eq 4}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Mayo" 		rendered="#{docenteSilabo.proceso eq 5}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Junio" 		rendered="#{docenteSilabo.proceso eq 6}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Julio" 		rendered="#{docenteSilabo.proceso eq 7}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Agosto" 		rendered="#{docenteSilabo.proceso eq 8}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Septiembre" 	rendered="#{docenteSilabo.proceso eq 9}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Octubre" 	rendered="#{docenteSilabo.proceso eq 10}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Noviembre" 	rendered="#{docenteSilabo.proceso eq 11}" />
+    				<p:outputLabel styleClass="form_readonly_value" value="Diciembre" 	rendered="#{docenteSilabo.proceso eq 12}" />
+    			</td>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Módulo" /></td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{docenteSilabo.beanSelected.nombreModulo}" /></td>
+    		</tr>
+    		<tr>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Turno" /></td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{docenteSilabo.beanSelected.nombreTurno}"/></td>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Unidad Didáctica" /></td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{docenteSilabo.beanSelected.nombreUnidad} (#{docenteSilabo.beanSelected.valorHoras} horas) " /></td>
+    		</tr>
+    		<tr>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Sección" /></td>
+    			<td><p:outputLabel styleClass="form_readonly_value" value="#{docenteSilabo.bean.nombre}"/></td>
+    		</tr>
+    		</table>
+    	</p:fieldset>
+    	<p:spacer height="4px"/>
+    	
+      	<p:panel header="DATOS GENERALES">
+      	<table>
+      	    <tr><td><p:outputLabel for="txtMet" value="Metodología" /></td></tr>
+      	    <tr><td><p:inputTextarea id="txtMet" value="#{docenteSilabo.bean.metodologia}" rows="5" cols="170" /></td></tr>
+      	    <tr><td><p:outputLabel for="txtEva" value="Evaluación" /></td></tr>
+      	    <tr><td><p:inputTextarea id="txtEva" value="#{docenteSilabo.bean.evaluacion}" rows="5" cols="170" /></td></tr>
+      	    <tr><td><p:outputLabel for="txtRec" value="Recursos Biblográficos" /></td></tr>
+      	    <tr><td><p:inputTextarea id="txtRec" value="#{docenteSilabo.bean.recursos}" rows="5" cols="170" /></td></tr>
+      	</table>
+		</p:panel> 
+     </h:form>
+     
+    </ui:define>
+</ui:composition>

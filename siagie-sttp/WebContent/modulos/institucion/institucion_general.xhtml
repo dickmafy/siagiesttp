@@ -1,0 +1,111 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmUpd" ajaxSubmit="false" enctype="multipart/form-data">
+     
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Actualizar" 	value="Actualizar" 	icon="icn_bar_save" actionListener="#{institucionGeneral.optionUpdate}" ajax="false" />
+		        <p:commandButton id="downloadLink1" value="Resolución Creación" ajax="false"	icon="icn_item_download" rendered="#{institucionGeneral.fileCre ne null}">  
+				    <p:fileDownload value="#{institucionGeneral.fileCre}" />  
+				</p:commandButton>
+				<p:commandButton id="downloadLink2" value="Resolución Renovación" ajax="false"	icon="icn_item_download" rendered="#{institucionGeneral.fileRen ne null}">  
+				    <p:fileDownload value="#{institucionGeneral.fileRen}" />  
+				</p:commandButton>
+				<p:commandButton id="downloadLink3" value="Resolución Revalidación" ajax="false"	icon="icn_item_download" rendered="#{institucionGeneral.fileRev ne null}">  
+				    <p:fileDownload value="#{institucionGeneral.fileRev}" />  
+				</p:commandButton>
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:tabView id="tabView">  
+    	<p:tab id="tab1" title="Datos Generales" >  
+    	   
+      		<table class="form_table" style="width:80%">
+     		<tr>
+     			<td  rowspan="8" width="15%" valign="top">
+     				<img id="pic" alt="" src="#{request.contextPath}/#{institucionGeneral.pic}"  height="128px" width="128px"/>			
+    			</td>
+     			<td width="15%"><p:outputLabel styleClass="form_readonly_title" value="Institución" /></td>
+     			<td width="50%">
+     				<h:outputText value="#{institucionGeneral.bean.nombreFormacion}" styleClass="form_readonly_value"/> 
+     				<h:outputText value="#{institucionGeneral.bean.nombre}" styleClass="form_readonly_value"/>
+     			</td>
+     		</tr>
+     		<tr>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="Código Modular" /></td>
+    			<td><h:outputText value="#{institucionGeneral.bean.codigo}" styleClass="form_readonly_value"/></td>
+    		</tr>
+     		<tr>
+    			<td><p:outputLabel styleClass="form_readonly_title" value="RUC" /></td>
+    			<td><h:outputText value="#{institucionGeneral.bean.ruc}" styleClass="form_readonly_value"/></td>
+    		</tr>
+    		
+    		<tr>
+				<td><p:outputLabel styleClass="form_readonly_title" for="txtEma" value="Correo Electrónico" /></td>
+				<td><p:inputText  id="txtEma"   value="#{institucionGeneral.bean.correo}"   size="55"/></td>
+			</tr>
+			<tr>
+				<td><p:outputLabel styleClass="form_readonly_title" for="txtWeb" value="Web" /> </td>
+				<td><p:inputText   id="txtWeb"  value="#{institucionGeneral.bean.web}"      size="55"/></td>
+			</tr>
+			<tr>
+				<td><p:outputLabel styleClass="form_readonly_title" for="txtFoto"  value="Logo de la Institución" /></td>
+				<td><p:fileUpload value="#{institucionGeneral.logo}" id="txtFoto" mode="simple" /></td>
+			</tr>
+			</table>   	
+		</p:tab>
+		<p:tab id="tab2" title="Gestión" >  
+			<table style="width:70%">
+			<tr>
+				<td width="20%"><p:outputLabel styleClass="form_readonly_title" value="Tipo de Gestión" /></td>
+				<td width="30%"><h:outputText value="#{institucionGeneral.bean.nombreGestion}" styleClass="form_readonly_value"/></td>
+				<td width="20%"><p:outputLabel styleClass="form_readonly_title" value="Resolución Renovación" /></td>				
+				<td width="30%"><h:outputText value="#{institucionGeneral.bean.nombreGestion}" styleClass="form_readonly_value"/></td>
+			</tr>
+			<tr>
+				<td><p:outputLabel styleClass="form_readonly_title" value="Resolución Creación" /></td>				
+				<td><h:outputText value="#{institucionGeneral.bean.nombreGestion}" styleClass="form_readonly_value"/></td>
+				<td><p:outputLabel styleClass="form_readonly_title" value="Resolución Validación" /></td>				
+				<td><h:outputText value="#{institucionGeneral.bean.nombreGestion}" styleClass="form_readonly_value"/></td>
+			</tr>
+			</table>
+			<table>
+		        <tr><td><p:outputLabel for="txtMis" value="Misión" /></td></tr>
+		        <tr><td><p:inputTextarea id="txtMis" value="#{institucionGeneral.bean.mision}" rows="3" cols="148" /></td></tr>
+		        <tr><td><p:outputLabel for="txtVis" value="Visión" /></td></tr>
+		        <tr><td><p:inputTextarea id="txtVis" value="#{institucionGeneral.bean.vision}" rows="3" cols="148" /></td></tr>
+		  	</table>    	   
+    	</p:tab>
+    	<p:tab id="tab3" title="Locales" > 
+    		<p:dataTable id="itemList" var="item" value="#{institucionGeneral.locales}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true">
+	     		
+	     		<p:column headerText="Nombre" style="width:15%; align:center;" >   
+					<h:outputText value="#{item.nombre}" />  
+				</p:column>		
+				
+				<p:column headerText="Responsable" style="width:25%; align:center;" >   
+					<h:outputText value="#{item.beanPersonal.nombreCompleto}" />  
+				</p:column>
+				
+				<p:column headerText="Dirección" style="width:40%; align:center;">   
+					<h:outputText value="#{item.direccion}" />  
+				</p:column>		
+				
+				<p:column headerText="Telefonos" style="width:20%; align:center;">   
+					<h:outputText value="#{item.telefonos}" />  
+				</p:column>		
+				
+			</p:dataTable>  
+    	</p:tab>
+		</p:tabView>
+</h:form>
+</ui:define>        
+</ui:composition>

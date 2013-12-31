@@ -1,0 +1,76 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmList" ajaxSubmit="false">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar> 
+  		
+  			<p:toolbarGroup align="left"> 
+	    		<p:spacer width="6px"/>
+	    		<p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="#{ceo_list}" ajax="false" />
+	    		<p:spacer width="6px"/>}
+				<p:commandButton id="btnNew" title="Nuevo" value="Nuevo" icon="icn_bar_new"
+					actionListener="#{cetproItinerario.nativeNew}" ajax="false"/>
+			</p:toolbarGroup>
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:dataTable id="itinerarioList" var="item" value="#{cetproItinerario.beanList}" scrollable="true"
+	   		emptyMessage="#{constante.LIST_EMPTY}">
+	     		
+     		<f:facet name="header">
+				<h:outputText value="Lista de Unidades Didácticas" />  
+			</f:facet>
+			
+			<p:column headerText="Título" style="width:59%; align:center;">   
+				<h:outputText value="#{item.titulo}"/>					  
+			</p:column>
+			
+			<p:column headerText="Sesiones" style="width:4%; align:center;" sortBy="#{item.semestre}">   
+				<h:outputText value="#{item.sesiones}" title="Nro de Sesiones: #{item.sesiones}"/>					  
+			</p:column>
+			
+			<p:column headerText="Horas" style="width:4%; align:center;" sortBy="#{item.horasSemestre}">   
+				<h:outputText value="#{item.horas}"/>					  
+			</p:column>
+			
+			
+			<p:column headerText="Opciones" style="width:10%">
+				<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{cetproItinerario.nativeLoad}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{cetproItinerario.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_item_disable" 	title="Habilitar" 		action="#{cetproItinerario.nativeEnabled}"	 ajax="false"	
+                	update=":frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_DISABLED}">
+                	 <f:setPropertyActionListener value="#{item}" target="#{cetproItinerario.beanSelected}" /> 
+                </p:commandButton>
+                <p:commandButton icon="icn_item_enable" 	title="Deshabilitar" 	action="#{cetproItinerario.nativeDisabled}" ajax="false"	
+                	update=":frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_ENABLED}">
+                	 <f:setPropertyActionListener value="#{item}" target="#{cetproItinerario.beanSelected}" /> 
+                </p:commandButton>
+				<p:commandButton icon="icn_item_remove" 	title="Eliminar" 		oncomplete="dialogDel.show()">
+					<f:setPropertyActionListener value="#{item}" target="#{cetproItinerario.beanSelected}" />				
+				</p:commandButton> 
+        	</p:column>
+        	
+		</p:dataTable> 
+     </h:form>
+    <!-- Eliminar -->
+	<p:confirmDialog widgetVar="dialogDel" width="350" appendToBody="true"
+		header="Mensaje de Confirmación" message="¿Estas seguro de eliminar este elemento?" style="font-size:13px;"
+       	closable="true" severity="alert" closeOnEscape="true">
+       	<h:form>	
+		<h:panelGroup style="text-align: right;" >
+			<p:commandButton value="Si" id="deleteButton" oncomplete="dialogDel.hide()"  actionListener="#{cetproItinerario.nativeRemove}"  update=":frmList"/>
+       		<p:commandButton value="No" id="cancelButton" onclick="dialogDel.hide()"/>   
+		</h:panelGroup>
+		</h:form>	
+  	</p:confirmDialog>
+  	
+  	
+    </ui:define>
+</ui:composition>

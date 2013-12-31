@@ -1,0 +1,84 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
+  		<p:toolbar>  
+  			<p:toolbarGroup align="left">
+	    		<p:spacer width="6px"/>
+	    		<p:outputLabel for="txtAnn" value="Año" style="position:relative;  top:-4px;"/>
+	    		<p:spacer width="6px"/>
+	    		<p:selectOneMenu id="txtAnn" value="#{admisionIngresante.annio}" style="position:relative;  top:2px;">
+                    <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        <f:selectItem itemLabel="2013"  itemValue="2013" />
+           	        <f:selectItem itemLabel="2014" 	itemValue="2014" />
+           	        <f:selectItem itemLabel="2015" 	itemValue="2015" />
+           	        <f:selectItem itemLabel="2016" 	itemValue="2016" />
+           	        <f:selectItem itemLabel="2017" 	itemValue="2017" /> 
+           	        <p:ajax event="change" update=":frmList:itemList" listener="#{admisionIngresante.selectAnnio}"/>       
+       	       	</p:selectOneMenu>
+       	       	<p:spacer height="6px"/>
+		        <p:outputLabel for="txtPro" value="Proceso" style="position:relative;  top:-4px;"/>
+		        <p:spacer height="6px"/>
+		       	<p:selectOneMenu id="txtPro" value="#{admisionIngresante.proceso}" style="position:relative;  top:3px; width:140px">
+					<f:selectItems value="#{admisionIngresante.procesoList}" var="lstPro" itemValue="#{lstPro.id}" itemLabel="#{lstPro.descripcion}"/>
+					<p:ajax event="change" update=":frmList" listener="#{admisionIngresante.optionSelectProceso}"/>
+				</p:selectOneMenu>
+				<p:spacer height="6px"/> 
+		   		<p:commandButton title="Actualizar" value="Actualizar" icon="icn_item_update" actionListener="#{admisionIngresante.optionUpdate}" rendered="#{admisionIngresante.enabled}" ajax="false" style="position:relative;  top:-4px;"/>
+			</p:toolbarGroup>
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      					
+   		<p:dataTable id="itemList" var="item" value="#{admisionIngresante.beanList}" 
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  
+   			paginator="true" rows="#{constante.LIST_SIZE}"  paginatorPosition="bottom"
+        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+     		
+     		<f:facet name="header">
+				<h:outputText value="Registro de Ingresantes" />  
+			</f:facet>
+	
+			<p:column headerText="Registro" style="width:6%; align:center;" sortBy="#{item.regfec}">   
+				<h:outputText value="#{item.regfec}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>  
+			</p:column>	
+			
+			<p:column headerText="Especialidad" style="width:24%; align:center;" sortBy="#{item.nombreEspecialidad}">   
+				<h:outputText value="#{item.nombreEspecialidad}" />  
+			</p:column>	
+			
+			<p:column headerText="Turno" style="width:7%; align:center;" sortBy="#{item.nombreTurno}">   
+				<h:outputText value="#{item.nombreTurno}" />  
+			</p:column>	
+			
+			<p:column headerText="DNI Nro." style="width:8%; align:center;" sortBy="#{item.postulanteDni}">   
+				<h:outputText value="#{item.postulanteDni}" />  
+			</p:column>	
+			
+			<p:column headerText="Nombres" style="width:13%; align:center;" sortBy="#{item.postulanteNombres}">   
+				<h:outputText value="#{item.postulanteNombres}" />  
+			</p:column>	
+			
+			<p:column headerText="Apellidos" style="width:18%; align:center;" sortBy="#{item.postulanteApellidos}">   
+				<h:outputText value="#{item.postulanteApellidos}" />  
+			</p:column>	
+			
+			<p:column headerText="Estado" style="width:15%; align:center;" sortBy="#{item.nombreEstado}">
+				<p:selectOneMenu value="#{item.ingreso}" rendered="#{admisionIngresante.enabled}">
+	    			<f:selectItem itemLabel="No Ingresante"  	itemValue="1" />
+	    			<f:selectItem itemLabel="Ingresante"	  	itemValue="2" />  
+	    			<f:selectItem itemLabel="NSP"				itemValue="0" />
+	        	</p:selectOneMenu>
+	        	<h:outputText value="#{item.nombreIngreso}" rendered="#{admisionIngresante.enabled eq false}"/>
+			</p:column>
+		</p:dataTable> 
+	</h:form>
+	</ui:define>
+</ui:composition>

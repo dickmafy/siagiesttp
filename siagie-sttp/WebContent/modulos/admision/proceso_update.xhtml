@@ -1,0 +1,116 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmUpd" ajaxSubmit="false">
+     
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="adm_pro_lst"       ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{admisionProceso.nativeUpdate}" ajax="false" rendered="#{admisionProceso.bean.estado eq 1}"/>  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:panel header="Proceso de Admisión #{admisionProceso.bean.annio} - #{admisionProceso.bean.tipo}">
+      	
+      	
+    	<p:tabView id="tabOption" style="border:none;">  
+			
+			<p:tab id="tabOfe" title="Oferta Educativa">
+			<p:dataTable id="oferList" var="item" value="#{admisionProceso.ofertas}" 
+   				emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true">
+     		
+     			<p:column headerText="Profesión" style="width:80%; align:center;" sortBy="#{item.nombreProfesion}">   
+					<h:outputText value="#{item.nombreProfesion}" />  
+				</p:column>		
+			
+				<p:column headerText="Turno" style="width:20%; align:center;">   
+					<h:outputText value="#{item.nombreTurno}" />  
+				</p:column>
+			</p:dataTable>
+   		  	</p:tab>
+   		  	
+   		  	<p:tab id="tabCro" title="Cronograma">
+			
+			<p:dataTable id="croList" var="item" value="#{admisionProceso.actividades}" editable="true" editMode="cell"
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"   rowIndexVar="rowNumber">
+     		
+     		<p:column headerText="#" style="width:5%; align:center;">
+				<h:outputText value="#{rowNumber+1}"/>  
+			</p:column>
+							
+     		<p:column headerText="Actividad" style="width:65%; align:center;">   
+				<h:outputText value="#{item.nombreActividad}" />  
+			</p:column>	
+			
+			<p:column headerText="Inicio" style="width:15%; align:center;">
+				<p:cellEditor>  
+                	<f:facet name="output">
+                		<h:outputText value="#{item.fecha_inicio}">
+                			<f:convertDateTime pattern="dd/MM/yyyy"/>
+   						</h:outputText>	
+                	</f:facet>  
+                	<f:facet name="input">
+                		<p:calendar value="#{item.fecha_inicio}" mindate="#{admisionProceso.minFec}" maxdate="#{admisionProceso.maxFec}" showButtonPanel="button" pattern="dd/MM/yyyy" disabled="#{admisionProceso.bean.estado eq 2}"/>
+                	</f:facet>  
+            	</p:cellEditor>   
+			</p:column>	
+			
+			<p:column headerText="Fin" style="width:15%; align:center;">
+				<p:cellEditor>  
+                	<f:facet name="output">
+                		<h:outputText value="#{item.fecha_fin}">
+                			<f:convertDateTime pattern="dd/MM/yyyy"/>
+   						</h:outputText>
+                	</f:facet>  
+                	<f:facet name="input">
+                		<p:calendar value="#{item.fecha_fin}" mindate="#{admisionProceso.minFec}" maxdate="#{admisionProceso.maxFec}" showButtonPanel="button" pattern="dd/MM/yyyy" disabled="#{admisionProceso.bean.estado eq 2}"/>
+                	</f:facet>  
+            	</p:cellEditor>
+			</p:column>	  
+			</p:dataTable>
+   		  	</p:tab>
+   		  	
+   		  	<p:tab id="tabCos" title="Costos">
+	      	<table>
+      		<tr>
+   		        <td><p:outputLabel 	for="txtCosPos" 	value="Carpeta Postulante" /></td>
+   		        <td>  
+   		        	<p:inputText  	id="txtCosPos"  	value="#{admisionProceso.bean.costo_carpeta}" size="10" disabled="#{admisionProceso.bean.estado eq 2}"/>
+   		        	<p:watermark for="txtCosPos" value="S/." />
+   		        </td>
+   		  	</tr>
+   		  	<tr>
+   		        <td><p:outputLabel 	for="txtCosIns" 	value="Inscripción" /></td>
+   		        <td>  
+   		        	<p:inputText  	id="txtCosIns"  	value="#{admisionProceso.bean.costo_inscripcion}" size="10" disabled="#{admisionProceso.bean.estado eq 2}"/>
+   		        	<p:watermark for="txtCosIns" value="S/." />
+   		        </td>
+   		  	</tr>
+   		  	<tr>
+   		        <td><p:outputLabel 	for="txtCosMatReg" 	value="Matricula Regular" /></td>
+   		        <td>  
+   		        	<p:inputText  	id="txtCosMatReg"  	value="#{admisionProceso.bean.costo_matreg}" size="10" disabled="#{admisionProceso.bean.estado eq 2}"/>
+   		        	<p:watermark for="txtCosMatReg" value="S/." />
+   		        </td>
+   		  	</tr>
+   		  	<tr>
+   		        <td><p:outputLabel 	for="txtCosMatExt" 	value="Matricula Extemporanea" /></td>
+   		        <td>  
+   		        	<p:inputText  	id="txtCosMatExt"  	value="#{admisionProceso.bean.costo_matext}" size="10" disabled="#{admisionProceso.bean.estado eq 2}"/>
+   		        	<p:watermark for="txtCosMatExt" value="S/." />
+   		        </td>
+   		  	</tr>
+   		  	</table>
+   		  	</p:tab>
+   		  	
+      	</p:tabView>
+ 		</p:panel> 		
+</h:form>
+</ui:define>        
+</ui:composition>

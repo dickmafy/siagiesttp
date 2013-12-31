@@ -1,0 +1,50 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmList" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>  
+      	<p:spacer height="4px"/>
+      	
+   		<p:dataTable id="itemList" var="item" value="#{institucionOferta.profesiones}" 
+   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  >
+     		
+     		<f:facet name="header">
+				<h:outputText value="Lista de Oferta Educativa" />  
+			</f:facet>
+	
+			<p:column headerText="Carreras Profesionales" style="width:75%; align:center;">   
+				<h:outputText value="#{item.nombreProfesion}" />  
+			</p:column>	
+			
+			<p:column headerText="Vigencia Inicio" style="width:10%; align:center;">   
+				<h:outputText value="#{item.vigenciaInicio}">
+					<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+   				</h:outputText>	    
+			</p:column>		
+			
+			<p:column headerText="Vigencia Fin" style="width:10%; align:center;">   
+				<h:outputText value="#{item.vigenciaFin}">
+					<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+   				</h:outputText>	    
+			</p:column>		
+			
+			<p:column headerText="Opciones" style="width:5%">  
+				<p:commandButton icon="icn_item_download" 	title="Descargar Resolución"  ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{institucionOferta.beanSelected}" />
+					<p:fileDownload value="#{institucionOferta.file}"/>
+				</p:commandButton>
+				
+				<p:commandButton icon="icn_item_detail" 	title="Itinerario"  action="#{institucionOferta.optionItinerario}" ajax="false">
+					<f:setPropertyActionListener value="#{item}" target="#{institucionOferta.beanSelected}" />
+				</p:commandButton>
+        	</p:column>
+				        
+		</p:dataTable> 
+	</h:form>
+    </ui:define>
+</ui:composition>

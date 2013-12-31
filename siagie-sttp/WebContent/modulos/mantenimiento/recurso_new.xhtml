@@ -1,0 +1,59 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="body" oncontextmenu="return false">
+		<h:form id="frmNew" ajaxSubmit="false">
+
+
+			<p:growl id="msgSystem" showDetail="false" life="4000" escape="true" />
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton title="Regresar" value="Regresar"
+						icon="icn_bar_back" actionListener="#{mantenimientoRecurso.init}"
+						ajax="false" />
+					<p:commandButton title="Guardar" value="Guardar"
+						icon="icn_bar_save"
+						actionListener="#{mantenimientoRecurso.nativeSave}" ajax="false" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:spacer height="4px" />
+
+			<p:panel header="Agregar Nuevo Recurso">
+
+				<table class="form_table">
+					<tr> 					
+						<td><p:outputLabel for="txtNom" value="Recurso" /></td>
+					</tr>
+
+					<tr>
+						
+						<td valign="top">
+							<p:inputText id="txtNom" value="#{mantenimientoRecurso.bean.nombre}" size="70" />
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2"><p:outputLabel for="txtDes" value="Descripción" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><p:inputTextarea id="txtDes" value="#{mantenimientoRecurso.bean.descripcion}"
+											 style="width:99%;" rows="3" autoResize="false"/></td>
+					
+					</tr>
+					<tr>						
+						<td colspan="2"><p:outputLabel for="txtObs" value="Observación" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><p:inputTextarea id="txtObs" value="#{mantenimientoRecurso.bean.observacion}" 
+											style="width:99%;" rows="3" autoResize="false" /></td>
+					</tr>
+				</table>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

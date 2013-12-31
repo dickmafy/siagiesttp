@@ -1,0 +1,93 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+     
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="ceo_list"       ajax="false" />
+		         <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{cetproOferta.nativeSave}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+	<p:spacer height="4px"/>
+      	<p:panel header="Actualizar Datos - #{cetproOferta.bean.modulo}">
+      
+           	<table>
+   		    <tr>
+   		    	<td>
+   		     	<table>
+   		     	<tr>
+    		        <td><p:outputLabel for="txtTipo" 	value="Tipo" /></td>
+    		        <td><p:outputLabel for="txtMod"		value="Módulo"/></td>
+    		        <td><p:outputLabel for="txtTitulo" 	value="Titulo" /></td>
+    		        <td><p:outputLabel for="txtRespon"	value="Responsable"/></td>
+   		     	</tr>
+   		     	<tr>
+   		     		<td><p:inputText   id="txtTipo"  	value="#{cetproOferta.bean.tipo}" size="20" disabled="true"/></td>
+     	       		<td><p:inputText   id="txtMod"  	value="#{cetproOferta.bean.modulo}" size="20" disabled="true"/></td>
+     	       		<td><p:inputText   id="txtTitulo"  	value="#{cetproOferta.bean.titulo}" size="20" disabled="true"/></td>
+     	       		<td><p:inputText   id="txtRespon"  	value="#{cetproOferta.bean.responsable}" size="20" disabled="true"/></td>
+  		    	</tr>
+   		    	</table>
+   		    	</td>
+   		    </tr>
+   		    
+   		    <tr>
+   		    	<td>
+   		     	<table>
+   		     	<tr>
+    		        <td><p:outputLabel for="txtDur" 	value="Duración" /></td>
+    		        <td><p:outputLabel for="txtIni"		value="Inicio"/></td>
+    		        <td><p:outputLabel for="txtFin" 	value="Fin" /></td>
+    		        <td><p:outputLabel for="txtCos"		value="Costo"/></td>
+   		     	</tr>
+   		     	<tr>
+   		     		<td><p:spinner 			id="txtDur" 		value="#{cetproOferta.bean.duracion}" size="3"></p:spinner></td>
+   		     		<td><p:calendar 		id="txtIni" 	 	showOn="button" navigator="true" pattern="dd/mm/yyyy" readonlyInput="true" yearRange="c-60" size="10"></p:calendar></td>
+   		    	 	<td><p:calendar 		id="txtFin" 	 	showOn="button" navigator="true" pattern="dd/mm/yyyy" readonlyInput="true" yearRange="c-60" size="10"></p:calendar></td>
+   		     		<td><p:inputText   		id="txtCos"  		value="#{cetproOferta.bean.costos}" 	size="40"/></td>
+   		     	</tr>
+   		    	</table>
+   		    	</td>
+   		    </tr>
+   		    
+   		    <tr>
+   		    	<td>
+   		     	<table>
+   		     	<tr>
+    		        <td><p:outputLabel for="txtDescrip" 	value="Descripción" /></td> 
+    		        <td><p:outputLabel for="txtFunda"		value="Fundamentación"/></td>
+   		     	</tr>
+   		     	<tr>
+   		     		<td><p:inputTextarea id="txtDescrip"  value="#{cetproOferta.bean.descripcion}"	rows="4" cols="50" ></p:inputTextarea></td>
+   		     		<td><p:inputTextarea id="txtFunda" 	 value="#{cetproOferta.bean.fundamentacion}" rows="4" cols="50" ></p:inputTextarea></td>
+   		     	</tr>
+   		    	</table>
+   		    	</td>
+   		    </tr>
+   		    
+ 		   
+ 			<tr>
+ 				<td>
+ 				<table>
+ 				<tr><td><p:outputLabel for="txtMarc"		value="Marco legal"/></td>
+    		        <td><p:outputLabel for="txtPart"		value="Participantes"/></td>
+    		    </tr>
+ 				<tr><td><p:inputTextarea id="txtMarc" 	 value="#{cetproOferta.bean.marco_legal}" rows="4" cols="50" ></p:inputTextarea></td>
+ 					<td><p:inputTextarea id="txtPart" 	 value="#{cetproOferta.bean.participantes}" rows="4" cols="50" ></p:inputTextarea></td>
+ 				</tr>
+ 				</table>
+ 				</td>
+ 			</tr>
+ 		    
+ 		</table> 	
+ </p:panel> 				
+</h:form>
+</ui:define>        
+</ui:composition>

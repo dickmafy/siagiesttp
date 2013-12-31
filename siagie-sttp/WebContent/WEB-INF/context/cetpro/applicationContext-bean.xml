@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	   http://www.springframework.org/schema/aop
+	   http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	
+	<!-- Modulo Cetpro -->
+	<bean id="ofertaEducativa" 		class="modules.cetpro.domain.OfertaEducativa" 		scope="session" />
+	<bean id="itinerarioCetpro" 	class="modules.cetpro.domain.ItinerarioCetpro" 		scope="session" />
+	<bean id="contexCetpro" 		class="modules.cetpro.domain.Contextualizacion" 	scope="session" />
+	<bean id="tramiteCetpro" 		class="modules.cetpro.domain.Tramite" 				scope="session" />
+	<bean id="progCetpro" 			class="modules.cetpro.domain.Programacion" 			scope="session" />
+	<bean id="cronoCetpro" 			class="modules.cetpro.domain.Calendario" 			scope="session" />
+
+</beans>

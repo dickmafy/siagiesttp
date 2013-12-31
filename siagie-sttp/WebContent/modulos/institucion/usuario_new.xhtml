@@ -1,0 +1,60 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+     
+     
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="itc_usr_lst" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{institucionUsuario.nativeSave}" ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+      	<p:panel header="Agregar Nuevo Usuario"> 
+    	
+    		<table class="form_table">
+    			<tr>
+    				<td><p:outputLabel for="txtPrf" value="Perfil" /></td>
+    				<td><p:outputLabel for="txtPrs" value="Personal"/></td>
+    			</tr>
+    			
+    			<tr>
+    				<td>
+		    			<p:selectOneMenu id="txtPrf" value="#{institucionUsuario.bean.perfil}" style="width:230px;">
+							<f:selectItems value="#{institucionUsuario.perfilList}" var="lstPerfil" itemValue="#{lstPerfil.id}" itemLabel="#{lstPerfil.nombre}"/>
+						</p:selectOneMenu>
+					</td>      
+					<td>
+		    			<p:selectOneMenu id="txtPrs" value="#{institucionUsuario.bean.pertenencia}" style="width:400px;" filter="true" filterMatchMode="startsWith">
+							<f:selectItems value="#{institucionUsuario.personalList}" var="lstPersona" itemValue="#{lstPersona.id}" itemLabel="#{lstPersona.nombre}"/>
+							<p:ajax event="change" update=":frmNew:txtNom,:frmNew:txtEma,:frmNew:txtUsr" listener="#{institucionUsuario.selectPersonal}"/>
+						</p:selectOneMenu>
+					</td>
+    			</tr>
+    		</table>
+    		<table>
+    			<tr>
+    				<td><p:outputLabel for="txtUsr" value="Usuario" /></td>
+    				<td><p:outputLabel for="txtNom" value="Nombres" /></td>
+    				<td><p:outputLabel for="txtEma" value="Correo Electrónico" /></td>
+    			</tr>
+    			<tr>
+    				<td><p:inputText id="txtUsr" value="#{institucionUsuario.bean.usuario}" 	size="20" /></td>
+    				<td><p:inputText id="txtNom" value="#{institucionUsuario.bean.nombres}" 	size="40" disabled="true"/></td>
+    				<td><p:inputText id="txtEma" value="#{institucionUsuario.bean.correo}"		size="30" disabled="true"/></td>
+    			</tr>
+    		</table>
+    		  
+		</p:panel> 		
+     </h:form>
+    </ui:define>
+        
+</ui:composition>

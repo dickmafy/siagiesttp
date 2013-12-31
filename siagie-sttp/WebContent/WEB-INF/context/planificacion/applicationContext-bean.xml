@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	   http://www.springframework.org/schema/aop
+	   http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	
+	<bean id="documento" 	 	class="modules.planificacion.domain.Documento"				scope="session" />
+	<bean id="estrategia" 	 	class="modules.planificacion.domain.Estategia"				scope="session" />
+	<bean id="objetivo" 	 	class="modules.planificacion.domain.Objetivo"				scope="session" />
+	<bean id="indicador" 	 	class="modules.planificacion.domain.Indicador"				scope="session" />
+	<bean id="resultado" 	 	class="modules.planificacion.domain.Resultado"				scope="session" />	
+	<bean id="recursoPropio" 	class="modules.planificacion.domain.RecursoPropio"			scope="session" />
+	<bean id="capacitacion" 	class="modules.planificacion.domain.Capacitacion"			scope="session" />
+	
+</beans>

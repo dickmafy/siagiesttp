@@ -1,0 +1,119 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+   	<h:form id="frmUpd" ajaxSubmit="false">
+   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
+  		
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+	    		<p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="adm_mat_lst"       ajax="false" />  
+			</p:toolbarGroup>  
+  		</p:toolbar>
+      	<p:spacer height="4px"/>
+			      			
+		<p:panel header="REGISTRO DE MATRICULA - #{admisionMatricula.bean.personaNombre} #{admisionMatricula.bean.personaPaterno} #{admisionMatricula.bean.personaMaterno}">		
+   		<p:tabView id="tabView">  
+    	   	<p:tab id="TabDatosGenerales" title="Datos Generales" >  
+   			<table class="form_table" style="width:100%">
+  			<tr>
+  			<td width="10%"><img alt="Foto" src="#{request.contextPath}/#{admisionMatricula.pic}"  height="128px" width="128px"/></td>
+   			<td width="90%">
+   				<table>
+   				<tr>
+	   				<td><p:outputLabel  value="Profesion" 	style="font-weight:bold"/></td>
+	   				<td><p:outputLabel  value="Turno" 		style="font-weight:bold"/></td>
+  					</tr>
+	        	<tr>	
+        			<td><p:outputLabel  value="#{admisionMatricula.bean.nombreEspecialidad}" /><p:spacer width="14px"/></td>
+        			<td><p:outputLabel  value="#{admisionMatricula.bean.nombreTurno}" /><p:spacer width="14px"/></td>
+    	    	</tr>
+    	    	</table>
+    	
+	   			<p:spacer height="4px"/>
+	   			<table class="form_table" style="width:100%">
+   				<tr>
+   					<td width="12%"><p:outputLabel value="Nro Documento" style="font-weight:bold" /></td>
+   					<td width="10%"><p:outputLabel  value="Nombres  "  style="font-weight:bold"/></td>
+   					<td width="15%"><p:outputLabel  value="Apellido Paterno"  style="font-weight:bold" /></td>
+   					<td width="70%"><p:outputLabel   value="Apellido Materno" style="font-weight:bold" /></td>
+   				</tr>
+   				<tr>
+   					<td><p:outputLabel id="txtNdoc" value="#{admisionMatricula.bean.personaDni}" /></td>	
+   					<td><p:outputLabel   id="txtNom"  value="#{admisionMatricula.bean.personaNombre}"/></td>
+        			<td><p:outputLabel   id="txtApp"  value="#{admisionMatricula.bean.personaPaterno}"/></td>
+        			<td><p:outputLabel   id="txtApm"  value="#{admisionMatricula.bean.personaMaterno}"/></td>
+   				</tr>
+   				</table>
+   				<table class="form_table" style="width:100%">
+   				<tr>
+   					<td width="15%"><p:outputLabel value="Correo  " style="font-weight:bold"/></td>
+   					<td width="10%"><p:outputLabel  value="Celular " style="font-weight:bold"/></td>
+   					<td width="75%"><p:outputLabel  value="Telefonos  " style="font-weight:bold" /></td>
+   				</tr>
+   				<tr>
+   					<td><p:outputLabel   id="txtCor"  value="#{admisionMatricula.bean.personaCorreo}" size="40"/></td>
+   					<td><p:outputLabel   id="txtCel"  value="#{admisionMatricula.bean.personaCelular}" size="15"/></td>
+   					<td><p:outputLabel   id="txtTel"  value="#{admisionMatricula.bean.personaTelefono}" size="25"/></td>
+   				</tr>
+	   			</table>
+	   			<p:spacer height="4px"/>
+	   			<table class="form_table">
+	 				<tr><td><p:outputLabel value="Dirección " style="font-weight:bold"/></td></tr>
+	  				<tr><td><p:outputLabel id="txtDir" value="#{admisionMatricula.bean.personaDireccion}" style="width:400px;"/></td></tr>  				
+	 			</table>
+	 		</td>
+	 		</tr>
+		 	</table>
+ 			</p:tab>
+ 			
+ 			<p:tab id="tab5" title="Detalle de Matricula" >  
+ 				
+ 				<p:dataTable id="matriculaList" var="item" value="#{admisionMatricula.matriculaList}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  >
+	     		
+		     		<p:column headerText="Módulo" style="width:10%; align:center;">   
+						<h:outputText value="MP#{item.modulo}" title="MP#{item.modulo}: #{item.nombreModulo}" rendered="#{item.tipo eq 1}"/>
+						<h:outputText value="MT#{item.modulo}" title="MT#{item.modulo}: #{item.nombreModulo}" rendered="#{item.tipo eq 2}"/>
+					</p:column>	
+					
+					<p:column headerText="Unidad Didáctica" style="width:80%; align:center;">   
+						<h:outputText value="#{item.nombreUnidad}" />  
+					</p:column>	
+					<p:column headerText="Sección" style="width:10%; align:center;">   
+						<h:outputText value="#{item.nombreSeccion}" />  
+					</p:column>
+				</p:dataTable> 
+ 			</p:tab>
+ 			
+ 			<p:tab id="tabPagos" title="Pagos" >
+ 			<table class="form_table">
+   				<tr>
+   					<td><p:outputLabel value="Fecha" /></td>
+   					<td><p:outputLabel  value="Banco" /></td>
+   					<td><p:outputLabel  value="Recibo Nro."/></td>
+   				</tr>
+   				<tr>
+ 					<td><p:calendar    id="txtPagFec"  value="#{admisionMatricula.bean.pago_fecha}"  showOn="button" navigator="true" pattern="dd/mm/yyyy" readonlyInput="true" yearRange="c" size="10" disabled="true"/></td>
+ 					<td>
+ 						<p:selectOneMenu id="txtPagBco" value="#{admisionMatricula.bean.pago_banco}" style="width:280px;" disabled="true">
+							<f:selectItems value="#{admisionMatricula.bancoList}" var="lstBco" itemValue="#{lstBco.id}" itemLabel="#{lstBco.descripcion}"/>
+							<p:ajax event="change"/>
+						</p:selectOneMenu>
+	        		</td>
+ 					<td><p:inputText id="txtPagRec" value="#{admisionMatricula.bean.pago_recibo}" size="20" disabled="true"/></td>
+ 				</tr>
+   			</table>
+ 			</p:tab>
+ 			
+		</p:tabView>
+		</p:panel>
+	</h:form>
+		
+   		
+    </ui:define>
+</ui:composition>
