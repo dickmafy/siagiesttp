@@ -230,8 +230,8 @@ public class AdminInstitucion extends GenericController
 	
 	public void optionGoMetaOcupacional() throws Exception
 	{
-		AdminConvenio go = (AdminConvenio)getSpringBean("adminConvenio");
-		go.init(((Institucion)getBeanSelected()).getId().longValue(), ((Institucion)getBeanSelected()).getNombreCompleto());
+		AdminMetaOcupacional go = (AdminMetaOcupacional)getSpringBean("adminMetaCetpro");
+		go.init(((Institucion)getBeanSelected()).getId().longValue(), ((Institucion)getBeanSelected()).getNombreCompleto(), ((Institucion)getBeanSelected()).getFormacion().longValue());
 	}
 	
 	public void optionGoUsuarios() throws Exception
