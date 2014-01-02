@@ -46,7 +46,7 @@ public class Matricula implements Serializable
 	private Long silabo;
 	private Long silaboAlumno;
 	
-	@Transient
+	
 	private Long asistio;
 	
 	
@@ -176,6 +176,8 @@ public class Matricula implements Serializable
 	public void setSilaboAlumno(Long silaboAlumno) {
 		this.silaboAlumno = silaboAlumno;
 	}
+	
+	@Transient
 	public Long getAsistio() {
 		return asistio;
 	}
