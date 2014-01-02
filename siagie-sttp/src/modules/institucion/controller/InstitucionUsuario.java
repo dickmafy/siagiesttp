@@ -1,7 +1,9 @@
 package modules.institucion.controller; 
 import java.util.List;
+
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
+
 import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
 import com.belogick.factory.util.helper.DateHelper;
@@ -9,6 +11,8 @@ import com.belogick.factory.util.helper.PasswordHelper;
 import com.belogick.factory.util.support.Encriptador;
 
 import modules.administracion.domain.Personal;
+import modules.admision.domain.Matricula;
+import modules.admision.domain.Persona;
 import modules.seguridad.domain.Perfil;
 import modules.seguridad.domain.Usuario;
 import modules.seguridad.domain.VariableAcceso;
@@ -21,6 +25,7 @@ public class InstitucionUsuario extends GenericController
 	private List<SelectItem>    personalList;
 	private SeguridadService	myService;
 	private List<Personal> personal;
+	private List<Matricula> matriculados;
 	
 	@Override 
 	public void init() throws Exception 
@@ -41,19 +46,71 @@ public class InstitucionUsuario extends GenericController
 	
 	public void fillAll() throws Exception
 	{
-		Personal objPrs=new Personal();
-		objPrs.setInstitucion(institucion);
-		personal=myService.listByObjectEnabled(objPrs);
-		personalList=getListSelectItem(personal, "id", "nombres,apepat,apemat"," ", true);
-		objPrs=null;
-		
 		Perfil objPrf=new Perfil();
 		objPrf.setTipo(2L);
 		objPrf.setEstado(Constante.ROW_STATUS_ENABLED);
 		perfilList=getListSelectItem(objPrf, "id", "nombre", true);
 		objPrf=null;
+		
+		//Matricula mat=new Matricula();
+		
+		
 	}
 	
+	public void selectPerfil() throws Exception
+	{
+		Usuario bean=(Usuario)getBean();
+		
+		if(bean.getPerfil()==4L)
+		{		
+			matriculados=myService.listMatriculaInstitucion(institucion);
+			personalList=getListSelectItem(matriculados, "id", "personaPaterno,personaMaterno,personaNombre"," ", true);
+		}
+		else
+		{
+			Personal objPrs=new Personal();
+			objPrs.setInstitucion(institucion);
+			personal=myService.listByObjectEnabled(objPrs);
+			personalList=getListSelectItem(personal, "id", "apepat,apemat,nombres"," ", true);
+			objPrs=null;
+			
+			
+		}
+	}
+	
+
+	public void selectPersonal() throws Exception
+	{
+		Usuario bean=(Usuario)getBean();
+		if(bean.getPerfil()==4L){	
+			for(int i=0; i<matriculados.size(); i++){
+				if(bean.getPertenencia().longValue()==matriculados.get(i).getId()){
+					bean.setUsuario(matriculados.get(i).getPersonaDni());
+					bean.setContrasena(Encriptador.encryptBlowfish(matriculados.get(i).getPersonaDni(), Constante.KEY));
+					bean.setNombres(matriculados.get(i).getPersonaNombre() + " " + matriculados.get(i).getPersonaPaterno() + " " + matriculados.get(i).getPersonaMaterno());
+					bean.setCorreo(matriculados.get(i).getPersonaCorreo());
+					bean.setCreacion(DateHelper.getDate());
+					bean.setEstado(Constante.ROW_STATUS_ENABLED);
+				}
+			}
+			
+		} else{
+			
+			for(int i=0; i<personal.size(); i++){
+				if(bean.getPertenencia().longValue()==personal.get(i).getId()){
+					bean.setUsuario(personal.get(i).getDni());
+					bean.setContrasena(Encriptador.encryptBlowfish(personal.get(i).getDni(), Constante.KEY));
+					bean.setNombres(personal.get(i).getNombreCompleto());
+					bean.setCorreo(personal.get(i).getCorreo());
+					bean.setCreacion(DateHelper.getDate());
+					bean.setEstado(Constante.ROW_STATUS_ENABLED);
+				}
+			}	
+			
+		}
+		
+		setBean(bean);
+	}
 	
 	@Override 
 	public void beforeSave() throws Exception
@@ -96,23 +153,6 @@ public class InstitucionUsuario extends GenericController
 		setBean(bean);
 	}
 	
-	public void selectPersonal() throws Exception
-	{
-		Usuario bean=(Usuario)getBean();
-		for(int i=0; i<personal.size(); i++)
-		{
-			if(bean.getPertenencia().longValue()==personal.get(i).getId())
-			{
-				bean.setUsuario(personal.get(i).getDni());
-				bean.setContrasena(Encriptador.encryptBlowfish("12345", Constante.KEY));
-				bean.setNombres(personal.get(i).getNombreCompleto());
-				bean.setCorreo(personal.get(i).getCorreo());
-				bean.setCreacion(DateHelper.getDate());
-				bean.setEstado(Constante.ROW_STATUS_ENABLED);
-			}
-		}
-		setBean(bean);
-	}
 	
 	@Override
 	public boolean validation() throws Exception 
@@ -168,6 +208,14 @@ public class InstitucionUsuario extends GenericController
 	
 	public List<SelectItem> getPersonalList()                       {return personalList;}
 	public void setPersonalList(List<SelectItem> personalList)      {this.personalList = personalList;}
+
+	public List<Matricula> getMatriculados() {
+		return matriculados;
+	}
+
+	public void setMatriculados(List<Matricula> matriculados) {
+		this.matriculados = matriculados;
+	}
 	
 	
 } 

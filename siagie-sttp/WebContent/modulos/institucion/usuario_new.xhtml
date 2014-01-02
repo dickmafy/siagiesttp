@@ -30,6 +30,7 @@
     				<td>
 		    			<p:selectOneMenu id="txtPrf" value="#{institucionUsuario.bean.perfil}" style="width:230px;">
 							<f:selectItems value="#{institucionUsuario.perfilList}" var="lstPerfil" itemValue="#{lstPerfil.id}" itemLabel="#{lstPerfil.nombre}"/>
+							<p:ajax event="change" update=":frmNew:txtPrs" listener="#{institucionUsuario.selectPerfil}"/>
 						</p:selectOneMenu>
 					</td>      
 					<td>

@@ -3,7 +3,9 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.hibernate.Query;
+
 import dataware.dao.SeguridadDao;
 import modules.administracion.domain.Convenio;
 import modules.administracion.domain.Cronograma;
@@ -12,6 +14,7 @@ import modules.administracion.domain.MetaInstitucional;
 import modules.administracion.domain.MetaOcupacional;
 import modules.administracion.domain.Oferta;
 import modules.administracion.domain.Solicitud;
+import modules.admision.domain.Matricula;
 import modules.admision.domain.Persona;
 import modules.admision.domain.Postulante;
 import modules.admision.domain.Proceso;
@@ -22,6 +25,7 @@ import modules.seguridad.domain.MenuAcceso;
 import modules.seguridad.domain.Usuario;
 import modules.seguridad.domain.Variable;
 import modules.seguridad.domain.VariableAcceso;
+
 import com.belogick.factory.util.dao.impl.GenericDaoJpa;
 import com.belogick.factory.util.support.DaoException;
 
@@ -503,7 +507,27 @@ public class SeguridadDaoJpa extends GenericDaoJpa implements SeguridadDao
 		return lista;
 	}
 
-
+	@Override
+	public List<Matricula> listMatriculaInstitucion(Long institucion) throws Exception 
+	{
+		List<Matricula> lista=new ArrayList<Matricula>();
+		Query consulta=createQuery("SELECT * FROM admision.lst_matriculainstitucion(:institucion)");
+		consulta.setParameter("institucion", Integer.parseInt(institucion.toString()));
+		List rst=consulta.list();
+		for(int i=0; i<rst.size(); i++)
+		{
+			Object[] objetos=(Object[])rst.get(i);
+			Matricula field=new Matricula();
+			if(objetos[0]!=null){field.setId(Long.parseLong(objetos[0].toString()));}
+			if(objetos[1]!=null){field.setPersonaNombre(objetos[1].toString());}
+			if(objetos[2]!=null){field.setPersonaPaterno(objetos[2].toString());}
+			if(objetos[3]!=null){field.setPersonaMaterno(objetos[3].toString());}
+			if(objetos[4]!=null){field.setPersonaCorreo(objetos[4].toString());}
+			if(objetos[5]!=null){field.setPersonaDni(objetos[5].toString());}
+			lista.add(field);
+		}
+		return lista;
+	}
 }
 
 

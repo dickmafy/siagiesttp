@@ -1,6 +1,7 @@
 package dataware.service;
 import java.util.Date;
 import java.util.List;
+
 import modules.administracion.domain.Convenio;
 import modules.administracion.domain.Cronograma;
 import modules.administracion.domain.HistorialLaboral;
@@ -8,6 +9,7 @@ import modules.administracion.domain.MetaInstitucional;
 import modules.administracion.domain.MetaOcupacional;
 import modules.administracion.domain.Oferta;
 import modules.administracion.domain.Solicitud;
+import modules.admision.domain.Matricula;
 import modules.admision.domain.Postulante;
 import modules.admision.domain.Proceso;
 import modules.admision.domain.Retiro;
@@ -16,6 +18,7 @@ import modules.seguridad.domain.Menu;
 import modules.seguridad.domain.MenuAcceso;
 import modules.seguridad.domain.Usuario;
 import modules.seguridad.domain.VariableAcceso;
+
 import com.belogick.factory.util.service.GenericService;
 import com.belogick.factory.util.support.DaoException;
 
@@ -42,5 +45,5 @@ public interface SeguridadService extends GenericService
 	public List<MetaInstitucional> listarMetaInstitucional(Long institucion, boolean tipo) throws Exception;
 	public List<MetaOcupacional> listarMetaOcupacional(Long institucion) throws Exception;
 	public List<HistorialLaboral> listarHistorialLaboral(Long personal) throws Exception;
-	
+	public List<Matricula> listMatriculaInstitucion(Long institucion) throws Exception ;
 }
