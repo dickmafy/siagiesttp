@@ -60,4 +60,70 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	
+	
+	<!-- Nuevo - 2 diciembre -->
+	
+	<!-- Interesado -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cetpro_interesado_new</from-outcome>
+			<to-view-id>/modulos/cetpro/interesado_new.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cetpro_interesado_list</from-outcome>
+			<to-view-id>/modulos/cetpro/interesado_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cetpro_interesado_update</from-outcome>
+			<to-view-id>/modulos/cetpro/interesado_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<!-- Ingresante -->
+		<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cetpro_ingresante_list</from-outcome>
+			<to-view-id>/modulos/cetpro/ingresante_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- Matricula -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cetpro_matricula_list</from-outcome>
+			<to-view-id>/modulos/cetpro/matricula_list.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cetpro_matricula_detail</from-outcome>
+			<to-view-id>/modulos/cetpro/matricula_detail.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cetpro_matricula_update</from-outcome>
+			<to-view-id>/modulos/cetpro/matricula_update.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+		
+	
 </faces-config>

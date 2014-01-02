@@ -29,6 +29,32 @@
 	  	<property name="myService" 	ref="seguridadService"/>
 	</bean>
 	
+	<!-- Nuevos -->
+	<bean id="cetproIngresante" class="modules.cetpro.controller.CetproIngresante" scope="session" parent="genericController">	  
+	    <property name="myService" 	ref="admisionService"/>	  
+	    <property name="bean" 		ref="postulante"/>	  
+	</bean>
+	
+	<bean id="cetproInteresado" class="modules.cetpro.controller.CetproInteresado" scope="session" parent="genericController">
+		<property name="myService" 	ref="admisionService"/>	  
+	    <property name="bean" 		ref="interesado"/>	  
+	</bean>
+	
+	
+	<bean id="cetproMatricula" class="modules.cetpro.controller.CetproMatricula" scope="session" parent="genericController">
+		 <property name="myService" 	ref="admisionService"/>
+		<property name="bean"		ref="matricula"/>		
+	</bean>
+	
+	
+	<bean id="cetproProceso" class="modules.cetpro.controller.CetproProceso" scope="session" parent="genericController">
+		<property name="myService" 	ref="admisionService"/>	  
+	    <property name="bean" 		ref="proceso"/>	  
+	</bean>
+	
+
+
+
 
 
 </beans>

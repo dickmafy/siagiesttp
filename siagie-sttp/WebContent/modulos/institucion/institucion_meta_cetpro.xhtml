@@ -8,19 +8,6 @@
     <ui:define name="body" oncontextmenu="return false">
    	<h:form id="frmList" ajaxSubmit="false">
    		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
-  		<p:toolbar>
-  			<p:toolbarGroup align="left">  		
-	    		<p:spacer height="6px"/>
-		        <p:outputLabel for="txtIns" value="Institución" style="position:relative;  top:-4px;"/>
-		   		<p:selectOneMenu id="txtIns" value="#{institucionMetaCetpro.institucion}" style="position:relative;  top:3px; left:15px; width:300px">
-					<f:selectItems value="#{institucionMetaCetpro.institucionList}" />
-					<p:ajax event="change" update=":frmList" listener="#{institucionMetaCetpro.defaultList}"/>
-				</p:selectOneMenu>
-				<p:spacer height="6px"/>
-				<p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{institucionMetaCetpro.nativeNew}" ajax="false" rendered="#{institucionMetaCetpro.institucion ne -1}" style="position:relative;  top:-4px; left:30px;"/>
-				
-			</p:toolbarGroup>  
-  		</p:toolbar>
   		<p:spacer height="4px"/>
   
    		<p:dataTable id="itemList" var="item" value="#{institucionMetaCetpro.beanList}" filteredValue="#{institucionMetaCetpro.beanFilterList}"

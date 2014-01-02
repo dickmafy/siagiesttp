@@ -3,9 +3,7 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.hibernate.Query;
-
 import dataware.dao.SeguridadDao;
 import modules.administracion.domain.Convenio;
 import modules.administracion.domain.Cronograma;
@@ -25,7 +23,6 @@ import modules.seguridad.domain.MenuAcceso;
 import modules.seguridad.domain.Usuario;
 import modules.seguridad.domain.Variable;
 import modules.seguridad.domain.VariableAcceso;
-
 import com.belogick.factory.util.dao.impl.GenericDaoJpa;
 import com.belogick.factory.util.support.DaoException;
 
@@ -424,7 +421,7 @@ public class SeguridadDaoJpa extends GenericDaoJpa implements SeguridadDao
 	public List<MetaOcupacional> listarMetaOcupacional(Long institucion) throws Exception 
 	{
 		List<MetaOcupacional> lista=new ArrayList<MetaOcupacional>();
-		Query consulta=createQuery("SELECT * FROM administracin.lst_metaocup(:institucion)");
+		Query consulta=createQuery("SELECT * FROM administracion.lst_metaocup(:institucion)");
 		consulta.setParameter("institucion", Integer.parseInt(institucion.toString()));
 		List rst=consulta.list();
 		
