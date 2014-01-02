@@ -141,9 +141,13 @@ public class DocenteSilaboAsistenciaListFecha extends GenericController
 			p = (Persona)myService.findById(p);
 			item.setNombre(p.getNombreCompleto());
 			
-			AsistenciaAlumnoCalendario temp;
-			temp=(AsistenciaAlumnoCalendario)myService.findByObject(asiscale);
-			item.setAsistio((long)temp.getAsistencia());
+			try {
+				AsistenciaAlumnoCalendario temp;
+				temp=(AsistenciaAlumnoCalendario)myService.findByObject(asiscale);
+				item.setAsistio((long)temp.getAsistencia());
+			} catch (Exception e) {
+				item.setAsistio(1L);
+			}
 		}
 		
 	}
