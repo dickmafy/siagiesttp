@@ -10,7 +10,12 @@
    		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
   		<p:toolbar>  
 	    	<p:toolbarGroup align="left">  		         
-		        <p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{mantenimientoSupervision.nativeNew}" ajax="false" />  
+		        <p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{mantenimientoSupervision.nativeNew}" ajax="false" />
+		        <p:spacer height="4px"/>
+		        <p:commandButton title="Listado de DRE" value="Listado de DRE"
+						icon="icn_item_download" oncomplete="wvReporte.show()" 
+						actionListener="#{mantenimientoSupervision.generarReporte}" 
+						update=":dlgReporte"/>  
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
@@ -66,6 +71,14 @@
 			</h:form>	
    		</p:confirmDialog>
    		
+   		<!--  muestra del reporte -->
+		<p:dialog widgetVar="wvReporte" id="dlgReporte" header="Reporte DRE" closable="true" appendToBody="true"
+			showEffect="fade" resizable="false" modal="true" width="1000px" height="500px" >
+			<p:media value="#{mantenimientoSupervision.urlRpt}" width="976px" height="476px"
+				id="mdPdf">
+                Su navegador no cuenta con un visor de archivos PDFs, por favor descarguelo para que pueda visualizar el archivo
+            </p:media>
+		</p:dialog>
    	
     </ui:define>
 </ui:composition>
