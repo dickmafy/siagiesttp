@@ -54,15 +54,15 @@ public class CetproMatricula extends GenericController
 		proceso=id;
 		annio=Long.parseLong(Calendar.getInstance().get(Calendar.YEAR)+"");
 		
-		page_new="adm_mat_lst";
-		page_main="adm_mat_lst";
-		page_update="adm_mat_upd";	
+		page_new="cetpro_matricula_new";
+		page_main="cetpro_matricula_list";
+		page_update="cetpro_matricula_detail";	
 		
 		
 		requisitos = new ArrayList();
 		procesoList=getListSelectItem(myService.listarProcesos(institucion,annio),"id","nombrePeriodo",true);
 		bancoList=getListSelectItem(new Banco(),"id","nombre",true);
-		optionSelectProceso();
+	
 		forward(page_main);
 	}
 	public void init() throws Exception
@@ -71,184 +71,7 @@ public class CetproMatricula extends GenericController
 	public void defaultList() throws Exception
 	{setBeanList(myService.listarMatricula(proceso));}
 	
-	public void optionSelectProceso() throws Exception
-	{
-		if(proceso.longValue()>0L)		{defaultList();}
-		else							{setBeanList(new ArrayList());}
-		enabledOptions();
-	}
-	public void enabledOptions() throws Exception
-	{
-		if(proceso.longValue()>0L)
-		{
-			Proceso bean=(Proceso)myService.findById(Proceso.class, proceso);
-			if(bean.getEstado().longValue()==5L)	{enabled=true;}
-			bean=null;
-		}
-		else
-		{enabled=false;}
-	}
-	
-	public void nativeDetail() throws Exception
-	{
-		setBean(getBeanSelected());
-		afterLoad();
-		forward("adm_mat_det");
-	}
-	
-	public void afterLoad() throws Exception
-	{
-		Matricula bean=(Matricula)getBean();
-		//requisitos=myService.listarRequisitosMatricula(bean.getId(), institucion, 0L);
-		itinerario=myService.listarModulos(bean.getEspecialidad());
-		matriculaList=myService.listarSeccionesMatricula(bean.getId());
-		bean=null;
-		
-		tipo=-1L;
-		modulo=-1L;
-		seccion=-1L;
-		unidad=-1L;
-		
-		moduloList=new ArrayList<SelectItem>();
-		moduloList.add(new SelectItem(Constante.NO_SELECTED, Constante.OPTION_SELECT));
-		unidadList=new ArrayList<SelectItem>();
-		unidadList.add(new SelectItem(Constante.NO_SELECTED, Constante.OPTION_SELECT));
-		seccionList=new ArrayList<SelectItem>();
-		seccionList.add(new SelectItem(Constante.NO_SELECTED, Constante.OPTION_SELECT));
-	}
-	
-	
-	public void beforeUpdate() throws Exception
-	{
-		Matricula bean=(Matricula)getBean();
-		bean.setEstado(1L);
-		setBean(bean);
-		//myService.eliminarRequisito(false, bean.getId());
-		//myService.insertarRequisitos(false, requisitos, bean.getId());
-	}
-	
-	
-	public void optionPublicar() throws Exception
-	{
-		status((Matricula)getBeanSelected(),2L);
-		defaultList();
-		setMessageSuccess("La matricula se público satisfactoriamente.");
-	}
-	
-	public Long getEstado()
-	{
-		for(int i=0; i<requisitos.size(); i++)
-		{
-			if(!requisitos.get(i).getCheck())
-			{return 1L;}
-		}
-		if(!validateEmpty(((Matricula)getBean()).getPago_fecha()) || !validateEmpty(((Matricula)getBean()).getPago_recibo()) || !validateSelect(((Matricula)getBean()).getPago_banco()))
-		{return 2L;}
-		return 3L;
-	}
-	
-	public void selectAnnio() throws Exception
-	{
-		proceso=-1L;
-		procesoList=getListSelectItem(myService.listarProcesos(institucion,annio),"id","nombrePeriodo",true);
-	}
-	
-	public void selectTipo() throws Exception
-	{
-		moduloList=new ArrayList<SelectItem>();
-		moduloList.add(new SelectItem(Constante.NO_SELECTED, Constante.OPTION_SELECT));
-		if(tipo.longValue()>0L)
-		{
-			for(int i=0; i<itinerario.size(); i++)
-			{
-				if(itinerario.get(i).getTipoItinerario().longValue()==tipo.longValue())
-				{moduloList.add(new SelectItem(itinerario.get(i).getModulo(), itinerario.get(i).getNombreModular()));}
-			}
-		}
-	}
-	public void selectModulo() throws Exception
-	{
-		Matricula bean=(Matricula)getBean();
-		unidadList=getListSelectItem(myService.listarUnidadesDisponibles(bean.getPersona(), institucion, bean.getEspecialidad(), modulo, tipo),"id","titulo",true);
-		unidad=-1L;
-	}
-	
-	public void selectUnidad() throws Exception
-	{
-		Matricula bean=(Matricula)getBean();
-		Proceso beanProceso=(Proceso)myService.findById(Proceso.class, proceso);
-		seccionList=getListSelectItem(myService.listarSecciones(institucion, annio, beanProceso.getProceso(), bean.getEspecialidad(), bean.getTurno(), modulo, tipo, unidad),"id","nombre",true);
-	}
-	
-	public void addSeccion() throws Exception
-	{
-		Matricula bean=(Matricula)getBean();
-		if(myService.validarVacantes(seccion))
-		{
-			if(myService.validarCruces(seccion, bean.getId()))
-			{
-				myService.actualizarMatricula(true, seccion, bean.getId(), bean.getPersona(), DateHelper.getDate());
-				matriculaList=myService.listarSeccionesMatricula(bean.getId());
-				setMessageSuccess("La sección fue agregada a la matricula del alumno satisfactoriamente.");
-			}
-			else
-			{setMessageError("La sección seleccionada genera un cruce de horarios.");}
-		}
-		else
-		{setMessageError("No existen vacantes para esta sección.");}
-		bean=null;
-	}
-	
-	public void subSeccion() throws Exception
-	{
-		Matricula bean=(Matricula)getBean();
-		System.out.println("valor de la sección: "+selectSeccion.getSeccion());
-		myService.actualizarMatricula(false, selectSeccion.getSeccion(), bean.getId(), bean.getPersona(), DateHelper.getDate());
-		matriculaList=myService.listarSeccionesMatricula(bean.getId());
-		setMessageSuccess("La sección fue eliminada de la matricula del alumno satisfactoriamente.");
-		bean=null;
-	}
-	
-	public String getPic()
-	{
-		try
-		{			
-			File fotoFile = new File(getServletContext().getRealPath("/recursos/fotos/"+((Matricula)getBean()).getPersona()+".png"));
-			if(fotoFile.isFile()) return "/recursos/fotos/"+((Matricula)getBean()).getPersona()+".png";
-			else return "/recursos/fotos/default.png";
-		}
-		catch(Exception e)
-		{return "/recursos/fotos/default.png";}
-		
-	}
-	
-	
-	public boolean validation()
-	{
-		boolean success=true;
-		Matricula bean=(Matricula)getBean();
-		if(matriculaList.size()<3)
-		{
-			success=false;
-			setMessageError("Debe agregar al menos tres secciones en la lista de matricula por sección.");	
-		}
-		else if(!validateEmpty(bean.getPago_fecha())) 
-		{
-			success=false;
-			setMessageError("Debe ingresar la fecha de pago.");
-		}
-		else if(!validateSelect(bean.getPago_banco())) 
-		{
-			success=false;
-			setMessageError("Debe seleccionar el Banco donde realizo el pago.");
-		}
-		else if(!validateEmpty(bean.getPago_recibo())) 
-		{
-			success=false;
-			setMessageError("Debe ingresar el número de recibo del voucher.");
-		}
-		return success;
-	}
+
 	
 	public AdmisionService getMyService() 										{return myService;}	
 	public void setMyService(AdmisionService myService)							{this.myService = myService;}
