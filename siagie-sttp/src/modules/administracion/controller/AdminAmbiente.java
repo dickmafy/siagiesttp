@@ -1,7 +1,27 @@
 package modules.administracion.controller; 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import resouces.ConnPg;
+import resouces.Fecha;
 
 import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
@@ -33,6 +53,9 @@ public class AdminAmbiente extends GenericController
 	private List<Institucion> instituciones=null;
 	private SeguridadService	myService;
 	
+	private String urlRpt; // Codigo Ericson Huamani
+	private String nombreUsuario; // Codigo Ericson Huamani
+	
 	public void initBase(Long codigo, String nombre) throws Exception
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
@@ -52,6 +75,9 @@ public class AdminAmbiente extends GenericController
 		page_main="adm_amb_lst";
 		page_update="adm_amb_upd";
 		forward(page_main);
+		
+		setUrlRpt("/modulos/reportes/pdf/NOMINA.pdf"); // Codigo Ericson Huamaní
+		nombreUsuario=usr.getNombres(); // Codigo Ericson Huamaní
 	}
 	
 	@Override
@@ -212,5 +238,61 @@ public class AdminAmbiente extends GenericController
 
 	public List<SelectItem> getSolicitudList() 							{return solicitudList;}
 	public void setSolicitudList(List<SelectItem> solicitudList) 		{this.solicitudList = solicitudList;}
+
+	public String getUrlRpt() {
+		return urlRpt;
+	}
+
+	public void setUrlRpt(String urlRpt) {
+		this.urlRpt = urlRpt;
+	}
 	
+	// Inicio Codigo Ericson Huamaní 19-12-2013 11:00
+		@SuppressWarnings("unchecked")
+		public void generarReporte(ActionEvent evt) {
+			if (institucion.longValue() > 0L) {
+				try {
+					String rutaAplicacion = FacesContext.getCurrentInstance()
+							.getExternalContext().getRealPath("/");
+					String nombreArchivoPdf = new Fecha().getFecha(new Date(),
+							Fecha.PATTERN_DDMMYYYYHHMMS, Fecha.LOCALE_ES) + ".pdf";
+					JasperPrint print = null;
+					
+					@SuppressWarnings("rawtypes")
+					Map parametro = new HashMap();
+					parametro.put("ID_INSTITUTO", institucion);
+					parametro.put("ID_LOCAL", local);
+					parametro.put("NOMBRE_LOCAL", getNombreLocal());
+					parametro.put("NOMBRE_INSTITUTO",getNombreInstitucion());
+					parametro.put("USUARIO", nombreUsuario);
+					parametro.put("RUTA_IMAGEN",rutaAplicacion+"/recursos/imagenes/sicad_1_rpt.jpg");
+					
+					File fp = new File(rutaAplicacion
+							+ "/modulos/reportes/jasper/rpt_ambientes.jasper");
+					InputStream reportSt = new BufferedInputStream(
+							new FileInputStream(fp));
+					print = JasperFillManager.fillReport(reportSt, parametro,
+							ConnPg.getConexion());
+					OutputStream output = new FileOutputStream(new File(
+							rutaAplicacion + "/modulos/reportes/pdf/"
+									+ nombreArchivoPdf));
+					JasperExportManager.exportReportToPdfStream(print, output);
+					urlRpt = "/modulos/reportes/pdf/" + nombreArchivoPdf;
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JRException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// Fin codigo Ericson Huamaní
 } 
