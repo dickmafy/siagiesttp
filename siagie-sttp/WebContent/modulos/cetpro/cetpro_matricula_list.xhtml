@@ -23,16 +23,6 @@
            	        <p:ajax event="change" update=":frmList" listener="#{cetproMatricula.cargarModulo}"/>       
        	       	</p:selectOneMenu>
        	       	
-	    		<p:spacer height="6px"/>
-			    	<p:outputLabel value="Modulos" style="position:relative;  top:-4px;"/>
-		        <p:spacer height="6px"/>
-		        
-		        <p:selectOneMenu id="txtmodulo" value="#{cetproMatricula.cetproMatriculaWrapper.pk_modulo}" style="position:relative;  top:3px; width:140px">
-					<f:selectItems value="#{cetproMatricula.listModulos}" />
-					<p:ajax event="change" update=":frmList" listener="#{cetproMatricula.cargarUnidad}"/>
-				</p:selectOneMenu>
-				
-			
 				
 								
 			</p:toolbarGroup>  
@@ -48,6 +38,10 @@
 				<h:outputText value="Matricula" />  
 			</f:facet>
 			
+			<p:column headerText="Modulo" style="width:10%; align:center;" sortBy="#{item.nombreEspecialidad}">   
+				<h:outputText value="#{item.pk_unidad}" />  
+			</p:column>
+			
 			<p:column headerText="Unidades Didacticas" style="width:10%; align:center;" sortBy="#{item.nombreEspecialidad}">   
 				<h:outputText value="#{item.pk_unidad}" />  
 			</p:column>
@@ -56,34 +50,25 @@
 				<h:outputText value="#{item.pk_docente}" />  
 			</p:column>	
 			
-			<p:column headerText="DNI Nro." style="width:8%; align:center;" sortBy="#{item.personaDni}">   
-				<h:outputText value="#{item.personaDni}" />  
+			<p:column headerText="Turno" style="width:8%; align:center;" sortBy="#{item.personaDni}">   
+				<h:outputText value="#{item.turno}" />  
 			</p:column>	
 			
-			<p:column headerText="Nombres" style="width:13%; align:center;" sortBy="#{item.personaNombre}">   
-				<h:outputText value="#{item.personaNombre}" />  
+			<p:column headerText="Estado" style="width:13%; align:center;" sortBy="#{item.personaNombre}">   
+				<h:outputText value="#{item.estado}" />  
 			</p:column>	
-			
-			<p:column headerText="Apellidos" style="width:18%; align:center;" sortBy="#{item.personaPaterno}">   
-				<h:outputText value="#{item.personaPaterno} #{item.personaMaterno}" />  
-			</p:column>	
-
-			<p:column headerText="Estado" style="width:15%; align:center;" sortBy="#{item.nombreEstado}">
-	        	<h:outputText value="#{item.nombreEstado}" />
-			</p:column>
-			
+						
 						
 			<p:column headerText="Opciones" style="width:10%">
 			
-				<p:commandButton icon="icn_item_update" title="Creacion Fechas" action="#{cetproMatricula.goCrearFecha}" ajax="false" >
+				<p:commandButton icon="icn_item_update" title="Creacion Fechas" action="#{cetproMatricula.goPublicar}" ajax="false" >
 					<f:setPropertyActionListener value="#{item}" target="#{cetproMatricula.beanSelected}" />
 				</p:commandButton>
 				
-				<p:commandButton icon="icn_prc_publicar" title="Publicar Matricula" action="#{cetproMatricula.goPublicar}" ajax="false">
+				<p:commandButton icon="icn_prc_publicar" title="Publicar Matricula" action="#{cetproMatricula.goCerrar}" ajax="false">
 					<f:setPropertyActionListener value="#{item}" target="#{cetproMatricula.beanSelected}" />				
 				</p:commandButton>
 				
-					
         	</p:column>      
 		</p:dataTable> 
 	</h:form>

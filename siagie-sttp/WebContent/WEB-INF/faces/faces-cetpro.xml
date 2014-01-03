@@ -104,7 +104,7 @@
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>cetpro_matricula_list</from-outcome>
-			<to-view-id>/modulos/cetpro/matricula_list.xhtml</to-view-id>
+			<to-view-id>/modulos/cetpro/cetpro_matricula_list.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -112,7 +112,7 @@
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>cetpro_matricula_detail</from-outcome>
-			<to-view-id>/modulos/cetpro/matricula_detail.xhtml</to-view-id>
+			<to-view-id>/modulos/cetpro/cetpro_matricula_detail.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -120,7 +120,7 @@
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>cetpro_matricula_new</from-outcome>
-			<to-view-id>/modulos/cetpro/matricula_new.xhtml</to-view-id>
+			<to-view-id>/modulos/cetpro/cetpro_matricula_new.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
