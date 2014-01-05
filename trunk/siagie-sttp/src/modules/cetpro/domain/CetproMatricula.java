@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cetpro.m_matricula_cetpro")
+@Table(name="cetpro.m_cetpro_matricula")
 public class CetproMatricula implements Serializable
 {
 	private static final long serialVersionUID = 1L;
