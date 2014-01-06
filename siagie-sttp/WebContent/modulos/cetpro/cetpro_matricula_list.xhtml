@@ -13,7 +13,7 @@
 	    		<p:spacer width="6px"/>
 	    		<p:outputLabel for="txtAnn" value="Año" style="position:relative;  top:-4px;"/>
 	    		<p:spacer width="6px"/>
-	    		<p:selectOneMenu id="txtAnn" value="#{cetproMatricula.cetproMatriculaWrapper.anio}" style="position:relative;  top:2px;">
+	    		<p:selectOneMenu id="txtAnn" value="#{cetproMatricula.annio}" style="position:relative;  top:2px;">
                     <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
            	        <f:selectItem itemLabel="2013"  itemValue="2013" />
            	        <f:selectItem itemLabel="2014" 	itemValue="2014" />
@@ -21,10 +21,17 @@
            	        <f:selectItem itemLabel="2016" 	itemValue="2016" />
            	        <f:selectItem itemLabel="2017" 	itemValue="2017" /> 
            	        <p:ajax event="change" update=":frmList" listener="#{cetproMatricula.cargarModulo}"/>       
-       	       	</p:selectOneMenu>
-       	       	
-				
-								
+       	       	</p:selectOneMenu>  
+       	       	<p:spacer height="6px"/>
+		        <p:outputLabel for="txtMod" value="Módulo" style="position:relative;  top:-4px;"/>
+		        <p:spacer height="6px"/>
+		        <p:selectOneMenu id="txtMod" value="#{cetproMatricula.modulo}" style="position:relative;  top:3px; width:200px">
+		        	<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
+					<f:selectItems value="#{cetproMatricula.moduloList}"/>
+					<p:ajax event="change" update=":frmList" lListener="#{cetproMatricula.defaultList}"/>
+				</p:selectOneMenu>
+				<p:spacer height="6px"/> 
+		   		<p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{cetproMatricula.nativeNew}" rendered="#{cetproMatricula.modulo != null}" ajax="false" style="position:relative;  top:-4px;"/>    
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
@@ -38,23 +45,23 @@
 				<h:outputText value="Matricula" />  
 			</f:facet>
 			
-			<p:column headerText="Modulo" style="width:10%; align:center;" sortBy="#{item.nombreEspecialidad}">   
-				<h:outputText value="#{item.pk_unidad}" />  
+			<p:column headerText="Módulo" style="width:10%; align:center;" sortBy="#{item.pk_unidad}">   
+				<h:outputText value="#{item.modulo}" />  
 			</p:column>
 			
-			<p:column headerText="Unidades Didacticas" style="width:10%; align:center;" sortBy="#{item.nombreEspecialidad}">   
-				<h:outputText value="#{item.pk_unidad}" />  
+			<p:column headerText="Unidad Didáctica" style="width:10%; align:center;" sortBy="#{item.nombreUnidad}">   
+				<h:outputText value="#{item.nombreUnidad}" />  
 			</p:column>
 			
-			<p:column headerText="Docente" style="width:7%; align:center;" sortBy="#{item.nombreTurno}">   
-				<h:outputText value="#{item.pk_docente}" />  
+			<p:column headerText="Docente" style="width:7%; align:center;" sortBy="#{item.nombreDocente}">   
+				<h:outputText value="#{item.nombreDocente}" />  
 			</p:column>	
 			
-			<p:column headerText="Turno" style="width:8%; align:center;" sortBy="#{item.personaDni}">   
+			<p:column headerText="Turno" style="width:8%; align:center;" sortBy="#{item.turno}">   
 				<h:outputText value="#{item.turno}" />  
 			</p:column>	
 			
-			<p:column headerText="Estado" style="width:13%; align:center;" sortBy="#{item.personaNombre}">   
+			<p:column headerText="Estado" style="width:13%; align:center;" sortBy="#{item.estado}">   
 				<h:outputText value="#{item.estado}" />  
 			</p:column>	
 						

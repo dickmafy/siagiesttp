@@ -50,6 +50,7 @@ public class DocenteSilaboFecha extends GenericController
     private Integer cantidad_clases;
     private List<Fecha> listFechas;
     private SilaboCronograma silaboCronograma;
+    
     public void init(Seccion pseccion) throws Exception
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");

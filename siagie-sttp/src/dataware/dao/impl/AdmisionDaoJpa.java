@@ -16,6 +16,7 @@ import modules.admision.domain.Proceso;
 import modules.admision.domain.ProcesoCronograma;
 import modules.admision.domain.ProcesoOferta;
 import modules.admision.domain.Requisitos;
+import modules.cetpro.domain.CetproMatricula;
 import modules.horario.domain.AsistenciaAlumno;
 import modules.horario.domain.AsistenciaDocente;
 import modules.horario.domain.HorarioDistribucion;
@@ -692,6 +693,41 @@ public class AdmisionDaoJpa extends HorarioDaoJpa implements AdmisionDao
 		if(asistencia.size()>0)
 		{executeQueryUpdate(query.toString().substring(0,query.toString().length()-1)+";");}
 		query=null;
+	}
+	
+	public List<CetproMatricula> listarUnidadesCetpro(Long anno,Long modulo) throws Exception
+	{
+		dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		List<CetproMatricula> lista=new ArrayList<CetproMatricula>();
+		Query consulta=createQuery("SELECT * FROM cetpro.lst_unidadesoferta(:anno, :modulo);");
+		consulta.setParameter("anno", Integer.parseInt(anno.toString()));
+		consulta.setParameter("modulo", Integer.parseInt(modulo.toString()));
+		List rst=consulta.list();
+		
+		for(int i=0; i<rst.size(); i++)
+		{
+			
+			Object[] objetos=(Object[])rst.get(i);
+			CetproMatricula field=new CetproMatricula();
+			if(objetos[0]!=null){field.setTipoModulo(Long.parseLong(objetos[0].toString()));}
+			if(objetos[1]!=null){field.setPk_cetpro_matricula(Long.parseLong(objetos[1].toString()));}
+			if(objetos[2]!=null){field.setPk_docente(Long.parseLong(objetos[2].toString()));}
+			if(objetos[3]!=null){field.setPk_unidad(Long.parseLong(objetos[3].toString()));}
+			if(objetos[4]!=null){field.setApepat(objetos[4].toString());}
+			if(objetos[5]!=null){field.setApemat(objetos[5].toString());}
+			if(objetos[6]!=null){field.setNom(objetos[6].toString());}
+			if(objetos[7]!=null){field.setModulo(Long.parseLong(objetos[7].toString()));}
+			if(objetos[8]!=null){field.setNomUnidad(objetos[8].toString());}
+			if(objetos[9]!=null){field.setFecha_ini(dateFormat.parse(objetos[9].toString()));}
+			if(objetos[10]!=null){field.setFecha_fin(dateFormat.parse(objetos[10].toString()));}	
+			if(objetos[11]!=null){field.setAnno(Long.parseLong(objetos[11].toString()));}
+			if(objetos[12]!=null){field.setTurno(Long.parseLong(objetos[12].toString()));}
+			if(objetos[13]!=null){field.setEstado(Long.parseLong(objetos[13].toString()));}
+						
+			lista.add(field);
+		}
+		dateFormat=null;
+		return lista;
 	}
 }
 
