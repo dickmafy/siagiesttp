@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="cetpro.m_cetpro_matricula")
@@ -23,6 +24,14 @@ public class CetproMatricula implements Serializable
 	private Date 	fecha_fin;
 	private Long 	turno;
 	private Long 	estado;
+	
+	private String apepat;
+	private String apemat;
+	private String nom;
+	private String nomUnidad;
+	private Long modulo;
+	private Long tipoModulo;
+	private String nombreDocente;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -76,11 +85,61 @@ public class CetproMatricula implements Serializable
 		this.estado = estado;
 	}
 	
+	@Transient
+	public String getApepat() {
+		return apepat;
+	}
+	public void setApepat(String apepat) {
+		this.apepat = apepat;
+	}
 	
+	@Transient
+	public String getApemat() {
+		return apemat;
+	}
+	public void setApemat(String apemat) {
+		this.apemat = apemat;
+	}
 	
-
+	@Transient
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 	
+	@Transient
+	public String getNomUnidad() {
+		return nomUnidad;
+	}
+	public void setNomUnidad(String nomUnidad) {
+		this.nomUnidad = nomUnidad;
+	}
 	
-
+	@Transient
+	public Long getModulo() {
+		return modulo;
+	}
+	public void setModulo(Long modulo) {
+		this.modulo = modulo;
+	}
+	
+	@Transient
+	public Long getTipoModulo() {
+		return tipoModulo;
+	}
+	public void setTipoModulo(Long tipoModulo) {
+		this.tipoModulo = tipoModulo;
+	}
+		
+	@Transient
+	public String getNombreDocente() {
+		return apepat+" "+apemat+" "+nom;
+	}
+	public void setNombreDocente(String nombreDocente) {
+		this.nombreDocente = nombreDocente;
+	}
+	
 
 }
