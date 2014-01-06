@@ -62,8 +62,8 @@ public class HorarioServiceImpl extends MarcoServiceImpl implements HorarioServi
 	public void actualizarDocente(Long seccion, Long docente) throws Exception
 	{getHorarioDao().actualizarDocente(seccion, docente);}
 	
-	public Long validarEtapaAsignación(Long meta) throws Exception
-	{return getHorarioDao().validarEtapaAsignación(meta);}
+	public Long validarEtapaAsignacion(Long meta) throws Exception
+	{return getHorarioDao().validarEtapaAsignacion(meta);}
 	
 	public Long validarEtapaSilabo(Long meta) throws Exception
 	{return getHorarioDao().validarEtapaSilabo(meta);}

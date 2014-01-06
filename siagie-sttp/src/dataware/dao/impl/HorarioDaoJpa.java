@@ -321,7 +321,7 @@ public class HorarioDaoJpa extends MarcoDaoJpa implements HorarioDao
 	public void actualizarDocente(Long seccion, Long docente) throws Exception
 	{executeQueryUpdate("UPDATE horario.m_seccion SET docente='"+docente+"' WHERE pk_seccion='"+seccion+"';");}
 	
-	public Long validarEtapaAsignación(Long meta) throws Exception 
+	public Long validarEtapaAsignacion(Long meta) throws Exception 
 	{
 		Query consulta=createQuery("SELECT * FROM horario.validar_proceso_asignacion(:meta)");
 		consulta.setParameter("meta", Integer.parseInt(meta.toString()));
