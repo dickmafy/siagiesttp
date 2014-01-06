@@ -82,7 +82,7 @@ public class CetproProceso extends GenericController
         }
         else if(object.getCosto_inscripcion()<=0.0)
         {
-                setMessageError("Debe ingresar el costo del registro al proceso de admisión.");                 
+                setMessageError("Debe ingresar el costo del registro al proceso de admision.");                 
                 success = false;
         }
         else if(object.getCosto_matreg()<=0.0)
@@ -116,7 +116,7 @@ public class CetproProceso extends GenericController
 	{
 		Proceso bean=(Proceso)getBeanSelected();
 		myService.updateStatus(bean, 3L);
-		setMessageSuccess("El proceso fue publicado exitósamente, el proceso de registro de postulantes se encuentra habilitado.");
+		setMessageSuccess("El proceso fue publicado exitosamente, el proceso de registro de postulantes se encuentra habilitado.");
 		defaultList();		
 		bean=null;
 	}
@@ -125,7 +125,7 @@ public class CetproProceso extends GenericController
 	{
 		Proceso bean=(Proceso)getBeanSelected();
 		myService.updateStatus(bean, 4L);
-		setMessageSuccess("El proceso ha registrado el Inicio de la Etapa de Admisión exitósamente.");
+		setMessageSuccess("El proceso ha registrado el Inicio de la Etapa de Admision exitosamente.");
 		defaultList();
 		bean=null;
 	}
@@ -134,7 +134,7 @@ public class CetproProceso extends GenericController
 		Proceso bean=(Proceso)getBeanSelected();
 		myService.updateStatus(bean, 5L);
 		myService.procesarIngresantes(bean.getId());
-		setMessageSuccess("El proceso ha registrado el Inicio de la Etapa de Matricula exitósamente.");
+		setMessageSuccess("El proceso ha registrado el Inicio de la Etapa de Matricula exitosamente.");
 		defaultList();
 		bean=null;
 	}
@@ -143,7 +143,7 @@ public class CetproProceso extends GenericController
 		Proceso bean=(Proceso)getBeanSelected();
 		myService.updateStatus(bean, 6L);
 		myService.iniciarClases(DateHelper.getDate(), bean.getId());
-		setMessageSuccess("El proceso ha registrado el Inicio de la Etapa Académica exitósamente.");		
+		setMessageSuccess("El proceso ha registrado el Inicio de la Etapa Academica exitosamente.");		
 		defaultList();
 		bean=null;
 	}
@@ -151,7 +151,7 @@ public class CetproProceso extends GenericController
 	{
 		Proceso bean=(Proceso)getBeanSelected();
 		myService.updateStatus(bean, 7L);
-		setMessageSuccess("El proceso se ha finalizado exitósamente.");
+		setMessageSuccess("El proceso se ha finalizado exitosamente.");
 		defaultList();
 		bean=null;
 	}
@@ -160,7 +160,7 @@ public class CetproProceso extends GenericController
 	{
 		Proceso bean=(Proceso)getBeanSelected();
 		myService.updateStatus(bean, 0L);
-		setMessageSuccess("El proceso fue anulado exitósamente.");
+		setMessageSuccess("El proceso fue anulado exitosamente.");
 		defaultList();
 		bean=null;
 	}
@@ -190,7 +190,7 @@ public class CetproProceso extends GenericController
 	{
 		mes=mes-1L;
 		int mess=Integer.parseInt(mes.toString());
-		int año=Integer.parseInt(anio);
+		int anyo=Integer.parseInt(anio);
 		switch(mess)
 		{
 			case 0:  // Enero
@@ -207,9 +207,9 @@ public class CetproProceso extends GenericController
 			case 10: // Noviembre
 			return 30;
 			case 1:  // Febrero
-			if ( ((año%100 == 0) && (año%400 == 0)) ||
-			((año%100 != 0) && (año%  4 == 0))   )
-			return 29;  // Año Bisiesto
+			if ( ((anyo%100 == 0) && (anyo%400 == 0)) ||
+			((anyo%100 != 0) && (anyo%  4 == 0))   )
+			return 29;  // Anyo Bisiesto
 			else
 			return 28;
 			default: throw new java.lang.IllegalArgumentException ("El mes debe estar entre 0 y 11");
