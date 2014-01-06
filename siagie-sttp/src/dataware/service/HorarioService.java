@@ -30,7 +30,7 @@ public interface HorarioService extends MarcoService
 	public boolean validarHoras(Long docente, Long horas) throws Exception ;
 	public void actualizarDocente(Long seccion, Long docente) throws Exception;
 	
-	public Long validarEtapaAsignación(Long meta) throws Exception;
+	public Long validarEtapaAsignacion(Long meta) throws Exception;
 	public Long validarEtapaSilabo(Long meta) throws Exception;
 	public Long validarEtapaAdmision(Long annio, Long proceso) throws Exception;
 	public void etapaAdmision(Long annio, Long proceso) throws Exception;
