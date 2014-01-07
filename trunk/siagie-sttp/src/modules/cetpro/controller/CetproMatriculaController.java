@@ -58,7 +58,7 @@ public class CetproMatriculaController extends GenericController
 	List<CetproMatriculaAlumno> listaAlumnos;
 	
 	private boolean enabled;
-	private Long 	proceso,institucion,tipo,modulo,unidad,seccion,annio,turno,docente,interesado;
+	private Long 	proceso,institucion,tipo,modulo,unidad,seccion,annio,turno,interesado,docente;
 	private Date 				fecha_inicio;
 	private Integer 			cantidad_clases;
 	private List<String> 		listaDiasSeleccionados;  
@@ -101,9 +101,10 @@ public class CetproMatriculaController extends GenericController
 		
 		Interesado bean=new Interesado();
     	bean.setInstitucion(institucion);
-    	interesadoList= myService.listByObjectEnabled(bean);
+    	interesadoList= getListSelectItem(myService.listarInteresados(institucion), "id", "apellido_paterno,apellido_materno,nombres"," ",true);
     	
-    	
+    	obj=null;
+    	bean=null;
 	}
 	
 	public void init() throws Exception
@@ -136,14 +137,14 @@ public class CetproMatriculaController extends GenericController
 	public void addAlumno() throws Exception
 	{
 		CetproMatricula bean=(CetproMatricula)getBean();
-			if(validarAlumno(interesado, bean.getPk_cetpro_matricula()))
-			{
-				//myService.actualizarMatricula(true, seccion, bean.getId(), bean.getPersona(), DateHelper.getDate());
-				//matriculaList=myService.listarSeccionesMatricula(bean.getId());
-				setMessageSuccess("La sección fue agregada a la matricula del alumno satisfactoriamente.");
-			}
-			else
-			{setMessageError("EL alumno seleccionado ya ha sido matriculado.");}
+		if(validarAlumno(interesado, bean.getPk_cetpro_matricula()))
+		{
+			myService.actualizarMatriculaCetpro(true, bean.getPk_cetpro_matricula(), interesado);
+			listaAlumnos=myService.listarAlumnosMatricula(bean.getPk_cetpro_matricula());
+			setMessageSuccess("El alumno fue matriculado satisfactoriamente.");
+		}
+		else
+		{setMessageError("EL alumno seleccionado ya ha sido matriculado.");}
 		bean=null;
 	}
 	
@@ -160,13 +161,12 @@ public class CetproMatriculaController extends GenericController
     	    	
 	}
 	
-	public void subSeccion() throws Exception
+	public void subAlumno() throws Exception
 	{
-		Matricula bean=(Matricula)getBean();
-		System.out.println("valor de la sección: "+selectSeccion.getSeccion());
-		myService.actualizarMatricula(false, selectSeccion.getSeccion(), bean.getId(), bean.getPersona(), DateHelper.getDate());
-		matriculaList=myService.listarSeccionesMatricula(bean.getId());
-		setMessageSuccess("La sección fue eliminada de la matricula del alumno satisfactoriamente.");
+		CetproMatricula bean=(CetproMatricula)getBean();
+		myService.actualizarMatriculaCetpro(true, bean.getPk_cetpro_matricula(), interesado);
+		listaAlumnos=myService.listarAlumnosMatricula(bean.getPk_cetpro_matricula());
+		setMessageSuccess("La matricula de alumno fue eliminada de la unidad.");
 		bean=null;
 	}
 	

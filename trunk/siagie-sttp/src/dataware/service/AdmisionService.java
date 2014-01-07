@@ -15,6 +15,7 @@ import modules.admision.domain.ProcesoCronograma;
 import modules.admision.domain.ProcesoOferta;
 import modules.admision.domain.Requisitos;
 import modules.cetpro.domain.CetproMatricula;
+import modules.cetpro.domain.CetproMatriculaAlumno;
 import modules.horario.domain.Seccion;
 import modules.marco.domain.Itinerario;
 
@@ -50,4 +51,7 @@ public interface AdmisionService extends HorarioService
 	public List<MatriculaSeccion> listarSeccionesMatricula(Long matricula) throws Exception;
 	public void iniciarClases(Date fechaInicio, Long proceso) throws Exception;
 	public List<CetproMatricula> listarUnidadesCetpro(Long anno,Long modulo) throws Exception;
+	public List<CetproMatriculaAlumno> listarAlumnosMatricula(Long matricula) throws Exception;
+	public void actualizarMatriculaCetpro(boolean tipo, Long matricula, Long alumno) throws Exception ;
+	public List<Persona> listarInteresados(Long institucion) throws Exception;
 }

@@ -117,53 +117,43 @@
 			</tr>
 				<tr>
 					<td>
-					<p:selectOneMenu id="txtUnd" value="#{admisionMatricula.interesado}" style="width:350px;">
-						<f:selectItems value="#{admisionMatricula.interesadoList}"/>
-					</p:selectOneMenu>
+						<p:selectOneMenu value="#{cetproMatricula.interesado}" style="width:350px;">
+								<f:selectItems value="#{cetproMatricula.interesadoList}"/>							
+						</p:selectOneMenu>
      				</td>
      				
-     				<td><p:commandButton actionListener="#{admisionMatricula.addSeccion}" update=":frmUpd" value="+" title="Agregar Alumno" ajax="false"/></td>
+     				<td><p:commandButton actionListener="#{cetproMatricula.addAlumno}" update=":frmUpd" value="+" title="Agregar Alumno" ajax="false"/></td>
 				</tr>  	
 		</table>
 		
-			<p:dataTable id="matriList" var="item" value="#{admisionMatricula.matriculaList}" 
+			<p:dataTable id="matriList" var="item" value="#{cetproMatricula.listaAlumnos}" 
 	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  >
 	     		
-		     		<p:column headerText="Módulo" style="width:8%; align:center;">   
-						<h:outputText value="MP#{item.modulo}" title="MP#{item.modulo}: #{item.nombreModulo}" rendered="#{item.tipo eq 1}"/>
-						<h:outputText value="MT#{item.modulo}" title="MT#{item.modulo}: #{item.nombreModulo}" rendered="#{item.tipo eq 2}"/>
+					<p:column headerText="DNI" style="width:15%; align:center;">   
+						<h:outputText value="#{item.alumno_dni}" />  
 					</p:column>	
-					
-					<p:column headerText="Unidad Didáctica" style="width:75%; align:center;">   
-						<h:outputText value="#{item.nombreUnidad}" />  
-					</p:column>	
-					<p:column headerText="Sección" style="width:10%; align:center;">   
-						<h:outputText value="#{item.nombreSeccion}" />  
+					<p:column headerText="Nombre" style="width:85%; align:left;">   
+						<h:outputText value="#{item.alumno_nom_completo}" />  
 					</p:column>
 					<p:column headerText="Opciones" style="width:7%; align:center;">   
-						<p:commandButton icon="icn_item_remove" title="Eliminar Sección" 	oncomplete="dialogEliSec.show()" >
-							<f:setPropertyActionListener value="#{item}" target="#{admisionMatricula.selectSeccion}" />				
+						<p:commandButton icon="icn_item_remove" title="Eliminar Alumno" 	oncomplete="dialogEliSec.show()" >
+							<f:setPropertyActionListener value="#{item}" target="#{cetproMatricula.selectSeccion}" />				
 						</p:commandButton>
 					</p:column>
 				</p:dataTable> 
 		</p:tab>
- 			
- 			
- 			
- 			
 		</p:tabView>
-		
 		
 		</p:panel>
 	</h:form>
 	
 	<!-- Elminar Seccion -->
 		<p:confirmDialog widgetVar="dialogEliSec" width="350" appendToBody="true"
-			header="Mensaje de Confirmacion" message="¿Estas seguro de eliminar la Sección de esta Matricula?" style="font-size:13px;"
+			header="Mensaje de Confirmación" message="¿Estas seguro de eliminar la Matricula del alumno seleccionado?" style="font-size:13px;"
         	closable="true" severity="alert" closeOnEscape="true">
         	<h:form>	
 			<h:panelGroup style="text-align: right;" >
-				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogEliSec.hide()"  actionListener="#{admisionMatricula.subSeccion}"  update=":frmUpd"/>
+				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogEliSec.hide()"  actionListener="#{cetproMatricula.suAlumno}"  update=":frmUpd"/>
         		<p:commandButton value="No" id="cancelButton" onclick="dialogEliSec.hide()"/>   
 			</h:panelGroup>
 			</h:form>	

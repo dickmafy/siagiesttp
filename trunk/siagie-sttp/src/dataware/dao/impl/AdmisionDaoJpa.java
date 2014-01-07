@@ -17,6 +17,7 @@ import modules.admision.domain.ProcesoCronograma;
 import modules.admision.domain.ProcesoOferta;
 import modules.admision.domain.Requisitos;
 import modules.cetpro.domain.CetproMatricula;
+import modules.cetpro.domain.CetproMatriculaAlumno;
 import modules.horario.domain.AsistenciaAlumno;
 import modules.horario.domain.AsistenciaDocente;
 import modules.horario.domain.HorarioDistribucion;
@@ -730,24 +731,65 @@ public class AdmisionDaoJpa extends HorarioDaoJpa implements AdmisionDao
 		return lista;
 	}
 	
-	public List<MatriculaSeccion> listarAlumnosUnidad(Long matricula) throws Exception 
+	public List<CetproMatriculaAlumno> listarAlumnosMatricula(Long matricula) throws Exception 
 	{
-		List<MatriculaSeccion> lista=new ArrayList<MatriculaSeccion>();
-		Query consulta=createQuery("SELECT * FROM horario.lst_horario_alumno(:matricula)");
+		List<CetproMatriculaAlumno> lista=new ArrayList<CetproMatriculaAlumno>();
+		Query consulta=createQuery("SELECT * FROM cetpro.lst_alumnosmatricula(:matricula)");
 		consulta.setParameter("matricula", Integer.parseInt(matricula.toString()));
 		List rst=consulta.list();
 		
 		for(int i=0; i<rst.size(); i++)
 		{
 			Object[] objetos=(Object[])rst.get(i);
-			MatriculaSeccion field=new MatriculaSeccion();
+			CetproMatriculaAlumno field=new CetproMatriculaAlumno();
+			if(objetos[0]!=null){field.setPk_cetpro_matricula_alumno(Long.parseLong(objetos[0].toString()));}
+			if(objetos[1]!=null){field.setPk_persona(Long.parseLong(objetos[1].toString()));}
+			if(objetos[2]!=null){field.setAlumno_dni(objetos[2].toString());}
+			if(objetos[3]!=null){field.setAlumno_apepat(objetos[3].toString());}
+			if(objetos[4]!=null){field.setAlumno_apemat(objetos[4].toString());}
+			if(objetos[5]!=null){field.setAlumno_nom(objetos[5].toString());}
+			lista.add(field);
+		}
+		return lista;
+	}
+	
+	public void actualizarMatriculaCetpro(boolean tipo, Long matricula, Long alumno) throws Exception 
+	{
+		StringBuilder query=new StringBuilder();
+		if(tipo)	
+		{
+			//query.append("UPDATE horario.m_seccion SET matriculados=matriculados+1 WHERE pk_seccion='"+seccion+"'; ");
+			query.append("INSERT INTO cetpro.m_cetpro_matricula_alumno(\"pk_cetpro_matricula\",\"pk_persona\",\"estado\") VALUES ('"+matricula+"','"+alumno+"','"+1+"'); ");			
+			executeQueryUpdate(query.toString());
+			//generarAsistencia(seccion, persona, fecha);
+			//generarNotas(seccion, persona);
+		}
+		else		
+		{
+			//query.append("UPDATE horario.m_seccion SET matriculados=matriculados-1 WHERE pk_seccion='"+seccion+"'; " );
+			query.append("DELETE FROM cetpro.m_cetpro_matricula_alumno WHERE pk_cetpro_matricula='"+matricula+"' AND pk_persona='"+alumno+"'; ");			
+			//query.append("DELETE FROM horario.m_asistencia_alumno WHERE pk_seccion='"+seccion+"' AND pk_persona='"+persona+"'; ");
+			//query.append("DELETE FROM horario.m_record_academico WHERE pk_seccion='"+seccion+"' AND pk_persona='"+persona+"'; ");
+			executeQueryUpdate(query.toString());
+		}
+		query=null;
+	}
+	
+	public List<Persona> listarInteresados(Long institucion) throws Exception 
+	{
+		List<Persona> lista=new ArrayList<Persona>();
+		Query consulta=createQuery("SELECT * FROM cetpro.lst_interesados(:institucion)");
+		consulta.setParameter("institucion", Integer.parseInt(institucion.toString()));
+		List rst=consulta.list();
+		
+		for(int i=0; i<rst.size(); i++)
+		{
+			Object[] objetos=(Object[])rst.get(i);
+			Persona field=new Persona();
 			if(objetos[0]!=null){field.setId(Long.parseLong(objetos[0].toString()));}
-			if(objetos[1]!=null){field.setSeccion(Long.parseLong(objetos[1].toString()));}
-			if(objetos[2]!=null){field.setTipo(Long.parseLong(objetos[2].toString()));}
-			if(objetos[3]!=null){field.setModulo(Long.parseLong(objetos[3].toString()));}
-			if(objetos[4]!=null){field.setNombreModulo(objetos[4].toString());}
-			if(objetos[5]!=null){field.setNombreUnidad(objetos[5].toString());}
-			if(objetos[6]!=null){field.setNombreSeccion(objetos[6].toString());}
+			if(objetos[1]!=null){field.setNombres(objetos[1].toString());}
+			if(objetos[2]!=null){field.setApellido_paterno(objetos[2].toString());}
+			if(objetos[3]!=null){field.setApellido_materno(objetos[3].toString());}
 			lista.add(field);
 		}
 		return lista;

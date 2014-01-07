@@ -15,6 +15,7 @@ import modules.admision.domain.ProcesoCronograma;
 import modules.admision.domain.ProcesoOferta;
 import modules.admision.domain.Requisitos;
 import modules.cetpro.domain.CetproMatricula;
+import modules.cetpro.domain.CetproMatriculaAlumno;
 import modules.horario.domain.Seccion;
 import modules.marco.domain.Itinerario;
 import dataware.dao.AdmisionDao;
@@ -107,4 +108,12 @@ public class AdmisionServiceImpl extends HorarioServiceImpl implements AdmisionS
 	public List<CetproMatricula> listarUnidadesCetpro(Long anno,Long modulo) throws Exception
 	{return getAdmisionDao().listarUnidadesCetpro(anno, modulo);}
 	
+	public List<CetproMatriculaAlumno> listarAlumnosMatricula(Long matricula) throws Exception 
+	{return getAdmisionDao().listarAlumnosMatricula(matricula);}
+	
+	public void actualizarMatriculaCetpro(boolean tipo, Long matricula, Long alumno) throws Exception 
+	{getAdmisionDao().actualizarMatriculaCetpro(tipo, matricula, alumno);}
+	
+	public List<Persona> listarInteresados(Long institucion) throws Exception
+	{return getAdmisionDao().listarInteresados(institucion);}
 }
