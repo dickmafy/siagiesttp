@@ -38,6 +38,8 @@ public class InstitucionPersonal extends GenericController
 		puestoList=getListSelectItem(new Puesto(), "id", "nombre",true);
 	}
 	
+	
+	
 	@Override
 	public void defaultList() throws Exception
 	{
@@ -47,7 +49,7 @@ public class InstitucionPersonal extends GenericController
 		setBeanList(getService().listByObject(bean));
 		bean=null;
 	}
-	/*	
+		
 	@Override
 	public void afterNew() throws Exception
 	{
@@ -57,7 +59,9 @@ public class InstitucionPersonal extends GenericController
 		setBean(bean);
 		fillDep();
 	}
-	*/
+	
+	
+	/*
 	@Override
 	public void beforeNew() throws Exception {
 		Personal bean=new Personal();
@@ -66,6 +70,7 @@ public class InstitucionPersonal extends GenericController
 		setBean(bean);
 		fillDep();
 	}
+	*/
 	
 	@Override
 	public boolean validation() throws Exception 
