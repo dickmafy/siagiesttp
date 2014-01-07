@@ -47,7 +47,7 @@ public class InstitucionUsuario extends GenericController
 	public void fillAll() throws Exception
 	{
 		Perfil objPrf=new Perfil();
-		objPrf.setTipo(2L);
+		objPrf.setTipo(3L);
 		objPrf.setEstado(Constante.ROW_STATUS_ENABLED);
 		perfilList=getListSelectItem(objPrf, "id", "nombre", true);
 		objPrf=null;
