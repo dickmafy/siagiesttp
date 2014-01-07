@@ -729,5 +729,28 @@ public class AdmisionDaoJpa extends HorarioDaoJpa implements AdmisionDao
 		dateFormat=null;
 		return lista;
 	}
+	
+	public List<MatriculaSeccion> listarAlumnosUnidad(Long matricula) throws Exception 
+	{
+		List<MatriculaSeccion> lista=new ArrayList<MatriculaSeccion>();
+		Query consulta=createQuery("SELECT * FROM horario.lst_horario_alumno(:matricula)");
+		consulta.setParameter("matricula", Integer.parseInt(matricula.toString()));
+		List rst=consulta.list();
+		
+		for(int i=0; i<rst.size(); i++)
+		{
+			Object[] objetos=(Object[])rst.get(i);
+			MatriculaSeccion field=new MatriculaSeccion();
+			if(objetos[0]!=null){field.setId(Long.parseLong(objetos[0].toString()));}
+			if(objetos[1]!=null){field.setSeccion(Long.parseLong(objetos[1].toString()));}
+			if(objetos[2]!=null){field.setTipo(Long.parseLong(objetos[2].toString()));}
+			if(objetos[3]!=null){field.setModulo(Long.parseLong(objetos[3].toString()));}
+			if(objetos[4]!=null){field.setNombreModulo(objetos[4].toString());}
+			if(objetos[5]!=null){field.setNombreUnidad(objetos[5].toString());}
+			if(objetos[6]!=null){field.setNombreSeccion(objetos[6].toString());}
+			lista.add(field);
+		}
+		return lista;
+	}
 }
 
