@@ -32,7 +32,7 @@ public class CetproMatricula implements Serializable
 	private Long modulo;
 	private Long tipoModulo;
 	private String nombreDocente;
-	
+	 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="pk_cetpro_matricula")
