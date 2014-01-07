@@ -37,7 +37,7 @@
 	</bean>
 	
 	
-	<bean id="cetproMatricula" class="modules.cetpro.controller.CetproMatricula" scope="session" parent="genericController">
+	<bean id="cetproMatricula" class="modules.cetpro.controller.CetproMatriculaController" scope="session" parent="genericController">
 		 <property name="myService" 	ref="admisionService"/>
 		<property name="bean"		ref="matricula"/>		
 	</bean>

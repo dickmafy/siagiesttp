@@ -18,12 +18,17 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
 
+import org.hibernate.Query;
+
 import modules.administracion.domain.Oferta;
 import modules.administracion.domain.Personal;
+import modules.admision.domain.Interesado;
 import modules.admision.domain.Matricula;
 import modules.admision.domain.MatriculaSeccion;
 import modules.admision.domain.Proceso;
 import modules.admision.domain.Requisitos;
+import modules.cetpro.domain.CetproMatricula;
+import modules.cetpro.domain.CetproMatriculaAlumno;
 import modules.horario.domain.Seccion;
 import modules.intranet.domain.Fecha;
 import modules.mantenimiento.domain.Banco;
@@ -38,7 +43,7 @@ import dataware.service.AdmisionService;
 
 @ManagedBean
 @SessionScoped
-public class CetproMatricula extends GenericController   
+public class CetproMatriculaController extends GenericController   
 {
 	private AdmisionService	myService;
 	
@@ -47,12 +52,13 @@ public class CetproMatricula extends GenericController
 	private	List<MatriculaSeccion>	matriculaList;
 	private List<SelectItem>    moduloList;
 	private List<SelectItem>    unidadList;
-	private List<SelectItem>    seccionList;
+	private List<SelectItem>    interesadoList;
 	private List<SelectItem>    docenteList;
-	private	List<Oferta> profesiones;
+	private	List<Oferta> 		profesiones;
+	List<CetproMatriculaAlumno> listaAlumnos;
 	
 	private boolean enabled;
-	private Long 	proceso,institucion,tipo,modulo,unidad,seccion,annio,turno,docente;
+	private Long 	proceso,institucion,tipo,modulo,unidad,seccion,annio,turno,docente,interesado;
 	private Date 				fecha_inicio;
 	private Integer 			cantidad_clases;
 	private List<String> 		listaDiasSeleccionados;  
@@ -75,10 +81,7 @@ public class CetproMatricula extends GenericController
 		//requisitos = new ArrayList();
 		//procesoList=getListSelectItem(myService.listarProcesos(institucion,annio),"id","nombrePeriodo",true);
 		
-		Personal obj=new Personal();
-		obj.setInstitucion(institucion);
-		obj.setPuesto(6L);
-		docenteList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "apepat,apemat,nombres"," ",true);
+		
 		
 		page_new="cetpro_matricula_new";
 		page_main="cetpro_matricula_list";
@@ -86,6 +89,23 @@ public class CetproMatricula extends GenericController
 		
 		forward(page_main);
 	}
+	
+	@Override
+	public void afterNew() throws Exception {
+		enabled=false;
+		
+		Personal obj=new Personal();
+		obj.setInstitucion(institucion);
+		obj.setPuesto(6L);
+		docenteList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "apepat,apemat,nombres"," ",true);
+		
+		Interesado bean=new Interesado();
+    	bean.setInstitucion(institucion);
+    	interesadoList= myService.listByObjectEnabled(bean);
+    	
+    	
+	}
+	
 	public void init() throws Exception
 	{init(-1L);}
 	
@@ -111,6 +131,43 @@ public class CetproMatricula extends GenericController
 		unidadList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "titulo"," ",false);
 		unidad=-1L;
 
+	}
+	
+	public void addAlumno() throws Exception
+	{
+		CetproMatricula bean=(CetproMatricula)getBean();
+			if(validarAlumno(interesado, bean.getPk_cetpro_matricula()))
+			{
+				//myService.actualizarMatricula(true, seccion, bean.getId(), bean.getPersona(), DateHelper.getDate());
+				//matriculaList=myService.listarSeccionesMatricula(bean.getId());
+				setMessageSuccess("La sección fue agregada a la matricula del alumno satisfactoriamente.");
+			}
+			else
+			{setMessageError("EL alumno seleccionado ya ha sido matriculado.");}
+		bean=null;
+	}
+	
+	public Boolean validarAlumno(Long alumno, Long pk) throws Exception{
+		
+		CetproMatriculaAlumno bean=new CetproMatriculaAlumno();
+    	bean.setPk_cetpro_matricula(pk);
+    	bean.setPk_persona(alumno);    	    	
+    	List<CetproMatriculaAlumno> list = myService.listByObjectEnabled(bean);
+    	bean=null;
+    	
+    	if(list==null)	{return true;}
+    	else					{return false;}
+    	    	
+	}
+	
+	public void subSeccion() throws Exception
+	{
+		Matricula bean=(Matricula)getBean();
+		System.out.println("valor de la sección: "+selectSeccion.getSeccion());
+		myService.actualizarMatricula(false, selectSeccion.getSeccion(), bean.getId(), bean.getPersona(), DateHelper.getDate());
+		matriculaList=myService.listarSeccionesMatricula(bean.getId());
+		setMessageSuccess("La sección fue eliminada de la matricula del alumno satisfactoriamente.");
+		bean=null;
 	}
 	
 	private void llenarDias() {
@@ -287,8 +344,8 @@ public class CetproMatricula extends GenericController
 	public List<SelectItem> getModuloList() 									{return moduloList;}
 	public void setModuloList(List<SelectItem> moduloList) 						{this.moduloList = moduloList;}
 	
-	public List<SelectItem> getSeccionList() 									{return seccionList;}
-	public void setSeccionList(List<SelectItem> seccionList) 					{this.seccionList = seccionList;}
+	public List<SelectItem> getInteresadoList() 									{return interesadoList;}
+	public void setInteresadoList(List<SelectItem> interesadoList) 					{this.interesadoList = interesadoList;}
 		
 	public List<SelectItem> getUnidadList() 									{return unidadList;}
 	public void setUnidadList(List<SelectItem> unidadList) 						{this.unidadList = unidadList;}
@@ -361,6 +418,22 @@ public class CetproMatricula extends GenericController
 	}
 	public void setDocente(Long docente) {
 		this.docente = docente;
+	}
+
+	public Long getInteresado() {
+		return interesado;
+	}
+
+	public void setInteresado(Long interesado) {
+		this.interesado = interesado;
+	}
+
+	public List<CetproMatriculaAlumno> getListaAlumnos() {
+		return listaAlumnos;
+	}
+
+	public void setListaAlumnos(List<CetproMatriculaAlumno> listaAlumnos) {
+		this.listaAlumnos = listaAlumnos;
 	}
 	
 	
