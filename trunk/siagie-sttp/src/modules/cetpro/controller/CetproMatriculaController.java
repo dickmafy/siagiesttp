@@ -32,7 +32,10 @@ import modules.cetpro.domain.CetproMatriculaAlumno;
 import modules.horario.domain.Seccion;
 import modules.intranet.domain.Fecha;
 import modules.mantenimiento.domain.Banco;
+import modules.marco.domain.Familia;
 import modules.marco.domain.Itinerario;
+import modules.marco.domain.Profesion;
+import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
 
 import com.belogick.factory.util.constant.Constante;
@@ -50,15 +53,15 @@ public class CetproMatriculaController extends GenericController
 	private	List<Requisitos> 	requisitos;
 	private	List<Itinerario> 	itinerario;
 	private	List<MatriculaSeccion>	matriculaList;
+	private List<SelectItem>    familiaList;
 	private List<SelectItem>    moduloList;
-	private List<SelectItem>    unidadList;
 	private List<SelectItem>    interesadoList;
 	private List<SelectItem>    docenteList;
 	private	List<Oferta> 		profesiones;
 	List<CetproMatriculaAlumno> listaAlumnos;
 	
 	private boolean enabled;
-	private Long 	proceso,institucion,tipo,modulo,unidad,seccion,annio,turno,interesado,docente;
+	private Long 	proceso,institucion,tipo,familia,unidad,seccion,annio,turno,interesado,docente;
 	private Date 				fecha_inicio;
 	private Integer 			cantidad_clases;
 	private List<String> 		listaDiasSeleccionados;  
@@ -66,6 +69,15 @@ public class CetproMatriculaController extends GenericController
     private List<Fecha> 		listFechas;
 	private	MatriculaSeccion	selectSeccion;
 	private SimpleDateFormat dateFormat;
+	
+	private List<ReferenteEducativo> esquemaList;
+	private List<ReferenteEducativo> contenidoList;
+	private List<ReferenteEducativo> transversalList;
+	private List<ReferenteEducativo> contenidoTList;
+	
+	private List<SelectItem> moduloTransversalList;
+	private List<SelectItem> moduloProfesionalList;
+
 	
 	public void init(Long id) throws Exception 
 	{
@@ -103,17 +115,32 @@ public class CetproMatriculaController extends GenericController
     	bean.setInstitucion(institucion);
     	interesadoList= getListSelectItem(myService.listarInteresados(institucion), "id", "apellido_paterno,apellido_materno,nombres"," ",true);
     	
+    	
+    	
+    	Familia tempFamilia = new Familia();
+    	familiaList = getListSelectItem(tempFamilia, "id", "nombre",true);
+    	
+    	
+    	ReferenteEducativo tempReferenteEducativo = new ReferenteEducativo();
+    	tempReferenteEducativo.setNivelB(0L);
+    	tempReferenteEducativo.setNivelC(0L);
+		moduloList =  getListSelectItem(tempReferenteEducativo, "id", "titulo",true);
+
     	obj=null;
     	bean=null;
 	}
-		
+	
+	
+	
+
+	
 	public void init() throws Exception
 	{init(-1L);}
 	
 	public void defaultList() throws Exception
 	{	
-		if(annio.longValue()>0L && modulo.longValue()>0L)
-		{setBeanList(myService.listarUnidadesCetpro(annio,modulo));}
+		if(annio.longValue()>0L && familia.longValue()>0L)
+		{setBeanList(myService.listarUnidadesCetpro(annio,familia));}
 		else
 		{setBeanList(new ArrayList<CetproMatricula>());}
 	}
@@ -122,19 +149,19 @@ public class CetproMatriculaController extends GenericController
 	{
 		profesiones=myService.listarOferta(institucion, dateFormat.parse(annio+"-01-01") ,1L);
 		
-		moduloList=getListSelectItem(profesiones, "profesion","nombreProfesion",false);
+		familiaList=getListSelectItem(profesiones, "profesion","nombreProfesion",false);
 	}
-	
-	public void selectModulo() throws Exception
-	{
-		CetproMatricula bean=(CetproMatricula)getBean();
-		Itinerario obj=new Itinerario();
-		obj.setProfesion(modulo);
-		unidadList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "titulo"," ",false);
-		bean.setPk_unidad(-1L);
-		obj=null;
-		bean=null;
-	}
+//	
+//	public void selectModulo() throws Exception
+//	{
+//		CetproMatricula bean=(CetproMatricula)getBean();
+//		Itinerario obj=new Itinerario();
+//		obj.setProfesion(familia);
+//		moduloList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "titulo"," ",false);
+//		bean.setPk_unidad(-1L);
+//		obj=null;
+//		bean=null;
+//	}
 	
 	public void addAlumno() throws Exception
 	{
@@ -196,9 +223,14 @@ public class CetproMatriculaController extends GenericController
 			setMessageError("Debe seleccionar el Docente.");			
 			success = false;
 		}
-		else if(!validateSelect(object.getPk_unidad()))
+		else if(!validateSelect(object.getPk_familia()))
 		{
-			setMessageError("Debe seleccionar la Unidad.");			
+			setMessageError("Debe seleccionar la familia.");			
+			success = false;
+		}
+		else if(!validateSelect(object.getPk_modulo()))
+		{
+			setMessageError("Debe seleccionar el modulo.");			
 			success = false;
 		}
 		else if(!validateSelect(object.getTurno()))
@@ -381,14 +413,14 @@ public class CetproMatriculaController extends GenericController
 	public List<SelectItem> getDocenteList() 										{return docenteList;}
 	public void setDocenteList(List<SelectItem> docenteList) 						{this.docenteList = docenteList;}
 		
-	public List<SelectItem> getModuloList() 									{return moduloList;}
-	public void setModuloList(List<SelectItem> moduloList) 						{this.moduloList = moduloList;}
+	public List<SelectItem> getModuloList() 									{return familiaList;}
+	public void setModuloList(List<SelectItem> moduloList) 						{this.familiaList = moduloList;}
 	
 	public List<SelectItem> getInteresadoList() 									{return interesadoList;}
 	public void setInteresadoList(List<SelectItem> interesadoList) 					{this.interesadoList = interesadoList;}
 		
-	public List<SelectItem> getUnidadList() 									{return unidadList;}
-	public void setUnidadList(List<SelectItem> unidadList) 						{this.unidadList = unidadList;}
+	public List<SelectItem> getUnidadList() 									{return moduloList;}
+	public void setUnidadList(List<SelectItem> unidadList) 						{this.moduloList = unidadList;}
 	
 	public boolean isEnabled() 													{return enabled;}
 	public void setEnabled(boolean enabled) 									{this.enabled = enabled;}
@@ -399,8 +431,8 @@ public class CetproMatriculaController extends GenericController
 	public Long getTipo() 														{return tipo;}
 	public void setTipo(Long tipo) 												{this.tipo = tipo;}
 	
-	public Long getModulo() 													{return modulo;}
-	public void setModulo(Long modulo) 											{this.modulo = modulo;}
+	public Long getModulo() 													{return familia;}
+	public void setModulo(Long modulo) 											{this.familia = modulo;}
 	
 	public Long getUnidad()	 													{return unidad;}
 	public void setUnidad(Long unidad) 											{this.unidad = unidad;}
@@ -474,6 +506,102 @@ public class CetproMatriculaController extends GenericController
 
 	public void setListaAlumnos(List<CetproMatriculaAlumno> listaAlumnos) {
 		this.listaAlumnos = listaAlumnos;
+	}
+
+	public List<Itinerario> getItinerario() {
+		return itinerario;
+	}
+
+	public void setItinerario(List<Itinerario> itinerario) {
+		this.itinerario = itinerario;
+	}
+
+	public List<SelectItem> getFamiliaList() {
+		return familiaList;
+	}
+
+	public void setFamiliaList(List<SelectItem> familiaList) {
+		this.familiaList = familiaList;
+	}
+
+	public List<Oferta> getProfesiones() {
+		return profesiones;
+	}
+
+	public void setProfesiones(List<Oferta> profesiones) {
+		this.profesiones = profesiones;
+	}
+
+	public Long getInstitucion() {
+		return institucion;
+	}
+
+	public void setInstitucion(Long institucion) {
+		this.institucion = institucion;
+	}
+
+	public Long getFamilia() {
+		return familia;
+	}
+
+	public void setFamilia(Long familia) {
+		this.familia = familia;
+	}
+
+	public SimpleDateFormat getDateFormat() {
+		return dateFormat;
+	}
+
+	public void setDateFormat(SimpleDateFormat dateFormat) {
+		this.dateFormat = dateFormat;
+	}
+
+	public List<ReferenteEducativo> getEsquemaList() {
+		return esquemaList;
+	}
+
+	public void setEsquemaList(List<ReferenteEducativo> esquemaList) {
+		this.esquemaList = esquemaList;
+	}
+
+	public List<ReferenteEducativo> getContenidoList() {
+		return contenidoList;
+	}
+
+	public void setContenidoList(List<ReferenteEducativo> contenidoList) {
+		this.contenidoList = contenidoList;
+	}
+
+	public List<ReferenteEducativo> getTransversalList() {
+		return transversalList;
+	}
+
+	public void setTransversalList(List<ReferenteEducativo> transversalList) {
+		this.transversalList = transversalList;
+	}
+
+	public List<ReferenteEducativo> getContenidoTList() {
+		return contenidoTList;
+	}
+
+	public void setContenidoTList(List<ReferenteEducativo> contenidoTList) {
+		this.contenidoTList = contenidoTList;
+	}
+
+	public List<SelectItem> getModuloTransversalList() {
+		return moduloTransversalList;
+	}
+
+	public void setModuloTransversalList(List<SelectItem> moduloTransversalList) {
+		this.moduloTransversalList = moduloTransversalList;
+	}
+
+	public List<SelectItem> getModuloProfesionalList() {
+		return moduloProfesionalList;
+	}
+
+	public void setModuloProfesionalList(List<SelectItem> moduloProfesionalList) {
+		this.moduloProfesionalList = moduloProfesionalList;
 	}
 	
 	
