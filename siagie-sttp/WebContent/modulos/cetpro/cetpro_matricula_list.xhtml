@@ -26,7 +26,6 @@
 		        <p:outputLabel for="txtMod" value="Familia" style="position:relative;  top:-4px;"/>
 		        <p:spacer height="6px"/>
 		        <p:selectOneMenu id="txtMod" value="#{cetproMatricula.familia}" style="position:relative;  top:3px; width:200px">
-		        	<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
 					<f:selectItems value="#{cetproMatricula.familiaList}"/>
 					<p:ajax event="change" update=":frmList" lListener="#{cetproMatricula.defaultList}"/>
 				</p:selectOneMenu>
