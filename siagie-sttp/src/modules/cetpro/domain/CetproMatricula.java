@@ -29,7 +29,8 @@ public class CetproMatricula implements Serializable
 	private String apepat;
 	private String apemat;
 	private String nom;
-	private String nomUnidad;
+	private String nomModulo;
+	private String nomFamilia;
 	private Long modulo;
 	private Long tipoModulo;
 	private String nombreDocente;
@@ -104,15 +105,7 @@ public class CetproMatricula implements Serializable
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
-	@Transient
-	public String getNomUnidad() {
-		return nomUnidad;
-	}
-	public void setNomUnidad(String nomUnidad) {
-		this.nomUnidad = nomUnidad;
-	}
-	
+		
 	@Transient
 	public Long getModulo() {
 		return modulo;
@@ -149,5 +142,20 @@ public class CetproMatricula implements Serializable
 		this.pk_modulo = pk_modulo;
 	}
 	
-
+	@Transient
+	public String getNomModulo() {
+		return nomModulo;
+	}
+	public void setNomModulo(String nomModulo) {
+		this.nomModulo = nomModulo;
+	}
+	@Transient
+	public String getNomFamilia() {
+		return nomFamilia;
+	}
+	public void setNomFamilia(String nomFamilia) {
+		this.nomFamilia = nomFamilia;
+	}
+	
+	
 }
