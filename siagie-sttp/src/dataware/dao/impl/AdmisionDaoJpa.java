@@ -710,10 +710,9 @@ public class AdmisionDaoJpa extends HorarioDaoJpa implements AdmisionDao
 			
 			Object[] objetos=(Object[])rst.get(i);
 			CetproMatricula field=new CetproMatricula();
-			if(objetos[0]!=null){field.setTipoModulo(Long.parseLong(objetos[0].toString()));}
 			if(objetos[1]!=null){field.setPk_cetpro_matricula(Long.parseLong(objetos[1].toString()));}
 			if(objetos[2]!=null){field.setPk_docente(Long.parseLong(objetos[2].toString()));}
-			//if(objetos[3]!=null){field.setPk_unidad(Long.parseLong(objetos[3].toString()));} //fernando arreglar enero
+			if(objetos[3]!=null){field.setPk_unidad(Long.parseLong(objetos[3].toString()));}
 			if(objetos[4]!=null){field.setApepat(objetos[4].toString());}
 			if(objetos[5]!=null){field.setApemat(objetos[5].toString());}
 			if(objetos[6]!=null){field.setNom(objetos[6].toString());}
