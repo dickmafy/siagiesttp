@@ -109,7 +109,7 @@ public class CetproMatriculaController extends GenericController
 		Personal obj=new Personal();
 		obj.setInstitucion(institucion);
 		obj.setPuesto(6L);
-		docenteList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "apepat,apemat,nombres"," ",true);
+		docenteList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "apepat,apemat,nombres"," ",false);
 		
 		Interesado bean=new Interesado();
     	bean.setInstitucion(institucion);
@@ -201,16 +201,21 @@ public class CetproMatriculaController extends GenericController
 	
 	
 	public void guardarMatriculaCetpro() throws Exception{
-		CetproMatricula bean = (CetproMatricula)getBeanSelected();
+		CetproMatricula bean = (CetproMatricula)getBean();
 				
 		if(!enabled)
 		{
 			if(validateUnidad())
 			{
-				bean.setTurno(turno);
+				bean.setAnno(annio);
+				bean.setEstado(1L);
 				getService().save(bean);
 				setMessageSuccess("Se registró la unidad satisfactoriamente");
 			}
+		}
+		else
+		{
+			
 		}
 	}
 	
