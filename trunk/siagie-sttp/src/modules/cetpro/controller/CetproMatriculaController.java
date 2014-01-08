@@ -90,6 +90,7 @@ public class CetproMatriculaController extends GenericController
 		institucion=usr.getInstitucion();
 		proceso=id;
 		annio=Long.parseLong(Calendar.getInstance().get(Calendar.YEAR)+"");	
+		familia=-1L;
 		dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
 		//requisitos = new ArrayList();
@@ -103,8 +104,8 @@ public class CetproMatriculaController extends GenericController
 	
 		
 		forward(page_main);
-		
-	
+			
+		defaultList();
     	
 	}
 	
@@ -121,10 +122,11 @@ public class CetproMatriculaController extends GenericController
     	bean.setInstitucion(institucion);
     	interesadoList= getListSelectItem(myService.listarInteresados(institucion), "id", "apellido_paterno,apellido_materno,nombres"," ",true);
     	
+    	//Familia tempFamilia = new Familia();
+    	//familiaList = getListSelectItem(tempFamilia, "id", "nombre",true);
     	
-    	
-    	Familia tempFamilia = new Familia();
-    	familiaList = getListSelectItem(tempFamilia, "id", "nombre",true);
+    	CetproMatricula beanMatricula= (CetproMatricula)getBean();
+    	beanMatricula.setPk_familia(familia);
     	
     	selectModulo();
     	
@@ -154,13 +156,11 @@ public class CetproMatriculaController extends GenericController
 		Familia tempFamilia = new Familia();
     	familiaList = getListSelectItem(tempFamilia, "id", "nombre",true);
     	
+    	defaultList();
 	}
 	
 	public void selectModulo() throws Exception
 	{
-		
-		
-		
 		Profesion tempprofesion = new Profesion();
 		tempprofesion.setFamilia(familia);
 		List<Profesion>  profesiones = myService.listByObject(tempprofesion);
@@ -235,6 +235,7 @@ public class CetproMatriculaController extends GenericController
 				bean.setEstado(1L);
 				getService().save(bean);
 				setMessageSuccess("Se registró la unidad satisfactoriamente");
+				forward("cetpro_matricula_list");
 			}
 		}
 		else
