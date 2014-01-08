@@ -27,7 +27,7 @@
 		        <p:spacer height="6px"/>
 		        <p:selectOneMenu id="txtMod" value="#{cetproMatricula.familia}" style="position:relative;  top:3px; width:200px">
 					<f:selectItems value="#{cetproMatricula.familiaList}"/>
-					<p:ajax event="change" update=":frmList" lListener="#{cetproMatricula.defaultList}"/>
+					<p:ajax event="change" update=":frmList" listener="#{cetproMatricula.defaultList}"/>
 				</p:selectOneMenu>
 				<p:spacer height="6px"/> 
 		   		<p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{cetproMatricula.nativeNew}" rendered="#{cetproMatricula.familia != null}" ajax="false" style="position:relative;  top:-4px;"/>    
@@ -44,16 +44,12 @@
 				<h:outputText value="Matricula" />  
 			</f:facet>
 			
-			<p:column headerText="Módulo" style="width:10%; align:center;" sortBy="#{item.pk_unidad}">   
-				<h:outputText value="#{item.modulo}" />  
-			</p:column>
-			
-			<p:column headerText="Familia Profesional" style="width:30%; align:center;" sortBy="#{item.nombreUnidad}">   
-				<h:outputText value="#{item.nombreFamilia}" />  
+			<p:column headerText="Familia Profesional" style="width:15%; align:center;" sortBy="#{item.nombreUnidad}">   
+				<h:outputText value="#{item.nomFamilia}" />  
 			</p:column>
 			
 			<p:column headerText="Unidad Didáctica" style="width:30%; align:center;" sortBy="#{item.nombreUnidad}">   
-				<h:outputText value="#{item.nombreModulo}" />  
+				<h:outputText value="#{item.nomModulo}" />  
 			</p:column>
 			
 			<p:column headerText="Docente" style="width:10%; align:center;" sortBy="#{item.nombreDocente}">   
