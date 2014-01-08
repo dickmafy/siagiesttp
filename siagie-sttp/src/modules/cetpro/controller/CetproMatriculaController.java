@@ -17,6 +17,7 @@ import java.util.TreeSet;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.SelectItem;
+import javax.persistence.Temporal;
 
 import org.hibernate.Query;
 
@@ -77,6 +78,7 @@ public class CetproMatriculaController extends GenericController
 	
 	private List<SelectItem> moduloTransversalList;
 	private List<SelectItem> moduloProfesionalList;
+	private Long modulo;
 
 	
 	public void init(Long id) throws Exception 
@@ -98,8 +100,12 @@ public class CetproMatriculaController extends GenericController
 		page_new="cetpro_matricula_new";
 		page_main="cetpro_matricula_list";
 		page_update="cetpro_matricula_detail";	
+	
 		
 		forward(page_main);
+		
+	
+    	
 	}
 	
 	@Override
@@ -120,12 +126,8 @@ public class CetproMatriculaController extends GenericController
     	Familia tempFamilia = new Familia();
     	familiaList = getListSelectItem(tempFamilia, "id", "nombre",true);
     	
+    	selectModulo();
     	
-    	ReferenteEducativo tempReferenteEducativo = new ReferenteEducativo();
-    	tempReferenteEducativo.setNivelB(0L);
-    	tempReferenteEducativo.setNivelC(0L);
-		moduloList =  getListSelectItem(tempReferenteEducativo, "id", "titulo",true);
-
     	obj=null;
     	bean=null;
 	}
@@ -149,19 +151,41 @@ public class CetproMatriculaController extends GenericController
 	{
 		profesiones=myService.listarOferta(institucion, dateFormat.parse(annio+"-01-01") ,1L);
 		
-		familiaList=getListSelectItem(profesiones, "profesion","nombreProfesion",false);
+		Familia tempFamilia = new Familia();
+    	familiaList = getListSelectItem(tempFamilia, "id", "nombre",true);
+    	
 	}
-//	
-//	public void selectModulo() throws Exception
-//	{
-//		CetproMatricula bean=(CetproMatricula)getBean();
-//		Itinerario obj=new Itinerario();
-//		obj.setProfesion(familia);
-//		moduloList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "titulo"," ",false);
-//		bean.setPk_unidad(-1L);
-//		obj=null;
-//		bean=null;
-//	}
+	
+	public void selectModulo() throws Exception
+	{
+		
+		
+		
+		Profesion tempprofesion = new Profesion();
+		tempprofesion.setFamilia(familia);
+		List<Profesion>  profesiones = myService.listByObject(tempprofesion);
+		List<ReferenteEducativo> beanReferenteList = null ;
+		ReferenteEducativo beanReferente;
+		
+		List<ReferenteEducativo> listaAnidada = new ArrayList<ReferenteEducativo>();
+		 
+		for (Profesion item: profesiones) 
+		{
+			beanReferente = new ReferenteEducativo();
+			
+			beanReferenteList = new ArrayList<ReferenteEducativo>();
+			beanReferente.setProfesion(item.getId());
+			beanReferente.setNivelB(0L);
+			beanReferente.setNivelC(0L);
+			
+			listaAnidada.addAll(myService.listByObject(beanReferente));
+			
+		}
+		moduloList =  getListSelectItem(listaAnidada, "id", "titulo",true);
+		
+    
+    
+	}
 	
 	public void addAlumno() throws Exception
 	{
@@ -407,110 +431,21 @@ public class CetproMatriculaController extends GenericController
 			}
 			return "";
     }
-	
-	
-	public AdmisionService getMyService() 										{return myService;}	
-	public void setMyService(AdmisionService myService)							{this.myService = myService;}
-	
-	public List<Requisitos> getRequisitos() 									{return requisitos;}
-	public void setRequisitos(List<Requisitos> requisitos) 						{this.requisitos = requisitos;}
-	
-	public List<SelectItem> getDocenteList() 										{return docenteList;}
-	public void setDocenteList(List<SelectItem> docenteList) 						{this.docenteList = docenteList;}
-		
-	public List<SelectItem> getModuloList() 									{return familiaList;}
-	public void setModuloList(List<SelectItem> moduloList) 						{this.familiaList = moduloList;}
-	
-	public List<SelectItem> getInteresadoList() 									{return interesadoList;}
-	public void setInteresadoList(List<SelectItem> interesadoList) 					{this.interesadoList = interesadoList;}
-		
-	public List<SelectItem> getUnidadList() 									{return moduloList;}
-	public void setUnidadList(List<SelectItem> unidadList) 						{this.moduloList = unidadList;}
-	
-	public boolean isEnabled() 													{return enabled;}
-	public void setEnabled(boolean enabled) 									{this.enabled = enabled;}
-	
-	public Long getProceso() 													{return proceso;}
-	public void setProceso(Long proceso) 										{this.proceso = proceso;}
-	
-	public Long getTipo() 														{return tipo;}
-	public void setTipo(Long tipo) 												{this.tipo = tipo;}
-	
-	public Long getModulo() 													{return familia;}
-	public void setModulo(Long modulo) 											{this.familia = modulo;}
-	
-	public Long getUnidad()	 													{return unidad;}
-	public void setUnidad(Long unidad) 											{this.unidad = unidad;}
-	
-	public Long getSeccion() 													{return seccion;}
-	public void setSeccion(Long seccion) 										{this.seccion = seccion;}
-	
-	public Long getAnnio() 														{return annio;}
-	public void setAnnio(Long annio) 											{this.annio = annio;}
-	
-	public MatriculaSeccion getSelectSeccion() 									{return selectSeccion;}
-	public void setSelectSeccion(MatriculaSeccion selectSeccion) 				{this.selectSeccion = selectSeccion;}
-	
-	public List<MatriculaSeccion> getMatriculaList() 							{return matriculaList;}
-	public void setMatriculaList(List<MatriculaSeccion> matriculaList) 			{this.matriculaList = matriculaList;}
-	
-	public Date getFecha_inicio() {
-		return fecha_inicio;
-	}
-	public void setFecha_inicio(Date fecha_inicio) {
-		this.fecha_inicio = fecha_inicio;
-	}
-	public Integer getCantidad_clases() {
-		return cantidad_clases;
-	}
-	public void setCantidad_clases(Integer cantidad_clases) {
-		this.cantidad_clases = cantidad_clases;
-	}
-	public List<String> getListaDiasSeleccionados() {
-		return listaDiasSeleccionados;
-	}
-	public void setListaDiasSeleccionados(List<String> listaDiasSeleccionados) {
-		this.listaDiasSeleccionados = listaDiasSeleccionados;
-	}
-	public Map<String, String> getListaDias() {
-		return listaDias;
-	}
-	public void setListaDias(Map<String, String> listaDias) {
-		this.listaDias = listaDias;
-	}
-	public List<Fecha> getListFechas() {
-		return listFechas;
-	}
-	public void setListFechas(List<Fecha> listFechas) {
-		this.listFechas = listFechas;
-	}
-	public Long getTurno() {
-		return turno;
-	}
-	public void setTurno(Long turno) {
-		this.turno = turno;
-	}
-	public Long getDocente() {
-		return docente;
-	}
-	public void setDocente(Long docente) {
-		this.docente = docente;
+
+	public AdmisionService getMyService() {
+		return myService;
 	}
 
-	public Long getInteresado() {
-		return interesado;
+	public void setMyService(AdmisionService myService) {
+		this.myService = myService;
 	}
 
-	public void setInteresado(Long interesado) {
-		this.interesado = interesado;
+	public List<Requisitos> getRequisitos() {
+		return requisitos;
 	}
 
-	public List<CetproMatriculaAlumno> getListaAlumnos() {
-		return listaAlumnos;
-	}
-
-	public void setListaAlumnos(List<CetproMatriculaAlumno> listaAlumnos) {
-		this.listaAlumnos = listaAlumnos;
+	public void setRequisitos(List<Requisitos> requisitos) {
+		this.requisitos = requisitos;
 	}
 
 	public List<Itinerario> getItinerario() {
@@ -521,12 +456,44 @@ public class CetproMatriculaController extends GenericController
 		this.itinerario = itinerario;
 	}
 
+	public List<MatriculaSeccion> getMatriculaList() {
+		return matriculaList;
+	}
+
+	public void setMatriculaList(List<MatriculaSeccion> matriculaList) {
+		this.matriculaList = matriculaList;
+	}
+
 	public List<SelectItem> getFamiliaList() {
 		return familiaList;
 	}
 
 	public void setFamiliaList(List<SelectItem> familiaList) {
 		this.familiaList = familiaList;
+	}
+
+	public List<SelectItem> getModuloList() {
+		return moduloList;
+	}
+
+	public void setModuloList(List<SelectItem> moduloList) {
+		this.moduloList = moduloList;
+	}
+
+	public List<SelectItem> getInteresadoList() {
+		return interesadoList;
+	}
+
+	public void setInteresadoList(List<SelectItem> interesadoList) {
+		this.interesadoList = interesadoList;
+	}
+
+	public List<SelectItem> getDocenteList() {
+		return docenteList;
+	}
+
+	public void setDocenteList(List<SelectItem> docenteList) {
+		this.docenteList = docenteList;
 	}
 
 	public List<Oferta> getProfesiones() {
@@ -537,6 +504,30 @@ public class CetproMatriculaController extends GenericController
 		this.profesiones = profesiones;
 	}
 
+	public List<CetproMatriculaAlumno> getListaAlumnos() {
+		return listaAlumnos;
+	}
+
+	public void setListaAlumnos(List<CetproMatriculaAlumno> listaAlumnos) {
+		this.listaAlumnos = listaAlumnos;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Long getProceso() {
+		return proceso;
+	}
+
+	public void setProceso(Long proceso) {
+		this.proceso = proceso;
+	}
+
 	public Long getInstitucion() {
 		return institucion;
 	}
@@ -545,12 +536,116 @@ public class CetproMatriculaController extends GenericController
 		this.institucion = institucion;
 	}
 
+	public Long getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Long tipo) {
+		this.tipo = tipo;
+	}
+
 	public Long getFamilia() {
 		return familia;
 	}
 
 	public void setFamilia(Long familia) {
 		this.familia = familia;
+	}
+
+	public Long getUnidad() {
+		return unidad;
+	}
+
+	public void setUnidad(Long unidad) {
+		this.unidad = unidad;
+	}
+
+	public Long getSeccion() {
+		return seccion;
+	}
+
+	public void setSeccion(Long seccion) {
+		this.seccion = seccion;
+	}
+
+	public Long getAnnio() {
+		return annio;
+	}
+
+	public void setAnnio(Long annio) {
+		this.annio = annio;
+	}
+
+	public Long getTurno() {
+		return turno;
+	}
+
+	public void setTurno(Long turno) {
+		this.turno = turno;
+	}
+
+	public Long getInteresado() {
+		return interesado;
+	}
+
+	public void setInteresado(Long interesado) {
+		this.interesado = interesado;
+	}
+
+	public Long getDocente() {
+		return docente;
+	}
+
+	public void setDocente(Long docente) {
+		this.docente = docente;
+	}
+
+	public Date getFecha_inicio() {
+		return fecha_inicio;
+	}
+
+	public void setFecha_inicio(Date fecha_inicio) {
+		this.fecha_inicio = fecha_inicio;
+	}
+
+	public Integer getCantidad_clases() {
+		return cantidad_clases;
+	}
+
+	public void setCantidad_clases(Integer cantidad_clases) {
+		this.cantidad_clases = cantidad_clases;
+	}
+
+	public List<String> getListaDiasSeleccionados() {
+		return listaDiasSeleccionados;
+	}
+
+	public void setListaDiasSeleccionados(List<String> listaDiasSeleccionados) {
+		this.listaDiasSeleccionados = listaDiasSeleccionados;
+	}
+
+	public Map<String, String> getListaDias() {
+		return listaDias;
+	}
+
+	public void setListaDias(Map<String, String> listaDias) {
+		this.listaDias = listaDias;
+	}
+
+	public List<Fecha> getListFechas() {
+		return listFechas;
+	}
+
+	public void setListFechas(List<Fecha> listFechas) {
+		this.listFechas = listFechas;
+	}
+
+	public MatriculaSeccion getSelectSeccion() {
+		return selectSeccion;
+	}
+
+	public void setSelectSeccion(MatriculaSeccion selectSeccion) {
+		this.selectSeccion = selectSeccion;
 	}
 
 	public SimpleDateFormat getDateFormat() {
@@ -608,6 +703,18 @@ public class CetproMatriculaController extends GenericController
 	public void setModuloProfesionalList(List<SelectItem> moduloProfesionalList) {
 		this.moduloProfesionalList = moduloProfesionalList;
 	}
+
+	public Long getModulo() {
+		return modulo;
+	}
+
+	public void setModulo(Long modulo) {
+		this.modulo = modulo;
+	}
+
+	
+	
+
 	
 	
 } 
