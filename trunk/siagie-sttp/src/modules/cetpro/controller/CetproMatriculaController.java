@@ -81,7 +81,7 @@ public class CetproMatriculaController extends GenericController
 		//requisitos = new ArrayList();
 		//procesoList=getListSelectItem(myService.listarProcesos(institucion,annio),"id","nombrePeriodo",true);
 		
-		
+		enabled=false;
 		
 		page_new="cetpro_matricula_new";
 		page_main="cetpro_matricula_list";
@@ -106,7 +106,7 @@ public class CetproMatriculaController extends GenericController
     	obj=null;
     	bean=null;
 	}
-	
+		
 	public void init() throws Exception
 	{init(-1L);}
 	
@@ -122,16 +122,18 @@ public class CetproMatriculaController extends GenericController
 	{
 		profesiones=myService.listarOferta(institucion, dateFormat.parse(annio+"-01-01") ,1L);
 		
-		moduloList=getListSelectItem(profesiones, "id","nombreProfesion",false);
+		moduloList=getListSelectItem(profesiones, "profesion","nombreProfesion",false);
 	}
 	
 	public void selectModulo() throws Exception
 	{
+		CetproMatricula bean=(CetproMatricula)getBean();
 		Itinerario obj=new Itinerario();
 		obj.setProfesion(modulo);
 		unidadList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "titulo"," ",false);
-		unidad=-1L;
-
+		bean.setPk_unidad(-1L);
+		obj=null;
+		bean=null;
 	}
 	
 	public void addAlumno() throws Exception
@@ -168,6 +170,44 @@ public class CetproMatriculaController extends GenericController
 		listaAlumnos=myService.listarAlumnosMatricula(bean.getPk_cetpro_matricula());
 		setMessageSuccess("La matricula de alumno fue eliminada de la unidad.");
 		bean=null;
+	}
+	
+	
+	public void guardarMatriculaCetpro() throws Exception{
+		CetproMatricula bean = (CetproMatricula)getBeanSelected();
+				
+		if(!enabled)
+		{
+			if(validateUnidad())
+			{
+				bean.setTurno(turno);
+				getService().save(bean);
+				setMessageSuccess("Se registró la unidad satisfactoriamente");
+			}
+		}
+	}
+	
+	public boolean validateUnidad() throws Exception
+	{
+		boolean success = true;
+		CetproMatricula object = (CetproMatricula)getBean();
+		if(!validateSelect(object.getPk_docente()))
+		{
+			setMessageError("Debe seleccionar el Docente.");			
+			success = false;
+		}
+		else if(!validateSelect(object.getPk_unidad()))
+		{
+			setMessageError("Debe seleccionar la Unidad.");			
+			success = false;
+		}
+		else if(!validateSelect(object.getTurno()))
+		{
+			setMessageError("Debe seleccionar el turno.");			
+			success = false;
+		}
+		object=null;
+		return success;
 	}
 	
 	private void llenarDias() {
