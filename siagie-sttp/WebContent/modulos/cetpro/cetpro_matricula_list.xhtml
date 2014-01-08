@@ -49,15 +49,19 @@
 				<h:outputText value="#{item.modulo}" />  
 			</p:column>
 			
-			<p:column headerText="Unidad Didáctica" style="width:10%; align:center;" sortBy="#{item.nombreUnidad}">   
-				<h:outputText value="#{item.nombreUnidad}" />  
+			<p:column headerText="Familia Profesional" style="width:30%; align:center;" sortBy="#{item.nombreUnidad}">   
+				<h:outputText value="#{item.nombreFamilia}" />  
 			</p:column>
 			
-			<p:column headerText="Docente" style="width:7%; align:center;" sortBy="#{item.nombreDocente}">   
+			<p:column headerText="Unidad Didáctica" style="width:30%; align:center;" sortBy="#{item.nombreUnidad}">   
+				<h:outputText value="#{item.nombreModulo}" />  
+			</p:column>
+			
+			<p:column headerText="Docente" style="width:10%; align:center;" sortBy="#{item.nombreDocente}">   
 				<h:outputText value="#{item.nombreDocente}" />  
 			</p:column>	
 			
-			<p:column headerText="Turno" style="width:8%; align:center;" sortBy="#{item.turno}">   
+			<p:column headerText="Turno" style="width:5%; align:center;" sortBy="#{item.turno}">   
 				<h:outputText value="#{item.turno}" />  
 			</p:column>	
 			
