@@ -14,5 +14,6 @@
 	<bean id="tramiteCetpro" 		class="modules.cetpro.domain.Tramite" 				scope="session" />
 	<bean id="progCetpro" 			class="modules.cetpro.domain.Programacion" 			scope="session" />
 	<bean id="cronoCetpro" 			class="modules.cetpro.domain.Calendario" 			scope="session" />
+	<bean id="matriculaCetpro"		class="modules.cetpro.domain.CetproMatricula"		scope="session" />
 
 </beans>

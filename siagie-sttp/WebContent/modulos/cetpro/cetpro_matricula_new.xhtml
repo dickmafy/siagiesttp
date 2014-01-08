@@ -11,7 +11,7 @@
   		
   		<p:toolbar>  
 	    	<p:toolbarGroup align="left">  
-	    		<p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="adm_mat_lst"       ajax="false" />
+	    		<p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="cetpro_matricula_list"       ajax="false" />
 		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" actionListener="#{cetproMatricula.guardarMatriculaCetpro}" ajax="false" />  
 			</p:toolbarGroup>  
   		</p:toolbar>
@@ -35,7 +35,8 @@
 						</p:selectOneMenu>
 	        		</td>
 	        		<td>
-	        			<p:selectOneMenu id="txtUnd" value="#{cetproMatricula.unidad}" style="width:350px;">
+	        			<p:selectOneMenu id="txtUnd" value="#{cetproMatricula.bean.pk_unidad}" style="width:350px;">
+	        			<f:selectItem itemLabel="#{constante.OPTION_SELECT}" itemValue="-1" />
 							<f:selectItems value="#{cetproMatricula.unidadList}"/>							
 						</p:selectOneMenu>
 	        		</td>
@@ -46,7 +47,7 @@
     	    	</tr>
     	    	<tr>    	    		
         			<td>	        			
-	        			<p:selectOneMenu id="txtTur" value="#{cetproMatricula.turno}" size="40">
+	        			<p:selectOneMenu id="txtTur" value="#{cetproMatricula.bean.turno}" size="40">
 	    			   		<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
 	            		    <f:selectItem itemLabel="MAÑANA"	itemValue="1" />  
 	            		    <f:selectItem itemLabel="TARDE"  itemValue="2" />
@@ -54,7 +55,8 @@
 	        			</p:selectOneMenu>
 	        		</td>
 	        		<td>
-		        		<p:selectOneMenu value="#{cetproMatricula.docente}" style="width:290px;" filter="true" filterMatchMode="startsWith">
+		        		<p:selectOneMenu value="#{cetproMatricula.bean.pk_docente}" style="width:290px;" filter="true" filterMatchMode="startsWith">
+		        			<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
 							<f:selectItems value="#{cetproMatricula.docenteList}"/>
 						</p:selectOneMenu>
 					</td>
@@ -63,7 +65,7 @@
     	
 		</p:tab>
  			
-		<p:tab id="tab2" title="Fechas" >
+		<p:tab id="tab2" title="Fechas" rendered="enabled">
 			<h:outputText value="Fecha Inicio" />  
 			<p:calendar id="txtFei" value="#{cetproMatricula.fecha_inicio}" showOn="button"  size="10"/>
 			
@@ -109,7 +111,7 @@
  			
   
  				
-		<p:tab id="tab3" title="Alumno" >
+		<p:tab id="tab3" title="Alumno" rendered="enabled">
 		<table>
 			<tr>
 				<td><p:outputLabel value="Alumno" style="font-weight:bold"/></td>
