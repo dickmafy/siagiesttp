@@ -23,21 +23,19 @@
     	   	<p:tab id="tab1" title="Unidad Didáctica" >
 	    	<table class="form_table" style="width:100%">
   				<tr>
-	   				<td><p:outputLabel  value="Profesión" 	style="font-weight:bold"/></td>
-	   				<td><p:outputLabel  value="Unidad Didáctica" style="font-weight:bold"/></td>
+	   				<td><p:outputLabel  value="Familia Profesional" 	style="font-weight:bold"/></td>
+	   				<td><p:outputLabel  value="Modulos" style="font-weight:bold"/></td>
   				</tr>
 	        	<tr>	
 	        		<td>
-	        			<p:selectOneMenu id="txtMod" value="#{cetproMatricula.modulo}" style="width:300px">
-				        	<f:selectItem itemLabel="#{constante.OPTION_SELECT}" itemValue="-1" />
-							<f:selectItems value="#{cetproMatricula.moduloList}"/>
-							<p:ajax event="change" update=":frmUpd:tabView:txtUnd" listener="#{cetproMatricula.selectModulo}"/>
+	        			<p:selectOneMenu id="txtMod" value="#{cetproMatricula.bean.pk_familia}" style="width:300px">
+							<f:selectItems value="#{cetproMatricula.familiaList}"/>
+							
 						</p:selectOneMenu>
 	        		</td>
 	        		<td>
-	        			<p:selectOneMenu id="txtUnd" value="#{cetproMatricula.bean.pk_unidad}" style="width:350px;">
-	        			<f:selectItem itemLabel="#{constante.OPTION_SELECT}" itemValue="-1" />
-							<f:selectItems value="#{cetproMatricula.unidadList}"/>							
+	        			<p:selectOneMenu id="txtUnd" value="#{cetproMatricula.bean.pk_modulo}" style="width:350px;">
+							<f:selectItems value="#{cetproMatricula.moduloList}"/>							
 						</p:selectOneMenu>
 	        		</td>
     	    	</tr>

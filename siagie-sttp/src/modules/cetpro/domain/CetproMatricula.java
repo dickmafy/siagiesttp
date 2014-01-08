@@ -18,7 +18,8 @@ public class CetproMatricula implements Serializable
 
 	private Long 	pk_cetpro_matricula;
 	private Long 	pk_docente;
-	private Long 	pk_unidad;
+	private Long 	pk_familia;
+	private Long 	pk_modulo;
 	private Long 	anno;
 	private Date 	fecha_ini;
 	private Date 	fecha_fin;
@@ -48,12 +49,7 @@ public class CetproMatricula implements Serializable
 	public void setPk_docente(Long pk_docente) {
 		this.pk_docente = pk_docente;
 	}
-	public Long getPk_unidad() {
-		return pk_unidad;
-	}
-	public void setPk_unidad(Long pk_unidad) {
-		this.pk_unidad = pk_unidad;
-	}
+	
 	public Long getAnno() {
 		return anno;
 	}
@@ -139,6 +135,18 @@ public class CetproMatricula implements Serializable
 	}
 	public void setNombreDocente(String nombreDocente) {
 		this.nombreDocente = nombreDocente;
+	}
+	public Long getPk_familia() {
+		return pk_familia;
+	}
+	public void setPk_familia(Long pk_familia) {
+		this.pk_familia = pk_familia;
+	}
+	public Long getPk_modulo() {
+		return pk_modulo;
+	}
+	public void setPk_modulo(Long pk_modulo) {
+		this.pk_modulo = pk_modulo;
 	}
 	
 
