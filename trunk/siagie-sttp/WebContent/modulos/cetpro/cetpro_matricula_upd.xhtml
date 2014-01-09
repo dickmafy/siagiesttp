@@ -58,20 +58,25 @@
 		</p:tab>
  			
 		<p:tab id="tab2" title="Fechas">
-			<h:outputText value="Fecha Inicio" />  
-			<p:calendar id="txtFei" value="#{cetproMatricula.fecha_inicio}" showOn="button"  size="10"/>
-			
-			<h:outputText value="Cantidad de Clases" />  
-			<p:inputText value="#{cetproMatricula.cantidad_clases}" style="width:90px" />
-			 
-			 
-			<p:selectCheckboxMenu value="#{cetproMatricula.listaDiasSeleccionados}" 
-			label="Dias" filter="true" filterText="Filter" filterMatchMode="startsWith"   style="position:relative;  top:+14px;">  
-	        	<f:selectItems value="#{cetproMatricula.listaDias}"  />  
-		    </p:selectCheckboxMenu>  
-	    
-	     	
-	        <p:commandButton title="Crear Fechas" 	value="Crear Fechas" 	icon="icn_bar_new" actionListener="#{cetproMatricula.generarFechas}" ajax="false" />  
+			<TABLE> 
+			<tr>
+				<td><h:outputText value="Fecha Inicio" style="font-weight:bold"/></td>
+				<td><h:outputText value="Cantidad de Clases" style="font-weight:bold"/></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><p:calendar id="txtFei" value="#{cetproMatricula.fecha_inicio}" showOn="button"  size="10"/></td>
+				<td><p:inputText value="#{cetproMatricula.cantidad_clases}" style="width:90px" /></td>
+				<td>
+					<p:selectCheckboxMenu value="#{cetproMatricula.listaDiasSeleccionados}" 
+					label="Dias de Clase" filter="true" filterText="Filter" filterMatchMode="startsWith"  >  
+			        	<f:selectItems value="#{cetproMatricula.listaDias}"  />  
+				    </p:selectCheckboxMenu> 
+				</td>
+				<td> <p:commandButton title="Crear Fechas" 	value="Crear Fechas" 	icon="icn_bar_new" actionListener="#{cetproMatricula.generarFechas}" ajax="false" /></td>
+			</tr>
+			</TABLE>
 			
 	      	<p:dataTable id="itemList" var="item" value="#{cetproMatricula.listFechas}" filteredValue="#{cetproMatricula.beanFilterList}"
 	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom"
@@ -79,18 +84,18 @@
 	        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
 	     		
 	     		<f:facet name="header">
-					<h:outputText value="Creacion de Fechas" />  
+					<h:outputText value="Creación de Fechas" />  
 				</f:facet>
 							
-				<p:column headerText="#" style="width:5%; align:center;">
+				<p:column headerText="#" style="width:2%; align:center;">
 					<h:outputText value="#{rowNumber+1}"/>  
 				</p:column>
 					
-				<p:column headerText="Dia" style="width:5%; align:center;" sortBy="#{item.dia}">
+				<p:column headerText="Dia" style="width:5%; align:center;" sortBy="#{item.dia}" >
 					<h:outputText value="#{item.dia}"/>
 				</p:column>		
 				
-				<p:column headerText="fechaListada" style="width:50%; align:center;" sortBy="#{item.fechaListada}" >   
+				<p:column headerText="Fechas de Clase" style="width:50%; align:center;" sortBy="#{item.fechaListada}" >   
 					<h:outputText value="#{item.fechaListada}">
 						<f:convertDateTime pattern="dd/MM/yyyy"/>
 					</h:outputText>

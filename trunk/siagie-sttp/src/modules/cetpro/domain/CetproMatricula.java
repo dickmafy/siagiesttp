@@ -34,6 +34,9 @@ public class CetproMatricula implements Serializable
 	private Long modulo;
 	private Long tipoModulo;
 	private String nombreDocente;
+	private String nombreTurno;
+	private String nombreEstado;
+	
 	 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -157,5 +160,24 @@ public class CetproMatricula implements Serializable
 		this.nomFamilia = nomFamilia;
 	}
 	
+	@Transient
+	public String getNombreTurno() 					
+	{
+		if(turno==null)				{return "";}
+		if(turno.longValue()==1L)		{return "MAÑANA";}
+		if(turno.longValue()==2L)		{return "TARDE";}
+		if(turno.longValue()==3L)		{return "NOCHE";}
+		return "";
+	}
 	
+	@Transient
+	public String getNombreEstado() 					
+	{
+		if(estado==null)				{return "";}
+		if(estado.longValue()<0L)		{return "DESHABILITADO";}
+		if(estado.longValue()==1L)		{return "PENDIENTE CREACIÓN FECHAS";}
+		if(estado.longValue()==2L)		{return "PRE-PUBLICADO";}
+		if(estado.longValue()==3L)		{return "PUBLICADO";}
+		return "";
+	}
 }
