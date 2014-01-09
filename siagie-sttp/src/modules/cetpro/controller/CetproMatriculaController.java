@@ -100,7 +100,7 @@ public class CetproMatriculaController extends GenericController
 		
 		page_new="cetpro_matricula_new";
 		page_main="cetpro_matricula_list";
-		page_update="cetpro_matricula_detail";	
+		page_update="cetpro_matricula_upd";	
 	
 		
 		forward(page_main);
@@ -108,6 +108,9 @@ public class CetproMatriculaController extends GenericController
 		defaultList();
     	
 	}
+
+	public void init() throws Exception
+	{init(-1L);}
 	
 	@Override
 	public void afterNew() throws Exception {
@@ -135,11 +138,32 @@ public class CetproMatriculaController extends GenericController
 	}
 	
 	
+	@Override
+	public void afterLoad() throws Exception {
+		enabled=true;
+		
+		Personal obj=new Personal();
+		obj.setInstitucion(institucion);
+		obj.setPuesto(6L);
+		docenteList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "apepat,apemat,nombres"," ",false);
+		
+		Interesado bean=new Interesado();
+    	bean.setInstitucion(institucion);
+    	interesadoList= getListSelectItem(myService.listarInteresados(institucion), "id", "apellido_paterno,apellido_materno,nombres"," ",true);
+    	
+    	CetproMatricula beanMatricula= (CetproMatricula)getBean();
+    	listaAlumnos=myService.listarAlumnosMatricula(beanMatricula.getPk_cetpro_matricula());
+    	selectModulo();
+    	
+    	obj=null;
+    	bean=null;
+    	beanMatricula=null;
+	}
 	
-
 	
-	public void init() throws Exception
-	{init(-1L);}
+	public void updateMatriculaCetpro() throws Exception
+	{}
+	
 	
 	public void defaultList() throws Exception
 	{	
@@ -209,7 +233,7 @@ public class CetproMatriculaController extends GenericController
     	List<CetproMatriculaAlumno> list = myService.listByObjectEnabled(bean);
     	bean=null;
     	
-    	if(list==null)	{return true;}
+    	if(list.size()==0)	{return true;}
     	else					{return false;}
     	    	
 	}
@@ -217,9 +241,9 @@ public class CetproMatriculaController extends GenericController
 	public void subAlumno() throws Exception
 	{
 		CetproMatricula bean=(CetproMatricula)getBean();
-		myService.actualizarMatriculaCetpro(true, bean.getPk_cetpro_matricula(), interesado);
+		myService.actualizarMatriculaCetpro(false, bean.getPk_cetpro_matricula(), interesado);
 		listaAlumnos=myService.listarAlumnosMatricula(bean.getPk_cetpro_matricula());
-		setMessageSuccess("La matricula de alumno fue eliminada de la unidad.");
+		setMessageSuccess("La matricula de alumno fue eliminada del módulo exitósamente.");
 		bean=null;
 	}
 	
@@ -235,6 +259,8 @@ public class CetproMatriculaController extends GenericController
 				bean.setEstado(1L);
 				getService().save(bean);
 				setMessageSuccess("Se registró la unidad satisfactoriamente");
+				
+				defaultList();
 				forward("cetpro_matricula_list");
 			}
 		}
