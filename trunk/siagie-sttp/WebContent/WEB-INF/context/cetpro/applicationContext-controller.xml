@@ -60,6 +60,17 @@
 	    <property name="bean" 		ref="cetproMatriculaFecha"/>	  
 	</bean>
 
+	<bean id="cetproDocenteListNota" class="modules.cetpro.controller.cetproDocenteNota" scope="session" parent="genericController">
+		<property name="myService" 	ref="intranetService"/>
+	    <property name="myServiceAdmision" 	ref="admisionService"/>
+	    <property name="bean" 		ref="cetproNota"/>		  	  
+	</bean>
+	
+	<bean id="cetproDocenteListCt" class="modules.cetpro.controller.cetproDocenteCt" scope="session" parent="genericController">
+		<property name="myService" 	ref="intranetService"/>
+	    <property name="myServiceAdmision" 	ref="admisionService"/>
+	    <property name="bean" 		ref="cetproCt"/>		  
+	</bean>
 	
 	
 	<!-- CETPRO ALUMNO -->

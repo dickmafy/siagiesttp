@@ -15,7 +15,7 @@ public class CetproMatriculaAlumno implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private Long 	pk_cetpro_matricula_alumno;
+	private Long 	id;
 	private Long 	pk_cetpro_matricula;
 	private Long 	pk_persona;
 	private Long 	estado;
@@ -24,15 +24,16 @@ public class CetproMatriculaAlumno implements Serializable
 	private String	alumno_apemat;
 	private String	alumno_nom;
 	private String	alumno_nom_completo;
+	private Long asistio;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="pk_cetpro_matricula_alumno")
-	public Long getPk_cetpro_matricula_alumno() {
-		return pk_cetpro_matricula_alumno;
+	public Long getId() {
+		return id;
 	}
-	public void setPk_cetpro_matricula_alumno(Long pk_cetpro_matricula_alumno) {
-		this.pk_cetpro_matricula_alumno = pk_cetpro_matricula_alumno;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public Long getPk_cetpro_matricula() {
 		return pk_cetpro_matricula;
@@ -87,6 +88,13 @@ public class CetproMatriculaAlumno implements Serializable
 	}
 	public void setAlumno_nom_completo(String alumno_nom_completo) {
 		this.alumno_nom_completo = alumno_nom_completo;
+	}
+	@Transient
+	public Long getAsistio() {
+		return asistio;
+	}
+	public void setAsistio(Long asistio) {
+		this.asistio = asistio;
 	}
 	
 	

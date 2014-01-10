@@ -1,0 +1,39 @@
+<ui:composition template="/modulos/index/template/default.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="body" oncontextmenu="return false">
+     <h:form id="frmNew" ajaxSubmit="false">
+      	<p:growl id="msgSystem" showDetail="false" life="4000" escape="true"/>   
+  		<p:toolbar>  
+	    	<p:toolbarGroup align="left">  
+		        <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="DocenteSilaboList" ajax="false" />
+		        <p:commandButton title="Guardar" 	value="Guardar" 	icon="icn_bar_save" 	actionListener="#{cetproDocenteListCt.guardarCT}" ajax="false" />		       
+			</p:toolbarGroup>  
+  		</p:toolbar>    		
+      	<p:spacer height="4px"/>
+      	
+    	   	
+      	<p:panel header="Sílabo #{cetproDocenteListCt.nombreUnidad} - Criterios de Evaluación">
+
+				<p:dataTable id="criteriosList" var="item" value="#{cetproDocenteListCt.criteriosList}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+	     		
+	     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
+					<h:outputText value="MOD#{item.nivelA}: #{item.titulo}" title="MÓDULO #{item.nivelA}: #{item.titulo} - #{item.descripcion}" rendered="false" style="font-weight:bold"/>
+					<h:outputText value="CT#{item.nivelB}: #{item.descripcion}" title="CAPACIDAD TERMINAL #{item.nivelB}: #{item.descripcion}" rendered="#{item.nivelB ne 0 and item.nivelC eq 0}" style="font-weight:bold"/>
+					<p:selectBooleanCheckbox value="#{item.check}" rendered="#{item.nivelC ne 0}"/>
+					<h:outputText value="CE#{item.nivelC}: #{item.descripcion}" title="CRITERIO DE EVALUACIÓN #{item.nivelC}: #{item.descripcion}" rendered="#{item.nivelC ne 0}"/>					  
+				</p:column>		        	      	        	        
+	        	      	        
+				</p:dataTable> 			
+    		
+		</p:panel>
+		
+     </h:form>
+     
+    </ui:define>
+</ui:composition>

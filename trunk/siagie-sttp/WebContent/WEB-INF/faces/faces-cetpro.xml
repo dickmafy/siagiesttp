@@ -151,5 +151,31 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cetproDocenteListFechaAlumno</from-outcome>
+			<to-view-id>/modulos/cetpro/cetproDocenteListFechaAlumno.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- CT -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cetproDocenteListCt</from-outcome>
+			<to-view-id>/modulos/cetpro/cetproDocenteListCt.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- NOTAS -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id> 
+		<navigation-case>
+			<from-outcome>cetproDocenteListNota</from-outcome>
+			<to-view-id>/modulos/cetpro/cetproDocenteListNota.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
 	
 </faces-config>

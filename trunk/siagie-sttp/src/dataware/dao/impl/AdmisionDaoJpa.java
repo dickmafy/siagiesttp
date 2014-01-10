@@ -710,7 +710,7 @@ public class AdmisionDaoJpa extends HorarioDaoJpa implements AdmisionDao
 			
 			Object[] objetos=(Object[])rst.get(i);
 			CetproMatricula field=new CetproMatricula();
-			if(objetos[0]!=null){field.setPk_cetpro_matricula(Long.parseLong(objetos[0].toString()));}
+			if(objetos[0]!=null){field.setId(Long.parseLong(objetos[0].toString()));}
 			if(objetos[1]!=null){field.setPk_docente(Long.parseLong(objetos[1].toString()));}
 			if(objetos[2]!=null){field.setPk_modulo(Long.parseLong(objetos[2].toString()));}
 			if(objetos[3]!=null){field.setPk_familia(Long.parseLong(objetos[3].toString()));}
@@ -742,7 +742,7 @@ public class AdmisionDaoJpa extends HorarioDaoJpa implements AdmisionDao
 		{
 			Object[] objetos=(Object[])rst.get(i);
 			CetproMatriculaAlumno field=new CetproMatriculaAlumno();
-			if(objetos[0]!=null){field.setPk_cetpro_matricula_alumno(Long.parseLong(objetos[0].toString()));}
+			if(objetos[0]!=null){field.setId(Long.parseLong(objetos[0].toString()));}
 			if(objetos[1]!=null){field.setPk_persona(Long.parseLong(objetos[1].toString()));}
 			if(objetos[2]!=null){field.setAlumno_dni(objetos[2].toString());}
 			if(objetos[3]!=null){field.setAlumno_apepat(objetos[3].toString());}

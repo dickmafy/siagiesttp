@@ -9,79 +9,58 @@
    	<h:form id="frmList" ajaxSubmit="false">
    		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
   		<p:toolbar>  
-	    	<p:toolbarGroup align="left"> 
-	    		<p:spacer width="6px"/>
-	    		<p:outputLabel for="txtAnn" value="Año" style="position:relative;  top:-4px;"/>
-	    		<p:spacer width="6px"/>
-	    		<p:selectOneMenu id="txtAnn" value="#{cetproDocenteListFecha.annio}" style="position:relative;  top:2px;">
-                    <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
-           	        <f:selectItem itemLabel="2013"  itemValue="2013" />
-           	        <f:selectItem itemLabel="2014" 	itemValue="2014" />
-           	        <f:selectItem itemLabel="2015" 	itemValue="2015" />
-           	        <f:selectItem itemLabel="2016" 	itemValue="2016" />
-           	        <f:selectItem itemLabel="2017" 	itemValue="2017" /> 
-           	        <p:ajax event="change" update=":frmList" listener="#{cetproDocenteListFecha.cargarModulo}"/>       
-       	       	</p:selectOneMenu>  
-       	       	<p:spacer height="6px"/>
-		        <p:outputLabel for="txtMod" value="Familia" style="position:relative;  top:-4px;"/>
-		        <p:spacer height="6px"/>
-		        <p:selectOneMenu id="txtMod" value="#{cetproDocenteListFecha.familia}" style="position:relative;  top:3px; width:200px">
-					<f:selectItems value="#{cetproDocenteListFecha.familiaList}"/>
-					<p:ajax event="change" update=":frmList" listener="#{cetproDocenteListFecha.defaultList}"/>
-				</p:selectOneMenu>
-				<p:spacer height="6px"/> 
-		   		<p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{cetproDocenteListFecha.nativeNew}" rendered="#{cetproDocenteListFecha.familia != null}" ajax="false" style="position:relative;  top:-4px;"/>    
+	    	<p:toolbarGroup align="left">  
+		          <p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" 	action="cetproDocenteList" ajax="false" />
+		          
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
-      					
-   			<p:dataTable id="itemList" var="item" value="#{cetproDocenteListFecha.beanList}"
-   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  
-   			paginator="true" rows="#{constante.LIST_SIZE}"  paginatorPosition="bottom"
-        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
-     		
-     		<f:facet name="header">
-				<h:outputText value="Matricula" />  
-			</f:facet>
-			
-			<p:column headerText="Familia Profesional" style="width:15%; align:center;" sortBy="#{item.nombreUnidad}">   
-				<h:outputText value="#{item.nomFamilia}" />  
-			</p:column>
-			
-			<p:column headerText="Unidad Didáctica" style="width:30%; align:center;" sortBy="#{item.nombreUnidad}">   
-				<h:outputText value="#{item.nomModulo}" />  
-			</p:column>
-			
-			<p:column headerText="Docente" style="width:10%; align:center;" sortBy="#{item.nombreDocente}">   
-				<h:outputText value="#{item.nombreDocente}" />  
-			</p:column>	
-			
-			<p:column headerText="Turno" style="width:5%; align:center;" sortBy="#{item.turno}">   
-				<h:outputText value="#{item.nombreTurno}" />  
-			</p:column>	
-			
-			<p:column headerText="Estado" style="width:13%; align:center;" sortBy="#{item.estado}">   
-				<h:outputText value="#{item.nombreEstado}" />  
-			</p:column>	
-						
-						
-			<p:column headerText="Opciones" style="width:10%">
-			
-				<p:commandButton icon="icn_item_update" title="Creacion Fechas" action="#{cetproDocenteListFecha.nativeLoad}" ajax="false" 
-				rendered="#{item.estado lt 3}">
-					<f:setPropertyActionListener value="#{item}" target="#{cetproDocenteListFecha.beanSelected}" />
-				</p:commandButton>
+     
+			<p:dataTable id="itemList" var="item" value="#{cetproDocenteListFecha.beanList}" filteredValue="#{cetproDocenteListFecha.beanFilterList}"
+	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom"
+	   			paginator="true" rows="20"  rowIndexVar="rowNumber" scrollable="true" sortBy="#{item.fecha}"
+	        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+	     		
+	     		<f:facet name="header">
+					<h:outputText value="Lista de Clases" />  
+				</f:facet>
+							
+				<p:column headerText="#" style="width:5%; align:center;">
+					<h:outputText value="#{rowNumber+1}"/>  
+				</p:column>
+					
+				<p:column headerText="Fecha de Clase" style="width:55%; align:center;" >
+					<h:outputText value="#{item.fecha}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>
 				
-				<p:commandButton icon="icn_prc_publicar" title="Publicar Matricula" action="#{cetproDocenteListFecha.goPublicar}" ajax="false"
-				rendered="#{item.estado lt 3}">
-					<f:setPropertyActionListener value="#{item}" target="#{cetproDocenteListFecha.beanSelected}" />				
-				</p:commandButton>
+				<p:column headerText="Estado" style="width:55%; align:center;" >
+					<h:outputText value="Pendiente" rendered="#{item.estado eq 1}"/>
+					<h:outputText value="Registrado" rendered="#{item.estado eq 2}"/>
+				</p:column>			
+					
+				<p:column headerText="id" style="width:5%; align:center;" sortBy="#{item.id}" rendered="false">
+					<h:outputText value="#{item.id}">
 				
-        	</p:column>      
-		</p:dataTable> 
+					</h:outputText>
+				</p:column>		
+				
+				
+				<p:column headerText="Operaciones" style="width:33%">  
+					<p:commandButton rendered="#{item.estado eq 1}" icon="icn_item_update" action="#{cetproDocenteListFecha.goAlumno}"	title="Tomar Asistencia" ajax="false">
+						<f:setPropertyActionListener value="#{item}" target="#{cetproDocenteListFecha.beanSelected}" />
+					</p:commandButton>
+					<p:commandButton rendered="#{item.estado eq 2}" icon="icn_item_historial" action="#{cetproDocenteListFecha.goDetail}"	title="Ver Asistencia" ajax="false">
+						<f:setPropertyActionListener value="#{item}" target="#{cetproDocenteListFecha.beanSelected}" />
+					</p:commandButton>					
+				</p:column>     	       
+			       	      	        
+			</p:dataTable>
+			
+			
 	</h:form>
-		
-	
    		
+   	
     </ui:define>
 </ui:composition>

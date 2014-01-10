@@ -11,27 +11,32 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="cetpro.m_cetpro_asistencia")
-public class M_Cetpro_Asistencia implements Serializable {
+public class CetproAsistencia implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Long pk_cetpro_asistencia;
+	private Long id;
 	private Long pk_cetpro_matricula_alumno;
 	private Long pk_cetpro_matricula_fecha;
 	private Long asistencia;
 	private Long estado;
 	
-	public M_Cetpro_Asistencia() {
+	public CetproAsistencia() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="pk_cetpro_asistencia")
-	public Long getPk_cetpro_asistencia() 										{return pk_cetpro_asistencia;}
-	public void setPk_cetpro_asistencia(Long pk_cetpro_asistencia) 				{this.pk_cetpro_asistencia = pk_cetpro_asistencia;}
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	@Column(name="pk_cetpro_matricula_alumno")
 	public Long getPk_cetpro_matricula_alumno() 								{return pk_cetpro_matricula_alumno;}
@@ -48,5 +53,7 @@ public class M_Cetpro_Asistencia implements Serializable {
 	@Column(name="estado")
 	public Long getEstado() 													{return estado;}
 	public void setEstado(Long estado) 											{this.estado = estado;}
+
+	
 	
 }

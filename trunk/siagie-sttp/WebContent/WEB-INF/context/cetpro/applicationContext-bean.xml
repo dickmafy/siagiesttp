@@ -18,10 +18,10 @@
 
 	<!-- CETPRO Nuevas Tablas -->
 	<bean id="cetproMatriculaFecha"		class="modules.cetpro.domain.CetproMatriculaFecha"		scope="session" />
-	<bean id="cetproAsistencia"		class="modules.cetpro.domain.Cetpro_Asistencia"		scope="session" />
-	<bean id="cetproMatriculaAlumno" class="modules.cetpro.domain.M_Cetpro_Matricula_Alumno"		scope="session" />
+	<bean id="cetproAsistencia"		class="modules.cetpro.domain.CetproAsistencia"		scope="session" />
+	<bean id="cetproMatriculaAlumno" class="modules.cetpro.domain.CetproMatriculaAlumno"		scope="session" />
 	<bean id="cetproNota"		class="modules.cetpro.domain.CetproNota"		scope="session" />
-	<bean id="cetproCt"		class="modules.cetpro.domain.M_Cetpro_Ct"		scope="session" />
+	<bean id="cetproCt"		class="modules.cetpro.domain.CetproCt"		scope="session" />
 	
 
 </beans>

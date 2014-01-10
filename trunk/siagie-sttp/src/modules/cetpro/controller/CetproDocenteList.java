@@ -34,6 +34,8 @@ import modules.cetpro.domain.CetproMatriculaFecha;
 import modules.horario.domain.Seccion;
 import modules.horario.domain.SilaboCalendario;
 import modules.horario.domain.SilaboCronograma;
+import modules.intranet.controller.DocenteSilaboCT;
+import modules.intranet.controller.DocenteSilaboNota;
 import modules.intranet.domain.Fecha;
 import modules.mantenimiento.domain.Banco;
 import modules.marco.controller.ProfesionProductivo;
@@ -154,17 +156,10 @@ public class CetproDocenteList extends GenericController
 	}
 	
 	
-	public void goNota() throws Exception 
-	{
-	
-		
-		forward("cetproDocenteNota");
-	}
-	
+
 	public void goAsistencia() throws Exception 
 	{
 		CetproMatricula bean = (CetproMatricula)getBeanSelected();	
-		
 		CetproDocenteListFecha go = (CetproDocenteListFecha)getSpringBean("cetproDocenteListFecha");
 		go.init(bean);
 		
@@ -172,11 +167,53 @@ public class CetproDocenteList extends GenericController
 		
 	}
 	
-	public void goCt() throws Exception 
-	{
+	public void goNota()throws Exception{
 		
-		forward("cetproDocenteCT");
 		
+		
+		SilaboCronograma silaboCronograma = obtenerSilaboCronograma();    	
+		silaboCronograma = (SilaboCronograma) myService.findByObject(silaboCronograma);
+		
+		DocenteSilaboNota go = (DocenteSilaboNota)getSpringBean("docenteSilaboNota");
+		Proceso proceso = new Proceso();
+		proceso.setAnnio(annio);
+		proceso.setProceso(this.proceso);
+		proceso = (Proceso) myService.findByObject(proceso);
+		go.init((Seccion)getBeanSelected(),proceso,silaboCronograma);
+	}
+	
+	private SilaboCronograma obtenerSilaboCronograma() {
+		Seccion bean = (Seccion)getBeanSelected();
+		SilaboCronograma silaboCronograma =new SilaboCronograma();
+		
+		silaboCronograma.setPk_meta(bean.getMeta());
+    	silaboCronograma.setContenido("-");
+    	silaboCronograma.setPk_unidad(bean.getValorUnidad());
+    	silaboCronograma.setPk_seccion(bean.getId());
+    	silaboCronograma.setPk_docente(bean.getDocente());
+    	silaboCronograma.setEstado(bean.getEstadoSilabo());
+		return silaboCronograma;
+	}
+	
+	public void goCt()throws Exception{
+		
+//		seccion=pseccion.getId();
+//		docente=pseccion.getDocente();
+//		meta=pseccion.getMeta();
+//		unidad=pseccion.getValorUnidad();
+//		
+		//en la seccion esta el silabocronograma id
+		CetproMatricula silaboCronograma =new CetproMatricula();
+    	silaboCronograma.setModulo(unidad);
+    	silaboCronograma.setPk_docente(docente);
+    	silaboCronograma.setEstado(1L);
+    	
+    	CetproMatricula obtenerSilaboCronograma = (CetproMatricula) myService.findByObject(silaboCronograma);
+    	
+    	
+		CetproDocenteListCt go = (CetproDocenteListCt)getSpringBean("cetproDocenteListCt");
+		
+		go.init(new Seccion(),new Proceso(),obtenerSilaboCronograma);
 	}
 	
 	
@@ -197,7 +234,7 @@ public class CetproDocenteList extends GenericController
     	interesadoList= getListSelectItem(myService.listarInteresados(institucion), "id", "apellido_paterno,apellido_materno,nombres"," ",true);
     	
     	CetproMatricula beanMatricula= (CetproMatricula)getBean();
-    	listaAlumnos=myService.listarAlumnosMatricula(beanMatricula.getPk_cetpro_matricula());
+    	listaAlumnos=myService.listarAlumnosMatricula(beanMatricula.getId());
     	selectModulo();
     	llenarDias();
     	llenarFechas();
@@ -237,7 +274,7 @@ public class CetproDocenteList extends GenericController
 	    	for (Fecha item: listFechas) 
 	    	{
 	    		matriculaFecha =new CetproMatriculaFecha();
-	    		matriculaFecha.setPk_cetpro_matricula(bean.getPk_cetpro_matricula());
+	    		matriculaFecha.setPk_cetpro_matricula(bean.getId());
 	    		matriculaFecha.setFecha(item.getFechaListada());
 	        	matriculaFecha.setEstado(1L);
 				myService.save(matriculaFecha);
@@ -303,10 +340,10 @@ public class CetproDocenteList extends GenericController
 	public void addAlumno() throws Exception
 	{
 		CetproMatricula bean=(CetproMatricula)getBean();
-		if(validarAlumno(interesado, bean.getPk_cetpro_matricula()))
+		if(validarAlumno(interesado, bean.getId()))
 		{
-			myService.actualizarMatriculaCetpro(true, bean.getPk_cetpro_matricula(), interesado);
-			listaAlumnos=myService.listarAlumnosMatricula(bean.getPk_cetpro_matricula());
+			myService.actualizarMatriculaCetpro(true, bean.getId(), interesado);
+			listaAlumnos=myService.listarAlumnosMatricula(bean.getId());
 			setMessageSuccess("El alumno fue matriculado satisfactoriamente.");
 		}
 		else
@@ -330,8 +367,8 @@ public class CetproDocenteList extends GenericController
 	public void subAlumno() throws Exception
 	{
 		CetproMatricula bean=(CetproMatricula)getBean();
-		myService.actualizarMatriculaCetpro(false, bean.getPk_cetpro_matricula(), interesado);
-		listaAlumnos=myService.listarAlumnosMatricula(bean.getPk_cetpro_matricula());
+		myService.actualizarMatriculaCetpro(false, bean.getId(), interesado);
+		listaAlumnos=myService.listarAlumnosMatricula(bean.getId());
 		setMessageSuccess("La matricula de alumno fue eliminada del módulo exitósamente.");
 		bean=null;
 	}
@@ -372,7 +409,7 @@ public class CetproDocenteList extends GenericController
 		CetproMatricula bean=(CetproMatricula)getBeanSelected();
 		
 		CetproMatriculaFecha matriculaFecha = new CetproMatriculaFecha();
-		matriculaFecha.setPk_cetpro_matricula(bean.getPk_cetpro_matricula());
+		matriculaFecha.setPk_cetpro_matricula(bean.getId());
 		
     	List<CetproMatriculaFecha> fechas = myService.listByObjectEnabled(matriculaFecha);
     	

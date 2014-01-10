@@ -13,7 +13,7 @@ public class CetproNota implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private Long 	pk_silabo_matricula;
+	private Long 	id;
 	private Long 	pk_silabo_oferta;
 	private Long 	pk_persona;
 	private Long 	estado;
@@ -21,12 +21,13 @@ public class CetproNota implements Serializable
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="pk_silabo_matricula")
-	public Long getPk_silabo_matricula() {
-		return pk_silabo_matricula;
+	public Long getId() {
+		return id;
 	}
-	public void setPk_silabo_matricula(Long pk_silabo_matricula) {
-		this.pk_silabo_matricula = pk_silabo_matricula;
+	public void setId(Long id) {
+		this.id = id;
 	}
+	
 	public Long getPk_silabo_oferta() {
 		return pk_silabo_oferta;
 	}
@@ -45,6 +46,7 @@ public class CetproNota implements Serializable
 	public void setEstado(Long estado) {
 		this.estado = estado;
 	}
+
 	
 	
 	
