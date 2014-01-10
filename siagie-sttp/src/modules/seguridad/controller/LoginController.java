@@ -48,7 +48,8 @@ public class LoginController extends GenericController
 			userName=usrLogin.getUsuario();
 			
 			//Perfil
-			if(usrLogin.getEstadoPerfil().longValue()==Constante.ROW_STATUS_DELETE.longValue() || usrLogin.getEstadoPerfil().longValue()==Constante.ROW_STATUS_DISABLED.longValue())
+			if(usrLogin.getEstadoPerfil().longValue()==Constante.ROW_STATUS_DELETE.longValue() || 
+					usrLogin.getEstadoPerfil().longValue()==Constante.ROW_STATUS_DISABLED.longValue())
 			{
 				setBeanSearch(new Usuario());
 				setMessageError(new Exception("El perfil del usuario no se encuentra habilitado para su uso."));
@@ -116,8 +117,8 @@ public class LoginController extends GenericController
 					if(!usrLogin.getContrasena().equals(pasLogin))
 					{
 						setBeanSearch(new Usuario());
-						setMessageError(new Exception("La contraseña ingresada es incorrecta."));
-						saveLog("Login en Proceso - Contraseña Incorrecta");
+						setMessageError(new Exception("La contraseï¿½a ingresada es incorrecta."));
+						saveLog("Login en Proceso - Contraseï¿½a Incorrecta");
 					}
 					//Clave Correcta
 					else

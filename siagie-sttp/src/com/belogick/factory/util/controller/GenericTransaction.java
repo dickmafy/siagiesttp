@@ -40,17 +40,17 @@
 /*     */   public void saveLog(String operation)
 /*     */     throws Exception
 /*     */   {
-/*  35 */     LogBase newLog = new LogBase();
-/*  36 */     newLog.setUsuario(this.userName);
-/*  37 */     newLog.setIp_local(NetworkHelper.getIpLocal());
-/*  38 */     newLog.setIp_publica(NetworkHelper.getIpPublica());
-/*  39 */     newLog.setHost(NetworkHelper.getHost());
-/*  40 */     newLog.setFecha(DateHelper.getDate());
-/*  41 */     newLog.setModulo(this.moduleName);
-/*  42 */     newLog.setOperacion(operation);
-/*  43 */     newLog.setSistema(this.appName);
-/*  44 */     getService().save(newLog);
-/*  45 */     newLog = null;
+/*  35 */     /*LogBase newLog = new LogBase();
+        newLog.setUsuario(this.userName);
+        newLog.setIp_local(NetworkHelper.getIpLocal());
+        newLog.setIp_publica(NetworkHelper.getIpPublica());
+        newLog.setHost(NetworkHelper.getHost());
+        newLog.setFecha(DateHelper.getDate());
+        newLog.setModulo(this.moduleName);
+        newLog.setOperacion(operation);
+        newLog.setSistema(this.appName);
+        getService().save(newLog);
+        newLog = null;*/
 /*     */   }
 /*     */ 
 /*     */   public Object getBean()
