@@ -36,6 +36,7 @@ import modules.horario.domain.SilaboCalendario;
 import modules.horario.domain.SilaboCronograma;
 import modules.intranet.domain.Fecha;
 import modules.mantenimiento.domain.Banco;
+import modules.marco.controller.ProfesionProductivo;
 import modules.marco.domain.Familia;
 import modules.marco.domain.Itinerario;
 import modules.marco.domain.Profesion;
@@ -50,7 +51,7 @@ import dataware.service.AdmisionService;
 
 @ManagedBean
 @SessionScoped
-public class CetproMatriculaController extends GenericController   
+public class CetproDocenteList extends GenericController   
 {
 	private AdmisionService	myService;
 	
@@ -101,9 +102,9 @@ public class CetproMatriculaController extends GenericController
 		
 		enabled=false;
 		
-		page_new="cetpro_matricula_new";
-		page_main="cetpro_matricula_list";
-		page_update="cetpro_matricula_upd";	
+		page_new="cetproDocenteList";
+		page_main="cetproDocenteList";
+		page_update="cetproDocenteList";	
 	
 		
 		forward(page_main);
@@ -151,6 +152,33 @@ public class CetproMatriculaController extends GenericController
     	obj=null;
     	bean=null;
 	}
+	
+	
+	public void goNota() throws Exception 
+	{
+	
+		
+		forward("cetproDocenteNota");
+	}
+	
+	public void goAsistencia() throws Exception 
+	{
+		CetproMatricula bean = (CetproMatricula)getBeanSelected();	
+		
+		CetproDocenteListFecha go = (CetproDocenteListFecha)getSpringBean("cetproDocenteListFecha");
+		go.init(bean);
+		
+		
+		
+	}
+	
+	public void goCt() throws Exception 
+	{
+		
+		forward("cetproDocenteCT");
+		
+	}
+	
 	
 	
 	@Override

@@ -132,4 +132,24 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	
+	<!-- CETPRO DOCENTE -->
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case> 
+			<from-outcome>cetproDocenteList</from-outcome>
+			<to-view-id>/modulos/cetpro/cetproDocenteList.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>cetproDocenteListFecha</from-outcome>
+			<to-view-id>/modulos/cetpro/cetproDocenteListFecha.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
 </faces-config>
