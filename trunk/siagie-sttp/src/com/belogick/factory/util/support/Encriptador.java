@@ -1,6 +1,7 @@
 /*    */ package com.belogick.factory.util.support;
 /*    */ 
 /*    */ import java.io.PrintStream;
+import java.security.MessageDigest;
 
 /*    */ import javax.crypto.Cipher;
 /*    */ import javax.crypto.spec.SecretKeySpec;
@@ -17,11 +18,14 @@ import org.apache.commons.codec.binary.Base64;
 /*    */     try
 /*    */     {
 /* 26 */       base = new Base64();
-/* 27 */       SecretKeySpec key = new SecretKeySpec(strkey.getBytes(), "Blowfish");
-/* 28 */       Cipher cipher = Cipher.getInstance("Blowfish");
-/* 29 */       cipher.init(1, key);
-/* 30 */       String encriptado = new String(cipher.doFinal(to_encrypt.getBytes()));
-/* 31 */       return base.encodeAsString(encriptado.getBytes());
+				MessageDigest md = MessageDigest.getInstance("MD5");
+				md.update(to_encrypt.getBytes());
+				byte[] digest = md.digest();
+/* 27 */       /*SecretKeySpec key = new SecretKeySpec(strkey.getBytes(), "Blowfish");
+ 28        Cipher cipher = Cipher.getInstance("Blowfish");
+ 29        cipher.init(1, key);
+ 30        String encriptado = new String(cipher.doFinal(to_encrypt.getBytes()));*/
+/* 31 */       return base.encodeAsString(digest);
 /*    */     }
 /*    */     catch (Exception e)
 /*    */     {
