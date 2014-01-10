@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class CetproMatriculaFecha implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private Long 	pk_cetpro_matricula_fecha;
+	private Long 	id;
 	private Long 	pk_cetpro_matricula;
 	private Date 	fecha;
 	private Long 	estado;
@@ -22,12 +22,13 @@ public class CetproMatriculaFecha implements Serializable
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="pk_cetpro_matricula_fecha")
-	public Long getPk_cetpro_matricula_fecha() {
-		return pk_cetpro_matricula_fecha;
+	public Long getId() {
+		return id;
 	}
-	public void setPk_cetpro_matricula_fecha(Long pk_cetpro_matricula_fecha) {
-		this.pk_cetpro_matricula_fecha = pk_cetpro_matricula_fecha;
+	public void setId(Long id) {
+		this.id = id;
 	}
+	
 	public Long getPk_cetpro_matricula() {
 		return pk_cetpro_matricula;
 	}
@@ -46,6 +47,7 @@ public class CetproMatriculaFecha implements Serializable
 	public void setEstado(Long estado) {
 		this.estado = estado;
 	}
+	
 	
 	
 	

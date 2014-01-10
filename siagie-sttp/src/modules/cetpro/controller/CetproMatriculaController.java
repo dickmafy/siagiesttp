@@ -172,7 +172,7 @@ public class CetproMatriculaController extends GenericController
     	interesadoList= getListSelectItem(myService.listarInteresados(institucion), "id", "apellido_paterno,apellido_materno,nombres"," ",true);
     	
     	CetproMatricula beanMatricula= (CetproMatricula)getBean();
-    	listaAlumnos=myService.listarAlumnosMatricula(beanMatricula.getPk_cetpro_matricula());
+    	listaAlumnos=myService.listarAlumnosMatricula(beanMatricula.getId());
     	selectModulo();
     	llenarDias();
     	llenarFechas();
@@ -212,7 +212,7 @@ public class CetproMatriculaController extends GenericController
 	    	for (Fecha item: listFechas) 
 	    	{
 	    		matriculaFecha =new CetproMatriculaFecha();
-	    		matriculaFecha.setPk_cetpro_matricula(bean.getPk_cetpro_matricula());
+	    		matriculaFecha.setPk_cetpro_matricula(bean.getId());
 	    		matriculaFecha.setFecha(item.getFechaListada());
 	        	matriculaFecha.setEstado(1L);
 				myService.save(matriculaFecha);
@@ -226,12 +226,12 @@ public class CetproMatriculaController extends GenericController
 		}
 		else if(bean.getEstado()==2L && nuevasFechas==true)
 		{
-			myService.deleteByField(new CetproMatriculaFecha(), "pk_cetpro_matricula",bean.getPk_cetpro_matricula().toString());
+			myService.deleteByField(new CetproMatriculaFecha(), "pk_cetpro_matricula",bean.getId().toString());
 			
 			for (Fecha item: listFechas) 
 	    	{
 	    		matriculaFecha =new CetproMatriculaFecha();
-	    		matriculaFecha.setPk_cetpro_matricula(bean.getPk_cetpro_matricula());
+	    		matriculaFecha.setPk_cetpro_matricula(bean.getId());
 	    		matriculaFecha.setFecha(item.getFechaListada());
 	        	matriculaFecha.setEstado(1L);
 				myService.save(matriculaFecha);
@@ -305,10 +305,10 @@ public class CetproMatriculaController extends GenericController
 	public void addAlumno() throws Exception
 	{
 		CetproMatricula bean=(CetproMatricula)getBean();
-		if(validarAlumno(interesado, bean.getPk_cetpro_matricula()))
+		if(validarAlumno(interesado, bean.getId()))
 		{
-			myService.actualizarMatriculaCetpro(true, bean.getPk_cetpro_matricula(), interesado);
-			listaAlumnos=myService.listarAlumnosMatricula(bean.getPk_cetpro_matricula());
+			myService.actualizarMatriculaCetpro(true, bean.getId(), interesado);
+			listaAlumnos=myService.listarAlumnosMatricula(bean.getId());
 			setMessageSuccess("El alumno fue matriculado satisfactoriamente.");
 		}
 		else
@@ -332,8 +332,8 @@ public class CetproMatriculaController extends GenericController
 	public void subAlumno() throws Exception
 	{
 		CetproMatricula bean=(CetproMatricula)getBean();
-		myService.actualizarMatriculaCetpro(false, bean.getPk_cetpro_matricula(), interesado);
-		listaAlumnos=myService.listarAlumnosMatricula(bean.getPk_cetpro_matricula());
+		myService.actualizarMatriculaCetpro(false, bean.getId(), interesado);
+		listaAlumnos=myService.listarAlumnosMatricula(bean.getId());
 		setMessageSuccess("La matricula de alumno fue eliminada del módulo exitósamente.");
 		bean=null;
 	}
@@ -374,7 +374,7 @@ public class CetproMatriculaController extends GenericController
 		CetproMatricula bean=(CetproMatricula)getBeanSelected();
 		
 		CetproMatriculaFecha matriculaFecha = new CetproMatriculaFecha();
-		matriculaFecha.setPk_cetpro_matricula(bean.getPk_cetpro_matricula());
+		matriculaFecha.setPk_cetpro_matricula(bean.getId());
 		
     	List<CetproMatriculaFecha> fechas = myService.listByObjectEnabled(matriculaFecha);
     	

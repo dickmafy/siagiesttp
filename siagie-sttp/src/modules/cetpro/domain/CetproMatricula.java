@@ -16,7 +16,7 @@ public class CetproMatricula implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private Long 	pk_cetpro_matricula;
+	private Long 	id;
 	private Long 	pk_docente;
 	private Long 	pk_familia;
 	private Long 	pk_modulo;
@@ -41,12 +41,13 @@ public class CetproMatricula implements Serializable
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="pk_cetpro_matricula")
-	public Long getPk_cetpro_matricula() {
-		return pk_cetpro_matricula;
+	public Long getId() {
+		return id;
 	}
-	public void setPk_cetpro_matricula(Long pk_cetpro_matricula) {
-		this.pk_cetpro_matricula = pk_cetpro_matricula;
+	public void setId(Long id) {
+		this.id = id;
 	}
+	
 	public Long getPk_docente() {
 		return pk_docente;
 	}
@@ -180,4 +181,5 @@ public class CetproMatricula implements Serializable
 		if(estado.longValue()==3L)		{return "PUBLICADO";}
 		return "";
 	}
+	
 }

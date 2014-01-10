@@ -21,6 +21,8 @@ import modules.admision.domain.Persona;
 import modules.admision.domain.Proceso;
 import modules.cetpro.domain.CetproMatricula;
 import modules.cetpro.domain.CetproMatriculaAlumno;
+import modules.cetpro.domain.CetproMatriculaFecha;
+import modules.cetpro.domain.CetproAsistencia;
 import modules.horario.domain.AsistenciaAlumno;
 import modules.horario.domain.AsistenciaAlumnoCalendario;
 import modules.horario.domain.Seccion;
@@ -34,7 +36,7 @@ import modules.seguridad.domain.Usuario;
 
 public class CetproDocenteListFecha extends GenericController   
 {	
-	private IntranetService	myService;
+	private AdmisionService	myService;
 	private List<ReferenteEducativo> criteriosList;
 	
 	private List<SelectItem> moduloProfesionalList;
@@ -55,10 +57,12 @@ public class CetproDocenteListFecha extends GenericController
 	private List<Matricula> matriculas;
 	private AsistenciaWrapper asistenciaWrapper;
 	
-	private List <SilaboAlumno> listSilaboAlumno; 
+	private List <CetproMatriculaAlumno> listSilaboAlumno; 
 	
 	private SilaboCronograma obtenerSilaboCronograma;
-	public void init(CetproMatricula cetproMatricula) throws Exception 
+	private CetproMatricula cetproMatricula;
+    
+	public void init(CetproMatricula pcetproMatricula) throws Exception 
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
 		appName="Intranet Docente";
@@ -71,7 +75,7 @@ public class CetproDocenteListFecha extends GenericController
 		page_main="cetproDocenteListFecha";
 				
 		
-		
+		cetproMatricula = pcetproMatricula;
 		this.proceso = proceso;
 		
 
@@ -84,31 +88,25 @@ public class CetproDocenteListFecha extends GenericController
 	public void defaultList() throws Exception
 	{
 
-		listScro =new ArrayList<SilaboCronograma>();
-		SilaboCronograma scro = new SilaboCronograma();
-		scro.setPk_docente(docente);
-		scro.setPk_meta(meta);
-		scro.setPk_seccion(seccion);
-		scro.setPk_unidad(unidad);
-		
-		scro = (SilaboCronograma) myService.findByObject(scro);
-		
-		SilaboCalendario scal = new SilaboCalendario();
-		scal.setPk_silabo_cronograma(scro.getId());
 
-		listCal =  myService.listByObject(scal);
+		
+		CetproMatriculaFecha scal = new CetproMatriculaFecha();
+		scal.setPk_cetpro_matricula(cetproMatricula.getId());
+
+		setBeanList(myService.listByObject(scal));
+				
 				
 		
 	}
 	
 	public void goAlumno()throws Exception
 	{
-		AsistenciaAlumnoCalendario aac = new AsistenciaAlumnoCalendario();
-		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();
+		CetproAsistencia aac = new CetproAsistencia();
+		CetproMatriculaFecha temporalCalendario = (CetproMatriculaFecha)getBeanSelected();
 		
-		aac.setPk_silabo_calendario(temporalCalendario.getId());
+		aac.setPk_cetpro_matricula_fecha(temporalCalendario.getId());
 		
-		forward("DocenteSilaboAsistenciaListaAlumno");
+		forward("cetproDocenteListFechaAlumno");
 		listarAlumnos();
 	}
 	
@@ -125,21 +123,21 @@ public class CetproDocenteListFecha extends GenericController
 	
 	@SuppressWarnings("unchecked")
 	public void listarAlumnos() throws Exception{
-		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();
-		SilaboAlumno silaboAlumno = new SilaboAlumno();
-		silaboAlumno.setPk_silabo_cronograma(temporalCalendario.getPk_silabo_cronograma());
+		CetproMatriculaFecha temporalCalendario = (CetproMatriculaFecha)getBeanSelected();
+		CetproMatriculaAlumno silaboAlumno = new CetproMatriculaAlumno();
+		silaboAlumno.setPk_cetpro_matricula(temporalCalendario.getPk_cetpro_matricula());
 		listSilaboAlumno = myService.listByObject(silaboAlumno);
 		
 		
-		for (SilaboAlumno item : listSilaboAlumno) {
+		for (CetproMatriculaAlumno item : listSilaboAlumno) {
 			AsistenciaAlumnoCalendario asiscale=new AsistenciaAlumnoCalendario();
 			asiscale.setPk_silabo_alumno(item.getId());
 			asiscale.setPk_silabo_calendario(temporalCalendario.getId());
 			
 			Persona p = new Persona();
-			p.setId(item.getPk_alumno());
+			p.setId(item.getPk_persona());
 			p = (Persona)myService.findById(p);
-			item.setNombre(p.getNombreCompleto());
+			item.setAlumno_nom_completo(p.getNombreCompleto());
 			
 			try {
 				AsistenciaAlumnoCalendario temp;
@@ -153,7 +151,7 @@ public class CetproDocenteListFecha extends GenericController
 	}
 	
 	public void guardarAsistencia() throws ServiceException, DaoException{
-		
+/*		
 		AsistenciaAlumnoCalendario asistenciaAlumnoCalendario = new AsistenciaAlumnoCalendario();	
 		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();				
 		
@@ -175,7 +173,7 @@ public class CetproDocenteListFecha extends GenericController
 		myService.save(temporalCalendario);
 		
 		forward("DocenteSilaboAsistenciaListaFecha");
-		
+	*/	
 		
 		
 		
@@ -184,8 +182,7 @@ public class CetproDocenteListFecha extends GenericController
 	
 	
 	
-	public IntranetService getMyService() 													{return myService;}
-	public void setMyService(IntranetService myService) 									{this.myService = myService;}
+	
 
 	public List<ReferenteEducativo> getCriteriosList() 										{return criteriosList;}
 	public void setCriteriosList(List<ReferenteEducativo> criteriosList) 					{this.criteriosList = criteriosList;}
@@ -246,17 +243,6 @@ public class CetproDocenteListFecha extends GenericController
 
 
 
-	public List<SilaboAlumno> getListSilaboAlumno() {
-		return listSilaboAlumno;
-	}
-
-
-
-	public void setListSilaboAlumno(List<SilaboAlumno> listSilaboAlumno) {
-		this.listSilaboAlumno = listSilaboAlumno;
-	}
-
-
 
 	public SilaboCronograma getObtenerSilaboCronograma() {
 		return obtenerSilaboCronograma;
@@ -266,6 +252,102 @@ public class CetproDocenteListFecha extends GenericController
 
 	public void setObtenerSilaboCronograma(SilaboCronograma obtenerSilaboCronograma) {
 		this.obtenerSilaboCronograma = obtenerSilaboCronograma;
+	}
+
+	public AdmisionService getMyService() {
+		return myService;
+	}
+
+	public void setMyService(AdmisionService myService) {
+		this.myService = myService;
+	}
+
+	public Long getSeccion() {
+		return seccion;
+	}
+
+	public void setSeccion(Long seccion) {
+		this.seccion = seccion;
+	}
+
+	public Long getModulo() {
+		return modulo;
+	}
+
+	public void setModulo(Long modulo) {
+		this.modulo = modulo;
+	}
+
+	public Long getProfesion() {
+		return profesion;
+	}
+
+	public void setProfesion(Long profesion) {
+		this.profesion = profesion;
+	}
+
+	public Proceso getProceso() {
+		return proceso;
+	}
+
+	public void setProceso(Proceso proceso) {
+		this.proceso = proceso;
+	}
+
+	public Long getMeta() {
+		return meta;
+	}
+
+	public void setMeta(Long meta) {
+		this.meta = meta;
+	}
+
+	public Long getDocente() {
+		return docente;
+	}
+
+	public void setDocente(Long docente) {
+		this.docente = docente;
+	}
+
+	public Long getUnidad() {
+		return unidad;
+	}
+
+	public void setUnidad(Long unidad) {
+		this.unidad = unidad;
+	}
+
+	public List<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(List<Matricula> matriculas) {
+		this.matriculas = matriculas;
+	}
+
+	public AsistenciaWrapper getAsistenciaWrapper() {
+		return asistenciaWrapper;
+	}
+
+	public void setAsistenciaWrapper(AsistenciaWrapper asistenciaWrapper) {
+		this.asistenciaWrapper = asistenciaWrapper;
+	}
+
+	public CetproMatricula getCetproMatricula() {
+		return cetproMatricula;
+	}
+
+	public void setCetproMatricula(CetproMatricula cetproMatricula) {
+		this.cetproMatricula = cetproMatricula;
+	}
+
+	public List<CetproMatriculaAlumno> getListSilaboAlumno() {
+		return listSilaboAlumno;
+	}
+
+	public void setListSilaboAlumno(List<CetproMatriculaAlumno> listSilaboAlumno) {
+		this.listSilaboAlumno = listSilaboAlumno;
 	}
 
 
