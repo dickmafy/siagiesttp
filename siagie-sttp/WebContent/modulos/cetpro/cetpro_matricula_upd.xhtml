@@ -20,15 +20,15 @@
 		<p:panel header="REGISTRO DE MATRICULA">
 				
    		<p:tabView id="tabView">  
-    	   	<p:tab id="tab1" title="Unidad Didáctica" >
+    	   	<p:tab id="tab1" title="Módulo" >
 	    	<table class="form_table" style="width:100%">
   				<tr>
-	   				<td><p:outputLabel  value="Modulos" style="font-weight:bold"/></td>
+	   				<td colspan="2"> <p:outputLabel  value="Módulo" style="font-weight:bold"/></td>
   				</tr>
 	        	<tr>	
 	        		
-	        		<td>
-	        			<p:selectOneMenu id="txtUnd" value="#{cetproMatricula.bean.pk_modulo}" style="width:350px;">
+	        		<td colspan="2">
+	        			<p:selectOneMenu id="txtUnd" value="#{cetproMatricula.bean.pk_modulo}" style="width:500px;">
 							<f:selectItems value="#{cetproMatricula.moduloList}"/>							
 						</p:selectOneMenu>
 	        		</td>
@@ -39,7 +39,7 @@
     	    	</tr>
     	    	<tr>    	    		
         			<td>	        			
-	        			<p:selectOneMenu id="txtTur" value="#{cetproMatricula.bean.turno}" size="40">
+	        			<p:selectOneMenu id="txtTur" value="#{cetproMatricula.bean.turno}" style="width:100px;">
 	    			   		<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
 	            		    <f:selectItem itemLabel="MAÑANA"	itemValue="1" />  
 	            		    <f:selectItem itemLabel="TARDE"  itemValue="2" />

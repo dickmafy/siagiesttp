@@ -20,15 +20,15 @@
 		<p:panel header="REGISTRO DE MATRICULA">
 				
    		<p:tabView id="tabView">  
-    	   	<p:tab id="tab1" title="Unidad Didáctica" >
+    	   	<p:tab id="tab1" title="Módulo" >
 	    	<table class="form_table" style="width:100%">
   				<tr>
-	   				<td><p:outputLabel  value="Modulos" style="font-weight:bold"/></td>
+	   				<td colspan="2"> <p:outputLabel  value="Módulo" style="font-weight:bold"/></td>
   				</tr>
 	        	<tr>	
 	        		
-	        		<td>
-	        			<p:selectOneMenu id="txtUnd" value="#{cetproMatricula.bean.pk_modulo}" style="width:350px;">
+	        		<td colspan="2">
+	        			<p:selectOneMenu id="txtUnd" value="#{cetproMatricula.bean.pk_modulo}" style="width:500px;">
 							<f:selectItems value="#{cetproMatricula.moduloList}"/>							
 						</p:selectOneMenu>
 	        		</td>
@@ -39,7 +39,7 @@
     	    	</tr>
     	    	<tr>    	    		
         			<td>	        			
-	        			<p:selectOneMenu id="txtTur" value="#{cetproMatricula.bean.turno}" size="40">
+	        			<p:selectOneMenu id="txtTur" value="#{cetproMatricula.bean.turno}" style="width:100px;">
 	    			   		<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
 	            		    <f:selectItem itemLabel="MAÑANA"	itemValue="1" />  
 	            		    <f:selectItem itemLabel="TARDE"  itemValue="2" />
@@ -57,85 +57,7 @@
     	
 		</p:tab>
  			
-		<p:tab id="tab2" title="Fechas" rendered="enabled">
-			<h:outputText value="Fecha Inicio" />  
-			<p:calendar id="txtFei" value="#{cetproMatricula.fecha_inicio}" showOn="button"  size="10"/>
-			
-			<h:outputText value="Cantidad de Clases" />  
-			<p:inputText value="#{cetproMatricula.cantidad_clases}" style="width:90px" />
-			 
-			 
-			<p:selectCheckboxMenu value="#{cetproMatricula.listaDiasSeleccionados}" 
-			label="Dias" filter="true" filterText="Filter" filterMatchMode="startsWith"   style="position:relative;  top:+14px;">  
-	        	<f:selectItems value="#{cetproMatricula.listaDias}"  />  
-		    </p:selectCheckboxMenu>  
-	    
-	     	
-	        <p:commandButton title="Crear Fechas" 	value="Crear Fechas" 	icon="icn_bar_new" actionListener="#{cetproMatricula.generarFechas}" ajax="false" />  
-			
-	      	<p:dataTable id="itemList" var="item" value="#{cetproMatricula.listFechas}" filteredValue="#{cetproMatricula.beanFilterList}"
-	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom"
-	   			paginator="true" rows="20"  rowIndexVar="rowNumber" scrollable="true"
-	        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
-	     		
-	     		<f:facet name="header">
-					<h:outputText value="Creacion de Fechas" />  
-				</f:facet>
-							
-				<p:column headerText="#" style="width:5%; align:center;">
-					<h:outputText value="#{rowNumber+1}"/>  
-				</p:column>
-					
-				<p:column headerText="Dia" style="width:5%; align:center;" sortBy="#{item.dia}">
-					<h:outputText value="#{item.dia}"/>
-				</p:column>		
-				
-				<p:column headerText="fechaListada" style="width:50%; align:center;" sortBy="#{item.fechaListada}" >   
-					<h:outputText value="#{item.fechaListada}">
-						<f:convertDateTime pattern="dd/MM/yyyy"/>
-					</h:outputText>
-				</p:column>
-				
-			       	      	        
-			</p:dataTable>
 		
-		</p:tab>
- 			
-  
- 				
-		<p:tab id="tab3" title="Alumno" rendered="enabled">
-		<table>
-			<tr>
-				<td><p:outputLabel value="Alumno" style="font-weight:bold"/></td>
-				<td></td>
-			</tr>
-				<tr>
-					<td>
-						<p:selectOneMenu value="#{cetproMatricula.interesado}" style="width:350px;">
-								<f:selectItems value="#{cetproMatricula.interesadoList}"/>							
-						</p:selectOneMenu>
-     				</td>
-     				
-     				<td><p:commandButton actionListener="#{cetproMatricula.addAlumno}" update=":frmUpd" value="+" title="Agregar Alumno" ajax="false"/></td>
-				</tr>  	
-		</table>
-		
-			<p:dataTable id="matriList" var="item" value="#{cetproMatricula.listaAlumnos}" 
-	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  >
-	     		
-					<p:column headerText="DNI" style="width:15%; align:center;">   
-						<h:outputText value="#{item.alumno_dni}" />  
-					</p:column>	
-					<p:column headerText="Nombre" style="width:85%; align:left;">   
-						<h:outputText value="#{item.alumno_nom_completo}" />  
-					</p:column>
-					<p:column headerText="Opciones" style="width:7%; align:center;">   
-						<p:commandButton icon="icn_item_remove" title="Eliminar Alumno" 	oncomplete="dialogEliSec.show()" >
-							<f:setPropertyActionListener value="#{item}" target="#{cetproMatricula.selectSeccion}" />				
-						</p:commandButton>
-					</p:column>
-				</p:dataTable> 
-		</p:tab>
 		</p:tabView>
 		
 		</p:panel>
