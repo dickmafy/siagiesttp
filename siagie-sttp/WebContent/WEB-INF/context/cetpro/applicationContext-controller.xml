@@ -48,6 +48,23 @@
 	</bean>
 
 
+	<!-- CETPRO DOCENTE -->
+	
+	<bean id="cetproDocenteList" class="modules.cetpro.controller.CetproDocenteList" scope="session" parent="genericController">
+		<property name="myService" 	ref="admisionService"/>
+		<property name="bean"		ref="cetproMatriculaFecha"/>	
+	</bean>
+	
+	<bean id="cetproDocenteListFecha" class="modules.cetpro.controller.CetproDocenteListFecha" scope="session" parent="genericController">
+		<property name="myService" 	ref="admisionService"/>	  
+	    <property name="bean" 		ref="cetproMatriculaFecha"/>	  
+	</bean>
+
+	
+	
+	<!-- CETPRO ALUMNO -->
+
+
 
 
 </beans>

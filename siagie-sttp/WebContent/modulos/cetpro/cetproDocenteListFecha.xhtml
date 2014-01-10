@@ -13,29 +13,29 @@
 	    		<p:spacer width="6px"/>
 	    		<p:outputLabel for="txtAnn" value="Año" style="position:relative;  top:-4px;"/>
 	    		<p:spacer width="6px"/>
-	    		<p:selectOneMenu id="txtAnn" value="#{cetproMatricula.annio}" style="position:relative;  top:2px;">
+	    		<p:selectOneMenu id="txtAnn" value="#{cetproDocenteListFecha.annio}" style="position:relative;  top:2px;">
                     <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
            	        <f:selectItem itemLabel="2013"  itemValue="2013" />
            	        <f:selectItem itemLabel="2014" 	itemValue="2014" />
            	        <f:selectItem itemLabel="2015" 	itemValue="2015" />
            	        <f:selectItem itemLabel="2016" 	itemValue="2016" />
            	        <f:selectItem itemLabel="2017" 	itemValue="2017" /> 
-           	        <p:ajax event="change" update=":frmList" listener="#{cetproMatricula.cargarModulo}"/>       
+           	        <p:ajax event="change" update=":frmList" listener="#{cetproDocenteListFecha.cargarModulo}"/>       
        	       	</p:selectOneMenu>  
        	       	<p:spacer height="6px"/>
 		        <p:outputLabel for="txtMod" value="Familia" style="position:relative;  top:-4px;"/>
 		        <p:spacer height="6px"/>
-		        <p:selectOneMenu id="txtMod" value="#{cetproMatricula.familia}" style="position:relative;  top:3px; width:200px">
-					<f:selectItems value="#{cetproMatricula.familiaList}"/>
-					<p:ajax event="change" update=":frmList" listener="#{cetproMatricula.defaultList}"/>
+		        <p:selectOneMenu id="txtMod" value="#{cetproDocenteListFecha.familia}" style="position:relative;  top:3px; width:200px">
+					<f:selectItems value="#{cetproDocenteListFecha.familiaList}"/>
+					<p:ajax event="change" update=":frmList" listener="#{cetproDocenteListFecha.defaultList}"/>
 				</p:selectOneMenu>
 				<p:spacer height="6px"/> 
-		   		<p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{cetproMatricula.nativeNew}" rendered="#{cetproMatricula.familia != null}" ajax="false" style="position:relative;  top:-4px;"/>    
+		   		<p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{cetproDocenteListFecha.nativeNew}" rendered="#{cetproDocenteListFecha.familia != null}" ajax="false" style="position:relative;  top:-4px;"/>    
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
       					
-   			<p:dataTable id="itemList" var="item" value="#{cetproMatricula.beanList}"
+   			<p:dataTable id="itemList" var="item" value="#{cetproDocenteListFecha.beanList}"
    			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  
    			paginator="true" rows="#{constante.LIST_SIZE}"  paginatorPosition="bottom"
         	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
@@ -67,14 +67,14 @@
 						
 			<p:column headerText="Opciones" style="width:10%">
 			
-				<p:commandButton icon="icn_item_update" title="Creacion Fechas" action="#{cetproMatricula.nativeLoad}" ajax="false" 
+				<p:commandButton icon="icn_item_update" title="Creacion Fechas" action="#{cetproDocenteListFecha.nativeLoad}" ajax="false" 
 				rendered="#{item.estado lt 3}">
-					<f:setPropertyActionListener value="#{item}" target="#{cetproMatricula.beanSelected}" />
+					<f:setPropertyActionListener value="#{item}" target="#{cetproDocenteListFecha.beanSelected}" />
 				</p:commandButton>
 				
-				<p:commandButton icon="icn_prc_publicar" title="Publicar Matricula" action="#{cetproMatricula.goPublicar}" ajax="false"
+				<p:commandButton icon="icn_prc_publicar" title="Publicar Matricula" action="#{cetproDocenteListFecha.goPublicar}" ajax="false"
 				rendered="#{item.estado lt 3}">
-					<f:setPropertyActionListener value="#{item}" target="#{cetproMatricula.beanSelected}" />				
+					<f:setPropertyActionListener value="#{item}" target="#{cetproDocenteListFecha.beanSelected}" />				
 				</p:commandButton>
 				
         	</p:column>      
