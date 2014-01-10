@@ -40,6 +40,8 @@ import modules.marco.domain.Familia;
 import modules.marco.domain.Itinerario;
 import modules.marco.domain.Profesion;
 import modules.marco.domain.ReferenteEducativo;
+import modules.seguridad.domain.Acceso;
+import modules.seguridad.domain.Perfil;
 import modules.seguridad.domain.Usuario;
 
 import com.belogick.factory.util.constant.Constante;
@@ -64,7 +66,7 @@ public class CetproMatriculaController extends GenericController
 	private	List<Oferta> 		profesiones;
 	List<CetproMatriculaAlumno> listaAlumnos;
 	
-	private boolean enabled;
+	private boolean enabled, nuevasFechas;
 	private Long 	proceso,institucion,tipo,familia,unidad,seccion,annio,turno,interesado,docente;
 	private Date 				fecha_inicio;
 	private Integer 			cantidad_clases;
@@ -100,6 +102,7 @@ public class CetproMatriculaController extends GenericController
 		//procesoList=getListSelectItem(myService.listarProcesos(institucion,annio),"id","nombrePeriodo",true);
 		
 		enabled=false;
+		
 		
 		page_new="cetpro_matricula_new";
 		page_main="cetpro_matricula_list";
@@ -156,7 +159,7 @@ public class CetproMatriculaController extends GenericController
 	@Override
 	public void afterLoad() throws Exception {
 		enabled=true;
-		
+		nuevasFechas=false;
 		listFechas=new ArrayList<Fecha>();
 		
 		Personal obj=new Personal();
@@ -196,16 +199,16 @@ public class CetproMatriculaController extends GenericController
 	
 	public void updateMatriculaCetpro() throws Exception
 	{
+		CetproMatricula bean= (CetproMatricula)getBean();
+		CetproMatriculaFecha matriculaFecha;
+		
 		if(listFechas.size()==0)
 		{setMessageError("No ha generado fechas de las clases.");}
-		else
+		else if(bean.getEstado()==1L)
 		{		
-			CetproMatricula bean= (CetproMatricula)getBean();
 			bean.setEstado(2L);
 			myService.save(bean);
 			
-	    	CetproMatriculaFecha matriculaFecha;
-	    	
 	    	for (Fecha item: listFechas) 
 	    	{
 	    		matriculaFecha =new CetproMatriculaFecha();
@@ -221,8 +224,35 @@ public class CetproMatriculaController extends GenericController
 	    	defaultList();
 			forward("cetpro_matricula_list");
 		}
+		else if(bean.getEstado()==2L && nuevasFechas==true)
+		{
+			myService.deleteByField(new CetproMatriculaFecha(), "pk_cetpro_matricula",bean.getPk_cetpro_matricula().toString());
+			
+			for (Fecha item: listFechas) 
+	    	{
+	    		matriculaFecha =new CetproMatriculaFecha();
+	    		matriculaFecha.setPk_cetpro_matricula(bean.getPk_cetpro_matricula());
+	    		matriculaFecha.setFecha(item.getFechaListada());
+	        	matriculaFecha.setEstado(1L);
+				myService.save(matriculaFecha);
+			}
+	    	    	
+	    	listFechas=new ArrayList<Fecha>();
+	    	
+	    	setMessageSuccess("Se actualizó el módulo satisfactoriamente");
+	    	defaultList();
+			forward("cetpro_matricula_list");
+		}
+		else
+		{
+			myService.save(bean);
+			setMessageSuccess("Se actualizó el módulo satisfactoriamente");
+	    	defaultList();
+			forward("cetpro_matricula_list");
+		}
     	
-		
+		bean=null;
+		matriculaFecha=null;
 	}
 	
 	
@@ -389,9 +419,15 @@ public class CetproMatriculaController extends GenericController
 	}
 	
 	public void generarFechas() throws ParseException{
+		CetproMatricula bean= (CetproMatricula)getBeanSelected();
 		listFechas = new ArrayList<Fecha>();
 		obtenerListaFechasxDia();
 		ordernarYRemoverFechasNoValidas();
+		
+		if(bean.getEstado()==2L)
+		{nuevasFechas=true;}
+		
+		bean=null;
 	}
 
 	private void ordernarYRemoverFechasNoValidas() {
