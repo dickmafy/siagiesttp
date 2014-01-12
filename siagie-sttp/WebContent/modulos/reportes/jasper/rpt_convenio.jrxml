@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_convenio" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8351e1fb-4960-4718-922b-da87152f04a7">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="376"/>
+	<property name="ireport.y" value="0"/>
+	<style name="texto_grilla" hAlign="Left" vAlign="Middle" fontSize="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="4"/>
+	</style>
+	<style name="background_grilla" mode="Opaque" backcolor="#E2EEFF" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<pen lineWidth="0.0"/>
+	</style>
+	<style name="header_grilla" mode="Opaque" forecolor="#000000" backcolor="#FFFFFF" hAlign="Center" vAlign="Bottom" isBlankWhenNull="true" fontSize="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<pen lineColor="#CCCCCC"/>
+		<box>
+			<pen lineWidth="0.25"/>
+			<topPen lineWidth="0.0"/>
+			<leftPen lineWidth="0.0"/>
+			<bottomPen lineWidth="0.5"/>
+			<rightPen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="label_ph" forecolor="#999999" hAlign="Left" vAlign="Middle" fontSize="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="10" rightPadding="4"/>
+	</style>
+	<style name="text_ph" forecolor="#999999" hAlign="Left" vAlign="Middle" fontSize="6" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="10" rightPadding="4"/>
+	</style>
+	<style name="texto_group" hAlign="Left" vAlign="Middle" fontSize="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false">
+		<box leftPadding="0"/>
+	</style>
+	<parameter name="USUARIO" class="java.lang.String"/>
+	<parameter name="RUTA_IMAGEN" class="java.lang.String"/>
+	<parameter name="PK_INSTITUCION" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TITULO_REPORTE" class="java.lang.String"/>
+	<parameter name="NOMBRE_INSTITUTO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+con.pk_convenio,
+con.pk_institucion,
+con.pk_empresa,
+con.nombre,
+con.modalidad,
+con.alcance,
+con.tipo,
+con.fecha_inicio,
+con.fecha_fin,
+con.beneficios,
+con.compromisos,
+con.responsables,
+con.estado,
+ins.nombre,
+mantenimiento.m_empresa.razon_social
+FROM
+administracion.m_convenio AS con
+INNER JOIN administracion.m_institucion AS ins ON con.pk_institucion = ins.pk_institucion
+INNER JOIN mantenimiento.m_empresa ON mantenimiento.m_empresa.pk_empresa = con.pk_empresa
+WHERE
+con.estado = 1 AND
+con.pk_institucion = $P{PK_INSTITUCION}
+ORDER BY
+con.tipo ASC,
+con.alcance ASC]]>
+	</queryString>
+	<field name="pk_convenio" class="java.lang.Integer"/>
+	<field name="pk_institucion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[LLave foranea de la tabla insitucion, Indica el instituto o cetpro al que pertenece.]]></fieldDescription>
+	</field>
+	<field name="pk_empresa" class="java.lang.Integer"/>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[Nombre que se le asigna a un aula]]></fieldDescription>
+	</field>
+	<field name="modalidad" class="java.lang.Integer"/>
+	<field name="alcance" class="java.lang.Integer"/>
+	<field name="tipo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Es el tipo de ambiente que puede ser aula, taller y laboratorio.]]></fieldDescription>
+	</field>
+	<field name="fecha_inicio" class="java.sql.Date">
+		<fieldDescription><![CDATA[Fecha de inicio de duración]]></fieldDescription>
+	</field>
+	<field name="fecha_fin" class="java.sql.Date">
+		<fieldDescription><![CDATA[Fecha fin de duración]]></fieldDescription>
+	</field>
+	<field name="beneficios" class="java.lang.String">
+		<fieldDescription><![CDATA[Beneficios]]></fieldDescription>
+	</field>
+	<field name="compromisos" class="java.lang.String">
+		<fieldDescription><![CDATA[Compromisos]]></fieldDescription>
+	</field>
+	<field name="responsables" class="java.lang.String">
+		<fieldDescription><![CDATA[Lista de responsables]]></fieldDescription>
+	</field>
+	<field name="estado" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Estado por el cual puede pasar un ambiente habilitado, deshabilitado, etc.]]></fieldDescription>
+	</field>
+	<field name="razon_social" class="java.lang.String">
+		<fieldDescription><![CDATA[Razón Social]]></fieldDescription>
+	</field>
+	<group name="group_tipo">
+		<groupExpression><![CDATA[$F{tipo}]]></groupExpression>
+		<groupHeader>
+			<band height="39">
+				<textField>
+					<reportElement uuid="855f6c62-7f7f-4fd9-b9a0-355b967c13ac" style="texto_group" x="0" y="7" width="802" height="16"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipo}.intValue()==2?"Público":"Privado"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="5d2eb3ce-8e83-4737-8d3d-01232e39427a" style="header_grilla" x="120" y="26" width="246" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[EMPRESA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="4c99fd2a-3a5e-412e-888e-6bf2c254aba8" style="header_grilla" x="368" y="26" width="318" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[BENEFICIOS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="e56e16b5-eac8-47ce-8d98-cfb03a215c8a" style="header_grilla" x="0" y="26" width="58" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[ALCANCE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="89ecab9f-6d2f-42dc-aa0e-22836f813a44" style="header_grilla" x="60" y="26" width="58" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[MODALIDAD]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="31867ce8-fe09-4b2c-b1d0-51e056c74da7" style="header_grilla" x="688" y="26" width="56" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[INICIO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="4ab4eb6c-10c2-4d64-9076-dd9e459482d0" style="header_grilla" x="746" y="26" width="56" height="12"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[FIN]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="1f2519c4-aeae-4c1d-a5bb-43dd0e34c861" style="text_ph" x="187" y="16" width="137" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="f28f6ef9-5abf-46e6-bd50-556c26ebcff3" x="0" y="5" width="149" height="30"/>
+				<imageExpression><![CDATA[$P{RUTA_IMAGEN}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="d997f944-c07a-4d02-bc14-96fbd37e15a5" style="label_ph" x="149" y="5" width="39" height="12"/>
+				<textElement/>
+				<text><![CDATA[Usuario]]></text>
+			</staticText>
+			<textField pattern="h.mm a">
+				<reportElement uuid="9f2754fa-1803-4e49-946b-9b102f7d055d" style="text_ph" x="187" y="27" width="137" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="18c6570d-8e1f-4d24-bdef-22a5851e6aab" style="label_ph" x="149" y="27" width="39" height="12"/>
+				<textElement/>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="3a818e03-a4b6-4e18-be40-2a59f12b43f9" style="text_ph" x="187" y="5" width="137" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{USUARIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="a3e15f03-386c-4c2f-8277-a4b5952449b8" style="label_ph" x="149" y="16" width="39" height="12"/>
+				<textElement/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="308b50b9-2d7b-49bb-8835-11d80c442337" x="571" y="0" width="231" height="22"/>
+				<textElement textAlignment="Right">
+					<font size="16" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TITULO_REPORTE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="419c8281-79e2-4a20-b311-6fa2e2258a14" x="571" y="21" width="231" height="18" forecolor="#999999"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NOMBRE_INSTITUTO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="14"/>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="f3b2e725-50af-40a5-9857-81bb19e44d5f" style="background_grilla" stretchType="RelativeToTallestObject" x="0" y="0" width="802" height="14">
+					<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue()%2==0]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="e31ec94c-0548-4aa6-92b2-d239ae3b4c84" style="texto_grilla" stretchType="RelativeToTallestObject" x="120" y="0" width="246" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razon_social}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="afe26956-232b-4b67-92cf-5fb7d6280bb9" style="texto_grilla" stretchType="RelativeToTallestObject" x="368" y="0" width="318" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{beneficios}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="a8e7332e-3d41-43fb-a1c4-9a5b25106529" style="texto_grilla" stretchType="RelativeToTallestObject" x="0" y="0" width="58" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{alcance}.intValue()==4?"Internacional":$F{alcance}.intValue()==3?"Distrital":$F{alcance}.intValue()==2?"Regional":"Nacional"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="20a8948e-5bb2-4bc2-becb-d6186b54b334" style="texto_grilla" stretchType="RelativeToTallestObject" x="60" y="0" width="58" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{modalidad}.intValue()==1?"Educativa":"ND"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="ba6c3cda-0897-44b0-92bc-a7553a916d48" style="texto_grilla" stretchType="RelativeToTallestObject" x="688" y="0" width="56" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_inicio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement uuid="0235f3e1-87ba-44e1-b579-89df0e588cbb" style="texto_grilla" stretchType="RelativeToTallestObject" x="746" y="0" width="56" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_fin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement uuid="a3fc3e39-de5b-4037-baac-e570393ba776" x="630" y="0" width="172" height="18"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Pág. "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="8fd99fee-32bd-477a-98b0-6bf5d2a78f1b" x="0" y="3" width="802" height="1" forecolor="#999999"/>
+			</line>
+			<staticText>
+				<reportElement uuid="aa2900b8-9b2d-43be-91cf-4d5012bed3d1" x="0" y="8" width="383" height="10" forecolor="#999999"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Sistema de Información de Apoyo a la Gestión de la Institución Educativa - Supertior Tecnológica y Técnica productiva]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
