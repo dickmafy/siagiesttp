@@ -1,90 +1,135 @@
 <ui:composition template="/modulos/index/template/default.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:p="http://primefaces.org/ui"
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <ui:define name="body" oncontextmenu="return false">
-   	<h:form id="frmList" ajaxSubmit="false">
-   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
-  		<p:toolbar>  
-	    	<p:toolbarGroup align="left">
-	    		<p:spacer height="6px"/>
-		        <p:outputLabel for="txtIns" value="Institución" style="position:relative;  top:-4px;"/>
-		   		<p:selectOneMenu id="txtIns" value="#{adminConvenio.institucion}" style="position:relative;  top:3px; left:15px; width:270px">
-					<f:selectItems value="#{adminConvenio.institucionList}"/>
-					<p:ajax event="change" update=":frmList" listener="#{adminConvenio.defaultList}"/>
-				</p:selectOneMenu>
-				<p:spacer height="6px"/>
-		        <p:commandButton id="btnNew" title="Nuevo" value="Nuevo" icon="icn_bar_new" style="position:relative;  top:-4px; left:20px;"
-					 actionListener="#{adminConvenio.nativeNew}" ajax="false" rendered="#{adminConvenio.institucion ne -1}"/>
-			</p:toolbarGroup>  
-  		</p:toolbar>    		
-      	<p:spacer height="4px"/>
-      	
-   		<p:dataTable id="itemList" var="item" value="#{adminConvenio.beanList}" filteredValue="#{adminConvenio.beanFilterList}" 
-   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  
-   			paginator="true" rows="#{constante.LIST_SIZE}"  paginatorPosition="bottom"
-        	paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
-     		
-     		<f:facet name="header">
-				<h:outputText value="Listado de Convenios (#{adminConvenio.defaultListSize})" />  
-			</f:facet>
-			
-			<p:column headerText="Tipo" style="width:7%; align:center;" sortBy="#{item.nombreTipo}">       
-				<h:outputText value="#{item.nombreTipo}" />  
-			</p:column>
-			
-			<p:column headerText="Modalidad" style="width:7%; align:center;" sortBy="#{item.nombreModalidad}">   
-				<h:outputText value="#{item.nombreModalidad}" />  
-			</p:column>
-			
-			<p:column headerText="Convenio" style="width:53%; align:center;" sortBy="#{item.nombre}">   
-				<h:outputText value="#{item.nombre}" />  
-			</p:column>		
-			
-			<p:column headerText="Alcance" style="width:20%; align:center;" sortBy="#{item.nombreAlcance}">       
-				<h:outputText value="#{item.nombreAlcance}" />  
-			</p:column>
-			
-			<p:column headerText="Opciones" style="width:13%">  
-			
-				<p:commandButton icon="icn_item_download" 	title="Descargar" 	 ajax="false"  rendered="#{item.existFile}"  >
-					<f:setPropertyActionListener value="#{item}" target="#{adminConvenio.beanSelected}" />
-					<p:fileDownload value="#{adminConvenio.file}"/>
-				</p:commandButton>  
-				
-				<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{adminConvenio.nativeLoad}" ajax="false">
-					<f:setPropertyActionListener value="#{item}" target="#{adminConvenio.beanSelected}" />
-				</p:commandButton>
+	<ui:define name="body" oncontextmenu="return false">
+		<h:form id="frmList" ajaxSubmit="false">
+			<p:growl id="msgSystem" showDetail="false" life="5000" escape="true" />
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:spacer height="6px" />
+					<p:outputLabel for="txtIns" value="Institución"
+						style="position:relative;  top:-4px;" />
+					<p:selectOneMenu id="txtIns" value="#{adminConvenio.institucion}"
+						style="position:relative;  top:3px; left:15px; width:270px">
+						<f:selectItems value="#{adminConvenio.institucionList}" />
+						<p:ajax event="change" update=":frmList"
+							listener="#{adminConvenio.defaultList}" />
+					</p:selectOneMenu>
+					<p:spacer height="6px" />
+					<p:commandButton id="btnNew" title="Nuevo" value="Nuevo"
+						icon="icn_bar_new"
+						style="position:relative;  top:-4px; left:20px;"
+						actionListener="#{adminConvenio.nativeNew}" ajax="false"
+						rendered="#{adminConvenio.institucion ne -1}" />
+					<p:commandButton title="Listado de Convenios" value="Listado de Convenios"
+						icon="icn_item_download" oncomplete="wvReporte.show()"
+						actionListener="#{adminConvenio.generarReporte}"
+						rendered="#{adminConvenio.institucion ne -1}" update=":dlgReporte"
+						style="position:relative;  top:-4px; left:30px;" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:spacer height="4px" />
 
-                <p:commandButton icon="icn_item_disable" 	title="Habilitar" 		action="#{adminConvenio.nativeEnabled}"	 ajax="false"	
-                	update=":frmList:itemList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_DISABLED}">
-                	 <f:setPropertyActionListener value="#{item}" target="#{adminConvenio.beanSelected}" /> 
-                </p:commandButton>
-                <p:commandButton icon="icn_item_enable" 	title="Deshabilitar" 	action="#{adminConvenio.nativeDisabled}" ajax="false"	
-                	update=":frmList:itemList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_ENABLED}">
-                	 <f:setPropertyActionListener value="#{item}" target="#{adminConvenio.beanSelected}" /> 
-                </p:commandButton>
-                 <p:commandButton icon="icn_item_remove" 	title="Eliminar" 		oncomplete="dialogUsrDel.show()">
-					<f:setPropertyActionListener value="#{item}" target="#{adminConvenio.beanSelected}" />				
-				</p:commandButton> 
-        	</p:column>      	        
-		</p:dataTable> 
-	</h:form>
-		
+			<p:dataTable id="itemList" var="item"
+				value="#{adminConvenio.beanList}"
+				filteredValue="#{adminConvenio.beanFilterList}"
+				emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"
+				paginator="true" rows="#{constante.LIST_SIZE}"
+				paginatorPosition="bottom"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+
+				<f:facet name="header">
+					<h:outputText
+						value="Listado de Convenios (#{adminConvenio.defaultListSize})" />
+				</f:facet>
+
+				<p:column headerText="Tipo" style="width:7%; align:center;"
+					sortBy="#{item.nombreTipo}">
+					<h:outputText value="#{item.nombreTipo}" />
+				</p:column>
+
+				<p:column headerText="Modalidad" style="width:7%; align:center;"
+					sortBy="#{item.nombreModalidad}">
+					<h:outputText value="#{item.nombreModalidad}" />
+				</p:column>
+
+				<p:column headerText="Convenio" style="width:53%; align:center;"
+					sortBy="#{item.nombre}">
+					<h:outputText value="#{item.nombre}" />
+				</p:column>
+
+				<p:column headerText="Alcance" style="width:20%; align:center;"
+					sortBy="#{item.nombreAlcance}">
+					<h:outputText value="#{item.nombreAlcance}" />
+				</p:column>
+
+				<p:column headerText="Opciones" style="width:13%">
+
+					<p:commandButton icon="icn_item_download" title="Descargar"
+						ajax="false" rendered="#{item.existFile}">
+						<f:setPropertyActionListener value="#{item}"
+							target="#{adminConvenio.beanSelected}" />
+						<p:fileDownload value="#{adminConvenio.file}" />
+					</p:commandButton>
+
+					<p:commandButton icon="icn_item_update" title="Actualizar"
+						action="#{adminConvenio.nativeLoad}" ajax="false">
+						<f:setPropertyActionListener value="#{item}"
+							target="#{adminConvenio.beanSelected}" />
+					</p:commandButton>
+
+					<p:commandButton icon="icn_item_disable" title="Habilitar"
+						action="#{adminConvenio.nativeEnabled}" ajax="false"
+						update=":frmList:itemList, :frmList:msgSystem"
+						rendered="#{item.estado eq constante.ROW_STATUS_DISABLED}">
+						<f:setPropertyActionListener value="#{item}"
+							target="#{adminConvenio.beanSelected}" />
+					</p:commandButton>
+					<p:commandButton icon="icn_item_enable" title="Deshabilitar"
+						action="#{adminConvenio.nativeDisabled}" ajax="false"
+						update=":frmList:itemList, :frmList:msgSystem"
+						rendered="#{item.estado eq constante.ROW_STATUS_ENABLED}">
+						<f:setPropertyActionListener value="#{item}"
+							target="#{adminConvenio.beanSelected}" />
+					</p:commandButton>
+					<p:commandButton icon="icn_item_remove" title="Eliminar"
+						oncomplete="dialogUsrDel.show()">
+						<f:setPropertyActionListener value="#{item}"
+							target="#{adminConvenio.beanSelected}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
 		<!-- Eliminar Convenios -->
-		<p:confirmDialog widgetVar="dialogUsrDel" width="350" appendToBody="true"
-			header="Mensaje de Confirmacion" message="¿Estas seguro de eliminar el convenio?" style="font-size:13px;"
-        	closable="true" severity="alert" closeOnEscape="true">
-        	<h:form>	
-			<h:panelGroup style="text-align: right;" >
-				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogUsrDel.hide()"  actionListener="#{adminConvenio.nativeRemove}"  update=":frmList"/>
-        		<p:commandButton value="No" id="cancelButton" onclick="dialogUsrDel.hide()"/>   
-			</h:panelGroup>
-			</h:form>	
-   		</p:confirmDialog>
-   		    
-    </ui:define>
+		<p:confirmDialog widgetVar="dialogUsrDel" width="350"
+			appendToBody="true" header="Mensaje de Confirmacion"
+			message="¿Estas seguro de eliminar el convenio?"
+			style="font-size:13px;" closable="true" severity="alert"
+			closeOnEscape="true">
+			<h:form>
+				<h:panelGroup style="text-align: right;">
+					<p:commandButton value="Si" id="deleteButton"
+						oncomplete="dialogUsrDel.hide()"
+						actionListener="#{adminConvenio.nativeRemove}" update=":frmList" />
+					<p:commandButton value="No" id="cancelButton"
+						onclick="dialogUsrDel.hide()" />
+				</h:panelGroup>
+			</h:form>
+		</p:confirmDialog>
+
+		<!--  muestra del reporte -->
+		<p:dialog widgetVar="wvReporte" id="dlgReporte"
+			header="Reporte de Convenios" closable="true"
+			appendToBody="true" showEffect="fade" resizable="false" modal="true"
+			width="1000px" height="500px">
+			<p:media value="#{adminConvenio.urlRpt}" width="976px" height="476px"
+				id="mdPdf">
+                Su navegador no cuenta con un visor de archivos PDFs, por favor descarguelo para que pueda visualizar el archivo
+            </p:media>
+		</p:dialog>
+	</ui:define>
 </ui:composition>
