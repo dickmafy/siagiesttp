@@ -106,8 +106,10 @@ public class CetproDocenteListFecha extends GenericController
 		
 		aac.setPk_cetpro_matricula_fecha(temporalCalendario.getId());
 		
-		forward("cetproDocenteListFechaAlumno");
+		
 		listarAlumnos();
+		
+		forward("cetproDocenteListFechaAlumno");
 	}
 	
 	public void goDetail()throws Exception
@@ -130,9 +132,9 @@ public class CetproDocenteListFecha extends GenericController
 		
 		
 		for (CetproMatriculaAlumno item : listSilaboAlumno) {
-			AsistenciaAlumnoCalendario asiscale=new AsistenciaAlumnoCalendario();
-			asiscale.setPk_silabo_alumno(item.getId());
-			asiscale.setPk_silabo_calendario(temporalCalendario.getId());
+			CetproAsistencia asis=new CetproAsistencia();
+			asis.setPk_cetpro_matricula_alumno(item.getId());
+			asis.setPk_cetpro_matricula_fecha(temporalCalendario.getId());
 			
 			Persona p = new Persona();
 			p.setId(item.getPk_persona());
@@ -140,8 +142,8 @@ public class CetproDocenteListFecha extends GenericController
 			item.setAlumno_nom_completo(p.getNombreCompleto());
 			
 			try {
-				AsistenciaAlumnoCalendario temp;
-				temp=(AsistenciaAlumnoCalendario)myService.findByObject(asiscale);
+				CetproAsistencia temp;
+				temp=(CetproAsistencia)myService.findByObject(asis);
 				item.setAsistio((long)temp.getAsistencia());
 			} catch (Exception e) {
 				item.setAsistio(1L);
@@ -349,6 +351,8 @@ public class CetproDocenteListFecha extends GenericController
 	public void setListSilaboAlumno(List<CetproMatriculaAlumno> listSilaboAlumno) {
 		this.listSilaboAlumno = listSilaboAlumno;
 	}
+
+	
 
 
 

@@ -96,7 +96,8 @@ public class CetproDocenteList extends GenericController
 		institucion=usr.getInstitucion();
 		docente=usr.getPertenencia();
 		proceso=id;
-		annio=Long.parseLong(Calendar.getInstance().get(Calendar.YEAR)+"");	
+		//annio=Long.parseLong(Calendar.getInstance().get(Calendar.YEAR)+"");	
+		annio=-1L;
 		familia=-1L;
 		dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
