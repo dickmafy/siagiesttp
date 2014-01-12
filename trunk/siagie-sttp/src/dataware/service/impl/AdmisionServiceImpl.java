@@ -116,4 +116,7 @@ public class AdmisionServiceImpl extends HorarioServiceImpl implements AdmisionS
 	
 	public List<Persona> listarInteresados(Long institucion) throws Exception
 	{return getAdmisionDao().listarInteresados(institucion);}
+	
+	public List<CetproMatricula> listarUnidadesDocenteAlumno(Long anno,Long tipo,Long id) throws Exception
+	{return getAdmisionDao().listarUnidadesDocenteAlumno(anno, tipo, id);}
 }

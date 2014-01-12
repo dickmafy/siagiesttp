@@ -20,17 +20,8 @@
            	        <f:selectItem itemLabel="2015" 	itemValue="2015" />
            	        <f:selectItem itemLabel="2016" 	itemValue="2016" />
            	        <f:selectItem itemLabel="2017" 	itemValue="2017" /> 
-           	        <p:ajax event="change" update=":frmList" listener="#{cetproDocenteList.cargarModulo}"/>       
-       	       	</p:selectOneMenu>  
-       	       	<p:spacer height="6px"/>
-		        <p:outputLabel for="txtMod" value="Familia" style="position:relative;  top:-4px;"/>
-		        <p:spacer height="6px"/>
-		        <p:selectOneMenu id="txtMod" value="#{cetproDocenteList.familia}" style="position:relative;  top:3px; width:200px">
-					<f:selectItems value="#{cetproDocenteList.familiaList}"/>
-					<p:ajax event="change" update=":frmList" listener="#{cetproDocenteList.defaultList}"/>
-				</p:selectOneMenu>
-				<p:spacer height="6px"/> 
-		   		<p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{cetproDocenteList.nativeNew}" rendered="#{cetproDocenteList.familia != null}" ajax="false" style="position:relative;  top:-4px;"/>    
+           	        <p:ajax event="change" update=":frmList" listener="#{cetproDocenteList.defaultList}"/>       
+       	       	</p:selectOneMenu>   
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
