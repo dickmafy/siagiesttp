@@ -24,7 +24,8 @@ public class CetproMatriculaAlumno implements Serializable
 	private String	alumno_apemat;
 	private String	alumno_nom;
 	private String	alumno_nom_completo;
-	private Long asistio;
+	private Long 	asistio;
+	private String 	asistioNom;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -84,7 +85,7 @@ public class CetproMatriculaAlumno implements Serializable
 	}
 	@Transient
 	public String getAlumno_nom_completo() {
-		return alumno_nom_completo;
+		return alumno_apepat+" "+alumno_apemat+" "+alumno_nom;
 	}
 	public void setAlumno_nom_completo(String alumno_nom_completo) {
 		this.alumno_nom_completo = alumno_nom_completo;
@@ -95,6 +96,16 @@ public class CetproMatriculaAlumno implements Serializable
 	}
 	public void setAsistio(Long asistio) {
 		this.asistio = asistio;
+	}
+	@Transient
+	public String getAsistioNom() {
+		if(asistio==1L)
+		{return "Asistió";}
+		else
+		{return "No Asistió";}
+	}
+	public void setAsistioNom(String asistioNom) {
+		this.asistioNom = asistioNom;
 	}
 	
 	
