@@ -7,22 +7,40 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import modules.administracion.domain.Convenio;
 import modules.administracion.domain.Institucion;
 import modules.administracion.domain.Solicitud;
 import modules.mantenimiento.domain.Empresa;
 import modules.seguridad.domain.Usuario;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+
 import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
+
 import dataware.service.SeguridadService;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
+
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import org.primefaces.model.DefaultStreamedContent; 
+
+import resouces.ConnPg;
+import resouces.Fecha;
 
 @ManagedBean
 @SessionScoped
@@ -40,6 +58,9 @@ public class AdminConvenio extends GenericController
 	private UploadedFile docpdf;
 	private StreamedContent file;
 	    
+	private String urlRpt; // Codigo Ericson Huamani
+	private String nombreUsuario; // Codigo Ericson Huamani
+	
     public void initBase(Long codigo, String nombre) throws Exception
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
@@ -58,6 +79,9 @@ public class AdminConvenio extends GenericController
 		page_main="cnv_lst";
 		page_update="cnv_upd";
 		forward(page_main);
+		
+		setUrlRpt("/modulos/reportes/pdf/NOMINA.pdf"); // Codigo Ericson Huamaní
+		nombreUsuario=usr.getNombres(); // Codigo Ericson Huamaní
 	}
     
     @Override
@@ -235,6 +259,58 @@ public class AdminConvenio extends GenericController
 	public void setNombreInstitucion(String nombreInstitucion) 			{this.nombreInstitucion = nombreInstitucion;}
 
 	public Long getInstitucion() 										{return institucion;}
-	public void setInstitucion(Long institucion) 						{this.institucion = institucion;}	
+	public void setInstitucion(Long institucion) 						{this.institucion = institucion;}
+
+	public String getUrlRpt() {
+		return urlRpt;
+	}
+
+	public void setUrlRpt(String urlRpt) {
+		this.urlRpt = urlRpt;
+	}	
 	
+	// Inicio Codigo Ericson Huamaní 19-12-2013 11:00
+		@SuppressWarnings("unchecked")
+		public void generarReporte(ActionEvent evt) {
+			try {
+				String rutaAplicacion = FacesContext.getCurrentInstance()
+						.getExternalContext().getRealPath("/");
+				String nombreArchivoPdf = new Fecha().getFecha(new Date(),
+						Fecha.PATTERN_DDMMYYYYHHMMS, Fecha.LOCALE_ES) + ".pdf";
+				JasperPrint print = null;
+
+				@SuppressWarnings("rawtypes")
+				Map parametro = new HashMap();
+				parametro.put("TITULO_REPORTE", "Listado de Convenios");
+				parametro.put("PK_INSTITUCION", institucion);
+				parametro.put("NOMBRE_INSTITUTO", nombreInstitucion);
+				parametro.put("USUARIO", nombreUsuario);
+				parametro.put("RUTA_IMAGEN", rutaAplicacion
+						+ "/recursos/imagenes/sicad_1_rpt.jpg");
+
+				File fp = new File(rutaAplicacion
+						+ "/modulos/reportes/jasper/rpt_convenio.jasper");
+				InputStream reportSt = new BufferedInputStream(new FileInputStream(
+						fp));
+				print = JasperFillManager.fillReport(reportSt, parametro,
+						ConnPg.getConexion());
+				OutputStream output = new FileOutputStream(new File(rutaAplicacion
+						+ "/modulos/reportes/pdf/" + nombreArchivoPdf));
+				JasperExportManager.exportReportToPdfStream(print, output);
+				setUrlRpt("/modulos/reportes/pdf/" + nombreArchivoPdf);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		// Fin codigo Ericson Huamaní
 } 
