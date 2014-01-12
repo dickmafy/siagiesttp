@@ -84,7 +84,7 @@ public class CetproMatriculaAlumno implements Serializable
 	}
 	@Transient
 	public String getAlumno_nom_completo() {
-		return alumno_apepat+" "+alumno_apemat+" "+alumno_nom;
+		return alumno_nom_completo;
 	}
 	public void setAlumno_nom_completo(String alumno_nom_completo) {
 		this.alumno_nom_completo = alumno_nom_completo;
