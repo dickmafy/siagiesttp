@@ -125,7 +125,7 @@ public class CetproMatriculaController extends GenericController
 		bean.setEstado(3L);
 		myService.save(bean);
 		setMessageSuccess("Se Publico la Matricula.");
-		
+		defaultList();
 	}
 	
 	
