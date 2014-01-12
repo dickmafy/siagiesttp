@@ -114,12 +114,12 @@ public class CetproDocenteListFecha extends GenericController
 	
 	public void goDetail()throws Exception
 	{
-		AsistenciaAlumnoCalendario aac = new AsistenciaAlumnoCalendario();
-		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();
+		CetproAsistencia aac = new CetproAsistencia();
+		CetproMatriculaFecha temporalCalendario = (CetproMatriculaFecha)getBeanSelected();
 		
-		aac.setPk_silabo_calendario(temporalCalendario.getId());
+		aac.setPk_cetpro_matricula_fecha(temporalCalendario.getId());
 		listarAlumnos();
-		forward("DocenteAsistenciaAlumnoDetail");		
+		forward("cetproDocenteListFechaAlumnoDetail");		
 	}
 	
 	
@@ -139,7 +139,9 @@ public class CetproDocenteListFecha extends GenericController
 			Persona p = new Persona();
 			p.setId(item.getPk_persona());
 			p = (Persona)myService.findById(p);
-			item.setAlumno_nom_completo(p.getNombreCompleto());
+			item.setAlumno_apepat(p.getApellido_paterno());
+			item.setAlumno_apemat(p.getApellido_materno());
+			item.setAlumno_nom(p.getNombres());
 			
 			try {
 				CetproAsistencia temp;
@@ -153,32 +155,27 @@ public class CetproDocenteListFecha extends GenericController
 	}
 	
 	public void guardarAsistencia() throws ServiceException, DaoException{
-/*		
-		AsistenciaAlumnoCalendario asistenciaAlumnoCalendario = new AsistenciaAlumnoCalendario();	
-		SilaboCalendario temporalCalendario = (SilaboCalendario)getBeanSelected();				
 		
-		for (SilaboAlumno item : listSilaboAlumno) {
+		CetproAsistencia asis;	
+		CetproMatriculaFecha fecha = (CetproMatriculaFecha)getBeanSelected();			
 		
-			asistenciaAlumnoCalendario = new AsistenciaAlumnoCalendario();					
-			temporalCalendario = (SilaboCalendario)getBeanSelected();
+		for (CetproMatriculaAlumno item : listSilaboAlumno) {
+		
+			asis = new CetproAsistencia();		
+			asis.setPk_cetpro_matricula_alumno(item.getId());
+			asis.setPk_cetpro_matricula_fecha(fecha.getId());
+			asis.setAsistencia(item.getAsistio());
+			asis.setEstado(1L);
 			
-			asistenciaAlumnoCalendario.setPk_silabo_calendario(temporalCalendario.getId());
-			asistenciaAlumnoCalendario.setAsistencia(item.getAsistio());
-			asistenciaAlumnoCalendario.setEstado(1L);
-			asistenciaAlumnoCalendario.setPk_silabo_alumno(item.getId());
-			
-			myService.save(asistenciaAlumnoCalendario);			
+			myService.save(asis);			
 		}
 	
 		//cerrar la fecha
-		temporalCalendario.setEstado(2L);
-		myService.save(temporalCalendario);
+		fecha.setEstado(2L);
+		myService.save(fecha);
 		
-		forward("DocenteSilaboAsistenciaListaFecha");
-	*/	
-		
-		
-		
+		forward("cetproDocenteListFecha");
+	
 	}
 
 	
