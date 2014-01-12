@@ -54,4 +54,5 @@ public interface AdmisionService extends HorarioService
 	public List<CetproMatriculaAlumno> listarAlumnosMatricula(Long matricula) throws Exception;
 	public void actualizarMatriculaCetpro(boolean tipo, Long matricula, Long alumno) throws Exception ;
 	public List<Persona> listarInteresados(Long institucion) throws Exception;
+	public List<CetproMatricula> listarUnidadesDocenteAlumno(Long anno,Long tipo,Long id) throws Exception;
 }
