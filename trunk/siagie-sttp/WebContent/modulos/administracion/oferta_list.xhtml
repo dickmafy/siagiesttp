@@ -1,66 +1,90 @@
 <ui:composition template="/modulos/index/template/default.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:p="http://primefaces.org/ui"
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <ui:define name="body" oncontextmenu="return false">
-   	<h:form id="frmList" ajaxSubmit="false">
-   		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
-  		<p:toolbar>
-  			<p:toolbarGroup align="left">  		
-	    		<p:spacer height="6px"/>
-		        <p:outputLabel for="txtIns" value="Institución" style="position:relative;  top:-4px;"/>
-		   		<p:selectOneMenu id="txtIns" value="#{adminOferta.institucion}" style="position:relative;  top:3px; left:15px; width:300px">
-					<f:selectItems value="#{adminOferta.institucionList}" />
-					<p:ajax event="change" update=":frmList" listener="#{adminOferta.defaultList}"/>
-				</p:selectOneMenu>
-				<p:spacer height="6px"/>
-				<p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{adminOferta.nativeNew}" ajax="false" rendered="#{adminOferta.institucion ne -1}" style="position:relative;  top:-4px; left:30px;"/>
-				
-			</p:toolbarGroup>  
-  		</p:toolbar>
-  		<p:spacer height="4px"/>
-  
-   		<p:dataTable id="itemList" var="item" value="#{adminOferta.beanList}" filteredValue="#{adminOferta.beanFilterList}"
-   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"  paginatorPosition="bottom"
-   			paginator="true" rows="7"  
-        	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
-     		
-     		<f:facet name="header">
-				<h:outputText value="Oferta Educativa" />  
-			</f:facet>
-							
-			<p:column headerText="Profesión" style="width:73%; align:center;" >   
-				<h:outputText value="#{item.nombreProfesion}"/>
-			</p:column>		
-			
-			<p:column headerText="Inicio" style="width:10%; align:center;">   
-				<h:outputText value="#{item.vigenciaInicio}">
-					<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-   				</h:outputText>	    
-			</p:column>		
-			
-			<p:column headerText="Fin" style="width:10%; align:center;">   
-				<h:outputText value="#{item.vigenciaFin}">
-					<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-   				</h:outputText>	    
-			</p:column>		
-			
-			<p:column headerText="Opciones" style="width:7%">  
-				<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{adminOferta.nativeLoad}" ajax="false">
-					<f:setPropertyActionListener value="#{item}" target="#{adminOferta.beanSelected}" />
-				</p:commandButton>
-				<p:commandButton icon="icn_item_download" 	title="Descargar Resolución"  ajax="false">
-					<f:setPropertyActionListener value="#{item}" target="#{adminOferta.beanSelected}" />
-					<p:fileDownload value="#{adminOferta.file}"/>
-				</p:commandButton>
-        	</p:column>
-        	      	        
-		</p:dataTable>
-		
-		
-	</h:form>
-    </ui:define>
+	<ui:define name="body" oncontextmenu="return false">
+		<h:form id="frmList" ajaxSubmit="false">
+			<p:growl id="msgSystem" showDetail="false" life="5000" escape="true" />
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:spacer height="6px" />
+					<p:outputLabel for="txtIns" value="Institución"
+						style="position:relative;  top:-4px;" />
+					<p:selectOneMenu id="txtIns" value="#{adminOferta.institucion}"
+						style="position:relative;  top:3px; left:15px; width:300px">
+						<f:selectItems value="#{adminOferta.institucionList}" />
+						<p:ajax event="change" update=":frmList"
+							listener="#{adminOferta.defaultList}" />
+					</p:selectOneMenu>
+					<p:spacer height="6px" />
+					<p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new"
+						actionListener="#{adminOferta.nativeNew}" ajax="false"
+						rendered="#{adminOferta.institucion ne -1}"
+						style="position:relative;  top:-4px; left:30px;" />
+					<p:commandButton title="Oferta Laboral" value="Oferta Laboral"
+						icon="icn_item_download" oncomplete="wvReporte.show()"
+						actionListener="#{adminOferta.generarReporte}"
+						rendered="#{adminOferta.institucion ne -1}" update=":dlgReporte"
+						style="position:relative;  top:-4px; left:30px;" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:spacer height="4px" />
+
+			<p:dataTable id="itemList" var="item" value="#{adminOferta.beanList}"
+				filteredValue="#{adminOferta.beanFilterList}"
+				emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true"
+				paginatorPosition="bottom" paginator="true" rows="7"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
+
+				<f:facet name="header">
+					<h:outputText value="Oferta Educativa" />
+				</f:facet>
+
+				<p:column headerText="Profesión" style="width:73%; align:center;">
+					<h:outputText value="#{item.nombreProfesion}" />
+				</p:column>
+
+				<p:column headerText="Inicio" style="width:10%; align:center;">
+					<h:outputText value="#{item.vigenciaInicio}">
+						<f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Fin" style="width:10%; align:center;">
+					<h:outputText value="#{item.vigenciaFin}">
+						<f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Opciones" style="width:7%">
+					<p:commandButton icon="icn_item_update" title="Actualizar"
+						action="#{adminOferta.nativeLoad}" ajax="false">
+						<f:setPropertyActionListener value="#{item}"
+							target="#{adminOferta.beanSelected}" />
+					</p:commandButton>
+					<p:commandButton icon="icn_item_download"
+						title="Descargar Resolución" ajax="false">
+						<f:setPropertyActionListener value="#{item}"
+							target="#{adminOferta.beanSelected}" />
+						<p:fileDownload value="#{adminOferta.file}" />
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+
+		<!--  muestra del reporte -->
+		<p:dialog widgetVar="wvReporte" id="dlgReporte"
+			header="Reporte de Oferta Educativa" closable="true"
+			appendToBody="true" showEffect="fade" resizable="false" modal="true"
+			width="1000px" height="500px">
+			<p:media value="#{adminOferta.urlRpt}" width="976px" height="476px"
+				id="mdPdf">
+                Su navegador no cuenta con un visor de archivos PDFs, por favor descarguelo para que pueda visualizar el archivo
+            </p:media>
+		</p:dialog>
+	</ui:define>
+
 </ui:composition>
