@@ -32,46 +32,58 @@
         	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
      		
      		<f:facet name="header">
-				<h:outputText value="Matricula" />  
+				<h:outputText value="Mis Cursos" />  
 			</f:facet>
 			
-			<p:column headerText="Familia Profesional" style="width:15%; align:center;" sortBy="#{item.nombreUnidad}">   
+			<p:column headerText="Familia Profesional" style="width:10%; align:center;" sortBy="#{item.nombreUnidad}">   
 				<h:outputText value="#{item.nomFamilia}" />  
 			</p:column>
 			
-			<p:column headerText="Unidad Didáctica" style="width:30%; align:center;" sortBy="#{item.nombreUnidad}">   
+			<p:column headerText="Módulo" style="width:20%; align:center;" sortBy="#{item.nombreUnidad}">   
 				<h:outputText value="#{item.nomModulo}" />  
 			</p:column>
-			
-			<p:column headerText="Docente" style="width:10%; align:center;" sortBy="#{item.nombreDocente}">   
-				<h:outputText value="#{item.nombreDocente}" />  
-			</p:column>	
 			
 			<p:column headerText="Turno" style="width:5%; align:center;" sortBy="#{item.turno}">   
 				<h:outputText value="#{item.nombreTurno}" />  
 			</p:column>	
 			
+			<p:column headerText="Estado" style="width:5%; align:center;" sortBy="#{item.turno}">   
+				<h:outputText value="#{item.nombreEstado}" />  
+			</p:column>	
 			
 						
-			<p:column headerText="Opciones" style="width:10%">
+			<p:column headerText="Opciones" style="width:5%">
 			
-				<p:commandButton icon="icn_item_calendar" title="Asistencia" action="#{cetproDocenteList.goAsistencia}" ajax="false">
+				<p:commandButton icon="icn_item_calendar" title="Asistencia" action="#{cetproDocenteList.goAsistencia}" ajax="false" rendered="#{item.estado ne 5}">
 					<f:setPropertyActionListener value="#{item}" target="#{cetproDocenteList.beanSelected}" />
 				</p:commandButton>
 				
-				<p:commandButton icon="icn_item_results" title="Calificar" action="#{cetproDocenteList.goNota}" ajax="false">
+				<p:commandButton icon="icn_item_results" title="Calificar" action="#{cetproDocenteList.goNota}" ajax="false" rendered="#{item.estado ne 5}">
 					<f:setPropertyActionListener value="#{item}" target="#{cetproDocenteList.beanSelected}" />				
 				</p:commandButton>
 				
-				<p:commandButton icon="icn_item_sillabo"  action="#{cetproDocenteList.goCt}"	title="Capacidades Terminales" ajax="false">
+				<p:commandButton icon="icn_item_sillabo"  action="#{cetproDocenteList.goCt}"	title="Capacidades Terminales" ajax="false" rendered="#{item.estado ne 5}">
 					<f:setPropertyActionListener value="#{item}" target="#{cetproDocenteList.beanSelected}" />
 				</p:commandButton>
 				
+				<p:commandButton icon="icn_item_goal" title="Finalizar Curso" oncomplete="dialogUsrDel.show()"  rendered="#{item.estado ne 5}">
+					<f:setPropertyActionListener value="#{item}" target="#{cetproDocenteList.beanSelected}" />
+				</p:commandButton>
         	</p:column>      
 		</p:dataTable> 
-	</h:form>
+	</h:form> 
 		
-	
+	<!-- Finalizar Curso -->
+		<p:confirmDialog widgetVar="dialogUsrDel" width="350" appendToBody="true"
+			header="Mensaje de Confirmación" message="¿Está seguro de finalizar el curso?" style="font-size:13px;"
+        	closable="true" severity="alert" closeOnEscape="true">
+        	<h:form>	
+			<h:panelGroup style="text-align: right;" >
+				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogUsrDel.hide()"  actionListener="#{cetproDocenteList.goFinalizar}" update=":frmList"/>
+        		<p:commandButton value="No" id="cancelButton" onclick="dialogUsrDel.hide()"/>   
+			</h:panelGroup>
+			</h:form>	
+   		</p:confirmDialog>
    		
     </ui:define>
 </ui:composition>
