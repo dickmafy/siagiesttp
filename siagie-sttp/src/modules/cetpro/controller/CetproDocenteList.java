@@ -28,6 +28,7 @@ import modules.admision.domain.Matricula;
 import modules.admision.domain.MatriculaSeccion;
 import modules.admision.domain.Proceso;
 import modules.admision.domain.Requisitos;
+import modules.cetpro.domain.CetproAsistencia;
 import modules.cetpro.domain.CetproMatricula;
 import modules.cetpro.domain.CetproMatriculaAlumno;
 import modules.cetpro.domain.CetproMatriculaFecha;
@@ -48,6 +49,7 @@ import modules.seguridad.domain.Usuario;
 import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
 import com.belogick.factory.util.helper.DateHelper;
+import com.lowagie.text.pdf.AcroFields.Item;
 
 import dataware.service.AdmisionService;
 
@@ -120,17 +122,6 @@ public class CetproDocenteList extends GenericController
 	public void init() throws Exception
 	{init(-1L);}
 	
-	public void goPublicar() throws Exception
-	{
-		CetproMatricula bean = (CetproMatricula)getBeanSelected();
-		bean = (CetproMatricula) myService.findByObject(bean);
-		bean.setEstado(3L);
-		myService.save(bean);
-		setMessageSuccess("Se Publico la Matricula.");
-		
-	}
-	
-	
 	
 	@Override
 	public void afterNew() throws Exception {
@@ -157,21 +148,15 @@ public class CetproDocenteList extends GenericController
     	bean=null;
 	}
 	
-	
-
 	public void goAsistencia() throws Exception 
 	{
 		CetproMatricula bean = (CetproMatricula)getBeanSelected();	
 		CetproDocenteListFecha go = (CetproDocenteListFecha)getSpringBean("cetproDocenteListFecha");
 		go.init(bean);
 		
-		
-		
 	}
 	
 	public void goNota()throws Exception{
-		
-		
 		
 		SilaboCronograma silaboCronograma = obtenerSilaboCronograma();    	
 		silaboCronograma = (SilaboCronograma) myService.findByObject(silaboCronograma);
@@ -182,6 +167,49 @@ public class CetproDocenteList extends GenericController
 		proceso.setProceso(this.proceso);
 		proceso = (Proceso) myService.findByObject(proceso);
 		go.init((Seccion)getBeanSelected(),proceso,silaboCronograma);
+	}
+	
+	public void goFinalizar() throws Exception
+	{
+		if(validarFinalizacion())
+		{
+			CetproMatricula bean = (CetproMatricula)getBeanSelected();
+			bean.setEstado(5L);
+			myService.save(bean);
+			setMessageSuccess("Se ha finalizado el curso exitósamente.");
+			defaultList();
+		}
+		
+	}
+	
+	private Boolean validarFinalizacion() throws Exception
+	{
+		boolean success = true;
+		Date fechaHoy = new Date();
+		CetproMatricula bean = (CetproMatricula)getBeanSelected();
+		CetproMatriculaFecha fecha = new CetproMatriculaFecha();
+		List<CetproMatriculaFecha> fechas = new ArrayList<CetproMatriculaFecha>();
+		fecha.setPk_cetpro_matricula(bean.getId());
+
+		fechas = myService.listByObject(fecha);
+		
+		for (CetproMatriculaFecha item : fechas) {
+			
+			if(item.getFecha().compareTo(fechaHoy)>0)
+			{
+				setMessageError("No se puede finalizar el curso antes del último día de clase.");
+				return false;
+			}
+			fecha=item;
+		}
+		
+		if(fecha.getEstado()!=2L)
+		{
+			setMessageError("Debe ingresar la asistencia de todas los días de clase.");
+			return false;
+		}
+		
+		return success;
 	}
 	
 	private SilaboCronograma obtenerSilaboCronograma() {

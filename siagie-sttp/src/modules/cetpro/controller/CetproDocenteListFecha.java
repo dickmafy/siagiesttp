@@ -87,16 +87,11 @@ public class CetproDocenteListFecha extends GenericController
 	@Override
 	public void defaultList() throws Exception
 	{
-
-
-		
 		CetproMatriculaFecha scal = new CetproMatriculaFecha();
 		scal.setPk_cetpro_matricula(cetproMatricula.getId());
 
 		setBeanList(myService.listByObject(scal));
 				
-				
-		
 	}
 	
 	public void goAlumno()throws Exception
