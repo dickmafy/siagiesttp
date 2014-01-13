@@ -36,7 +36,7 @@ public class CetproMatricula implements Serializable
 	private String nombreDocente;
 	private String nombreTurno;
 	private String nombreEstado;
-	
+	private Long profesion;
 	 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -182,6 +182,12 @@ public class CetproMatricula implements Serializable
 		else if(estado.longValue()==3L) {return "PUBLICADO";}		
 		if(estado.longValue()==5L)		{return "FINALIZADO";}
 		return "";
+	}
+	public Long getProfesion() {
+		return profesion;
+	}
+	public void setProfesion(Long profesion) {
+		this.profesion = profesion;
 	}
 	
 }
