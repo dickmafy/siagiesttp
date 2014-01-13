@@ -696,6 +696,7 @@ public class AdmisionDaoJpa extends HorarioDaoJpa implements AdmisionDao
 		query=null;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public List<CetproMatricula> listarUnidadesCetpro(Long anno,Long modulo) throws Exception
 	{
 		dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -724,6 +725,7 @@ public class AdmisionDaoJpa extends HorarioDaoJpa implements AdmisionDao
 			if(objetos[11]!=null){field.setAnno(Long.parseLong(objetos[11].toString()));}
 			if(objetos[12]!=null){field.setTurno(Long.parseLong(objetos[12].toString()));}
 			if(objetos[13]!=null){field.setEstado(Long.parseLong(objetos[13].toString()));}
+			if(objetos[14]!=null){field.setProfesion(Long.parseLong(objetos[14].toString()));}
 						
 			lista.add(field);
 		}
@@ -824,7 +826,8 @@ public class AdmisionDaoJpa extends HorarioDaoJpa implements AdmisionDao
 			if(objetos[11]!=null){field.setAnno(Long.parseLong(objetos[11].toString()));}
 			if(objetos[12]!=null){field.setTurno(Long.parseLong(objetos[12].toString()));}
 			if(objetos[13]!=null){field.setEstado(Long.parseLong(objetos[13].toString()));}
-						
+			if(objetos[14]!=null){field.setProfesion(Long.parseLong(objetos[14].toString()));}
+			
 			lista.add(field);
 		}
 		dateFormat=null;

@@ -13,6 +13,7 @@ import dataware.service.IntranetService;
 import modules.administracion.domain.MetaInstitucional;
 import modules.admision.domain.Matricula;
 import modules.admision.domain.Proceso;
+import modules.cetpro.domain.CetproCt;
 import modules.cetpro.domain.CetproMatricula;
 import modules.horario.domain.Seccion;
 import modules.horario.domain.SilaboCronograma;
@@ -46,41 +47,38 @@ public class CetproDocenteListCt extends GenericController
 	private int notas[][];
 	
 	private int numbCapTerminales;
-	private CetproMatricula obtenerSilaboCronograma;
+	private CetproMatricula cetproMatricula;
 
 	
-	public void init(Seccion pseccion,Proceso proceso, CetproMatricula pobtenerSilaboCronograma) throws Exception 
+	public void init(CetproMatricula pCetproMatricula) throws Exception 
 	{
 		
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
 		appName="Intranet Docente";
 		moduleName="Notas";
 		userName=usr.getUsuario();
-		meta=pseccion.getMeta();
-		seccion=pseccion.getId();
-		docente=pseccion.getDocente();
-		unidad=pseccion.getValorUnidad();
-		modulo=1L;
-		profesion=101L;
+		docente = usr.getPertenencia();
+		
+	
 		nombreUnidad= "Prueba";
-		this.proceso = proceso;
 		
-		obtenerSilaboCronograma =  pobtenerSilaboCronograma;
 		
-		MetaInstitucional met = (MetaInstitucional) myService.findById(MetaInstitucional.class, meta);		
-		annio=met.getAnnio();
-		process=met.getProceso();
+		cetproMatricula =  pCetproMatricula;
+		
+				
+		annio=pCetproMatricula.getAnno();
 		
 		page_main="cetproDocenteListCt";
 		numbCapTerminales = 3;
 		//defaultList();		
 		forward(page_main);
 		optionCriterios();
+		listarCT();
 	}
 	
 	public void optionCriterios() throws Exception
 	{
-		List<ReferenteEducativo> educativoList=myService.listarReferenteEducativo(profesion, 0, 1L);
+		List<ReferenteEducativo> educativoList=myService.listarReferenteEducativo(cetproMatricula.getProfesion(), 0, 1L);
 		criteriosList=new ArrayList<ReferenteEducativo>();
 		
 		for(int i=0; i<educativoList.size(); i++)
@@ -90,9 +88,9 @@ public class CetproDocenteListCt extends GenericController
 		}
 		educativoList=null;
 		
-		filtrarModulo(criteriosList,modulo);
+		filtrarModulo(criteriosList,cetproMatricula.getPk_modulo());
 		
-		forward("DocenteSilaboCT");
+		forward("cetproDocenteListCt");
 	}
 	
 	public void filtrarModulo(List<ReferenteEducativo> educativoList, Long modulo) throws Exception
@@ -100,7 +98,7 @@ public class CetproDocenteListCt extends GenericController
 		ArrayList<ReferenteEducativo> filtro=new ArrayList<ReferenteEducativo>();	
 		for (ReferenteEducativo item : educativoList) 
 		{
-			if(item.getNivelA() == modulo)
+			//if(item.getNivelA() == modulo)  //diego : verificar esta validacion despues
 			{filtro.add(item);}						
 		}
 		
@@ -110,14 +108,7 @@ public class CetproDocenteListCt extends GenericController
 	@Override
 	public void defaultList() throws Exception
 	{
-		/*Criteria criteria = JPAPersistenceUtil.getSession().createCriteria(Matricula.class);
-		criteria.add(Expression.eq("estado",4))
-		.add(Expression.eq("estado",seccionObject.));*/
-		
-		List<Matricula> matriculas = myService.listarAlumnosSeccion(meta, unidad, seccion, docente);
-		notas = new int[matriculas.size()][numbCapTerminales];
-		setBeanList(matriculas);
-		
+				
 		
 	}
 
@@ -139,8 +130,8 @@ public class CetproDocenteListCt extends GenericController
 		
 		for (ReferenteEducativo item : criteriosList) {
 			if(item.getCheck()){
-				SilaboUnidadCt ct = new SilaboUnidadCt();
-				ct.setPk_silabo_cronograma(obtenerSilaboCronograma.getId());
+				CetproCt ct = new CetproCt();
+				ct.setPk_cetpro_matricula(cetproMatricula.getId());
 				ct.setPk_ct(item.getId());
 				ct.setPrioridad(1L);
 				ct.setEstado(1L);
@@ -148,7 +139,7 @@ public class CetproDocenteListCt extends GenericController
 			}
 		}
 		
-		SilaboCronograma bean = (SilaboCronograma)myService.findByObject(obtenerSilaboCronograma);
+		CetproMatricula bean = (CetproMatricula)myService.findByObject(cetproMatricula);
 		bean.setEstado(2L);
 		myService.save(bean); 
 		
@@ -157,30 +148,13 @@ public class CetproDocenteListCt extends GenericController
 		forward("cetproDocenteList");
 	}
 
-	
-	public IntranetService getMyService() 													{return myService;}
-	public void setMyService(IntranetService myService) 									{this.myService = myService;}
+	public IntranetService getMyService() {
+		return myService;
+	}
 
-	public List<ReferenteEducativo> getCriteriosList() 										{return criteriosList;}
-	public void setCriteriosList(List<ReferenteEducativo> criteriosList) 					{this.criteriosList = criteriosList;}
-
-	public String getNombreUnidad() 													{return nombreUnidad;}
-	public void setNombreUnidad(String nombreUnidad) 									{this.nombreUnidad = nombreUnidad;}
-
-	public List<SelectItem> getModuloProfesionalList() 									{return moduloProfesionalList;}
-	public void setModuloProfesionalList(List<SelectItem> moduloProfesionalList) 		{this.moduloProfesionalList = moduloProfesionalList;}
-
-	public List<SelectItem> getCapacidadProfesionalList() 								{return capacidadProfesionalList;}
-	public void setCapacidadProfesionalList(List<SelectItem> capacidadProfesionalList) 	{this.capacidadProfesionalList = capacidadProfesionalList;}
-
-	public List<SelectItem> getModuloTransversalList() 									{return moduloTransversalList;}
-	public void setModuloTransversalList(List<SelectItem> moduloTransversalList) 		{this.moduloTransversalList = moduloTransversalList;}
-	
-	public List<SelectItem> getCapacidadTransversalList() 								{return capacidadTransversalList;}
-	public void setCapacidadTransversalList(List<SelectItem> capacidadTransversalList) 	{this.capacidadTransversalList = capacidadTransversalList;}
-	
-	public Long getTipo() 																{return tipo;}
-	public void setTipo(Long tipo) 														{this.tipo = tipo;}
+	public void setMyService(IntranetService myService) {
+		this.myService = myService;
+	}
 
 	public AdmisionService getMyServiceAdmision() {
 		return myServiceAdmision;
@@ -188,6 +162,72 @@ public class CetproDocenteListCt extends GenericController
 
 	public void setMyServiceAdmision(AdmisionService myServiceAdmision) {
 		this.myServiceAdmision = myServiceAdmision;
+	}
+
+	public List<ReferenteEducativo> getCriteriosList() {
+		return criteriosList;
+	}
+
+	public void setCriteriosList(List<ReferenteEducativo> criteriosList) {
+		this.criteriosList = criteriosList;
+	}
+
+	public List<ReferenteEducativo> getCriteriosListCt() {
+		return criteriosListCt;
+	}
+
+	public void setCriteriosListCt(List<ReferenteEducativo> criteriosListCt) {
+		this.criteriosListCt = criteriosListCt;
+	}
+
+	public List<String> getSelectCapacidades() {
+		return selectCapacidades;
+	}
+
+	public void setSelectCapacidades(List<String> selectCapacidades) {
+		this.selectCapacidades = selectCapacidades;
+	}
+
+	public List<SelectItem> getModuloProfesionalList() {
+		return moduloProfesionalList;
+	}
+
+	public void setModuloProfesionalList(List<SelectItem> moduloProfesionalList) {
+		this.moduloProfesionalList = moduloProfesionalList;
+	}
+
+	public List<SelectItem> getCapacidadProfesionalList() {
+		return capacidadProfesionalList;
+	}
+
+	public void setCapacidadProfesionalList(
+			List<SelectItem> capacidadProfesionalList) {
+		this.capacidadProfesionalList = capacidadProfesionalList;
+	}
+
+	public List<SelectItem> getModuloTransversalList() {
+		return moduloTransversalList;
+	}
+
+	public void setModuloTransversalList(List<SelectItem> moduloTransversalList) {
+		this.moduloTransversalList = moduloTransversalList;
+	}
+
+	public List<SelectItem> getCapacidadTransversalList() {
+		return capacidadTransversalList;
+	}
+
+	public void setCapacidadTransversalList(
+			List<SelectItem> capacidadTransversalList) {
+		this.capacidadTransversalList = capacidadTransversalList;
+	}
+
+	public Long getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Long tipo) {
+		this.tipo = tipo;
 	}
 
 	public Long getSeccion() {
@@ -212,47 +252,6 @@ public class CetproDocenteListCt extends GenericController
 
 	public void setProfesion(Long profesion) {
 		this.profesion = profesion;
-	}
-
-	public Seccion getSeccionObject() {
-		return seccionObject;
-	}
-
-	public void setSeccionObject(Seccion seccionObject) {
-		this.seccionObject = seccionObject;
-	}
-
-	public Proceso getProceso() {
-		return proceso;
-	}
-
-	public void setProceso(Proceso proceso) {
-		this.proceso = proceso;
-	}
-
-	public int[][] getNotas() {
-		return notas;
-	}
-
-	public void setNotas(int[][] notas) {
-		this.notas = notas;
-	}
-	public List<String> getSelectCapacidades() {
-		return selectCapacidades;
-	}
-
-	public void setSelectCapacidades(List<String> selectCapacidades) {
-		this.selectCapacidades = selectCapacidades;
-	}
-
-
-	
-	public List<ReferenteEducativo> getCriteriosListCt() {
-		return criteriosListCt;
-	}
-
-	public void setCriteriosListCt(List<ReferenteEducativo> criteriosListCt) {
-		this.criteriosListCt = criteriosListCt;
 	}
 
 	public Long getMeta() {
@@ -295,6 +294,38 @@ public class CetproDocenteListCt extends GenericController
 		this.process = process;
 	}
 
+	public Proceso getProceso() {
+		return proceso;
+	}
+
+	public void setProceso(Proceso proceso) {
+		this.proceso = proceso;
+	}
+
+	public String getNombreUnidad() {
+		return nombreUnidad;
+	}
+
+	public void setNombreUnidad(String nombreUnidad) {
+		this.nombreUnidad = nombreUnidad;
+	}
+
+	public Seccion getSeccionObject() {
+		return seccionObject;
+	}
+
+	public void setSeccionObject(Seccion seccionObject) {
+		this.seccionObject = seccionObject;
+	}
+
+	public int[][] getNotas() {
+		return notas;
+	}
+
+	public void setNotas(int[][] notas) {
+		this.notas = notas;
+	}
+
 	public int getNumbCapTerminales() {
 		return numbCapTerminales;
 	}
@@ -303,17 +334,14 @@ public class CetproDocenteListCt extends GenericController
 		this.numbCapTerminales = numbCapTerminales;
 	}
 
-	public CetproMatricula getObtenerSilaboCronograma() {
-		return obtenerSilaboCronograma;
+	public CetproMatricula getCetproMatricula() {
+		return cetproMatricula;
 	}
 
-	public void setObtenerSilaboCronograma(CetproMatricula obtenerSilaboCronograma) {
-		this.obtenerSilaboCronograma = obtenerSilaboCronograma;
+	public void setCetproMatricula(CetproMatricula cetproMatricula) {
+		this.cetproMatricula = cetproMatricula;
 	}
 
-
-
-	
-	
+		
 	
 } 
