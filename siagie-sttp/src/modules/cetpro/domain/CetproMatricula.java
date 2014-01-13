@@ -178,8 +178,8 @@ public class CetproMatricula implements Serializable
 		if(estado.longValue()<0L)		{return "DESHABILITADO";}
 		if(estado.longValue()==1L)		{return "PENDIENTE CREACIÓN FECHAS";}
 		if(estado.longValue()==2L)		{return "PRE-PUBLICADO";}
-		if(estado.longValue()==3L)		{return "PUBLICADO";}
-		if(estado.longValue()==4L)		{return "EN CURSO";}
+		if(estado.longValue()==3L && fecha_ini.compareTo(new Date())<=0) {return "EN CURSO";}	 										
+		else if(estado.longValue()==3L) {return "PUBLICADO";}		
 		if(estado.longValue()==5L)		{return "FINALIZADO";}
 		return "";
 	}
