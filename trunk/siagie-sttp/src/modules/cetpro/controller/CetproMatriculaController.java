@@ -120,13 +120,24 @@ public class CetproMatriculaController extends GenericController
 	{init(-1L);}
 	
 	public void goPublicar() throws Exception
-	{
+	{	
 		CetproMatricula bean = (CetproMatricula)getBeanSelected();
-		bean = (CetproMatricula) myService.findByObject(bean);
+		CetproMatriculaFecha fecha = new CetproMatriculaFecha();
+		List<CetproMatriculaFecha> fechas = new ArrayList<CetproMatriculaFecha>();
+		fecha.setPk_cetpro_matricula(bean.getId());
+
+		fechas = myService.listByObject(fecha);		
+		fecha = fechas.get(fechas.size()-1);	
+		bean.setFecha_ini(fecha.getFecha());
+		fecha = fechas.get(0);
+		bean.setFecha_fin(fecha.getFecha());
+		
 		bean.setEstado(3L);
 		myService.save(bean);
-		setMessageSuccess("Se Publico la Matricula.");
+		
+		setMessageSuccess("Se Publicó la Matricula.");
 		defaultList();
+		
 	}
 	
 	
