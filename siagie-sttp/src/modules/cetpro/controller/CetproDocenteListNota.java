@@ -53,7 +53,6 @@ public class CetproDocenteListNota extends GenericController
 	private CetproMatricula cetproMatricula;
 	private List <CetproMatriculaAlumno> listSilaboAlumno;
 	
-	
 	public void init(CetproMatricula pCeproMatricula) throws Exception 
 	{
 		
@@ -71,11 +70,7 @@ public class CetproDocenteListNota extends GenericController
 		profesion=101L; 
 		nombreUnidad= "Prueba";
 		
-		
 		cetproMatricula =  pCeproMatricula;
-		
-		
-		
 		
 		numbCapTerminales = 3;
 		defaultList();		
@@ -132,6 +127,7 @@ public class CetproDocenteListNota extends GenericController
 	public void listarAlumnos() throws Exception{
 		
 		CetproMatriculaAlumno silaboAlumno = new CetproMatriculaAlumno();
+		silaboAlumno.setPk_cetpro_matricula(cetproMatricula.getId());
 		listSilaboAlumno = myService.listByObject(silaboAlumno);
 		
 		for (CetproMatriculaAlumno item : listSilaboAlumno) {
