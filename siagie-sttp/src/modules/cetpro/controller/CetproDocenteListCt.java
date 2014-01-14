@@ -128,23 +128,24 @@ public class CetproDocenteListCt extends GenericController
 	
 	public void guardarCT() throws Exception {
 		
-		for (ReferenteEducativo item : criteriosList) {
-			if(item.getCheck()){
-				CetproCt ct = new CetproCt();
-				ct.setPk_cetpro_matricula(cetproMatricula.getId());
-				ct.setPk_ct(item.getId());
-				ct.setPrioridad(1L);
-				ct.setEstado(1L);
-				myService.save(ct);
+		try {
+			for (ReferenteEducativo item : criteriosList) {
+				if(item.getCheck()){
+					CetproCt ct = new CetproCt();
+					ct.setPk_cetpro_matricula(cetproMatricula.getId());
+					ct.setPk_ct(item.getId());
+					ct.setPrioridad(1L);
+					ct.setEstado(1L);
+					myService.save(ct);
+				}
 			}
+			
+			
+			status(cetproMatricula, 2L);
+			setMessageSuccess("Capacidades Guardadas.");
+		} catch (Exception e) {
+			
 		}
-		
-		CetproMatricula bean = (CetproMatricula)myService.findByObject(cetproMatricula);
-		bean.setEstado(2L);
-		myService.save(bean); 
-		
-		
-		
 		forward("cetproDocenteList");
 	}
 

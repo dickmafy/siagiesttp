@@ -21,15 +21,15 @@
   		
   				
       	<p:spacer height="4px"/>
-      	  
-    	   		<p:selectOneMenu  value="#{cetproDocenteListNota.pk_unidad_ctSeleccionado}" filter="true" filterMatchMode="startsWith" >
+      	  xxxxxxxxxxxx
+    	   		<p:selectOneMenu  value="#{cetproDocenteListNota.pk_ct}" filter="true" filterMatchMode="startsWith" >
 					<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
-					<f:selectItems value="#{cetproDocenteListNota.listarCT}" var="item" itemValue="#{item.ctSilaboUnidadCt.id}" itemLabel="CT: #{item.referenteEducativo.descripcion}"/>
+					<f:selectItems value="#{cetproDocenteListNota.criteriosList}" var="item" itemValue="#{item.id}" itemLabel="CT: #{item.descripcion}"/>
 					<p:ajax update="frmNew:dt_notasFecha" listener="#{cetproDocenteListNota.reloadNotas}"></p:ajax>
 				</p:selectOneMenu>
 				
 				
-			<p:dataTable id="dt_notasFecha" var="item" value="#{cetproDocenteListNota.beanList}" 
+			<p:dataTable id="dt_notasFecha" var="item" value="#{cetproDocenteListNota.listSilaboAlumno}" 
 	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
 	     		
 	     		<p:columnGroup type="header">  
@@ -49,19 +49,19 @@
 		        </p:columnGroup>
         
 				<p:column>   
-					<h:outputText value="#{item.persona.apellido_paterno}" />					  
+					<h:outputText value="#{item.alumno_apepat}" />					  
 				</p:column>
 				
 				<p:column>   
-					<h:outputText value="#{item.persona.apellido_materno}" />					  
+					<h:outputText value="#{item.alumno_apemat}" />					  
 				</p:column>
 	     		
 	     		<p:column>   
-					<h:outputText value="#{item.persona.nombres}" />					  
+					<h:outputText value="#{item.alumno_nom_completo}" />					  
 				</p:column>
 				
 				<p:column >  
-	                   <p:inputText  value="#{item.nota}"  maxlength="4" style="width:40px; background-color : #{item.nota lt 13 ? '#F78181' : '#81F781' }" >
+	                   <p:inputText  value="item.nota"  maxlength="4" >
 	                   </p:inputText>
 				</p:column>
 		       	    
