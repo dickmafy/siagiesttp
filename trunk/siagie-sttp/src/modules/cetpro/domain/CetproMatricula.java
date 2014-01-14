@@ -183,6 +183,8 @@ public class CetproMatricula implements Serializable
 		if(estado.longValue()==5L)		{return "FINALIZADO";}
 		return "";
 	}
+	
+	@Transient
 	public Long getProfesion() {
 		return profesion;
 	}

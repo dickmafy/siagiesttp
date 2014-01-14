@@ -158,15 +158,9 @@ public class CetproDocenteList extends GenericController
 	
 	public void goNota()throws Exception{
 		
-		SilaboCronograma silaboCronograma = obtenerSilaboCronograma();    	
-		silaboCronograma = (SilaboCronograma) myService.findByObject(silaboCronograma);
-		
-		DocenteSilaboNota go = (DocenteSilaboNota)getSpringBean("docenteSilaboNota");
-		Proceso proceso = new Proceso();
-		proceso.setAnnio(annio);
-		proceso.setProceso(this.proceso);
-		proceso = (Proceso) myService.findByObject(proceso);
-		go.init((Seccion)getBeanSelected(),proceso,silaboCronograma);
+		CetproMatricula silaboCronograma = (CetproMatricula)getBeanSelected();    	
+		CetproDocenteListNota go = (CetproDocenteListNota)getSpringBean("cetproDocenteListNota");
+		go.init(silaboCronograma);
 	}
 	
 	public void goFinalizar() throws Exception
@@ -212,19 +206,7 @@ public class CetproDocenteList extends GenericController
 		return success;
 	}
 	
-	private SilaboCronograma obtenerSilaboCronograma() {
-		Seccion bean = (Seccion)getBeanSelected();
-		SilaboCronograma silaboCronograma =new SilaboCronograma();
-		
-		silaboCronograma.setPk_meta(bean.getMeta());
-    	silaboCronograma.setContenido("-");
-    	silaboCronograma.setPk_unidad(bean.getValorUnidad());
-    	silaboCronograma.setPk_seccion(bean.getId());
-    	silaboCronograma.setPk_docente(bean.getDocente());
-    	silaboCronograma.setEstado(bean.getEstadoSilabo());
-		return silaboCronograma;
-	}
-	
+
 	public void goCt()throws Exception{
 		CetproMatricula silaboCronograma = (CetproMatricula)getBeanSelected();
     	silaboCronograma.setPk_docente(docente);
