@@ -73,8 +73,8 @@ public class AdminInstitucion extends GenericController
 		forward(page_main);
 		flag=false;
 		
-		setUrlRpt("/modulos/reportes/pdf/NOMINA.pdf"); // Codigo Ericson Huamaní
-		nombreUsuario=usr.getNombres(); // Codigo Ericson Huamaní
+		setUrlRpt("/modulos/reportes/pdf/NOMINA.pdf"); // Codigo Ericson Huamanï¿½
+		nombreUsuario=usr.getNombres(); // Codigo Ericson Huamanï¿½
 	}
 		
 	@Override
@@ -137,17 +137,17 @@ public class AdminInstitucion extends GenericController
 		
 		if(!validateSelect(object.getFormacion()))
 		{
-			setMessageError("Debe ingresar el Centro de formación.");			
+			setMessageError("Debe ingresar el Centro de formacion.");			
 			success = false;
 		}
 		else if(!validateSelect(object.getResolcre()))
 		{
-			setMessageError("Debe seleccionar la Resolución de Creación.");			
+			setMessageError("Debe seleccionar la Resolucion de Creacion.");			
 			success = false;
 		}
 		else if(!validateSelect(object.getGestion()))
 		{
-			setMessageError("Debe ingresar el tipo de Gestión.");			
+			setMessageError("Debe ingresar el tipo de Gestion.");			
 			success = false;
 		}
 		else if(!validateEmpty(object.getCodigo()))
@@ -157,7 +157,7 @@ public class AdminInstitucion extends GenericController
 		}
 		else if(!validateEmpty(object.getNombre()))
 		{
-			setMessageError("Debe ingresar el Nombre de la Institución.");			
+			setMessageError("Debe ingresar el Nombre de la Institucion.");			
 			success = false;
 		}
 		else if(!validateEmpty(object.getRuc()))
@@ -167,32 +167,32 @@ public class AdminInstitucion extends GenericController
 		}
 		else if(flag && !validateSelect(provincia))
 		{
-			setMessageError("Debe seleccionar la Provincia de la Dirección de la Institución.");			
+			setMessageError("Debe seleccionar la Provincia de la Direccion de la Institucion.");			
 			success = false;
 		}
 		else if(flag && !validateSelect(departamento))
 		{
-			setMessageError("Debe seleccionar el Departamento de la Dirección de la Institución.");			
+			setMessageError("Debe seleccionar el Departamento de la Direccion de la Institucion.");			
 			success = false;
 		}
 		else if(flag && !validateSelect(beanLocal.getUbigeo()))
 		{
-			setMessageError("Debe seleccionar el Distrito de la Dirección de la Institución.");			
+			setMessageError("Debe seleccionar el Distrito de la Direccion de la Institucion.");			
 			success = false;
 		}
 		else if(flag && !validateEmpty(beanLocal.getDireccion()))
 		{
-			setMessageError("Debe ingresar la dirección de la Institución.");			
+			setMessageError("Debe ingresar la direccion de la Institucion.");			
 			success = false;
 		}
 		else if(flag && !validateEmpty(beanPersona.getCodigo()))
 		{
-			setMessageError("Debe ingresar el Código Modular del Encargado.");			
+			setMessageError("Debe ingresar el Codigo Modular del Encargado.");			
 			success = false;
 		}
 		else if(flag && !validateEmpty(beanPersona.getDni()))
 		{
-			setMessageError("Debe ingresar el número de DNI del Encargado.");			
+			setMessageError("Debe ingresar el numero de DNI del Encargado.");			
 			success = false;
 		}
 		else if(flag && !validateEmpty(beanPersona.getNombres()))
@@ -330,7 +330,7 @@ public class AdminInstitucion extends GenericController
 		this.urlRpt = urlRpt;
 	}
 	
-	// Inicio Codigo Ericson Huamaní 19-12-2013 11:00
+	// Inicio Codigo Ericson Huamanï¿½ 19-12-2013 11:00
 			@SuppressWarnings("unchecked")
 			public void generarReporte(ActionEvent evt) {			
 					try {
@@ -373,5 +373,5 @@ public class AdminInstitucion extends GenericController
 					}
 			}
 
-			// Fin codigo Ericson Huamaní
+			// Fin codigo Ericson Huamanï¿½
 } 
