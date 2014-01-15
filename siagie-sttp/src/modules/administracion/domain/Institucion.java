@@ -111,7 +111,7 @@ public class Institucion implements Serializable
 	public String getNombreGestion() 
 	{
 		if(gestion==null)			return "";
-		if(gestion.longValue()==1L)	return "PÚBLICA";
+		if(gestion.longValue()==1L)	return "PUBLICA";
 		if(gestion.longValue()==2L)	return "PRIVADA";
 		if(gestion.longValue()==3L)	return "POR CONVENIO";
 		return "";
