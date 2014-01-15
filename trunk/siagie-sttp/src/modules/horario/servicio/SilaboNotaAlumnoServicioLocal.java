@@ -9,6 +9,8 @@ import com.aprolab.sicad.persistence.JPAPersistenceUtil;
 import com.belogick.factory.util.support.ServiceException;
 
 import modules.admision.domain.Persona;
+import modules.cetpro.domain.CetproMatriculaAlumno;
+import modules.cetpro.domain.CetproNota;
 import modules.horario.domain.SilaboAlumno;
 import modules.horario.domain.SilaboNotaAlumno;
 
@@ -56,5 +58,24 @@ public class SilaboNotaAlumnoServicioLocal {
 	}
 	
 	
+	//cetpro
+	public static CetproNota getSilaboNotaAlumnoCetpro(Long pk_alumno,Long pk_unidad_ct) throws ServiceException{
+		
+		CetproNota result = (CetproNota) JPAPersistenceUtil.getSession().createCriteria(CetproNota.class)
+				.add(Expression.eq("pk_silabo_alumno",pk_alumno))
+				.add(Expression.eq("pk_unidad_ct",pk_unidad_ct)).uniqueResult();
+		
+		if (result!=null) return result;
+		
+		
+		result = new CetproNota();
+		result.setPk_cetpro_matricula_alumno(pk_alumno);
+		result.setPk_cetpro_ct(pk_unidad_ct);
+		result.setEstado(1L);
+		result.setNota(0.0);
+		JPAPersistenceUtil.getSession().save(result);
+		return result; 
+	}
+
 	
 }

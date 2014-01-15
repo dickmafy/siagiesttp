@@ -8,43 +8,50 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cetpro.m_matricula_cetpro")
+@Table(name="cetpro.m_nota")
 public class CetproNota implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
 	private Long 	id;
-	private Long 	pk_silabo_oferta;
-	private Long 	pk_persona;
+	private Long 	pk_cetpro_matricula_alumno;
+	private Long 	pk_cetpro_ct;
+	private Double 	nota;
 	private Long 	estado;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="pk_silabo_matricula")
+	@Column(name="pk_nota")
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public Long getPk_cetpro_matricula_alumno() {
+		return pk_cetpro_matricula_alumno;
+	}
+	public void setPk_cetpro_matricula_alumno(Long pk_cetpro_matricula_alumno) {
+		this.pk_cetpro_matricula_alumno = pk_cetpro_matricula_alumno;
+	}
+	public Long getPk_cetpro_ct() {
+		return pk_cetpro_ct;
+	}
+	public void setPk_cetpro_ct(Long pk_cetpro_ct) {
+		this.pk_cetpro_ct = pk_cetpro_ct;
+	}
 	
-	public Long getPk_silabo_oferta() {
-		return pk_silabo_oferta;
-	}
-	public void setPk_silabo_oferta(Long pk_silabo_oferta) {
-		this.pk_silabo_oferta = pk_silabo_oferta;
-	}
-	public Long getPk_persona() {
-		return pk_persona;
-	}
-	public void setPk_persona(Long pk_persona) {
-		this.pk_persona = pk_persona;
-	}
 	public Long getEstado() {
 		return estado;
 	}
 	public void setEstado(Long estado) {
 		this.estado = estado;
+	}
+	public Double getNota() {
+		return nota;
+	}
+	public void setNota(Double nota) {
+		this.nota = nota;
 	}
 
 	

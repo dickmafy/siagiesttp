@@ -21,7 +21,6 @@
   		
   				
       	<p:spacer height="4px"/>
-      	  xxxxxxxxxxxx
     	   		<p:selectOneMenu  value="#{cetproDocenteListNota.pk_ct}" filter="true" filterMatchMode="startsWith" style="width:500px;">
 					<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
 					<f:selectItems value="#{cetproDocenteListNota.criteriosList}" var="item" itemValue="#{item.id}" itemLabel="CT: #{item.descripcion}"/>
@@ -39,11 +38,9 @@
 		            </p:row>  
 		  
 		            <p:row>
-		            
 		            	<p:column headerText="Apellido Paterno" />
 		            	<p:column headerText="Apellido Materno" />
 		            	<p:column headerText="Nombres" />
-		            	
 		            </p:row>
 		              
 		        </p:columnGroup>
@@ -57,7 +54,7 @@
 				</p:column>
 	     		
 	     		<p:column>   
-					<h:outputText value="#{item.alumno_nom_completo}" />					  
+					<h:outputText value="#{item.alumno_nom}" />					  
 				</p:column>
 				
 				<p:column >  

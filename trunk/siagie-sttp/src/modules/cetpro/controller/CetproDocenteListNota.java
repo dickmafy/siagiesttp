@@ -18,9 +18,14 @@ import modules.cetpro.domain.CetproAsistencia;
 import modules.cetpro.domain.CetproMatricula;
 import modules.cetpro.domain.CetproMatriculaAlumno;
 import modules.cetpro.domain.CetproMatriculaFecha;
+import modules.cetpro.domain.CetproNota;
 import modules.horario.domain.Seccion;
 import modules.horario.domain.SilaboCronograma;
+import modules.horario.domain.SilaboNotaAlumno;
 import modules.horario.domain.SilaboUnidadCt;
+import modules.horario.servicio.PersonaAlumno;
+import modules.horario.servicio.PersonaAlumnoCetpro;
+import modules.horario.servicio.SilaboNotaAlumnoServicioLocal;
 import modules.intranet.domain.silabo_docente;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
@@ -167,27 +172,27 @@ public class CetproDocenteListNota extends GenericController
 	
 	
 	
-	public void guardarCT() throws Exception {
+	
+	@SuppressWarnings("unchecked")
+	public void guardarNotas()  throws Exception {
 		
-		for (ReferenteEducativo item : criteriosList) {
-			if(item.getCheck()){
-				SilaboUnidadCt ct = new SilaboUnidadCt();
-				ct.setPk_silabo_cronograma(cetproMatricula.getId());
-				ct.setPk_ct(item.getId());
-				ct.setPrioridad(1L);
-				ct.setEstado(1L);
-				myService.save(ct);
-			}
+		//List<PersonaAlumnoCetpro> matriculados = listSilaboAlumno;
+		List<PersonaAlumnoCetpro> matriculados = (List<PersonaAlumnoCetpro>)getBeanList(); //diego : traer la lista contas
+		
+		for (PersonaAlumnoCetpro item : matriculados) {
+			
+			CetproNota result = SilaboNotaAlumnoServicioLocal
+					.getSilaboNotaAlumnoCetpro(item.getSilaboAlumno().getId(), pk_ct);
+			
+			result.setNota(item.getNota());
+			myService.save(result);
+			result=null;
 		}
 		
-		SilaboCronograma bean = (SilaboCronograma)myService.findByObject(cetproMatricula);
-		bean.setEstado(2L);
-		myService.save(bean); 
+		forward("cetproDocenteList");
 		
-		
-		
-		//forward("DocenteSilaboList");
 	}
+
 
 	public IntranetService getMyService() {
 		return myService;
