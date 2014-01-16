@@ -86,7 +86,7 @@ public class DocenteSilaboNota extends GenericController
 			for (SilaboUnidadCt siCt : listaActual) {
 				referenteEducativo = (ReferenteEducativo) 
 						myService.findById(ReferenteEducativo.class, siCt.getPk_ct());
-				listarCT.add(new VistaReferenteEducativo(siCt, referenteEducativo));
+				listarCT.add(new VistaReferenteEducativo(siCt, referenteEducativo,null));
 			}
 		}
 		

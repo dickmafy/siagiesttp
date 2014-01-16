@@ -15,6 +15,7 @@ import modules.admision.domain.Matricula;
 import modules.admision.domain.Persona;
 import modules.admision.domain.Proceso;
 import modules.cetpro.domain.CetproAsistencia;
+import modules.cetpro.domain.CetproCt;
 import modules.cetpro.domain.CetproMatricula;
 import modules.cetpro.domain.CetproMatriculaAlumno;
 import modules.cetpro.domain.CetproMatriculaFecha;
@@ -27,6 +28,7 @@ import modules.horario.servicio.PersonaAlumno;
 import modules.horario.servicio.PersonaAlumnoCetpro;
 import modules.horario.servicio.SilaboNotaAlumnoServicioLocal;
 import modules.intranet.domain.silabo_docente;
+import modules.intranet.servicio.VistaReferenteEducativo;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
 
@@ -57,6 +59,7 @@ public class CetproDocenteListNota extends GenericController
 	private int numbCapTerminales;
 	private CetproMatricula cetproMatricula;
 	private List <CetproMatriculaAlumno> listSilaboAlumno;
+	private List<VistaReferenteEducativo> listarCT;
 	
 	public void init(CetproMatricula pCeproMatricula) throws Exception 
 	{
@@ -80,41 +83,36 @@ public class CetproDocenteListNota extends GenericController
 		numbCapTerminales = 3;
 		defaultList();		
 		forward(page_main);
-		optionCriterios();
+		llenarCapacidades();
 		
 		forward("cetproDocenteListNota");
 	}
 	
 	
 
-	public void optionCriterios() throws Exception
+	@SuppressWarnings("unchecked")
+	public void llenarCapacidades() throws Exception
 	{
-		List<ReferenteEducativo> educativoList=myService.listarReferenteEducativo(cetproMatricula.getProfesion(), 0, 1L);
-		criteriosList=new ArrayList<ReferenteEducativo>();
-		
-		for(int i=0; i<educativoList.size(); i++)
-		{
-			if(educativoList.get(i).getTipo().longValue()==1L && educativoList.get(i).getEstado().longValue()!=Constante.ROW_STATUS_DELETE.longValue())
-			{criteriosList.add(educativoList.get(i));	}
-		}
-		educativoList=null;
-		
-		filtrarModulo(criteriosList,cetproMatricula.getPk_modulo());
-		
 	
-	}
-	
-	public void filtrarModulo(List<ReferenteEducativo> educativoList, Long modulo) throws Exception
-	{
-		ArrayList<ReferenteEducativo> filtro=new ArrayList<ReferenteEducativo>();	
-		for (ReferenteEducativo item : educativoList) 
-		{
-			//if(item.getNivelA() == modulo)  //diego : verificar esta validacion despues
-			{filtro.add(item);}						
-		}
+		CetproCt silaboUnidadCt = new CetproCt();
+		silaboUnidadCt.setPk_cetpro_matricula(cetproMatricula.getId());	
 		
-		criteriosList=filtro;
+		List<CetproCt> listaActual = myService.listByObject(silaboUnidadCt);
+		
+		pk_ct = -1l;
+		if (listaActual.size()>0) {
+			listarCT = new ArrayList<VistaReferenteEducativo>();
+			pk_ct = listaActual.get(0).getId();
+			ReferenteEducativo referenteEducativo; 
+			for (CetproCt siCt : listaActual) {
+				referenteEducativo = (ReferenteEducativo)myService.findById(ReferenteEducativo.class, siCt.getPk_ct());
+				listarCT.add(new VistaReferenteEducativo(null, referenteEducativo,siCt));
+			}
+		}
 	}
+
+	
+	
 	
 	
 	@Override
@@ -177,16 +175,16 @@ public class CetproDocenteListNota extends GenericController
 	public void guardarNotas()  throws Exception {
 		
 		//List<PersonaAlumnoCetpro> matriculados = listSilaboAlumno;
-		List<PersonaAlumnoCetpro> matriculados = (List<PersonaAlumnoCetpro>)getBeanList(); //diego : traer la lista contas
-		
-		for (PersonaAlumnoCetpro item : matriculados) {
+		//List<PersonaAlumnoCetpro> matriculados = (List<PersonaAlumnoCetpro>)getBeanList(); //diego : traer la lista con notas
+		CetproNota  cetproNota;
+		for (CetproMatriculaAlumno item : listSilaboAlumno) {
+			cetproNota = new CetproNota();
+			cetproNota.setNota(item.getNota());
+			cetproNota.setPk_cetpro_ct(pk_ct);
+			cetproNota.setPk_cetpro_matricula_alumno(item.getId());
+			cetproNota.setEstado(1L);//insertado
+			myService.save(cetproNota);
 			
-			CetproNota result = SilaboNotaAlumnoServicioLocal
-					.getSilaboNotaAlumnoCetpro(item.getSilaboAlumno().getId(), pk_ct);
-			
-			result.setNota(item.getNota());
-			myService.save(result);
-			result=null;
 		}
 		
 		forward("cetproDocenteList");
@@ -406,6 +404,18 @@ public class CetproDocenteListNota extends GenericController
 
 	public void setPk_ct(Long pk_ct) {
 		this.pk_ct = pk_ct;
+	}
+
+
+
+	public List<VistaReferenteEducativo> getListarCT() {
+		return listarCT;
+	}
+
+
+
+	public void setListarCT(List<VistaReferenteEducativo> listarCT) {
+		this.listarCT = listarCT;
 	}
 
 	

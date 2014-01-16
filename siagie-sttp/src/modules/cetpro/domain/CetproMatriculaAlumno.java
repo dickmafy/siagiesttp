@@ -26,6 +26,7 @@ public class CetproMatriculaAlumno implements Serializable
 	private String	alumno_nom_completo;
 	private Long 	asistio;
 	private String 	asistioNom;
+	private Double  nota;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -106,6 +107,14 @@ public class CetproMatriculaAlumno implements Serializable
 	}
 	public void setAsistioNom(String asistioNom) {
 		this.asistioNom = asistioNom;
+	}
+	
+	@Transient
+	public Double getNota() {
+		return nota;
+	}
+	public void setNota(Double nota) {
+		this.nota = nota;
 	}
 	
 	
