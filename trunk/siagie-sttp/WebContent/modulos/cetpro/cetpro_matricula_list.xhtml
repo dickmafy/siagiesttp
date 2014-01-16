@@ -73,14 +73,34 @@
 				</p:commandButton>
 				
 				<p:commandButton icon="icn_prc_publicar" title="Publicar Matricula" action="#{cetproMatricula.goPublicar}" ajax="false"
-				rendered="#{item.estado lt 3}">
+				rendered="#{item.estado eq 2}">
 					<f:setPropertyActionListener value="#{item}" target="#{cetproMatricula.beanSelected}" />				
 				</p:commandButton>
 				
+				<p:commandButton icon="icn_item_detail" title="Ver Detalle" action="#{cetproMatricula.goDetail}" ajax="false"
+				rendered="#{item.estado eq 3}">
+					<f:setPropertyActionListener value="#{item}" target="#{cetproMatricula.beanSelected}" />				
+				</p:commandButton>
+				
+				<p:commandButton icon="icn_item_remove" 	title="Eliminar" 		oncomplete="dialogUsrDel.show()">
+					<f:setPropertyActionListener value="#{item}" target="#{cetproMatricula.beanSelected}" />				
+				</p:commandButton> 
         	</p:column>      
 		</p:dataTable> 
 	</h:form>
 		
+		
+		<!-- Eliminar Matricula -->
+		<p:confirmDialog widgetVar="dialogUsrDel" width="350" appendToBody="true"
+			header="Mensaje de Confirmacion" message="¿Estas seguro de eliminar el Módulo seleccionado?" style="font-size:13px;"
+        	closable="true" severity="alert" closeOnEscape="true">
+        	<h:form>	
+			<h:panelGroup style="text-align: right;" >
+				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogUsrDel.hide()"  actionListener="#{cetproMatricula.nativeRemove}"  update=":frmList"/>
+        		<p:commandButton value="No" id="cancelButton" onclick="dialogUsrDel.hide()"/>   
+			</h:panelGroup>
+			</h:form>	
+   		</p:confirmDialog>
 	
    		
     </ui:define>
