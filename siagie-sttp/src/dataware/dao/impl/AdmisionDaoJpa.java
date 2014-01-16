@@ -726,6 +726,7 @@ public class AdmisionDaoJpa extends HorarioDaoJpa implements AdmisionDao
 			if(objetos[12]!=null){field.setTurno(Long.parseLong(objetos[12].toString()));}
 			if(objetos[13]!=null){field.setEstado(Long.parseLong(objetos[13].toString()));}
 			if(objetos[14]!=null){field.setProfesion(Long.parseLong(objetos[14].toString()));}
+			if(objetos[15]!=null){field.setModulo(Long.parseLong(objetos[15].toString()));}
 						
 			lista.add(field);
 		}

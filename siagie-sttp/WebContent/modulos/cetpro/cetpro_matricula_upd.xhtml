@@ -25,12 +25,9 @@
   				<tr>
 	   				<td colspan="2"> <p:outputLabel  value="Módulo" style="font-weight:bold"/></td>
   				</tr>
-	        	<tr>	
-	        		
+	        	<tr>		        		
 	        		<td colspan="2">
-	        			<p:selectOneMenu id="txtUnd" value="#{cetproMatricula.bean.pk_modulo}" style="width:500px;">
-							<f:selectItems value="#{cetproMatricula.moduloList}"/>							
-						</p:selectOneMenu>
+	        			<h:outputText styleClass="form_readonly_value" value="#{cetproMatricula.bean.nomModulo}" style="width:500px;"/>
 	        		</td>
     	    	</tr>
     	    	<tr>    	    		
@@ -106,9 +103,31 @@
 		
 		</p:tab>
  			
-  
+  		<p:tab id="tab3" title="Capacidades Terminales">
+  			
+  			<TABLE> 
+			<tr>
+				<td><p:commandButton title="Guardar Capacidades" 	value="Guardar Capacidades" icon="icn_bar_new" actionListener="#{cetproMatricula.guardarCT}" ajax="false" /> </td>
+			</tr>
+			</TABLE>
+		
+			<p:panel header="Módulo: #{cetproMatricula.bean.nomModulo} - Criterios de Evaluación">
+
+				<p:dataTable id="criteriosList" var="item" value="#{cetproMatricula.criteriosList}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+	     		
+	     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
+					<p:selectBooleanCheckbox value="#{item.check}" rendered="#{item.nivelB ne 0 and item.nivelC eq 0}"/>
+					<h:outputText value=" CT#{item.nivelB}: #{item.descripcion}" title="CAPACIDAD TERMINAL #{item.nivelB}: #{item.descripcion}" rendered="#{item.nivelB ne 0 and item.nivelC eq 0}" />
+				</p:column>		        	      	        	        
+	        	      	        
+				</p:dataTable> 			
+    		
+			</p:panel>
+
+		</p:tab>
  				
-		<p:tab id="tab3" title="Alumno">
+		<p:tab id="tab4" title="Alumno">
 		<table>
 			<tr>
 				<td><p:outputLabel value="Alumno" style="font-weight:bold"/></td>
@@ -141,6 +160,8 @@
 					</p:column>
 				</p:dataTable> 
 		</p:tab>
+		
+		
 		</p:tabView>
 		
 		</p:panel>

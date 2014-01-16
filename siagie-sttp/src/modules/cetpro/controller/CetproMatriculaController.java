@@ -28,6 +28,7 @@ import modules.admision.domain.Matricula;
 import modules.admision.domain.MatriculaSeccion;
 import modules.admision.domain.Proceso;
 import modules.admision.domain.Requisitos;
+import modules.cetpro.domain.CetproCt;
 import modules.cetpro.domain.CetproMatricula;
 import modules.cetpro.domain.CetproMatriculaAlumno;
 import modules.cetpro.domain.CetproMatriculaFecha;
@@ -80,6 +81,7 @@ public class CetproMatriculaController extends GenericController
 	private List<ReferenteEducativo> contenidoList;
 	private List<ReferenteEducativo> transversalList;
 	private List<ReferenteEducativo> contenidoTList;
+	private List<ReferenteEducativo> criteriosList;
 	
 	private List<SelectItem> moduloTransversalList;
 	private List<SelectItem> moduloProfesionalList;
@@ -104,16 +106,25 @@ public class CetproMatriculaController extends GenericController
 		
 		enabled=false;
 		
-		
 		page_new="cetpro_matricula_new";
 		page_main="cetpro_matricula_list";
 		page_update="cetpro_matricula_upd";	
-	
 		
-		forward(page_main);
-			
+		forward(page_main);			
 		defaultList();
     	
+		
+		Personal obj=new Personal();
+		obj.setInstitucion(institucion);
+		obj.setPuesto(6L);
+		docenteList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "apepat,apemat,nombres"," ",false);
+		
+		Interesado bean=new Interesado();
+    	bean.setInstitucion(institucion);
+    	interesadoList= getListSelectItem(myService.listarInteresados(institucion), "id", "apellido_paterno,apellido_materno,nombres"," ",true);
+    	
+    	obj=null;
+    	bean=null;
 	}
 
 	public void init() throws Exception
@@ -121,22 +132,25 @@ public class CetproMatriculaController extends GenericController
 	
 	public void goPublicar() throws Exception
 	{	
-		CetproMatricula bean = (CetproMatricula)getBeanSelected();
-		CetproMatriculaFecha fecha = new CetproMatriculaFecha();
-		List<CetproMatriculaFecha> fechas = new ArrayList<CetproMatriculaFecha>();
-		fecha.setPk_cetpro_matricula(bean.getId());
-
-		fechas = myService.listByObject(fecha);		
-		fecha = fechas.get(fechas.size()-1);	
-		bean.setFecha_ini(fecha.getFecha());
-		fecha = fechas.get(0);
-		bean.setFecha_fin(fecha.getFecha());
-		
-		bean.setEstado(3L);
-		myService.save(bean);
-		
-		setMessageSuccess("Se Publicó la Matricula.");
-		defaultList();
+		if(validateCapacidades())
+		{
+			CetproMatricula bean = (CetproMatricula)getBeanSelected();
+			CetproMatriculaFecha fecha = new CetproMatriculaFecha();
+			List<CetproMatriculaFecha> fechas = new ArrayList<CetproMatriculaFecha>();
+			fecha.setPk_cetpro_matricula(bean.getId());
+	
+			fechas = myService.listByObject(fecha);		
+			fecha = fechas.get(fechas.size()-1);	
+			bean.setFecha_ini(fecha.getFecha());
+			fecha = fechas.get(0);
+			bean.setFecha_fin(fecha.getFecha());
+			
+			bean.setEstado(3L);
+			myService.save(bean);
+			
+			setMessageSuccess("Se Publicó la Matricula.");
+			defaultList();
+		}
 		
 	}
 	
@@ -145,16 +159,7 @@ public class CetproMatriculaController extends GenericController
 	@Override
 	public void afterNew() throws Exception {
 		enabled=false;
-		
-		Personal obj=new Personal();
-		obj.setInstitucion(institucion);
-		obj.setPuesto(6L);
-		docenteList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "apepat,apemat,nombres"," ",false);
-		
-		Interesado bean=new Interesado();
-    	bean.setInstitucion(institucion);
-    	interesadoList= getListSelectItem(myService.listarInteresados(institucion), "id", "apellido_paterno,apellido_materno,nombres"," ",true);
-    	
+
     	//Familia tempFamilia = new Familia();
     	//familiaList = getListSelectItem(tempFamilia, "id", "nombre",true);
     	
@@ -163,8 +168,6 @@ public class CetproMatriculaController extends GenericController
     	
     	selectModulo();
     	
-    	obj=null;
-    	bean=null;
 	}
 	
 	
@@ -173,24 +176,32 @@ public class CetproMatriculaController extends GenericController
 		enabled=true;
 		nuevasFechas=false;
 		listFechas=new ArrayList<Fecha>();
-		
-		Personal obj=new Personal();
-		obj.setInstitucion(institucion);
-		obj.setPuesto(6L);
-		docenteList=getListSelectItem(myService.listByObjectEnabled(obj), "id", "apepat,apemat,nombres"," ",false);
-		
-		Interesado bean=new Interesado();
-    	bean.setInstitucion(institucion);
-    	interesadoList= getListSelectItem(myService.listarInteresados(institucion), "id", "apellido_paterno,apellido_materno,nombres"," ",true);
-    	
+
     	CetproMatricula beanMatricula= (CetproMatricula)getBean();
     	listaAlumnos=myService.listarAlumnosMatricula(beanMatricula.getId());
-    	selectModulo();
+    	//selectModulo();
     	llenarDias();
     	llenarFechas();
-    	    	
-    	obj=null;
-    	bean=null;
+    	optionCriterios();
+
+    	beanMatricula=null;
+	}
+	
+	
+	public void goDetail() throws Exception {
+		enabled=true;
+		nuevasFechas=false;
+		listFechas=new ArrayList<Fecha>();
+
+    	CetproMatricula beanMatricula= (CetproMatricula)getBeanSelected();
+    	setBean(beanMatricula);
+    	listaAlumnos=myService.listarAlumnosMatricula(beanMatricula.getId());
+    	//selectModulo();
+    	llenarDias();
+    	llenarFechas();
+    	
+    	forward("cetpro_matricula_detail");
+
     	beanMatricula=null;
 	}
 	
@@ -350,8 +361,66 @@ public class CetproMatriculaController extends GenericController
 		bean=null;
 	}
 	
+	public void optionCriterios() throws Exception
+	{
+		CetproMatricula bean=(CetproMatricula)getBean();
+		//ReferenteEducativo ref = new ReferenteEducativo();
+		//ref.setId(bean.getPk_modulo());
+		
+		List<ReferenteEducativo> educativoList=myService.listarReferenteEducativo(bean.getProfesion(), 0, 1L);
+		criteriosList=new ArrayList<ReferenteEducativo>();
+		
+		for(int i=0; i<educativoList.size(); i++)
+		{
+			if(educativoList.get(i).getTipo().longValue()==1L && educativoList.get(i).getNivelA().longValue()==bean.getModulo()  && educativoList.get(i).getNivelC().longValue()==0L && educativoList.get(i).getEstado().longValue()!=Constante.ROW_STATUS_DELETE.longValue())
+			{criteriosList.add(educativoList.get(i));	}
+		}
+		educativoList=null;
+		
+		//filtrarModulo(criteriosList,bean.getProfesion());
+		
+		forward("cetproDocenteListCt");
+	}
 	
+	public void filtrarModulo(List<ReferenteEducativo> educativoList, Long profesion) throws Exception
+	{
+		
+		ArrayList<ReferenteEducativo> filtro=new ArrayList<ReferenteEducativo>();	
+		for (ReferenteEducativo item : educativoList) 
+		{
+			if(item.getNivelA() == modulo)  //diego : verificar esta validacion despues
+			{filtro.add(item);}						
+		}
+		
+		criteriosList=filtro;
+	}
 	
+	public void guardarCT() throws Exception {
+		
+		CetproMatricula bean=(CetproMatricula)getBean();
+		CetproCt ct = new CetproCt();
+		
+		myService.deleteByField(ct , "pk_cetpro_matricula", bean.getId().toString());
+		
+		try {
+			for (ReferenteEducativo item : criteriosList) {
+				if(item.getCheck()){
+					ct = new CetproCt();
+					ct.setPk_cetpro_matricula(bean.getId());
+					ct.setPk_ct(item.getId());
+					ct.setPrioridad(1L);
+					ct.setEstado(1L);
+					myService.save(ct);
+				}
+			}
+			
+			
+			//status(cetproMatricula, 2L);
+			setMessageSuccess("Las Capacidades Terminales se guardaron exitósamente.");
+		} catch (Exception e) {
+			
+		}
+	}
 	
 	public boolean validateUnidad() throws Exception
 	{
@@ -381,6 +450,27 @@ public class CetproMatriculaController extends GenericController
 		return success;
 	}
 	
+	public boolean validateCapacidades() throws Exception
+	{
+		CetproMatricula object = (CetproMatricula)getBeanSelected();
+		CetproCt ct = new CetproCt();
+		List<CetproCt> ctList = new ArrayList<CetproCt>();
+		ct.setPk_cetpro_matricula(object.getId());
+		
+		ctList = myService.listByObject(ct);
+		
+		if(ctList.size()==0)
+		{
+			setMessageError("Debe seleccionar al menos una Capacidad Terminal a evaluar.");
+			return false;
+		} 
+		else
+		{
+			return true;
+		}
+		
+	}
+	
 	private void llenarFechas() throws Exception
 	{
 		CetproMatricula bean=(CetproMatricula)getBeanSelected();
@@ -402,6 +492,13 @@ public class CetproMatriculaController extends GenericController
     	bean=null;
     	matriculaFecha=null;
     	fechas=null;
+	}
+	
+	@Override
+	public void nativeRemove() throws Exception {
+		status(getBeanSelected(), 0L);
+		setMessageSuccess("El registro ha sido eliminado.");
+		defaultList();
 	}
 	
 	private void llenarDias() {
@@ -849,6 +946,14 @@ public class CetproMatriculaController extends GenericController
 
 	public void setModulo(Long modulo) {
 		this.modulo = modulo;
+	}
+
+	public List<ReferenteEducativo> getCriteriosList() {
+		return criteriosList;
+	}
+
+	public void setCriteriosList(List<ReferenteEducativo> criteriosList) {
+		this.criteriosList = criteriosList;
 	}
 
 	
