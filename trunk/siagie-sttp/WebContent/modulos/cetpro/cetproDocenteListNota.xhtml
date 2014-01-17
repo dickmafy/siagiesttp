@@ -1,10 +1,12 @@
+
 <ui:composition template="/modulos/index/template/default.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+    
     <ui:define name="body" oncontextmenu="return false">
      <h:form id="frmNew" ajaxSubmit="false">
      
@@ -19,16 +21,22 @@
 			  
   		</p:toolbar>
   		
+  		<p:progressBar id="progressBarClient" widgetVar="pbClient" styleClass="animated"/>
   				
       	<p:spacer height="4px"/>
     	   		<p:selectOneMenu  value="#{cetproDocenteListNota.pk_ct}" filter="true" filterMatchMode="startsWith" style="width:500px;">
 					<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
 					<f:selectItems value="#{cetproDocenteListNota.listarCT}" var="item" itemValue="#{item.cetproCt.id}" itemLabel="CT: #{item.referenteEducativo.descripcion}"/>
-					<p:ajax update="frmNew:dt_notasFecha" listener="#{cetproDocenteListNota.reloadNotas}"></p:ajax>
+
+					<p:ajax event="change" listener="#{cetproDocenteListNota.reloadNotas}"  
+					onstart="start();"  oncomplete="cancel()" update="frmNew:dt_notasFecha"/>
+					
 				</p:selectOneMenu>
 				
-				
-			<p:dataTable id="dt_notasFecha" var="item" value="#{cetproDocenteListNota.listSilaboAlumno}" 
+				   
+		
+		    
+		<p:dataTable id="dt_notasFecha" var="item" value="#{cetproDocenteListNota.listSilaboAlumno}" 
 	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
 	     		
 	     		<p:columnGroup type="header">  
@@ -58,7 +66,7 @@
 				</p:column>
 				
 				<p:column >  
-	                   <p:inputText  value="#{item.nota}"  maxlength="4" >
+	                   <p:inputText  value="#{item.nota}"  maxlength="4" style="width:40px; background-color : #{item.nota lt 13 ? '#F78181' : '#81F781' }" >
 	                   </p:inputText>
 				</p:column>
 		       	    
@@ -69,4 +77,10 @@
      </h:form>
      
     </ui:define>
+    
+   
+    
+    
 </ui:composition>
+
+
