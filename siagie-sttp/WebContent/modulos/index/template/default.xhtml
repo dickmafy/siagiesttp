@@ -10,10 +10,26 @@
 <h:head>   
 	<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="web_author" content="Carlos Sanchez Gonzales" />
+	<meta name="web_author" content="APROLAB II" />
 	<meta name="copyright" content="2013, PROYECTO APROLAB II" />	
 	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/recursos/estilos/index.css" />	
 	<title>SIAGIE-STTP</title>
+	
+	 <!-- PROGRESS BAR -->
+	<script type="text/javascript">  
+    function start() {  
+        this.progressInterval = setInterval(function(){  
+            pbClient.setValue(pbClient.getValue() + 10);  
+        }, 2000);  
+    }  
+  
+    function cancel() {  
+        clearInterval(this.progressInterval);  
+        pbClient.setValue(0);  
+    }  
+ 
+	</script>
+	
 </h:head>
 <h:body>
 	<p:layout fullPage="true">  

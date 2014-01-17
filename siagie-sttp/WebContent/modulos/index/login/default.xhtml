@@ -9,11 +9,41 @@
 <h:head>   
 	<!-- metas -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="web_author" content="Carlos Sanchez Gonzales" />
+	<meta name="web_author" content="APROLAB II" />
 	<meta name="copyright" content="2013, PROYECTO APROLAB II" />	
 	<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />	
 	<link type="text/css" rel="stylesheet" href="#{request.contextPath}/recursos/estilos/index.css" />	
 	<title>SIAGIE-STTP</title>
+	
+    <script type="text/javascript">  
+    function start() 
+    {  
+        PF('startButton1').disable();  
+  
+        window['progress'] = setInterval(function() {  
+            var pbClient = PF('pbClient'),  
+            oldValue = pbClient.getValue(),  
+            newValue = oldValue + 10;  
+  
+            pbClient.setValue(pbClient.getValue() + 10);  
+  
+            if(newValue === 100) {  
+                clearInterval(window['progress']);  
+            }  
+  
+  
+        }, 1000);  
+    }  
+  
+    function cancel() 
+    {  
+        clearInterval(window['progress']);  
+        PF('pbClient').setValue(0);  
+        PF('startButton1').enable();  
+    }  
+	</script> 
+	
+	
 </h:head>
 <h:body>
 	<p:layout fullPage="true">  

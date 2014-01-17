@@ -4,30 +4,17 @@ import java.util.List;
 
 import javax.faces.model.SelectItem;
 
-import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
-import com.belogick.factory.util.support.ServiceException;
-
 import dataware.service.AdmisionService;
 import dataware.service.IntranetService;
-import modules.administracion.domain.MetaInstitucional;
-import modules.admision.domain.Matricula;
 import modules.admision.domain.Persona;
 import modules.admision.domain.Proceso;
 import modules.cetpro.domain.CetproAsistencia;
 import modules.cetpro.domain.CetproCt;
 import modules.cetpro.domain.CetproMatricula;
 import modules.cetpro.domain.CetproMatriculaAlumno;
-import modules.cetpro.domain.CetproMatriculaFecha;
 import modules.cetpro.domain.CetproNota;
 import modules.horario.domain.Seccion;
-import modules.horario.domain.SilaboCronograma;
-import modules.horario.domain.SilaboNotaAlumno;
-import modules.horario.domain.SilaboUnidadCt;
-import modules.horario.servicio.PersonaAlumno;
-import modules.horario.servicio.PersonaAlumnoCetpro;
-import modules.horario.servicio.SilaboNotaAlumnoServicioLocal;
-import modules.intranet.domain.silabo_docente;
 import modules.intranet.servicio.VistaReferenteEducativo;
 import modules.marco.domain.ReferenteEducativo;
 import modules.seguridad.domain.Usuario;
@@ -61,6 +48,7 @@ public class CetproDocenteListNota extends GenericController
 	private List <CetproMatriculaAlumno> listSilaboAlumno;
 	private List<VistaReferenteEducativo> listarCT;
 	
+	
 	public void init(CetproMatricula pCeproMatricula) throws Exception 
 	{
 		
@@ -68,12 +56,7 @@ public class CetproDocenteListNota extends GenericController
 		appName="Intranet Docente";
 		moduleName="Notas";
 		userName=usr.getUsuario();
-		
-		//usr.getPertenencia();
-		//cetproMatricula.getProfesion();
-		//cetproMatricula.getModulo();
-		
-		
+		pk_ct = -1L;
 		modulo=1L;
 		profesion=101L; 
 		nombreUnidad= "Prueba";
@@ -81,11 +64,13 @@ public class CetproDocenteListNota extends GenericController
 		cetproMatricula =  pCeproMatricula;
 		
 		numbCapTerminales = 3;
-		defaultList();		
+				
 		forward(page_main);
 		llenarCapacidades();
 		
 		forward("cetproDocenteListNota");
+		
+		listSilaboAlumno = new ArrayList<CetproMatriculaAlumno>();
 	}
 	
 	
@@ -115,25 +100,20 @@ public class CetproDocenteListNota extends GenericController
 	
 	
 	
-	@Override
-	public void defaultList() throws Exception
-	{
-		/*Criteria criteria = JPAPersistenceUtil.getSession().createCriteria(Matricula.class);
-		criteria.add(Expression.eq("estado",4))
-		.add(Expression.eq("estado",seccionObject.));*/
-		listarAlumnos();
-	}
-	
 	
 	
 	@SuppressWarnings("unchecked")
-	public void listarAlumnos() throws Exception{
+	public void reloadNotas() throws Exception{
+		
+		
 		
 		CetproMatriculaAlumno silaboAlumno = new CetproMatriculaAlumno();
 		silaboAlumno.setPk_cetpro_matricula(cetproMatricula.getId());
 		listSilaboAlumno = myService.listByObject(silaboAlumno);
 		
-		for (CetproMatriculaAlumno item : listSilaboAlumno) {
+		
+		for (CetproMatriculaAlumno item : listSilaboAlumno) 
+		{
 			CetproAsistencia asis=new CetproAsistencia();
 			asis.setPk_cetpro_matricula_alumno(item.getId());
 			Persona p = new Persona();
@@ -143,14 +123,23 @@ public class CetproDocenteListNota extends GenericController
 			item.setAlumno_apemat(p.getApellido_materno());
 			item.setAlumno_nom(p.getNombres());
 			
-			try {
-				CetproAsistencia temp;
-				temp=(CetproAsistencia)myService.findByObject(asis);
-				item.setAsistio((long)temp.getAsistencia());
+			
+			
+			try 
+			{
+				CetproNota tempNota = new CetproNota();
+				tempNota.setPk_cetpro_matricula_alumno(item.getId());
+				tempNota.setPk_cetpro_ct(pk_ct);
+				tempNota = (CetproNota)myService.findByObject(tempNota);
+				item.setNota(tempNota.getNota());
 			} catch (Exception e) {
-				item.setAsistio(1L);
+				item.setNota(0.0);
 			}
+			
+			
 		}
+
+	
 		
 	}
 	
@@ -173,20 +162,21 @@ public class CetproDocenteListNota extends GenericController
 	
 	@SuppressWarnings("unchecked")
 	public void guardarNotas()  throws Exception {
-		
-		//List<PersonaAlumnoCetpro> matriculados = listSilaboAlumno;
-		//List<PersonaAlumnoCetpro> matriculados = (List<PersonaAlumnoCetpro>)getBeanList(); //diego : traer la lista con notas
 		CetproNota  cetproNota;
 		for (CetproMatriculaAlumno item : listSilaboAlumno) {
+			
 			cetproNota = new CetproNota();
 			cetproNota.setNota(item.getNota());
 			cetproNota.setPk_cetpro_ct(pk_ct);
 			cetproNota.setPk_cetpro_matricula_alumno(item.getId());
 			cetproNota.setEstado(1L);//insertado
+			cetproNota = (CetproNota)myService.findByObject(cetproNota);
 			myService.save(cetproNota);
 			
 		}
 		
+		
+		setMessageSuccess("Notas Guardadas Correctamente.");
 		forward("cetproDocenteList");
 		
 	}
@@ -417,6 +407,8 @@ public class CetproDocenteListNota extends GenericController
 	public void setListarCT(List<VistaReferenteEducativo> listarCT) {
 		this.listarCT = listarCT;
 	}
+
+
 
 	
 	
