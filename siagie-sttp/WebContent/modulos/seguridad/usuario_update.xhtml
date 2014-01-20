@@ -37,17 +37,17 @@
         	          	</p:selectOneMenu>
         	      	</td>
         	    	<td>
-		    			<p:selectOneMenu id="txtPrf" value="#{usuarioController.bean.perfil}" style="width:220px;" disabled="true">
+		    			<p:selectOneMenu id="txtPrf" value="#{usuarioController.bean.perfil}" style="width:220px;" >
 							<f:selectItems value="#{usuarioController.perfilList}" var="lstPerfil" itemValue="#{lstPerfil.id}" itemLabel="#{lstPerfil.nombre}"/>
 						</p:selectOneMenu>
 					</td>      
 					<td>
-		    			<p:selectOneMenu  filter="true" filterMatchMode="startsWith" id="txtIns" value="#{usuarioController.bean.institucion}" style="width:270px;" rendered="#{usuarioController.tipo gt 1}" disabled="true">
+		    			<p:selectOneMenu  filter="true" filterMatchMode="startsWith" id="txtIns" value="#{usuarioController.bean.institucion}" style="width:270px;" rendered="#{usuarioController.tipo gt 1}" >
 							<f:selectItems value="#{usuarioController.institucionList}" var="lstInstitucion" itemValue="#{lstPerfil.id}" itemLabel="#{lstPerfil.nombre}"/>
 						</p:selectOneMenu>
 					</td>
 					<td>
-		    			<p:selectOneMenu id="txtPrs" value="#{usuarioController.bean.pertenencia}" style="width:220px;" rendered="#{usuarioController.tipo eq 2}" disabled="true">
+		    			<p:selectOneMenu id="txtPrs" value="#{usuarioController.bean.pertenencia}" style="width:220px;" rendered="#{usuarioController.tipo eq 2}" >
 							<f:selectItems value="#{usuarioController.colaboradorList}" var="lstPersona" itemValue="#{lstPersona.id}" itemLabel="#{lstPersona.nombre}"/>
 						</p:selectOneMenu>
 					</td>
