@@ -55,6 +55,7 @@ public class AdminLocal extends GenericController {
 	private String urlRpt; // Codigo Ericson Huamani
 	private String nombreUsuario; // Codigo Ericson Huamani
 
+	@SuppressWarnings("unchecked")
 	public void initBase(Long codigo, String nombre) throws Exception {
 		Usuario usr = (Usuario) getSpringBean("usuarioSesion");
 		appName = "Local";
@@ -64,8 +65,7 @@ public class AdminLocal extends GenericController {
 		nombreInstitucion = nombre;
 		defaultList();
 
-		instituciones = myService
-				.listByObjectEnabledDisabled(new Institucion());
+		instituciones = myService.listByObjectEnabledDisabled(new Institucion());
 		institucionList = getListSelectItem(instituciones, "id", "nombre", true);
 
 		Personal obj = new Personal();
@@ -108,8 +108,7 @@ public class AdminLocal extends GenericController {
 	public void afterNew() throws Exception {
 		Personal obj = new Personal();
 		obj.setInstitucion(institucion);
-		personalList = getListSelectItem(obj, "id", "nombres,apepat,apemat",
-				" ", true);
+		personalList = getListSelectItem(obj, "id", "nombres,apepat,apemat"," ", true);
 		obj = null;
 
 		Local bean = new Local();

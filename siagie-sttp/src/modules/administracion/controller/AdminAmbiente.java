@@ -56,6 +56,7 @@ public class AdminAmbiente extends GenericController
 	private String urlRpt; // Codigo Ericson Huamani
 	private String nombreUsuario; // Codigo Ericson Huamani
 	
+	@SuppressWarnings("unchecked")
 	public void initBase(Long codigo, String nombre) throws Exception
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
@@ -94,11 +95,14 @@ public class AdminAmbiente extends GenericController
 		beanLocal=null;
 	}
 	
-	public void optionNew() throws Exception
-	{
-		if(local.longValue()>0L)	{forward(page_new);}
-		else						{setMessageError("Debe seleccionar un Local para agregar ambientes.");}
-	}
+//	public void optionNew() throws Exception
+//	{
+//		if(local.longValue()>0L)	{forward(page_new);}
+//		else						{setMessageError("Debe seleccionar un Local para agregar ambientes.");}
+//	}
+//	
+	
+	
 	
 	public void selectInstitucion() throws Exception 
 	{
