@@ -69,6 +69,25 @@
 			
 			<p:column headerText="Opciones" style="width:12%">
 								
+				<p:commandButton icon="icn_item_sillabo" 	title="Ver Sílabo" 	action="#{docenteSilabo.optionGoSilabo}" ajax="false" >
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilabo.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="icn_item_update" 	title="Datos Generales" 	action="#{docenteSilabo.optionGoDetalle}" ajax="false" >
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilabo.beanSelected}" />
+				</p:commandButton>
+				<p:commandButton icon="book_contenido" 		title="Contenido Básico" 	action="#{docenteSilabo.optionGoContenido}" ajax="false" >
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilabo.beanSelected}" />
+				</p:commandButton> 
+				<p:commandButton icon="book_criterio" 		title="Criterios de Evaluación" 	action="#{docenteSilabo.optionGoCriterio}" ajax="false" >
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilabo.beanSelected}" />
+				</p:commandButton>
+				
+				<p:commandButton icon="icn_item_send" 	title="Enviar" 	oncomplete="dialogSilSend.show()" >
+					<f:setPropertyActionListener value="#{item}" target="#{docenteSilabo.beanSelected}" />				
+				</p:commandButton>
+				
+				
+				<!-- 
 				<p:commandButton icon="icn_item_sillabo" 	title="Ver Sílabo" 	action="#{docenteSilabo.optionGoSilabo}" ajax="false" rendered="#{item.estado gt 1}">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilabo.beanSelected}" />
 				</p:commandButton>
@@ -85,6 +104,8 @@
 				<p:commandButton icon="icn_item_send" 	title="Enviar" 	oncomplete="dialogSilSend.show()" rendered="#{item.estado lt 2}">
 					<f:setPropertyActionListener value="#{item}" target="#{docenteSilabo.beanSelected}" />				
 				</p:commandButton>
+				 -->
+				
 			</p:column>     
 		</p:dataTable>
 		
