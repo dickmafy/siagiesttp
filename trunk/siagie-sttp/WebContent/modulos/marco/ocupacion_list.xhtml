@@ -21,14 +21,14 @@
         	 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} ">
      		
      		<f:facet name="header">
-				<h:outputText value="Lista de Módulos Ocupacionales (#{marcoOcupacion.defaultListSize})" />  
+				<h:outputText value="Lista de Módulos Profesional (#{marcoOcupacion.defaultListSize})" />  
 			</f:facet>
 			
-			<p:column headerText="Familia" style="width:20%; align:center;" sortBy="#{item.nombreFamilia}" filterBy="#{item.nombreFamilia}">   
+			<p:column headerText="Carrera Profesional" style="width:20%; align:center;" sortBy="#{item.nombreFamilia}" filterBy="#{item.nombreFamilia}">   
 				<h:outputText value="#{item.nombreFamilia}" />  
 			</p:column>	
 			
-			<p:column headerText="Nombre" style="width:55%; align:center;" sortBy="#{item.nombre}" filterBy="#{item.nombre}">   
+			<p:column headerText="Nombre del Modulo Profesional" style="width:55%; align:center;" sortBy="#{item.nombre}" filterBy="#{item.nombre}">   
 				<h:outputText value="#{item.nombre}" />  
 			</p:column>		
 			
