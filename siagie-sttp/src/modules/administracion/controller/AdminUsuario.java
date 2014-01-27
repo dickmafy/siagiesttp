@@ -54,7 +54,7 @@ public class AdminUsuario extends GenericController
 		objPrs=null;
 		
 		Perfil objPrf=new Perfil();
-		objPrf.setTipo(2L);
+		//objPrf.setTipo(2L);
 		objPrf.setEstado(Constante.ROW_STATUS_ENABLED);
 		perfilList=getListSelectItem(objPrf, "id", "nombre", true);
 		objPrf=null;
@@ -73,6 +73,7 @@ public class AdminUsuario extends GenericController
 			bean.setEstado(Constante.ROW_STATUS_ENABLED);
 		}
 	}
+	
 	
 	@Override 
 	public void beforeUpdate() throws Exception
