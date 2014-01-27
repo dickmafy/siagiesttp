@@ -43,8 +43,8 @@ public class AdminInstitucion extends GenericController
 {	 	
 	private Personal	beanPersona;
 	private Local		beanLocal;
-	private	Usuario		beanUsuario;
 	
+	private	Usuario		beanUsuario;
 	private List<SelectItem>    resolucionList;
 	private List<SelectItem>    puestoList;
 	
@@ -118,7 +118,23 @@ public class AdminInstitucion extends GenericController
 			 beanUsuario.setNombres(inst.getNombreFormacion()+" "+inst.getNombre());
 			 beanUsuario.setCorreo(inst.getCorreo());
 			 beanUsuario.setCreacion(DateHelper.getDate());
-			 beanUsuario.setPerfil(2L);
+			 
+			//2 = formacion cetpro
+			 if(inst.getFormacion().equals(2L)) 
+			 {
+				//3 = perfil admin cetpro
+				 beanUsuario.setPerfil(3L);
+			 }
+			 else
+			 {
+				//2 = perfil admin iest
+				 beanUsuario.setPerfil(2L);
+					 
+			 }
+			 
+			 
+			 
+			 
 			 beanUsuario.setEstado(Constante.ROW_STATUS_ENABLED);
 			 
 			 beanPersona=(Personal)getService().save(beanPersona);

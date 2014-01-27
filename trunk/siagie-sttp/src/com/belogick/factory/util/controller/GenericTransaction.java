@@ -56,8 +56,8 @@
 /*     */   public Object getBean()
 /*     */   {
 /*  69 */     return this.bean; } 
-/*  70 */   public Object getBeanSave() { return this.beanSave; } 
 /*  71 */   public Object getBeanSearch() { return this.beanSearch; } 
+/*  70 */   public Object getBeanSave() { return this.beanSave; } 
 /*  72 */   public Object getBeanDelete() { return this.beanDelete; } 
 /*  73 */   public Object getBeanSelected() { return this.beanSelected; } 
 /*     */   public void setBean(Object bean) {
