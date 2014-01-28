@@ -143,11 +143,11 @@ public class AdminUsuario extends GenericController
 			setMessageError("Debe ingresar el nombre de usuario.");			
 			success = false;
 		}
-		else if(!validateEmpty(object.getCorreo()))
-		{
-			setMessageError("Debe ingresar el correo electrónico del usuario.");			
-			success = false;
-		}
+//		else if(!validateEmpty(object.getCorreo()))
+//		{
+//			setMessageError("Debe ingresar el correo electrónico del usuario.");			
+//			success = false;
+//		}
 		object=null;
 		return success;
 	}   
