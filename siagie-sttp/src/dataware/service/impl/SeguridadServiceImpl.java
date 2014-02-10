@@ -90,6 +90,9 @@ public class SeguridadServiceImpl extends GenericServiceImpl implements Segurida
 	
 	public List<Matricula> listMatriculaInstitucion(Long institucion) throws Exception 
 	{return getSeguridadDao().listMatriculaInstitucion(institucion);}
+	
+	public List<Oferta> listarOfertaCetpro(Long institucion) throws Exception 
+	{return getSeguridadDao().listarOfertaCetpro(institucion);}
 
 }
 

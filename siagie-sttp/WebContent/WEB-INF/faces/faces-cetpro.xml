@@ -185,5 +185,30 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<!-- Oferta Educativa -->
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>oferta_profesion_list</from-outcome>
+			<to-view-id>/modulos/cetpro/ofertaProfesionList.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>oferta_profesion_new</from-outcome>
+			<to-view-id>/modulos/cetpro/ofertaProfesionNew.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>oferta_profesion_upd</from-outcome>
+			<to-view-id>/modulos/cetpro/ofertaProfesionUpd.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
 	
 </faces-config>
