@@ -9,6 +9,11 @@
 	  	<property name="myService" 	ref="seguridadService"/>
 	</bean>
 	
+	<bean id="cetproOfertaEducativa" class="modules.cetpro.controller.CetproOfertaEducativa" scope="session" parent="genericController">	  
+	    <property name="bean" ref="profesion"/>
+	  	<property name="myService" 	ref="seguridadService"/>
+	</bean>
+	
 	<bean id="cetproItinerario" class="modules.cetpro.controller.CetproItinerario" scope="session" parent="genericController">	  
 	    <property name="bean" ref="itinerarioCetpro"/>
 	  	<property name="myService" 	ref="seguridadService"/>

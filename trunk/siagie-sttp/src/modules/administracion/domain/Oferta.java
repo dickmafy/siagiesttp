@@ -24,7 +24,9 @@ public class Oferta implements Serializable
 	private Long solicitud;
 	
 	private String nombreProfesion;
+	private String nombreFamilia;
 	private Boolean check;
+	private Long formacion;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -63,5 +65,24 @@ public class Oferta implements Serializable
 	@Transient
 	public String getNombreProfesion() 						{return nombreProfesion;}
 	public void setNombreProfesion(String nombreProfesion) 	{this.nombreProfesion = nombreProfesion;}
+	
+	@Transient
+	public Long getFormacion() {
+		return formacion;
+	}
+	public void setFormacion(Long formacion) {
+		this.formacion = formacion;
+	}
+	@Transient
+	public String getNombreFamilia() {
+		return nombreFamilia;
+	}
+	public void setNombreFamilia(String nombreFamilia) {
+		this.nombreFamilia = nombreFamilia;
+	}
+	
+	
+	
+	
 	
 }

@@ -77,6 +77,7 @@ public class ProfesionItinerario extends GenericController
 	{
 		Itinerario bean=new Itinerario();
 		bean.setEstado(Constante.ROW_STATUS_ENABLED);
+		bean.setProfesion(profesion);
 		bean.setModulo(modulo);
 		setBean(bean);
 		bean=null;

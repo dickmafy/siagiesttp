@@ -46,4 +46,5 @@ public interface SeguridadService extends GenericService
 	public List<MetaOcupacional> listarMetaOcupacional(Long institucion) throws Exception;
 	public List<HistorialLaboral> listarHistorialLaboral(Long personal) throws Exception;
 	public List<Matricula> listMatriculaInstitucion(Long institucion) throws Exception ;
+	public List<Oferta> listarOfertaCetpro(Long institucion) throws Exception;
 }

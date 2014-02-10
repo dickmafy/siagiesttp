@@ -180,6 +180,33 @@ public class SeguridadDaoJpa extends GenericDaoJpa implements SeguridadDao
 		return lista;
 	}
 	
+	public List<Oferta> listarOfertaCetpro(Long institucion) throws Exception 
+	{
+		List<Oferta> lista=new ArrayList<Oferta>();
+		Query consulta=createQuery("SELECT * FROM cetpro.lst_oferta_educativa(:institucion)");
+		consulta.setParameter("institucion", Integer.parseInt(institucion.toString()));
+		List rst=consulta.list();
+		
+		dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		for(int i=0; i<rst.size(); i++)
+		{
+			Object[] objetos=(Object[])rst.get(i);
+			Oferta field=new Oferta();
+			field.setId(Long.parseLong(objetos[0].toString()));
+			field.setInstitucion(Long.parseLong(objetos[1].toString()));
+			field.setProfesion(Long.parseLong(objetos[2].toString()));
+			field.setVigenciaInicio(dateFormat.parse(objetos[3].toString()));
+			field.setVigenciaFin(dateFormat.parse(objetos[4].toString()));
+			if(objetos[5]!=null){field.setResolucion(Long.parseLong(objetos[5].toString()));}
+			if(objetos[6]!=null){field.setSolicitud(Long.parseLong(objetos[6].toString()));}
+			field.setNombreProfesion(objetos[7].toString());
+			field.setFormacion(Long.parseLong(objetos[8].toString()));
+			field.setNombreFamilia(objetos[9].toString());
+			lista.add(field);
+		}
+		return lista;
+	}
+	
 	public List<Cronograma> listarPeriodo(Long institucion, Date fecha, Long tipo) throws Exception 
 	{
 		List<Cronograma> lista=new ArrayList<Cronograma>();

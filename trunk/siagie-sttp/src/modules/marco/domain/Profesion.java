@@ -28,6 +28,7 @@ public class Profesion implements Serializable
 	private Boolean referente;
 	private Long duracion;
 	private Long estado;
+	private Long institucion;
 	
 	
 	private String nombreFamilia;
@@ -91,6 +92,10 @@ public class Profesion implements Serializable
 	@Column(name="estado")
 	public Long getEstado() 							{return estado;}	
 	public void setEstado(Long estado) 					{this.estado = estado;}
+	
+	@Column(name="pk_institucion")
+	public Long getInstitucion() 						{return institucion;}	
+	public void setInstitucion(Long institucion) 		{this.institucion = institucion;}
 	
 	@Transient
 	public Boolean getReferente() 						{return referente;}
