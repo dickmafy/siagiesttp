@@ -26,11 +26,11 @@
 				<h:outputText value="Historial Academico - #{adminHistorialAcademico.nombrePersonal}  (#{adminHistorialAcademico.defaultListSize})" />  
 			</f:facet>
 	
-			<p:column headerText="Centro Estudio" style="width:20%; align:center;" sortBy="#{item.centro}" filterBy="#{item.centro}">   
+			<p:column headerText="Centro de Estudio" style="width:20%; align:center;" sortBy="#{item.centro}" filterBy="#{item.centro}">   
 				<h:outputText value="#{item.centro}" title="#{item.centro}"/>  
 			</p:column>	
 			
-			<p:column headerText="Profesion" style="width:15%; align:center;" sortBy="#{item.beanProfesion.nombre}" filterBy="#{item.beanProfesion.nombre}">   
+			<p:column headerText="Profesión" style="width:15%; align:center;" sortBy="#{item.beanProfesion.nombre}" filterBy="#{item.beanProfesion.nombre}">   
 				<h:outputText value="#{item.beanProfesion.nombre}" title="#{item.beanProfesion.nombre}"/>  
 			</p:column>		
 							
@@ -46,7 +46,7 @@
 				<h:outputText value="#{item.duracion}" />  
 			</p:column>
 			
-			<p:column headerText="Situacion" style="width:10%; align:center;" sortBy="#{item.nombreSituacion}">       
+			<p:column headerText="Situación" style="width:10%; align:center;" sortBy="#{item.nombreSituacion}">       
 				<h:outputText value="#{item.nombreSituacion}" />  
 			</p:column>
 			
