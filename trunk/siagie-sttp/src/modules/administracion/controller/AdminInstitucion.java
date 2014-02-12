@@ -168,7 +168,7 @@ public class AdminInstitucion extends GenericController
 		}
 		else if(!validateEmpty(object.getCodigo()))
 		{
-			setMessageError("Debe ingresar el Codigo Modular.");			
+			setMessageError("Debe ingresar el Código Modular.");			
 			success = false;
 		}
 		else if(!validateEmpty(object.getNombre()))
@@ -183,32 +183,37 @@ public class AdminInstitucion extends GenericController
 		}
 		else if(flag && !validateSelect(provincia))
 		{
-			setMessageError("Debe seleccionar la Provincia de la Direccion de la Institucion.");			
+			setMessageError("Debe seleccionar la Provincia de la Dirección de la Institución.");			
 			success = false;
 		}
 		else if(flag && !validateSelect(departamento))
 		{
-			setMessageError("Debe seleccionar el Departamento de la Direccion de la Institucion.");			
+			setMessageError("Debe seleccionar el Departamento de la Dirección de la Institución.");			
 			success = false;
 		}
 		else if(flag && !validateSelect(beanLocal.getUbigeo()))
 		{
-			setMessageError("Debe seleccionar el Distrito de la Direccion de la Institucion.");			
+			setMessageError("Debe seleccionar el Distrito de la Dirección de la Institución.");			
 			success = false;
 		}
 		else if(flag && !validateEmpty(beanLocal.getDireccion()))
 		{
-			setMessageError("Debe ingresar la direccion de la Institucion.");			
+			setMessageError("Debe ingresar la dirección de la Institución.");			
 			success = false;
 		}
 		else if(flag && !validateEmpty(beanPersona.getCodigo()))
 		{
-			setMessageError("Debe ingresar el Codigo Modular del Encargado.");			
+			setMessageError("Debe ingresar el Código Modular del Encargado.");			
 			success = false;
 		}
 		else if(flag && !validateEmpty(beanPersona.getDni()))
 		{
-			setMessageError("Debe ingresar el numero de DNI del Encargado.");			
+			setMessageError("Debe ingresar el número de DNI del Encargado.");			
+			success = false;
+		}
+		else if(flag && !validateLength(beanPersona.getDni(), 8))
+		{
+			setMessageError("El número de DNI del Encargado no puede exceder los 8 dígitos.");			
 			success = false;
 		}
 		else if(flag && !validateEmpty(beanPersona.getNombres()))

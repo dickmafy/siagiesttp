@@ -44,18 +44,18 @@ public class SeguridadDaoJpa extends GenericDaoJpa implements SeguridadDao
 		item.setPerfil(Long.parseLong(objetos[1].toString()));
 		item.setUsuario(objetos[2].toString());
 		item.setContrasena(objetos[3].toString());
-
-		System.out.println(objetos[0]+"IDUSUARIO");
-		System.out.println(objetos[1]+"PERFIL");
-		System.out.println(objetos[2]+"LGINUSUARIO");
-		System.out.println(objetos[3]+"CONTRAsenia");
-		System.out.println(objetos[4]+"pertenecnai");
-		System.out.println(objetos[5]+"nombre");
-		System.out.println(objetos[6]+"acceso");
-		System.out.println(objetos[7]+"estado");
-		System.out.println(objetos[8]+"nombreperfil");
-		System.out.println(objetos[9]+"pestado perfil");
-		System.out.println(objetos[4]+"institup");
+		
+		//System.out.println(objetos[0]+"IDUSUARIO");
+		//System.out.println(objetos[1]+"PERFIL");
+		//System.out.println(objetos[2]+"LGINUSUARIO");
+		//System.out.println(objetos[3]+"CONTRAsenia");
+		//System.out.println(objetos[4]+"pertenecnai");
+		//System.out.println(objetos[5]+"nombre");
+		//System.out.println(objetos[6]+"acceso");
+		//System.out.println(objetos[7]+"estado");
+		//System.out.println(objetos[8]+"nombreperfil");
+		//System.out.println(objetos[9]+"pestado perfil");
+		//System.out.println(objetos[4]+"institup");
 		//System.exit(-1);
 		if(objetos[4]!=null)	{item.setPertenencia(Long.parseLong(objetos[4].toString()));}
 		if(objetos[5]!=null)    {item.setNombres(objetos[5].toString());}
