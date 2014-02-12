@@ -193,6 +193,9 @@ public class AdminLocal extends GenericController {
 		} else if (!validateSelect(departamento)) {
 			setMessageError("Debe seleccionar el Departamento del Local.");
 			success = false;
+		} else if (!validateSelect(object.getEncargado())) {
+			setMessageError("Debe seleccionar el Encargado del Local.");
+			success = false;
 		} else if (!validateSelect(object.getUbigeo())) {
 			setMessageError("Debe seleccionar el Distrito del Local.");
 			success = false;
