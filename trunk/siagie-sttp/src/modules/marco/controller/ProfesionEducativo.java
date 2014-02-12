@@ -18,12 +18,17 @@ public class ProfesionEducativo extends GenericController
 	private List<ReferenteEducativo> contenidoList;
 	private List<ReferenteEducativo> transversalList;
 	private List<ReferenteEducativo> contenidoTList;
+	private List<ReferenteEducativo> capacitacionList;
+	private List<ReferenteEducativo> contenidoCList;
 	
 	private List<SelectItem> moduloProfesionalList;
 	private List<SelectItem> capacidadProfesionalList;
 	
 	private List<SelectItem> moduloTransversalList;
 	private List<SelectItem> capacidadTransversalList;
+	
+	private List<SelectItem> moduloCapacitacionList;
+	private List<SelectItem> capacidadCapacitacionList;
 	
 	private Long tipo=0L,profesion;
 	private String nombreProfesion, pagina;
@@ -55,6 +60,8 @@ public class ProfesionEducativo extends GenericController
 		contenidoList=new ArrayList<ReferenteEducativo>();
 		transversalList=new ArrayList<ReferenteEducativo>();
 		contenidoTList=new ArrayList<ReferenteEducativo>();
+		capacitacionList=new ArrayList<ReferenteEducativo>();
+		contenidoCList=new ArrayList<ReferenteEducativo>();
 		
 		for(int i=0; i<educativoList.size(); i++)
 		{
@@ -66,10 +73,16 @@ public class ProfesionEducativo extends GenericController
 			{transversalList.add(educativoList.get(i));}
 			if(educativoList.get(i).getTipo().longValue()==4L && educativoList.get(i).getEstado().longValue()!=Constante.ROW_STATUS_DELETE.longValue())
 			{contenidoTList.add(educativoList.get(i));}
+			if(educativoList.get(i).getTipo().longValue()==5L && educativoList.get(i).getEstado().longValue()!=Constante.ROW_STATUS_DELETE.longValue())
+			{capacitacionList.add(educativoList.get(i));}
+			if(educativoList.get(i).getTipo().longValue()==6L && educativoList.get(i).getEstado().longValue()!=Constante.ROW_STATUS_DELETE.longValue())
+			{contenidoCList.add(educativoList.get(i));}
 		}
 		educativoList=null;
 		fillModuloTransversal();
 		fillModuloProfesional();
+		fillModuloCapacitacion();
+		
 	}
 	
 	public void setting() throws Exception
@@ -88,6 +101,10 @@ public class ProfesionEducativo extends GenericController
 		if(tipo.longValue()==7L)	{ref.setTipo(3L);}
 		if(tipo.longValue()==8L)	{ref.setTipo(3L);}
 		if(tipo.longValue()==9L)	{ref.setTipo(4L);}
+		if(tipo.longValue()==10L)	{ref.setTipo(5L);}
+		if(tipo.longValue()==11L)	{ref.setTipo(5L);}
+		if(tipo.longValue()==12L)	{ref.setTipo(5L);}
+		if(tipo.longValue()==13L)	{ref.setTipo(6L);}
 		setBean(ref);
 		ref=null;
 	}
@@ -108,7 +125,7 @@ public class ProfesionEducativo extends GenericController
 			if(esquemaList.get(i).getNivelB().longValue()==0L && esquemaList.get(i).getNivelC().longValue()==0L)
 			{list.add(esquemaList.get(i));}
 		}
-		moduloProfesionalList=getListSelectItem(list, "nivelA", "descripcion", true);
+		moduloProfesionalList=getListSelectItem(list, "nivelA", "titulo", true);
 		list=null;
 	}
 	public void fillCapacidadProfesional() throws Exception
@@ -131,7 +148,7 @@ public class ProfesionEducativo extends GenericController
 			if(transversalList.get(i).getNivelB().longValue()==0L && transversalList.get(i).getNivelC().longValue()==0L)
 			{list.add(transversalList.get(i));}
 		}
-		moduloTransversalList=getListSelectItem(list, "nivelA", "descripcion", true);
+		moduloTransversalList=getListSelectItem(list, "nivelA", "titulo", true);
 		list=null;
 	}
 	public void fillCapacidadTransversal() throws Exception
@@ -145,7 +162,29 @@ public class ProfesionEducativo extends GenericController
 		capacidadTransversalList=getListSelectItem(list, "nivelB", "descripcion", true);
 		list=null;
 	}
-	
+		
+	public void fillModuloCapacitacion() throws Exception
+	{
+		List<ReferenteEducativo> list=new ArrayList<ReferenteEducativo>();
+		for(int i=0; i<capacitacionList.size(); i++)
+		{
+			if(capacitacionList.get(i).getNivelB().longValue()==0L && capacitacionList.get(i).getNivelC().longValue()==0L)
+			{list.add(capacitacionList.get(i));}
+		}
+		moduloCapacitacionList=getListSelectItem(list, "nivelA", "titulo", true);
+		list=null;
+	}
+	public void fillCapacidadCapacitacion() throws Exception
+	{
+		List<ReferenteEducativo> list=new ArrayList<ReferenteEducativo>();
+		for(int i=0; i<capacitacionList.size(); i++)
+		{
+			if(capacitacionList.get(i).getNivelA().longValue()==((ReferenteEducativo)getBean()).getNivelA() && capacitacionList.get(i).getNivelB().longValue()!=0L && capacitacionList.get(i).getNivelC().longValue()==0L)
+			{list.add(capacitacionList.get(i));}
+		}
+		capacidadCapacitacionList=getListSelectItem(list, "nivelB", "descripcion", true);
+		list=null;
+	}
 	
 	@Override
 	public boolean validation() throws Exception 
@@ -208,5 +247,40 @@ public class ProfesionEducativo extends GenericController
 	
 	public Long getTipo() 																{return tipo;}
 	public void setTipo(Long tipo) 														{this.tipo = tipo;}
+
+	public List<ReferenteEducativo> getCapacitacionList() {
+		return capacitacionList;
+	}
+
+	public void setCapacitacionList(List<ReferenteEducativo> capacitacionList) {
+		this.capacitacionList = capacitacionList;
+	}
+
+	public List<ReferenteEducativo> getContenidoCList() {
+		return contenidoCList;
+	}
+
+	public void setContenidoCList(List<ReferenteEducativo> contenidoCList) {
+		this.contenidoCList = contenidoCList;
+	}
+
+	public List<SelectItem> getModuloCapacitacionList() {
+		return moduloCapacitacionList;
+	}
+
+	public void setModuloCapacitacionList(List<SelectItem> moduloCapacitacionList) {
+		this.moduloCapacitacionList = moduloCapacitacionList;
+	}
+
+	public List<SelectItem> getCapacidadCapacitacionList() {
+		return capacidadCapacitacionList;
+	}
+
+	public void setCapacidadCapacitacionList(
+			List<SelectItem> capacidadCapacitacionList) {
+		this.capacidadCapacitacionList = capacidadCapacitacionList;
+	}
+	
+	
 
 } 
