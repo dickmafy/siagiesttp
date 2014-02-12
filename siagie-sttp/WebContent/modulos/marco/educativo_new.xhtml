@@ -31,6 +31,10 @@
 	         		<f:selectItem itemLabel="Capacidad Terminal del Módulo Transversal" 		itemValue="7" />
 	         		<f:selectItem itemLabel="Criterio de Evaluación del Módulo Transversal" 	itemValue="8" />
 	         		<f:selectItem itemLabel="Contenido Base del Módulo Transversal" 			itemValue="9" />
+	         		<f:selectItem itemLabel="Módulo de Capacitación"						 		itemValue="10" /> 
+	         		<f:selectItem itemLabel="Capacidad Terminal del Módulo de Capacitación" 		itemValue="11" />
+	         		<f:selectItem itemLabel="Criterio de Evaluación del Módulo de Capacitación" 	itemValue="12" />
+	         		<f:selectItem itemLabel="Contenido Base del Módulo de Capacitación" 			itemValue="13" />
 	         		<p:ajax event="change" update=":frmNew" listener="#{profesionEducativo.setting}"/>
 	    			</p:selectOneMenu>
 				</td>
@@ -50,8 +54,8 @@
 				<f:selectItems value="#{profesionEducativo.capacidadProfesionalList}" />
 			</p:selectOneMenu>	
 			
-			<p:outputLabel for="txtModTra" value="Modulo Transversal" rendered="#{profesionEducativo.tipo gt 6}"/>
-   			<p:selectOneMenu id="txtModTra" value="#{profesionEducativo.bean.nivelA}" style="width:600px;" rendered="#{profesionEducativo.tipo gt 6}">
+			<p:outputLabel for="txtModTra" value="Modulo Transversal" rendered="#{profesionEducativo.tipo gt 6 and profesionEducativo.tipo lt 10}"/>
+   			<p:selectOneMenu id="txtModTra" value="#{profesionEducativo.bean.nivelA}" style="width:600px;" rendered="#{profesionEducativo.tipo gt 6 and profesionEducativo.tipo lt 10}">
 				<f:selectItems value="#{profesionEducativo.moduloTransversalList}"/>
 				<p:ajax event="change" listener="#{profesionEducativo.fillCapacidadTransversal}" update="txtCapTra"/>
 			</p:selectOneMenu>	
@@ -61,8 +65,19 @@
 				<f:selectItems value="#{profesionEducativo.capacidadTransversalList}"/>
 			</p:selectOneMenu>	
 			
-			<p:outputLabel for="txtNom" value="Nombre" rendered="#{profesionEducativo.tipo eq 2 or profesionEducativo.tipo eq 6}"/>
-			<p:inputText id="txtNom" value="#{profesionEducativo.bean.titulo}" style="width:736px;" rendered="#{profesionEducativo.tipo eq 2 or profesionEducativo.tipo eq 6}"/>
+			<p:outputLabel for="txtModCap" value="Modulo de Capacitación" rendered="#{profesionEducativo.tipo gt 10}"/>
+   			<p:selectOneMenu id="txtModCap" value="#{profesionEducativo.bean.nivelA}" style="width:600px;" rendered="#{profesionEducativo.tipo gt 10}">
+				<f:selectItems value="#{profesionEducativo.moduloCapacitacionList}"/>
+				<p:ajax event="change" listener="#{profesionEducativo.fillCapacidadCapacitacion}" update="txtCapCap"/>
+			</p:selectOneMenu>	
+			
+			<p:outputLabel for="txtCapCap" value="Capacidad Terminal" rendered="#{profesionEducativo.tipo eq 12}"/>
+			<p:selectOneMenu id="txtCapCap" value="#{profesionEducativo.bean.nivelB}" style="width:600px;" rendered="#{profesionEducativo.tipo eq 12}">
+				<f:selectItems value="#{profesionEducativo.capacidadCapacitacionList}"/>
+			</p:selectOneMenu>
+			
+			<p:outputLabel for="txtNom" value="Nombre" rendered="#{profesionEducativo.tipo eq 2 or profesionEducativo.tipo eq 6 or profesionEducativo.tipo eq 10}"/>
+			<p:inputText id="txtNom" value="#{profesionEducativo.bean.titulo}" style="width:736px;" rendered="#{profesionEducativo.tipo eq 2 or profesionEducativo.tipo eq 6 or profesionEducativo.tipo eq 10}"/>
 			
 			<p:outputLabel for="txtDes" value="Descripción"/>
 			<p:inputTextarea id="txtDes" value="#{profesionEducativo.bean.descripcion}" rows="10" cols="140" autoResize="false"/>

@@ -51,7 +51,7 @@
 			
     		</p:tab>
     		
-    		<p:tab id="tabBas" title="Contenidos Básicos - Profesionales">
+    		<p:tab id="tabBas" title="Cont. Básicos - Profesionales">
 			
 				<p:dataTable id="contenidoList" var="item" value="#{profesionEducativo.contenidoList}"
 	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true" scrollable="true">
@@ -100,7 +100,7 @@
 				</p:dataTable> 
     		</p:tab>
     		
-    		<p:tab id="tabBasT" title="Contenidos Básicos - Transversales">
+    		<p:tab id="tabBasT" title="Cont. Básicos - Transversales">
 			
 				<p:dataTable id="contenidoTList" var="item" value="#{profesionEducativo.contenidoTList}"
 	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true" scrollable="true">
@@ -118,7 +118,54 @@
 				</p:dataTable> 
     		</p:tab>
     		
+    		<p:tab id="tabCap" title="Modulos de Capacitación">
+			
+				<p:dataTable id="capacitacionList" var="item" value="#{profesionEducativo.capacitacionList}" 
+	   			emptyMessage="#{constante.LIST_EMPTY}"  rowIndexVar="rowNumber" scrollable="true" >
+	     		
+	     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">
+	     			<h:outputText value="MODT#{item.nivelA}: #{item.titulo}" title="MÓDULO TRANSVERSAL #{item.nivelA}: #{item.titulo} - #{item.descripcion}" rendered="#{item.nivelB eq 0 and item.nivelC eq 0}" style="font-weight:bold"/>
+					<h:outputText value="    CT#{item.nivelB}: #{item.descripcion}" title="CAPACIDAD TERMINAL #{item.nivelB}: #{item.descripcion}" rendered="#{item.nivelB ne 0 and item.nivelC eq 0}"/>
+					<h:outputText value="        CE#{item.nivelC}: #{item.descripcion}" title="CRITERIO DE EVALUACIÓN #{item.nivelC}: #{item.descripcion}" rendered="#{item.nivelC ne 0}"/>
+				</p:column>	
+				
+				<p:column headerText="Opciones" style="width:10%">
+					<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{profesionEducativo.nativeLoad}" ajax="false">
+						<f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" />
+					</p:commandButton>
+					<p:commandButton icon="icn_item_disable" 	title="Habilitar" 		action="#{profesionEducativo.nativeEnabled}"	 ajax="false"	
+	                	update=":frmNew:tabOption:capacidadList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_DISABLED}">
+	                	 <f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" /> 
+	                </p:commandButton>
+	                <p:commandButton icon="icn_item_enable" 	title="Deshabilitar" 	action="#{profesionEducativo.nativeDisabled}" ajax="false"	
+	                	update=":frmNew:tabOption:capacidadList, :frmList:msgSystem"	rendered="#{item.estado eq constante.ROW_STATUS_ENABLED}">
+	                	 <f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" /> 
+	                </p:commandButton>
+					<p:commandButton icon="icn_item_remove" 	title="Eliminar" 		oncomplete="dialogDel.show()">
+						<f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" />				
+					</p:commandButton> 
+	        	</p:column>
+	        	      	        
+				</p:dataTable> 
+    		</p:tab>
     		
+    		<p:tab id="tabBasC" title="Cont. Básicos - Capacitación">
+			
+				<p:dataTable id="contenidoCList" var="item" value="#{profesionEducativo.contenidoCList}"
+	   			emptyMessage="#{constante.LIST_EMPTY}" resizableColumns="true" scrollable="true">
+	     		
+	     		<p:column headerText="Descripción" style="width:90%; align:center;" sortBy="#{item.descripcion}">   
+	     			<h:outputText value="MODT#{item.nivelA}: #{item.descripcion}" title="MODT#{item.nivelA}: #{item.descripcion}"/>					
+				</p:column>	
+				
+				<p:column headerText="Opciones" style="width:10%">
+					<p:commandButton icon="icn_item_update" 	title="Actualizar" 		action="#{profesionEducativo.nativeLoad}" ajax="false" >
+						<f:setPropertyActionListener value="#{item}" target="#{profesionEducativo.beanSelected}" />
+					</p:commandButton>
+	        	</p:column>
+	        	      	        
+				</p:dataTable> 
+    		</p:tab>
     		
     		
     		
