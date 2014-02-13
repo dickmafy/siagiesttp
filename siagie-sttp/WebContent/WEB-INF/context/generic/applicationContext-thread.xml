@@ -12,25 +12,4 @@
 		<property name="queueCapacity" value="3000" />	
 	</bean>
 	
-	<!--Cron Task Defined-->
-    <bean id="jobDetailBean" class="org.springframework.scheduling.quartz.JobDetailBean">
-        <property name="jobClass" value="modules.seguridad.jobs.BackupLog" />
-    </bean>
-	
-	<!--CronJobs Defined-->
-    <bean id="cronTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
-        <property name="jobDetail" ref="jobDetailBean" />
-        <property name="cronExpression" value="0/59 * * * * ?" />
-    <!--Daily Morning 2-->
-    </bean>
-    
-	<!--Trigger for cronJobs-->
-    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="triggers">
-            <list>
-                <ref bean="cronTriggerBean"/>
-            </list>
-        </property>
-    </bean>
-	
 </beans>
