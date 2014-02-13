@@ -19,6 +19,7 @@ public class ProfesionItinerario extends GenericController
 	private Double totalCreditos;
 	private Long totalHoras;
 	private Long totalHorasSemestre;
+	private Long tipoModulo;
 	
 	public void init(Long id, String nombre, String returnPage) throws Exception 
 	{
@@ -30,8 +31,8 @@ public class ProfesionItinerario extends GenericController
 		nombreProfesion=nombre;
 		pagina=returnPage;
 		modulo=-1L;
-		moduloList=myService.listarReferenteEducativo(profesion, 1, 1L);
-		
+		//moduloList=myService.listarReferenteEducativo(profesion, 1, 1L);
+		moduloList=null;
 		page_new="itnr_new";
 		page_update="itnr_update";
 		page_main="itnr_list";
@@ -41,6 +42,11 @@ public class ProfesionItinerario extends GenericController
 	
 	public void returnPage() throws Exception
 	{forward(pagina);}
+	
+	public void selectTipo() throws Exception
+	{
+		moduloList=myService.listarReferenteEducativo(profesion, 1, tipoModulo);		
+	}
 	
 	@Override
 	public void defaultList() throws Exception
@@ -137,4 +143,14 @@ public class ProfesionItinerario extends GenericController
 
 	public Long getTotalHorasSemestre() 									{return totalHorasSemestre;}
 	public void setTotalHorasSemestre(Long totalHorasSemestre) 				{this.totalHorasSemestre = totalHorasSemestre;}
+
+	public Long getTipoModulo() {
+		return tipoModulo;
+	}
+
+	public void setTipoModulo(Long tipoModulo) {
+		this.tipoModulo = tipoModulo;
+	}
+	
+	
 } 
