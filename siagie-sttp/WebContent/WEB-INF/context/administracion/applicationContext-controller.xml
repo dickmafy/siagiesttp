@@ -5,72 +5,72 @@
 	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<!-- Administración -->
-	<bean id="adminInstitucion" class="modules.administracion.controller.AdminInstitucion" scope="session" parent="genericController">	  
+	<bean id="adminInstitucion" class="modules.administracion.controller.AdminInstitucion" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="myService" 	ref="seguridadService"/>
 	    <property name="bean" ref="institucion"/>	  
 	</bean>
 	
-	<bean id="adminConvenio" class="modules.administracion.controller.AdminConvenio" scope="session" parent="genericController">	  
+	<bean id="adminConvenio" class="modules.administracion.controller.AdminConvenio" scope="${spring.scope.dao}" parent="genericController">	  
 	   	<property name="myService" 	ref="seguridadService"/>
 	    <property name="bean" ref="convenio"/>	  
 	</bean>
 	
-	<bean id="adminLocal" class="modules.administracion.controller.AdminLocal" scope="session" parent="genericController">	  
+	<bean id="adminLocal" class="modules.administracion.controller.AdminLocal" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="myService" 	ref="seguridadService"/>
 	    <property name="bean" ref="local"/>	  
 	</bean>
 	
-	<bean id="adminAmbiente" class="modules.administracion.controller.AdminAmbiente" scope="session" parent="genericController">	  
+	<bean id="adminAmbiente" class="modules.administracion.controller.AdminAmbiente" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="myService" 	ref="seguridadService"/>
 	    <property name="bean" ref="ambiente"/>	  
 	</bean>
 	
-	<bean id="adminOferta" class="modules.administracion.controller.AdminOferta" scope="session" parent="genericController">	  
+	<bean id="adminOferta" class="modules.administracion.controller.AdminOferta" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="myService" 	ref="seguridadService"/>
 	    <property name="bean" ref="oferta"/>	  
 	</bean>
 	
-	<bean id="adminPersonal" class="modules.administracion.controller.AdminPersonal" scope="session" parent="genericController">	  
+	<bean id="adminPersonal" class="modules.administracion.controller.AdminPersonal" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="myService" 	ref="seguridadService"/>
 	    <property name="bean" ref="local"/>	  
 	</bean>
 	
-	<bean id="adminHistorialAcademico" class="modules.administracion.controller.AdminHistorialAcademico" scope="session" parent="genericController">	  
+	<bean id="adminHistorialAcademico" class="modules.administracion.controller.AdminHistorialAcademico" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="myService" 	ref="seguridadService"/>
 	    <property name="bean" ref="historialAcademico"/>	  
 	</bean>
 	
-	<bean id="adminHistorialLaboral" class="modules.administracion.controller.AdminHistorialLaboral" scope="session" parent="genericController">	  
+	<bean id="adminHistorialLaboral" class="modules.administracion.controller.AdminHistorialLaboral" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="myService" 	ref="seguridadService"/>
 	    <property name="bean" ref="historialLaboral"/>	  
 	</bean>
 	
-	<bean id="adminUsuario" class="modules.administracion.controller.AdminUsuario" scope="session" parent="genericController">	  
+	<bean id="adminUsuario" class="modules.administracion.controller.AdminUsuario" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="myService" 	ref="seguridadService"/>
 	    <property name="bean" ref="local"/>	  
 	</bean>
 	
-	<bean id="adminProceso" class="modules.administracion.controller.AdminProceso" scope="session" parent="genericController">	  
+	<bean id="adminProceso" class="modules.administracion.controller.AdminProceso" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="myService" 	ref="seguridadService"/>
 	    <property name="bean" ref="cronograma"/>	  
 	</bean>
 	
-	<bean id="solicitudController" class="modules.administracion.controller.SolicitudController" scope="session" parent="genericController">
+	<bean id="solicitudController" class="modules.administracion.controller.SolicitudController" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="seguridadService"/>	  
 	    <property name="bean" ref="solicitud"/>	  
 	</bean>
 	
-	<bean id="adminMetaCetpro" class="modules.administracion.controller.AdminMetaOcupacional" scope="session" parent="genericController">
+	<bean id="adminMetaCetpro" class="modules.administracion.controller.AdminMetaOcupacional" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="seguridadService"/>	  
 	    <property name="bean" 		ref="metaOcupacional"/>	  
 	</bean>
 	
-	<bean id="adminMetaInstitucional" class="modules.administracion.controller.AdminMetaInstitucional" scope="session" parent="genericController">
+	<bean id="adminMetaInstitucional" class="modules.administracion.controller.AdminMetaInstitucional" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="seguridadService"/>	  
 	    <property name="bean" 		ref="metaInstitucional"/>	  
 	</bean>
 	
-	<bean id="adminMetaInstitucionalDetalle" class="modules.administracion.controller.AdminMetaInstitucionalDetalle" scope="session" parent="genericController">
+	<bean id="adminMetaInstitucionalDetalle" class="modules.administracion.controller.AdminMetaInstitucionalDetalle" scope="${spring.scope.dao}" parent="genericController">
 	    <property name="bean" 		ref="metaDetalle"/>
 	    <property name="myService" 	ref="horarioService"/>	  
 	</bean>

@@ -8,17 +8,17 @@
 	   http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 	
 	<!-- Modulo Mantenimiento -->
-	<bean id="banco" 	 		class="modules.mantenimiento.domain.Banco" 					scope="session" />
-	<bean id="recurso" 	 		class="modules.mantenimiento.domain.Recurso" 				scope="session" />
-	<bean id="puesto" 	 		class="modules.mantenimiento.domain.Puesto" 				scope="session" />
-	<bean id="feriadoGeneral"  	class="modules.mantenimiento.domain.FeriadoGeneral"			scope="session" />
-	<bean id="supervision"		class="modules.mantenimiento.domain.Supervision"			scope="session" />
-	<bean id="requisito"		class="modules.mantenimiento.domain.Requisito"				scope="session" />
-	<bean id="empresa"   		class="modules.mantenimiento.domain.Empresa"				scope="session" />
-	<bean id="negocio"   		class="modules.mantenimiento.domain.GiroNegocio"			scope="session" />
-	<bean id="colegio"   		class="modules.mantenimiento.domain.Colegio"			    scope="session" />
-	<bean id="especialidad"   	class="modules.mantenimiento.domain.Especialidad"			scope="session" />
-	<bean id="resolucion"   	class="modules.mantenimiento.domain.Resolucion" 			scope="session" />
-	<bean id="profession"   	class="modules.mantenimiento.domain.Profession" 			scope="session" />
-	<bean id="tipoAmbiente"   	class="modules.mantenimiento.domain.TipoAmbiente" 			scope="session" />
+	<bean id="banco" 	 		class="modules.mantenimiento.domain.Banco" 					scope="${spring.scope.bean}" />
+	<bean id="recurso" 	 		class="modules.mantenimiento.domain.Recurso" 				scope="${spring.scope.bean}" />
+	<bean id="puesto" 	 		class="modules.mantenimiento.domain.Puesto" 				scope="${spring.scope.bean}" />
+	<bean id="feriadoGeneral"  	class="modules.mantenimiento.domain.FeriadoGeneral"			scope="${spring.scope.bean}" />
+	<bean id="supervision"		class="modules.mantenimiento.domain.Supervision"			scope="${spring.scope.bean}" />
+	<bean id="requisito"		class="modules.mantenimiento.domain.Requisito"				scope="${spring.scope.bean}" />
+	<bean id="empresa"   		class="modules.mantenimiento.domain.Empresa"				scope="${spring.scope.bean}" />
+	<bean id="negocio"   		class="modules.mantenimiento.domain.GiroNegocio"			scope="${spring.scope.bean}" />
+	<bean id="colegio"   		class="modules.mantenimiento.domain.Colegio"			    scope="${spring.scope.bean}" />
+	<bean id="especialidad"   	class="modules.mantenimiento.domain.Especialidad"			scope="${spring.scope.bean}" />
+	<bean id="resolucion"   	class="modules.mantenimiento.domain.Resolucion" 			scope="${spring.scope.bean}" />
+	<bean id="profession"   	class="modules.mantenimiento.domain.Profession" 			scope="${spring.scope.bean}" />
+	<bean id="tipoAmbiente"   	class="modules.mantenimiento.domain.TipoAmbiente" 			scope="${spring.scope.bean}" />
 </beans>

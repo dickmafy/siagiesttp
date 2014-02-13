@@ -5,58 +5,58 @@
 	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<!-- Modulo Mantenimiento -->
-	<bean id="mantenimientoRecurso" class="modules.mantenimiento.controller.MantenimientoRecurso" scope="session" parent="genericController">
+	<bean id="mantenimientoRecurso" class="modules.mantenimiento.controller.MantenimientoRecurso" scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="recurso"/>   	    
 	</bean>
 	
-	<bean id="mantenimientoPuesto" class="modules.mantenimiento.controller.MantenimientoPuesto" scope="session" parent="genericController">
+	<bean id="mantenimientoPuesto" class="modules.mantenimiento.controller.MantenimientoPuesto" scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="puesto"/>   	    
 	</bean>
 	
-	<bean id="mantenimientoFeriado" class="modules.mantenimiento.controller.MantenimientoFeriado" scope="session" parent="genericController">
+	<bean id="mantenimientoFeriado" class="modules.mantenimiento.controller.MantenimientoFeriado" scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="feriadoGeneral"/>   	    
 	</bean>
 	
-	<bean id="mantenimientoSupervision" class="modules.mantenimiento.controller.MantenimientoSupervision" scope="session" parent="genericController">
+	<bean id="mantenimientoSupervision" class="modules.mantenimiento.controller.MantenimientoSupervision" scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="supervision"/>
 	   	<property name="myService" 	ref="generalService"/>   	    
 	</bean>
 		
-	<bean id="mantenimientoRequisito" class="modules.mantenimiento.controller.MantenimientoRequisito" scope="session" parent="genericController">
+	<bean id="mantenimientoRequisito" class="modules.mantenimiento.controller.MantenimientoRequisito" scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="requisito"/>   	    
 	</bean>
 	
-	<bean id="mantenimientoEmpresa" class="modules.mantenimiento.controller.MantenimientoEmpresa" scope="session" parent="genericController">
+	<bean id="mantenimientoEmpresa" class="modules.mantenimiento.controller.MantenimientoEmpresa" scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="empresa"/>  
 	   	 <property name="myService" 	ref="seguridadService"/> 	    
 	</bean>
 	
-	<bean id="mantenimientoNegocio" class="modules.mantenimiento.controller.MantenimientoNegocio"    scope="session" parent="genericController">
+	<bean id="mantenimientoNegocio" class="modules.mantenimiento.controller.MantenimientoNegocio"    scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="negocio"/>   	    
 	</bean>
 	
-	<bean id="mantenimientoBanco" class="modules.mantenimiento.controller.MantenimientoBanco" scope="session" parent="genericController">
+	<bean id="mantenimientoBanco" class="modules.mantenimiento.controller.MantenimientoBanco" scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="banco"/>   	    
 	</bean>
 	
-	<bean id="mantenimientoEspecialidad" class="modules.mantenimiento.controller.MantenimientoEspecialidad" scope="session" parent="genericController">
+	<bean id="mantenimientoEspecialidad" class="modules.mantenimiento.controller.MantenimientoEspecialidad" scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="especialidad"/>   	    
 	</bean>
 	
-	<bean id="mantenimientoColegio" class="modules.mantenimiento.controller.MantenimientoColegio" scope="session" parent="genericController">
+	<bean id="mantenimientoColegio" class="modules.mantenimiento.controller.MantenimientoColegio" scope="${spring.scope.dao}" parent="genericController">
 		<property name="bean" 		ref="colegio"/>
 			<property name="myService" 	ref="seguridadService"/>
 	</bean>
 	
-	<bean id="mantenimientoResolucion" class="modules.mantenimiento.controller.MantenimientoResolucion" scope="session" parent="genericController">
+	<bean id="mantenimientoResolucion" class="modules.mantenimiento.controller.MantenimientoResolucion" scope="${spring.scope.dao}" parent="genericController">
 	    <property name="bean" ref="resolucion"/>	  
 	</bean>
 	
-	<bean id="mantenimientoProfesion" class="modules.mantenimiento.controller.MantenimientoProfesion" scope="session" parent="genericController">
+	<bean id="mantenimientoProfesion" class="modules.mantenimiento.controller.MantenimientoProfesion" scope="${spring.scope.dao}" parent="genericController">
 	    <property name="bean" ref="profession"/>	  
 	</bean>
 	
-	<bean id="mantenimientoAmbiente" class="modules.mantenimiento.controller.MantenimientoAmbiente" scope="session" parent="genericController">
+	<bean id="mantenimientoAmbiente" class="modules.mantenimiento.controller.MantenimientoAmbiente" scope="${spring.scope.dao}" parent="genericController">
 	    <property name="bean" ref="tipoAmbiente"/>	  
 	</bean>
 </beans>

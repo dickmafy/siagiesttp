@@ -5,33 +5,33 @@
 	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<!-- Modulo Mantenimiento -->
-	<bean id="planificacionDocumento" class="modules.planificacion.controller.PlanificacionDocumento" scope="session" parent="genericController">
+	<bean id="planificacionDocumento" class="modules.planificacion.controller.PlanificacionDocumento" scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="documento"/>
 		<property name="myService" 	ref="planificacionService"/>   	    
 	</bean>
 	
-	<bean id="planificacionObjetivo" class="modules.planificacion.controller.PlanificacionObjetivo" scope="session" parent="genericController">
+	<bean id="planificacionObjetivo" class="modules.planificacion.controller.PlanificacionObjetivo" scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="objetivo"/>
 		<property name="myService" 	ref="planificacionService"/>   	    
 	</bean>
 	
-	<bean id="planificacionIndicador" class="modules.planificacion.controller.PlanificacionIndicador" scope="session" parent="genericController">
+	<bean id="planificacionIndicador" class="modules.planificacion.controller.PlanificacionIndicador" scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="indicador"/>
 		<property name="myService" 	ref="planificacionService"/>   	    
 	</bean>
 	
-	<bean id="planificacionRecurso" class="modules.planificacion.controller.PlanificacionRecurso" scope="session" parent="genericController">
+	<bean id="planificacionRecurso" class="modules.planificacion.controller.PlanificacionRecurso" scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="recursoPropio"/>
 		<property name="myService" 	ref="planificacionService"/>   	    
 	</bean>
 	
 	
-	<bean id="planificacionResultado" class="modules.planificacion.controller.PlanificacionResultado" scope="session" parent="genericController">
+	<bean id="planificacionResultado" class="modules.planificacion.controller.PlanificacionResultado" scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="resultado"/>
 		<property name="myService" 	ref="planificacionService"/>   	    
 	</bean>
 	
-	<bean id="planificacionCapacitacion" class="modules.planificacion.controller.PlanificacionCapacitacion" scope="session" parent="genericController">
+	<bean id="planificacionCapacitacion" class="modules.planificacion.controller.PlanificacionCapacitacion" scope="${spring.scope.dao}" parent="genericController">
 	   	<property name="bean" ref="capacitacion"/>
 		<property name="myService" 	ref="planificacionService"/>   	    
 	</bean>

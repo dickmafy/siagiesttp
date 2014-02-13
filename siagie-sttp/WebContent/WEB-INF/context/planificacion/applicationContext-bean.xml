@@ -7,12 +7,12 @@
 	   http://www.springframework.org/schema/aop
 	   http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 	
-	<bean id="documento" 	 	class="modules.planificacion.domain.Documento"				scope="session" />
-	<bean id="estrategia" 	 	class="modules.planificacion.domain.Estategia"				scope="session" />
-	<bean id="objetivo" 	 	class="modules.planificacion.domain.Objetivo"				scope="session" />
-	<bean id="indicador" 	 	class="modules.planificacion.domain.Indicador"				scope="session" />
-	<bean id="resultado" 	 	class="modules.planificacion.domain.Resultado"				scope="session" />	
-	<bean id="recursoPropio" 	class="modules.planificacion.domain.RecursoPropio"			scope="session" />
-	<bean id="capacitacion" 	class="modules.planificacion.domain.Capacitacion"			scope="session" />
+	<bean id="documento" 	 	class="modules.planificacion.domain.Documento"				scope="${spring.scope.bean}" />
+	<bean id="estrategia" 	 	class="modules.planificacion.domain.Estrategia"				scope="${spring.scope.bean}" />
+	<bean id="objetivo" 	 	class="modules.planificacion.domain.Objetivo"				scope="${spring.scope.bean}" />
+	<bean id="indicador" 	 	class="modules.planificacion.domain.Indicador"				scope="${spring.scope.bean}" />
+	<bean id="resultado" 	 	class="modules.planificacion.domain.Resultado"				scope="${spring.scope.bean}" />	
+	<bean id="recursoPropio" 	class="modules.planificacion.domain.RecursoPropio"			scope="${spring.scope.bean}" />
+	<bean id="capacitacion" 	class="modules.planificacion.domain.Capacitacion"			scope="${spring.scope.bean}" />
 	
 </beans>
