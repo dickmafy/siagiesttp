@@ -8,14 +8,14 @@
 	   http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 	
 	<!-- Módulos de Admision -->
-	<bean id="proceso"  			class="modules.admision.domain.Proceso"  			scope="session" />
-	<bean id="procesoSesion" 		class="modules.admision.domain.Proceso" 			scope="session" />
-	<bean id="persona"  			class="modules.admision.domain.Persona"  			scope="session" />	
-	<bean id="postulante"  			class="modules.admision.domain.Postulante" 			scope="session" />
-	<bean id="retiro"  			    class="modules.admision.domain.Retiro" 			    scope="session" />
-	<bean id="matricula"  			class="modules.admision.domain.Matricula" 			scope="session" />
-	<bean id="matriculaRequisito"  	class="modules.admision.domain.MatriculaRequisito" 	scope="session" />
-	<bean id="requisitos"  			class="modules.admision.domain.Requisitos" 			scope="session" />
-	<bean id="interesado" 			class="modules.admision.domain.Interesado" 			scope="session"	/>
-	<bean id="interes" 				class="modules.admision.domain.Interes" 			scope="session"	/>
+	<bean id="proceso"  			class="modules.admision.domain.Proceso"  			scope="${spring.scope.bean}" />
+	<bean id="procesoSesion" 		class="modules.admision.domain.Proceso" 			scope="${spring.scope.bean}" />
+	<bean id="persona"  			class="modules.admision.domain.Persona"  			scope="${spring.scope.bean}" />	
+	<bean id="postulante"  			class="modules.admision.domain.Postulante" 			scope="${spring.scope.bean}" />
+	<bean id="retiro"  			    class="modules.admision.domain.Retiro" 			    scope="${spring.scope.bean}" />
+	<bean id="matricula"  			class="modules.admision.domain.Matricula" 			scope="${spring.scope.bean}" />
+	<bean id="matriculaRequisito"  	class="modules.admision.domain.MatriculaRequisito" 	scope="${spring.scope.bean}" />
+	<bean id="requisitos"  			class="modules.admision.domain.Requisitos" 			scope="${spring.scope.bean}" />
+	<bean id="interesado" 			class="modules.admision.domain.Interesado" 			scope="${spring.scope.bean}"	/>
+	<bean id="interes" 				class="modules.admision.domain.Interes" 			scope="${spring.scope.bean}"	/>
 </beans>

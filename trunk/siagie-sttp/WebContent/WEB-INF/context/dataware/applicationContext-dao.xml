@@ -5,35 +5,35 @@
 	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<bean id="seguridadDAO" class="dataware.dao.impl.SeguridadDaoJpa"
-		scope="singleton" parent="genericDAO">
+		scope="${spring.scope.bean}" parent="genericDAO">
 	</bean>
 	
 	<bean id="generalDAO" class="dataware.dao.impl.GeneralDaoJpa"
-		scope="singleton" parent="seguridadDAO">
+		scope="${spring.scope.bean}" parent="seguridadDAO">
 	</bean>		
 	
 	<bean id="institucionDAO" class="dataware.dao.impl.InstitucionDaoJpa"
-		scope="singleton" parent="generalDAO">
+		scope="${spring.scope.bean}" parent="generalDAO">
 	</bean>
 	
 	<bean id="marcoDAO" class="dataware.dao.impl.MarcoDaoJpa"
-		scope="singleton" parent="institucionDAO">
+		scope="${spring.scope.bean}" parent="institucionDAO">
 	</bean>
 	
 	<bean id="horarioDAO" class="dataware.dao.impl.HorarioDaoJpa"
-		scope="singleton" parent="marcoDAO">
+		scope="${spring.scope.bean}" parent="marcoDAO">
 	</bean>
 	
 	<bean id="intranetDAO" class="dataware.dao.impl.IntranetDaoJpa"
-		scope="singleton" parent="horarioDAO">
+		scope="${spring.scope.bean}" parent="horarioDAO">
 	</bean>
 	
 	<bean id="admisionDAO" class="dataware.dao.impl.AdmisionDaoJpa"
-		scope="singleton" parent="horarioDAO">
+		scope="${spring.scope.bean}" parent="horarioDAO">
 	</bean>
 	
 	<bean id="planificacionDAO" class="dataware.dao.impl.PlanificacionDaoJpa"
-		scope="singleton" parent="generalDAO">
+		scope="${spring.scope.bean}" parent="generalDAO">
 	</bean>
 
 </beans>

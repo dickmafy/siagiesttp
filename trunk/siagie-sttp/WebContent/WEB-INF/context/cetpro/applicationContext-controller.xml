@@ -4,50 +4,50 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean id="cetproOferta" class="modules.cetpro.controller.CetproOferta" scope="session" parent="genericController">	  
+	<bean id="cetproOferta" class="modules.cetpro.controller.CetproOferta" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="bean" ref="ofertaEducativa"/>
 	  	<property name="myService" 	ref="seguridadService"/>
 	</bean>
 	
-	<bean id="cetproOfertaEducativa" class="modules.cetpro.controller.CetproOfertaEducativa" scope="session" parent="genericController">	  
+	<bean id="cetproOfertaEducativa" class="modules.cetpro.controller.CetproOfertaEducativa" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="bean" ref="profesion"/>
 	  	<property name="myService" 	ref="seguridadService"/>
 	</bean>
 	
-	<bean id="cetproItinerario" class="modules.cetpro.controller.CetproItinerario" scope="session" parent="genericController">	  
+	<bean id="cetproItinerario" class="modules.cetpro.controller.CetproItinerario" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="bean" ref="itinerarioCetpro"/>
 	  	<property name="myService" 	ref="seguridadService"/>
 	</bean>
 	
-	<bean id="cetproContex" class="modules.cetpro.controller.CetproContex" scope="session" parent="genericController">	  
+	<bean id="cetproContex" class="modules.cetpro.controller.CetproContex" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="bean" ref="contexCetpro"/>
 	  	<property name="myService" 	ref="seguridadService"/>
 	</bean>
 	
-	<bean id="cetproCrono" class="modules.cetpro.controller.CetproCrono" scope="session" parent="genericController">	  
+	<bean id="cetproCrono" class="modules.cetpro.controller.CetproCrono" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="bean" ref="cronoCetpro"/>
 	  	<property name="myService" 	ref="seguridadService"/>
 	</bean>
 	
-	<bean id="cetproProg" class="modules.cetpro.controller.CetproProg" scope="session" parent="genericController">	  
+	<bean id="cetproProg" class="modules.cetpro.controller.CetproProg" scope="${spring.scope.dao}" parent="genericController">	  
 	    <property name="bean" ref="progCetpro"/>
 	  	<property name="myService" 	ref="seguridadService"/>
 	</bean>
 	
 	<!-- Nuevos -->
 
-	<bean id="cetproInteresado" class="modules.cetpro.controller.CetproInteresado" scope="session" parent="genericController">
+	<bean id="cetproInteresado" class="modules.cetpro.controller.CetproInteresado" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="admisionService"/>	  
 	    <property name="bean" 		ref="interesado"/>	  
 	</bean>
 	
 	
-	<bean id="cetproMatricula" class="modules.cetpro.controller.CetproMatriculaController" scope="session" parent="genericController">
+	<bean id="cetproMatricula" class="modules.cetpro.controller.CetproMatriculaController" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="admisionService"/>
 		<property name="bean"		ref="matriculaCetpro"/>		
 	</bean>
 	
-	<bean id="cetproSilabo" class="modules.cetpro.controller.CetproSilabo" scope="session" parent="genericController">
+	<bean id="cetproSilabo" class="modules.cetpro.controller.CetproSilabo" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="admisionService"/>	  
 	    <property name="bean" 		ref="proceso"/>	  
 	</bean>
@@ -55,23 +55,23 @@
 
 	<!-- CETPRO DOCENTE -->
 	
-	<bean id="cetproDocenteList" class="modules.cetpro.controller.CetproDocenteList" scope="session" parent="genericController">
+	<bean id="cetproDocenteList" class="modules.cetpro.controller.CetproDocenteList" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="admisionService"/>
 		<property name="bean"		ref="cetproMatriculaFecha"/>	
 	</bean>
 	
-	<bean id="cetproDocenteListFecha" class="modules.cetpro.controller.CetproDocenteListFecha" scope="session" parent="genericController">
+	<bean id="cetproDocenteListFecha" class="modules.cetpro.controller.CetproDocenteListFecha" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="admisionService"/>	  
 	    <property name="bean" 		ref="cetproMatriculaFecha"/>	  
 	</bean>
 
-	<bean id="cetproDocenteListNota" class="modules.cetpro.controller.CetproDocenteListNota" scope="session" parent="genericController">
+	<bean id="cetproDocenteListNota" class="modules.cetpro.controller.CetproDocenteListNota" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="intranetService"/>
 	    <property name="myServiceAdmision" 	ref="admisionService"/>
 	    <property name="bean" 		ref="cetproNota"/>		  	  
 	</bean>
 	
-	<bean id="cetproDocenteListCt" class="modules.cetpro.controller.CetproDocenteListCt" scope="session" parent="genericController">
+	<bean id="cetproDocenteListCt" class="modules.cetpro.controller.CetproDocenteListCt" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="intranetService"/>
 	    <property name="myServiceAdmision" 	ref="admisionService"/>
 	    <property name="bean" 		ref="cetproCt"/>		  

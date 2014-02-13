@@ -8,15 +8,15 @@
 	   http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 	
 	<!-- Marco Educativo -->
-	<bean id="capacidad" 						class="modules.marco.domain.Capacidad" 				scope="session" />
-	<bean id="familia" 							class="modules.marco.domain.Familia" 				scope="session" />
-	<bean id="profesion" 						class="modules.marco.domain.Profesion" 				scope="session" />
-	<bean id="referenteEducativo"			 	class="modules.marco.domain.ReferenteEducativo" 	scope="session" />
-	<bean id="referenteProductivo" 				class="modules.marco.domain.ReferenteProductivo" 	scope="session" />
-	<bean id="referenteTransversal"				class="modules.marco.domain.ReferenteTransversal" 	scope="session" />
-	<bean id="referenteItinerario" 				class="modules.marco.domain.Itinerario" 			scope="session" />
-	<bean id="referenteItinerarioTransversal" 	class="modules.marco.domain.ItinerarioTransversal" 	scope="session" />
-	<bean id="requisitoAmbiente"			 	class="modules.marco.domain.RequisitoAmbiente" 		scope="session" />
-	<bean id="transversal" 						class="modules.marco.domain.Transversal"		 	scope="session" />
+	<bean id="capacidad" 						class="modules.marco.domain.Capacidad" 				scope="${spring.scope.bean}" />
+	<bean id="familia" 							class="modules.marco.domain.Familia" 				scope="${spring.scope.bean}" />
+	<bean id="profesion" 						class="modules.marco.domain.Profesion" 				scope="${spring.scope.bean}" />
+	<bean id="referenteEducativo"			 	class="modules.marco.domain.ReferenteEducativo" 	scope="${spring.scope.bean}" />
+	<bean id="referenteProductivo" 				class="modules.marco.domain.ReferenteProductivo" 	scope="${spring.scope.bean}" />
+	<bean id="referenteTransversal"				class="modules.marco.domain.ReferenteTransversal" 	scope="${spring.scope.bean}" />
+	<bean id="referenteItinerario" 				class="modules.marco.domain.Itinerario" 			scope="${spring.scope.bean}" />
+	<bean id="referenteItinerarioTransversal" 	class="modules.marco.domain.ItinerarioTransversal" 	scope="${spring.scope.bean}" />
+	<bean id="requisitoAmbiente"			 	class="modules.marco.domain.RequisitoAmbiente" 		scope="${spring.scope.bean}" />
+	<bean id="transversal" 						class="modules.marco.domain.Transversal"		 	scope="${spring.scope.bean}" />
 	
 </beans>

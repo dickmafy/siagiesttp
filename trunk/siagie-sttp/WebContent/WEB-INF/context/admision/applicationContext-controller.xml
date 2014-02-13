@@ -5,37 +5,37 @@
 	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<!-- Admisión -->
-	<bean id="admisionProceso" class="modules.admision.controller.AdmisionProceso" scope="session" parent="genericController">
+	<bean id="admisionProceso" class="modules.admision.controller.AdmisionProceso" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="admisionService"/>	  
 	    <property name="bean" 		ref="proceso"/>	  
 	</bean>
 	
-	<bean id="admisionInteresado" class="modules.admision.controller.AdmisionInteresado" scope="session" parent="genericController">
+	<bean id="admisionInteresado" class="modules.admision.controller.AdmisionInteresado" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="admisionService"/>	  
 	    <property name="bean" 		ref="interesado"/>
 	</bean>
 		
-	<bean id="admisionPostulante" class="modules.admision.controller.AdmisionPostulante" scope="session" parent="genericController">
+	<bean id="admisionPostulante" class="modules.admision.controller.AdmisionPostulante" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="admisionService"/>	
 	    <property name="bean" 		ref="postulante"/>	  
 	</bean>
 	
-	<bean id="admisionIngresante" class="modules.admision.controller.AdmisionIngresante" scope="session" parent="genericController">
+	<bean id="admisionIngresante" class="modules.admision.controller.AdmisionIngresante" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="admisionService"/>	  
 	    <property name="bean" 		ref="postulante"/>	  
 	</bean>
 	
-	<bean id="admisionMatricula" class="modules.admision.controller.AdmisionMatricula" scope="session" parent="genericController">
+	<bean id="admisionMatricula" class="modules.admision.controller.AdmisionMatricula" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="admisionService"/>
 		<property name="bean"		ref="matricula"/>		
 	</bean>
 	
-	<bean id="admisionRetiro" class="modules.admision.controller.AdmisionRetiro" scope="session" parent="genericController">
+	<bean id="admisionRetiro" class="modules.admision.controller.AdmisionRetiro" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="admisionService"/>
 		<property name="bean"       ref="retiro"/>		
 	</bean>
 	
-	<bean id="admisionRequisito" class="modules.admision.controller.AdmisionRequisito" scope="session" parent="genericController">
+	<bean id="admisionRequisito" class="modules.admision.controller.AdmisionRequisito" scope="${spring.scope.dao}" parent="genericController">
 		<property name="myService" 	ref="admisionService"/>
 		<property name="bean"       ref="requisitos"/>		
 	</bean>

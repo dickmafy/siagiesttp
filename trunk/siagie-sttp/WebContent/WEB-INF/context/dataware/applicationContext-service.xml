@@ -6,7 +6,7 @@
 
 	<bean id="seguridadService" name="seguridadService"
 		class="dataware.service.impl.SeguridadServiceImpl"
-		parent="genericService" scope="singleton">
+		parent="genericService" scope="${spring.scope.bean}">
 		<property name="seguridadDao">
 			<ref bean="seguridadDAO" />
 		</property>
@@ -14,7 +14,7 @@
 	
 	<bean id="generalService" name="generalService"
 		class="dataware.service.impl.GeneralServiceImpl"
-		parent="seguridadService" scope="singleton">
+		parent="seguridadService" scope="${spring.scope.bean}">
 		<property name="generalDao">
 			<ref bean="generalDAO" />
 		</property>
@@ -22,7 +22,7 @@
 	
 	<bean id="institucionService" name="institucionService"
 		class="dataware.service.impl.InstitucionServiceImpl"
-		parent="generalService" scope="singleton">
+		parent="generalService" scope="${spring.scope.bean}">
 		<property name="institucionDao">
 			<ref bean="institucionDAO" />
 		</property>
@@ -30,7 +30,7 @@
 	
 	<bean id="marcoService" name="marcoService"
 		class="dataware.service.impl.MarcoServiceImpl"
-		parent="institucionService" scope="singleton">
+		parent="institucionService" scope="${spring.scope.bean}">
 		<property name="marcoDao">
 			<ref bean="marcoDAO" />
 		</property>
@@ -38,7 +38,7 @@
 	
 	<bean id="horarioService" name="horarioService"
 		class="dataware.service.impl.HorarioServiceImpl"
-		parent="marcoService" scope="singleton">
+		parent="marcoService" scope="${spring.scope.bean}">
 		<property name="horarioDao">
 			<ref bean="horarioDAO" />
 		</property>
@@ -46,7 +46,7 @@
 	
 	<bean id="intranetService" name="intranetService"
 		class="dataware.service.impl.IntranetServiceImpl"
-		parent="horarioService" scope="singleton">
+		parent="horarioService" scope="${spring.scope.bean}">
 		<property name="intranetDao">
 			<ref bean="intranetDAO" />
 		</property>
@@ -54,7 +54,7 @@
 	
 	<bean id="admisionService" name="admisionService"
 		class="dataware.service.impl.AdmisionServiceImpl"
-		parent="horarioService" scope="singleton">
+		parent="horarioService" scope="${spring.scope.bean}">
 		<property name="admisionDao">
 			<ref bean="admisionDAO" />
 		</property>
@@ -62,7 +62,7 @@
 	
 	<bean id="planificacionService" name="planificacionService"
 		class="dataware.service.impl.PlanificacionServiceImpl"
-		parent="genericService" scope="singleton">
+		parent="genericService" scope="${spring.scope.bean}">
 		<property name="planificacionDao">
 			<ref bean="planificacionDAO" />
 		</property>

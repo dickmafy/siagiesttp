@@ -8,21 +8,21 @@
 	   http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 	
 	<!-- Módulos de Administración -->
-	<bean id="institucion"  	class="modules.administracion.domain.Institucion"  		scope="session" />
-	<bean id="local"   			class="modules.administracion.domain.Local" 			scope="session" />
-	<bean id="personal"  		class="modules.administracion.domain.Personal" 			scope="session" />
-	<bean id="oferta"  			class="modules.administracion.domain.Oferta" 			scope="session" />
-	<bean id="cronograma" 		class="modules.administracion.domain.Cronograma"		scope="session" />
-	<bean id="solicitud"   		class="modules.administracion.domain.Solicitud"  		scope="session" />
-	<bean id="convenio"   		class="modules.administracion.domain.Convenio"     		scope="session" />
-	<bean id="feriado"   		class="modules.administracion.domain.Feriado" 			scope="session" />
-	<bean id="ambiente"   		class="modules.administracion.domain.Ambiente" 			scope="session" />
-	<bean id="ambienteUnidad" 	class="modules.administracion.domain.AmbienteUnidad"	scope="session" />
-	<bean id="metaDetalle"	 	class="modules.administracion.domain.MetaDetalle"	 	scope="session" />
-	<bean id="metaOcupacional" 	class="modules.administracion.domain.MetaOcupacional" 	scope="session" />
-	<bean id="metaInstitucional" 	class="modules.administracion.domain.MetaInstitucional" 	scope="session" />
-	<bean id="historialAcademico" 	class="modules.administracion.domain.HistorialAcademico" 	scope="session" />
-	<bean id="historialLaboral" 	class="modules.administracion.domain.HistorialLaboral" 		scope="session" />
+	<bean id="institucion"  	class="modules.administracion.domain.Institucion"  		scope="${spring.scope.bean}" />
+	<bean id="local"   			class="modules.administracion.domain.Local" 			scope="${spring.scope.bean}" />
+	<bean id="personal"  		class="modules.administracion.domain.Personal" 			scope="${spring.scope.bean}" />
+	<bean id="oferta"  			class="modules.administracion.domain.Oferta" 			scope="${spring.scope.bean}" />
+	<bean id="cronograma" 		class="modules.administracion.domain.Cronograma"		scope="${spring.scope.bean}" />
+	<bean id="solicitud"   		class="modules.administracion.domain.Solicitud"  		scope="${spring.scope.bean}" />
+	<bean id="convenio"   		class="modules.administracion.domain.Convenio"     		scope="${spring.scope.bean}" />
+	<bean id="feriado"   		class="modules.administracion.domain.Feriado" 			scope="${spring.scope.bean}" />
+	<bean id="ambiente"   		class="modules.administracion.domain.Ambiente" 			scope="${spring.scope.bean}" />
+	<bean id="ambienteUnidad" 	class="modules.administracion.domain.AmbienteUnidad"	scope="${spring.scope.bean}" />
+	<bean id="metaDetalle"	 	class="modules.administracion.domain.MetaDetalle"	 	scope="${spring.scope.bean}" />
+	<bean id="metaOcupacional" 	class="modules.administracion.domain.MetaOcupacional" 	scope="${spring.scope.bean}" />
+	<bean id="metaInstitucional" 	class="modules.administracion.domain.MetaInstitucional" 	scope="${spring.scope.bean}" />
+	<bean id="historialAcademico" 	class="modules.administracion.domain.HistorialAcademico" 	scope="${spring.scope.bean}" />
+	<bean id="historialLaboral" 	class="modules.administracion.domain.HistorialLaboral" 		scope="${spring.scope.bean}" />
 	
 	
 </beans>

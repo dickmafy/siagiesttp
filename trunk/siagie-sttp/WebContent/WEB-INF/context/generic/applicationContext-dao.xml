@@ -4,8 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean id="genericDAO" class="com.belogick.factory.util.dao.impl.GenericDaoJpa"
-		scope="singleton">
+	<bean id="genericDAO" class="com.belogick.factory.util.dao.impl.GenericDaoJpa" scope="singleton">
 		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
 	</bean>	
 </beans>

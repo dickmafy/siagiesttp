@@ -5,8 +5,7 @@
 	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<bean id="genericService" name="genericService"
-		class="com.belogick.factory.util.service.impl.GenericServiceImpl"
-		scope="singleton">
+		class="com.belogick.factory.util.service.impl.GenericServiceImpl" scope="singleton">
 		<property name="genericDAO">
 			<ref bean="genericDAO" />
 		</property>

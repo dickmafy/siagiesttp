@@ -8,20 +8,20 @@
 	   http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 	
 	<!-- Modulo Cetpro -->
-	<bean id="ofertaEducativa" 		class="modules.cetpro.domain.OfertaEducativa" 		scope="session" />
-	<bean id="itinerarioCetpro" 	class="modules.cetpro.domain.ItinerarioCetpro" 		scope="session" />
-	<bean id="contexCetpro" 		class="modules.cetpro.domain.Contextualizacion" 	scope="session" />
-	<bean id="tramiteCetpro" 		class="modules.cetpro.domain.Tramite" 				scope="session" />
-	<bean id="progCetpro" 			class="modules.cetpro.domain.Programacion" 			scope="session" />
-	<bean id="cronoCetpro" 			class="modules.cetpro.domain.Calendario" 			scope="session" />
-	<bean id="matriculaCetpro"		class="modules.cetpro.domain.CetproMatricula"		scope="session" />
+	<bean id="ofertaEducativa" 		class="modules.cetpro.domain.OfertaEducativa" 		scope="${spring.scope.bean}" />
+	<bean id="itinerarioCetpro" 	class="modules.cetpro.domain.ItinerarioCetpro" 		scope="${spring.scope.bean}" />
+	<bean id="contexCetpro" 		class="modules.cetpro.domain.Contextualizacion" 	scope="${spring.scope.bean}" />
+	<bean id="tramiteCetpro" 		class="modules.cetpro.domain.Tramite" 				scope="${spring.scope.bean}" />
+	<bean id="progCetpro" 			class="modules.cetpro.domain.Programacion" 			scope="${spring.scope.bean}" />
+	<bean id="cronoCetpro" 			class="modules.cetpro.domain.Calendario" 			scope="${spring.scope.bean}" />
+	<bean id="matriculaCetpro"		class="modules.cetpro.domain.CetproMatricula"		scope="${spring.scope.bean}" />
 
 	<!-- CETPRO Nuevas Tablas -->
-	<bean id="cetproMatriculaFecha"		class="modules.cetpro.domain.CetproMatriculaFecha"		scope="session" />
-	<bean id="cetproAsistencia"		class="modules.cetpro.domain.CetproAsistencia"		scope="session" />
-	<bean id="cetproMatriculaAlumno" class="modules.cetpro.domain.CetproMatriculaAlumno"		scope="session" />
-	<bean id="cetproNota"		class="modules.cetpro.domain.CetproNota"		scope="session" />
-	<bean id="cetproCt"		class="modules.cetpro.domain.CetproCt"		scope="session" />
+	<bean id="cetproMatriculaFecha"		class="modules.cetpro.domain.CetproMatriculaFecha"		scope="${spring.scope.bean}" />
+	<bean id="cetproAsistencia"		class="modules.cetpro.domain.CetproAsistencia"				scope="${spring.scope.bean}" />
+	<bean id="cetproMatriculaAlumno" class="modules.cetpro.domain.CetproMatriculaAlumno"		scope="${spring.scope.bean}" />
+	<bean id="cetproNota"		class="modules.cetpro.domain.CetproNota"						scope="${spring.scope.bean}" />
+	<bean id="cetproCt"		class="modules.cetpro.domain.CetproCt"								scope="${spring.scope.bean}" />
 	
 
 </beans>

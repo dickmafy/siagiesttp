@@ -5,29 +5,29 @@
 	   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<!-- Seguridad y Accesos -->
-	<bean id="loginController" class="modules.seguridad.controller.LoginController" scope="session" parent="genericController">
+	<bean id="loginController" class="modules.seguridad.controller.LoginController" scope="${spring.scope.dao}" parent="genericController">
 	    <property name="myService" 	ref="seguridadService"/>
 	    <property name="beanSearch" ref="usuario"/>	    
 	</bean>
 	
-	<bean id="opcionController" class="modules.seguridad.controller.OpcionController" scope="session" parent="genericController"/>
+	<bean id="opcionController" class="modules.seguridad.controller.OpcionController" scope="${spring.scope.dao}" parent="genericController"/>
 	
-	<bean id="usuarioController" class="modules.seguridad.controller.UsuarioController" scope="session" parent="genericController">
+	<bean id="usuarioController" class="modules.seguridad.controller.UsuarioController" scope="${spring.scope.dao}" parent="genericController">
 		<property name="bean" 		ref="usuario"/>
 		<property name="myService" 	ref="seguridadService"/>
 	</bean>
 	
-	<bean id="perfilController" class="modules.seguridad.controller.PerfilController" scope="session" parent="genericController">
+	<bean id="perfilController" class="modules.seguridad.controller.PerfilController" scope="${spring.scope.dao}" parent="genericController">
 		<property name="bean" 		ref="perfil"/>
 		<property name="myService" 	ref="seguridadService"/>
 	</bean>
 	
-	<bean id="variableController" class="modules.seguridad.controller.VariableController" scope="session" parent="genericController">
+	<bean id="variableController" class="modules.seguridad.controller.VariableController" scope="${spring.scope.dao}" parent="genericController">
 		<property name="bean" 		ref="variable"/>
 		<property name="myService" 	ref="seguridadService"/>
 	</bean>
 	
-	<bean id="logController" class="modules.seguridad.controller.LogController" scope="session" parent="genericController">
+	<bean id="logController" class="modules.seguridad.controller.LogController" scope="${spring.scope.dao}" parent="genericController">
 		<property name="bean" 		ref="log"/>
 	</bean>
 </beans>

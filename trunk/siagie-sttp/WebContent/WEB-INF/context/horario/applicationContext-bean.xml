@@ -7,19 +7,19 @@
 	   http://www.springframework.org/schema/aop
 	   http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 	
-	<bean id="seccion"         		class="modules.horario.domain.Seccion" 	            scope="session" />
-	<bean id="silabo" 				class="modules.horario.domain.Silabo"				scope="session" />
-	<bean id="silaboNota" 			class="modules.horario.domain.SilaboNota"			scope="session" />
-	<bean id="horarioRecuperacion" 	class="modules.horario.domain.HorarioRecuperacion"	scope="session" />
-	<bean id="horarioDistribucion" 	class="modules.horario.domain.HorarioDistribucion"	scope="session" />
-	<bean id="horarioDocente" 		class="modules.horario.domain.HorarioDocente"		scope="session" />
-	<bean id="asistenciaDocente" 	class="modules.horario.domain.AsistenciaDocente"	scope="session" />
+	<bean id="seccion"         		class="modules.horario.domain.Seccion" 	            scope="${spring.scope.bean}" />
+<!-- 	<bean id="silabo" 				class="modules.horario.domain.Silabo"				scope="${spring.scope.bean}" /> -->
+	<bean id="silaboNota" 			class="modules.horario.domain.SilaboNota"			scope="${spring.scope.bean}" />
+	<bean id="horarioRecuperacion" 	class="modules.horario.domain.HorarioRecuperacion"	scope="${spring.scope.bean}" />
+	<bean id="horarioDistribucion" 	class="modules.horario.domain.HorarioDistribucion"	scope="${spring.scope.bean}" />
+	<bean id="horarioDocente" 		class="modules.horario.domain.HorarioDocente"		scope="${spring.scope.bean}" />
+	<bean id="asistenciaDocente" 	class="modules.horario.domain.AsistenciaDocente"	scope="${spring.scope.bean}" />
 	
-	<bean id="silaboNotaAlumno" 	class="modules.horario.domain.SilaboNotaAlumno"	scope="session" />
-	<bean id="silaboUnidadCt" 	class="modules.horario.domain.SilaboUnidadCt"	scope="session" />
-	<bean id="asistenciaAlumnoCalendario" 	class="modules.horario.domain.AsistenciaAlumnoCalendario"	scope="session" />
-	<bean id="silaboAlumno" 	class="modules.horario.domain.SilaboAlumno"	scope="session" />
-	<bean id="silaboCalendario" 	class="modules.horario.domain.SilaboCalendario"	scope="session" />
-	<bean id="silaboCronograma" 	class="modules.horario.domain.SilaboCronograma"		scope="session" />
+	<bean id="silaboNotaAlumno" 	class="modules.horario.domain.SilaboNotaAlumno"						scope="${spring.scope.bean}" />
+	<bean id="silaboUnidadCt" 	class="modules.horario.domain.SilaboUnidadCt"							scope="${spring.scope.bean}" />
+	<bean id="asistenciaAlumnoCalendario" 	class="modules.horario.domain.AsistenciaAlumnoCalendario"	scope="${spring.scope.bean}" />
+	<bean id="silaboAlumno" 	class="modules.horario.domain.SilaboAlumno"								scope="${spring.scope.bean}" />
+	<bean id="silaboCalendario" 	class="modules.horario.domain.SilaboCalendario"						scope="${spring.scope.bean}" />
+	<bean id="silaboCronograma" 	class="modules.horario.domain.SilaboCronograma"						scope="${spring.scope.bean}" />
 	
 </beans>
