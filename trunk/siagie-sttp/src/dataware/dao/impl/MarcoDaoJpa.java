@@ -123,12 +123,13 @@ public class MarcoDaoJpa extends InstitucionDaoJpa implements MarcoDao
 		return lst;	
 	}
 	
-	public List<Itinerario> listarItinerario(Long profesion, Long modulo) throws Exception 
+	public List<Itinerario> listarItinerario(Long profesion, Long modulo, Long tipo) throws Exception 
 	{
 		List<Itinerario> lst=new ArrayList<Itinerario>();
-		Query consulta=createQuery("SELECT * FROM marco.lst_referente_itinerario(:profesion,:modulo)");
+		Query consulta=createQuery("SELECT * FROM marco.lst_referente_itinerario(:profesion,:modulo,:tipo)");
 		consulta.setParameter("profesion", Integer.parseInt(profesion.toString()));
 		consulta.setParameter("modulo", Integer.parseInt(modulo.toString()));
+		consulta.setParameter("tipo", Integer.parseInt(tipo.toString()));
 		List rst=consulta.list();
 		for(int i=0; i<rst.size(); i++)
 		{
@@ -146,6 +147,7 @@ public class MarcoDaoJpa extends InstitucionDaoJpa implements MarcoDao
 			field.setCreditos(Double.parseDouble(objetos[9].toString()));
 			field.setEstado(Long.parseLong(objetos[10].toString()));
 			if(objetos[11]!=null)	{field.setNombreModulo(objetos[11].toString());}
+			if(objetos[12]!=null)	{field.setTipoModulo(Long.parseLong(objetos[12].toString()));}
 			lst.add(field);
 			field=null;
 		}

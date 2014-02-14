@@ -33,8 +33,8 @@ public class MarcoServiceImpl extends InstitucionServiceImpl implements MarcoSer
 	public List<ReferenteEducativo> listarReferenteEducativo(Long profesion, int opcion, Long tipo) throws Exception
 	{return getMarcoDao().listarReferenteEducativo(profesion,opcion,tipo);}
 	
-	public List<Itinerario> listarItinerario(Long profesion, Long modulo) throws Exception 
-	{return getMarcoDao().listarItinerario(profesion,modulo);}
+	public List<Itinerario> listarItinerario(Long profesion, Long modulo, Long tipo) throws Exception 
+	{return getMarcoDao().listarItinerario(profesion,modulo, tipo);}
 	
 	public List<Transversal> listarReferenteTransversal(int opcion, Long modulo) throws Exception
 	{return getMarcoDao().listarReferenteTransversal(opcion,modulo);}

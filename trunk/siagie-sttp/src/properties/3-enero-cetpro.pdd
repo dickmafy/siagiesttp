@@ -2,7 +2,7 @@
 
 <DBMODEL Version="1.4" TYPE="PostgreSQL">
 
-<MODELSETTINGS MDDVERSION="1.2.11 (build 650)" ModelProject="SICAT" ModelName="SICAT" ModelCompany="APROLABII" ModelAuthor="Carlos Sanchez" ModelCopyright="Junio 2013" ModelVersion="" ModelVersionAI="0" ModelCreated="2013-05-07 22:17:38" ModelUpdated="2014-02-05 22:35:26" Description="" Annotation="" ZoomFac="100.00" XPos="0" YPos="0" PrintLink="" GenSettings="object GenSettings1: TGenSettings\n  TextCharCase = tccMixed\n  ModelCheck = True\n  DropIfExists = True\n  ISQL = False\n  DBOptions = [dbgoCreate, dbgoBeginScript, dbgoEndScript]\n  ViewOptions = [viewgoCreate, viewgoCreateRule]\n  SPOptions = [spgoCreate]\n  TableOptions = [tblgoCreate, tblgoDrop, tblgoBeginScript, tblgoEndScript, tblgoComment, tblgoCreatePK, tblgoCreateFK, tblgoCreateIndex, tblgoCreateRule, tblgoCreateTrigger, tblgoCreateCHECK]\n  OwnerOptions = [owngoSchema, owngoTable, owngoView, owngoSP, owngoSequence, owngoUDT]\n  ACLOptions = [aclgoSchema, aclgoTable, aclgoView, aclgoSP, aclgoSequence]\n  RoleCreate = True\n  RoleWhenCreate = rocrInScript\n  SQLTypeNames = False\nend\n" DisplaySettings="object DisplaySettings1: TDisplaySettings\n  ObjectsDisplay = [edoColumns, edoInhColumns, edoIndices, edoConstraints, edoTriggers, edoRules, edoColTypes, edoFKs, rdoRefName, spdoParameters, spdoResult, spdoParamTypes, spdoParamKind, vdoAttributes, vdoTargets, vdoRules]\n  Color = clWhite\n  ShowIcons = True\n  SnapGrid = True\n  DisplaySnap = True\n  SnapSize = 10\n  ShowPages = True\n  EntityFillColor = clWhite\n  EntityLineColor = clNavy\n  SPFillColor = 13499135\n  SPLineColor = clNavy\n  ViewFillColor = 3329434\n  ViewLineColor = clNavy\n  RefNotation = 0\n  RefColor = clNavy\n  RefLabelColor = clWhite\n  MinimapShapesStyle = mmssFillAndBorder\n  MinimapVisibleAreaStyle = mmvasBitmapShading\n  MinimapBackColor = clWhite\nend\n" DefaultDelete="3" DefaultUpdate="3" DefaultDataType="23" DefaultSchemaID="0" FKPrefix="" QueryDelimiter=";" DBQuoteCharacter="\A" EncloseNames="1" HPageCount="5" VPageCount="5" />
+<MODELSETTINGS MDDVERSION="1.2.11 (build 650)" ModelProject="SICAT" ModelName="SICAT" ModelCompany="APROLABII" ModelAuthor="Carlos Sanchez" ModelCopyright="Junio 2013" ModelVersion="" ModelVersionAI="0" ModelCreated="2013-05-07 22:17:38" ModelUpdated="2014-02-13 22:25:05" Description="" Annotation="" ZoomFac="100.00" XPos="0" YPos="0" PrintLink="" GenSettings="object GenSettings1: TGenSettings\n  TextCharCase = tccMixed\n  ModelCheck = True\n  DropIfExists = True\n  ISQL = False\n  DBOptions = [dbgoCreate, dbgoBeginScript, dbgoEndScript]\n  ViewOptions = [viewgoCreate, viewgoCreateRule]\n  SPOptions = [spgoCreate]\n  TableOptions = [tblgoCreate, tblgoDrop, tblgoBeginScript, tblgoEndScript, tblgoComment, tblgoCreatePK, tblgoCreateFK, tblgoCreateIndex, tblgoCreateRule, tblgoCreateTrigger, tblgoCreateCHECK]\n  OwnerOptions = [owngoSchema, owngoTable, owngoView, owngoSP, owngoSequence, owngoUDT]\n  ACLOptions = [aclgoSchema, aclgoTable, aclgoView, aclgoSP, aclgoSequence]\n  RoleCreate = True\n  RoleWhenCreate = rocrInScript\n  SQLTypeNames = False\nend\n" DisplaySettings="object DisplaySettings1: TDisplaySettings\n  ObjectsDisplay = [edoColumns, edoInhColumns, edoIndices, edoConstraints, edoTriggers, edoRules, edoColTypes, edoFKs, rdoRefName, spdoParameters, spdoResult, spdoParamTypes, spdoParamKind, vdoAttributes, vdoTargets, vdoRules]\n  Color = clWhite\n  ShowIcons = True\n  SnapGrid = True\n  DisplaySnap = True\n  SnapSize = 10\n  ShowPages = True\n  EntityFillColor = clWhite\n  EntityLineColor = clNavy\n  SPFillColor = 13499135\n  SPLineColor = clNavy\n  ViewFillColor = 3329434\n  ViewLineColor = clNavy\n  RefNotation = 0\n  RefColor = clNavy\n  RefLabelColor = clWhite\n  MinimapShapesStyle = mmssFillAndBorder\n  MinimapVisibleAreaStyle = mmvasBitmapShading\n  MinimapBackColor = clWhite\nend\n" DefaultDelete="3" DefaultUpdate="3" DefaultDataType="23" DefaultSchemaID="0" FKPrefix="" QueryDelimiter=";" DBQuoteCharacter="\A" EncloseNames="1" HPageCount="5" VPageCount="5" />
 
 <DATABASE Name="sicad" CharacterSet="" Collate="" CType="" Tablespace="" Owner="" Template="" Comments="Base de datos del Sistema la Gesti\243n Academica de las Instituciones Educativas Superior Tecnol\243gicas y T\233cnico Productivas" Description="Base de datos del Sistema la Gesti\243n Academica de las Instituciones Educativas Superior Tecnol\243gicas y T\233cnico Productivas" Annotation="" BeginScript="\n" EndScript="\n" Generate="0" />
 
@@ -217,7 +217,7 @@
 					<CONSTRAINTCOLUMN ID="2" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="1791" Name="uk_usuario_nombre" Kind="1" Expression="" ReferenceIndex="102640" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="1791" Name="uk_usuario_nombre" Kind="1" Expression="" ReferenceIndex="102792" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="22" />
 				</CONSTRAINTCOLUMNS>
@@ -229,7 +229,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102640" Name="uk_usuario_nombre_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="1791" FillFactor="0" Comments="">
+		<INDEX ID="102792" Name="uk_usuario_nombre_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="1791" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="usuario"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -254,7 +254,7 @@
 					<CONSTRAINTCOLUMN ID="4" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="1792" Name="uk_perfil_nombre" Kind="1" Expression="" ReferenceIndex="102641" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="1792" Name="uk_perfil_nombre" Kind="1" Expression="" ReferenceIndex="102793" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="5" />
 				</CONSTRAINTCOLUMNS>
@@ -266,7 +266,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102641" Name="uk_perfil_nombre_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="1792" FillFactor="0" Comments="">
+		<INDEX ID="102793" Name="uk_perfil_nombre_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="1792" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="nombre"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -505,7 +505,7 @@
 		<REFERENCE_END ID="57010" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="9397" Name="" Kind="2" Expression="" ReferenceIndex="102701" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="9397" Name="" Kind="2" Expression="" ReferenceIndex="102853" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="9379" />
 				</CONSTRAINTCOLUMNS>
@@ -515,7 +515,7 @@
 					<CONSTRAINTCOLUMN ID="9381" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="9383" Name="uk_personal_dni" Kind="1" Expression="" ReferenceIndex="102702" FillFactor="0" Comments="DNI es \250nico por cada persona." TablespaceID="0">
+			<CONSTRAINT ID="9383" Name="uk_personal_dni" Kind="1" Expression="" ReferenceIndex="102854" FillFactor="0" Comments="DNI es \250nico por cada persona." TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="9382" />
 				</CONSTRAINTCOLUMNS>
@@ -527,12 +527,12 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102701" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="9397" FillFactor="0" Comments="">
+		<INDEX ID="102853" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="9397" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_personal"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102702" Name="uk_personal_dni_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="9383" FillFactor="0" Comments="">
+		<INDEX ID="102854" Name="uk_personal_dni_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="9383" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="dni"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -587,7 +587,7 @@
 		<REFERENCE_END ID="15657" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="9433" Name="" Kind="2" Expression="" ReferenceIndex="102648" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="9433" Name="" Kind="2" Expression="" ReferenceIndex="102800" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="33868" />
 				</CONSTRAINTCOLUMNS>
@@ -607,7 +607,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102648" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="9433" FillFactor="0" Comments="">
+		<INDEX ID="102800" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="9433" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_requisitos"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -996,7 +996,7 @@
 					<CONSTRAINTCOLUMN ID="15586" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="15608" Name="uk_institucion_codigo" Kind="1" Expression="" ReferenceIndex="102712" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="15608" Name="uk_institucion_codigo" Kind="1" Expression="" ReferenceIndex="102864" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="15589" />
 				</CONSTRAINTCOLUMNS>
@@ -1008,7 +1008,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102712" Name="uk_institucion_codigo_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="15608" FillFactor="0" Comments="">
+		<INDEX ID="102864" Name="uk_institucion_codigo_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="15608" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="codigo"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -1047,13 +1047,13 @@
 					<CONSTRAINTCOLUMN ID="15634" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="15647" Name="uk_local_nombre" Kind="1" Expression="" ReferenceIndex="102645" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="15647" Name="uk_local_nombre" Kind="1" Expression="" ReferenceIndex="102797" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="15637" />
 					<CONSTRAINTCOLUMN ID="15648" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="15648" Name="uk_local_emcargado" Kind="1" Expression="" ReferenceIndex="102646" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="15648" Name="uk_local_emcargado" Kind="1" Expression="" ReferenceIndex="102798" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="15636" />
 				</CONSTRAINTCOLUMNS>
@@ -1065,12 +1065,12 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102645" Name="uk_local_nombre_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="15647" FillFactor="0" Comments="">
+		<INDEX ID="102797" Name="uk_local_nombre_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="15647" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="nombre,pk_institucion"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102646" Name="uk_local_emcargado_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="15648" FillFactor="0" Comments="">
+		<INDEX ID="102798" Name="uk_local_emcargado_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="15648" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="encargado"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -1130,12 +1130,12 @@
 					<CONSTRAINTCOLUMN ID="16704" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="16719" Name="uk_empresa_ruc" Kind="1" Expression="" ReferenceIndex="102651" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="16719" Name="uk_empresa_ruc" Kind="1" Expression="" ReferenceIndex="102803" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="16705" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="16720" Name="uk_empresa_razon" Kind="1" Expression="" ReferenceIndex="102652" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="16720" Name="uk_empresa_razon" Kind="1" Expression="" ReferenceIndex="102804" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="16706" />
 				</CONSTRAINTCOLUMNS>
@@ -1147,12 +1147,12 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102651" Name="uk_empresa_ruc_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="16719" FillFactor="0" Comments="">
+		<INDEX ID="102803" Name="uk_empresa_ruc_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="16719" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="ruc"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102652" Name="uk_empresa_razon_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="16720" FillFactor="0" Comments="">
+		<INDEX ID="102804" Name="uk_empresa_razon_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="16720" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="razon_social"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -1278,7 +1278,7 @@
 					<CONSTRAINTCOLUMN ID="32635" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="32780" Name="uk_oferta_educativa" Kind="1" Expression="" ReferenceIndex="102676" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="32780" Name="uk_oferta_educativa" Kind="1" Expression="" ReferenceIndex="102828" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="18051" />
 					<CONSTRAINTCOLUMN ID="18052" />
@@ -1291,7 +1291,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102676" Name="uk_oferta_educativa_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="32780" FillFactor="0" Comments="">
+		<INDEX ID="102828" Name="uk_oferta_educativa_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="32780" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_institucion,pk_profesion"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -1399,7 +1399,7 @@
 					<CONSTRAINTCOLUMN ID="20260" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="20280" Name="uk_persona_documento" Kind="1" Expression="" ReferenceIndex="102708" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="20280" Name="uk_persona_documento" Kind="1" Expression="" ReferenceIndex="102860" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="20261" />
 					<CONSTRAINTCOLUMN ID="20262" />
@@ -1412,7 +1412,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102708" Name="uk_persona_documento_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="20280" FillFactor="0" Comments="">
+		<INDEX ID="102860" Name="uk_persona_documento_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="20280" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="documento_tipo,documento_nro"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -1468,7 +1468,7 @@
 		<REFERENCE_END ID="57906" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="21117" Name="" Kind="2" Expression="" ReferenceIndex="102697" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="21117" Name="" Kind="2" Expression="" ReferenceIndex="102849" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="21107" />
 				</CONSTRAINTCOLUMNS>
@@ -1486,7 +1486,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102697" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="21117" FillFactor="0" Comments="">
+		<INDEX ID="102849" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="21117" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_postulante"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -1514,7 +1514,7 @@
 		<REFERENCE_END ID="21126" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="21128" Name="" Kind="2" Expression="" ReferenceIndex="102661" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="21128" Name="" Kind="2" Expression="" ReferenceIndex="102813" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="21125" />
 				</CONSTRAINTCOLUMNS>
@@ -1533,7 +1533,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102661" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="21128" FillFactor="0" Comments="">
+		<INDEX ID="102813" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="21128" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_matricula"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -1556,7 +1556,7 @@
 					<CONSTRAINTCOLUMN ID="33876" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="33021" Name="uk_matreq" Kind="1" Expression="" ReferenceIndex="102662" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="33021" Name="uk_matreq" Kind="1" Expression="" ReferenceIndex="102814" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="22961" />
 					<CONSTRAINTCOLUMN ID="22959" />
@@ -1569,7 +1569,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102662" Name="uk_matreq_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="33021" FillFactor="0" Comments="">
+		<INDEX ID="102814" Name="uk_matreq_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="33021" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_matricula,pk_requisito"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -1599,7 +1599,7 @@
 		<REFERENCE_END ID="27896" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="23095" Name="" Kind="2" Expression="" ReferenceIndex="102696" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="23095" Name="" Kind="2" Expression="" ReferenceIndex="102848" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="22964" />
 				</CONSTRAINTCOLUMNS>
@@ -1618,7 +1618,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102696" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="23095" FillFactor="0" Comments="">
+		<INDEX ID="102848" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="23095" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_proceso"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -1728,7 +1728,7 @@
 					<CONSTRAINTCOLUMN ID="32639" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="32781" Name="uk_cronograma_periodo" Kind="1" Expression="" ReferenceIndex="102667" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="32781" Name="uk_cronograma_periodo" Kind="1" Expression="" ReferenceIndex="102819" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="32620" />
 					<CONSTRAINTCOLUMN ID="32619" />
@@ -1742,7 +1742,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102667" Name="uk_cronograma_periodo_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="32781" FillFactor="0" Comments="">
+		<INDEX ID="102819" Name="uk_cronograma_periodo_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="32781" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_institucion,periodo,tipo"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -1813,6 +1813,7 @@
 			<COLUMN ID="33918" Name="horas_total" Pos="8" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="0" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments="Total de horas de la unidad didactica"></COLUMN>
 			<COLUMN ID="33919" Name="creditos" Pos="9" Datatype="700" Type="float4" Width="0" Prec="0" NotNull="0" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments="Total de cr\233ditos de la unidad didactica"></COLUMN>
 			<COLUMN ID="47521" Name="estado" Pos="10" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="0" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments="Estado de la unidad didactica"></COLUMN>
+			<COLUMN ID="99022" Name="tipo_modulo" Pos="11" Datatype="23" Type="int4" Width="0" Prec="0" NotNull="0" AutoInc="0" PrimaryKey="0" IsFKey="0" DefaultValue="" QuoteDefault="0" Comments="tipo de m\243dulo:\n1 - Profesional\n3 - Transversal\n5 - Capacitaci\243n"></COLUMN>
 	</COLUMNS>
 	<REFERENCES_BEGIN>
 		<REFERENCE_BEGIN ID="57888" />
@@ -1822,26 +1823,27 @@
 		<REFERENCE_END ID="47525" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="33292" Name="uk_itinerario" Kind="2" Expression="" ReferenceIndex="87170" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="33292" Name="uk_itinerario" Kind="2" Expression="" ReferenceIndex="102858" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="33914" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="47527" Name="uk_integridad" Kind="1" Expression="" ReferenceIndex="102706" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="47527" Name="uk_integridad" Kind="1" Expression="" ReferenceIndex="102790" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="33915" />
 					<CONSTRAINTCOLUMN ID="33916" />
+					<CONSTRAINTCOLUMN ID="99022" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
 	</CONSTRAINTS>
 	<INDEXES>
-		<INDEX ID="87170" Name="uk_itinerario_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="33292" FillFactor="0" Comments="">
-			<INDEXCOLUMNS COMMATEXT="pk_unidad"></INDEXCOLUMNS>
+		<INDEX ID="102790" Name="uk_integridad_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="47527" FillFactor="0" Comments="">
+			<INDEXCOLUMNS COMMATEXT="pk_profesion,modulo,tipo_modulo"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102706" Name="uk_integridad_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="47527" FillFactor="0" Comments="">
-			<INDEXCOLUMNS COMMATEXT="pk_profesion,modulo"></INDEXCOLUMNS>
+		<INDEX ID="102858" Name="uk_itinerario_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="33292" FillFactor="0" Comments="">
+			<INDEXCOLUMNS COMMATEXT="pk_unidad"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
@@ -1960,7 +1962,7 @@
 		<REFERENCE_END ID="99181" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="46807" Name="" Kind="2" Expression="" ReferenceIndex="102713" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="46807" Name="" Kind="2" Expression="" ReferenceIndex="102865" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="46785" />
 				</CONSTRAINTCOLUMNS>
@@ -1977,7 +1979,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102713" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="46807" FillFactor="0" Comments="">
+		<INDEX ID="102865" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="46807" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_profesion"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -2081,7 +2083,7 @@
 		<REFERENCE_BEGIN ID="47521" />
 	</REFERENCES_BEGIN>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="47513" Name="" Kind="2" Expression="" ReferenceIndex="102673" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="47513" Name="" Kind="2" Expression="" ReferenceIndex="102825" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="47513" />
 				</CONSTRAINTCOLUMNS>
@@ -2098,7 +2100,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102673" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="47513" FillFactor="0" Comments="">
+		<INDEX ID="102825" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="47513" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_familia"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -2244,7 +2246,7 @@
 					<CONSTRAINTCOLUMN ID="57855" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="57863" Name="uk_meta_institucional" Kind="1" Expression="" ReferenceIndex="102711" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="57863" Name="uk_meta_institucional" Kind="1" Expression="" ReferenceIndex="102863" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="57856" />
 					<CONSTRAINTCOLUMN ID="57857" />
@@ -2260,7 +2262,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102711" Name="uk_meta_institucional_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="57863" FillFactor="0" Comments="">
+		<INDEX ID="102863" Name="uk_meta_institucional_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="57863" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="institucion,profesion,proceso,turno,annio"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -2286,7 +2288,7 @@
 					<CONSTRAINTCOLUMN ID="66895" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="66899" Name="uk_distribucion" Kind="1" Expression="" ReferenceIndex="102692" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="66899" Name="uk_distribucion" Kind="1" Expression="" ReferenceIndex="102844" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="57883" />
 					<CONSTRAINTCOLUMN ID="57884" />
@@ -2302,7 +2304,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102692" Name="uk_distribucion_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="66899" FillFactor="0" Comments="">
+		<INDEX ID="102844" Name="uk_distribucion_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="66899" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_secccion,pk_ambiente,dia,hora_inicio,hora_fin"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -2329,7 +2331,7 @@
 		<REFERENCE_END ID="57888" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="57882" Name="" Kind="2" Expression="" ReferenceIndex="102690" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="57882" Name="" Kind="2" Expression="" ReferenceIndex="102842" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="57897" />
 				</CONSTRAINTCOLUMNS>
@@ -2346,7 +2348,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102690" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="57882" FillFactor="0" Comments="">
+		<INDEX ID="102842" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="57882" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_detalle"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -2369,7 +2371,7 @@
 					<CONSTRAINTCOLUMN ID="57898" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="57887" Name="uk_transitoria" Kind="1" Expression="" ReferenceIndex="102691" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="57887" Name="uk_transitoria" Kind="1" Expression="" ReferenceIndex="102843" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="57899" />
 				</CONSTRAINTCOLUMNS>
@@ -2381,7 +2383,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102691" Name="uk_transitoria_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="57887" FillFactor="0" Comments="">
+		<INDEX ID="102843" Name="uk_transitoria_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="57887" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_secccion"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -2407,7 +2409,7 @@
 		<REFERENCE_END ID="57897" />
 	</REFERENCES_END>
 	<CONSTRAINTS>
-			<CONSTRAINT ID="57894" Name="" Kind="2" Expression="" ReferenceIndex="102707" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="57894" Name="" Kind="2" Expression="" ReferenceIndex="102859" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="57915" />
 				</CONSTRAINTCOLUMNS>
@@ -2425,7 +2427,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102707" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="57894" FillFactor="0" Comments="">
+		<INDEX ID="102859" Name="_idx_pk" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="57894" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_silabo"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -2688,7 +2690,7 @@
 					<CONSTRAINTCOLUMN ID="66953" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="67021" Name="uk_documento" Kind="1" Expression="" ReferenceIndex="102704" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="67021" Name="uk_documento" Kind="1" Expression="" ReferenceIndex="102856" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="66959" />
 					<CONSTRAINTCOLUMN ID="66954" />
@@ -2701,7 +2703,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102704" Name="uk_documento_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="67021" FillFactor="0" Comments="">
+		<INDEX ID="102856" Name="uk_documento_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="67021" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="pk_institucion,tipo"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
@@ -2992,7 +2994,7 @@
 					<CONSTRAINTCOLUMN ID="82233" />
 				</CONSTRAINTCOLUMNS>
 		</CONSTRAINT>
-			<CONSTRAINT ID="82240" Name="uk_meta_ocupacional" Kind="1" Expression="" ReferenceIndex="102710" FillFactor="0" Comments="" TablespaceID="0">
+			<CONSTRAINT ID="82240" Name="uk_meta_ocupacional" Kind="1" Expression="" ReferenceIndex="102862" FillFactor="0" Comments="" TablespaceID="0">
 				<CONSTRAINTCOLUMNS>
 					<CONSTRAINTCOLUMN ID="82235" />
 					<CONSTRAINTCOLUMN ID="82243" />
@@ -3005,7 +3007,7 @@
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
 		</INDEX>
-		<INDEX ID="102710" Name="uk_meta_ocupacional_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="82240" FillFactor="0" Comments="">
+		<INDEX ID="102862" Name="uk_meta_ocupacional_idx_ui" Unique="1" Method="0" Predicate="" TablespaceID="0" ReferenceConstraint="82240" FillFactor="0" Comments="">
 			<INDEXCOLUMNS COMMATEXT="profesion,institucion"></INDEXCOLUMNS>
 			<INDEXSORTS COMMATEXT=""></INDEXSORTS>
 			<INDEXNULLS COMMATEXT=""></INDEXNULLS>
