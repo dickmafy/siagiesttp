@@ -31,6 +31,7 @@ public class ProfesionItinerario extends GenericController
 		nombreProfesion=nombre;
 		pagina=returnPage;
 		modulo=-1L;
+		tipoModulo=-1L;
 		//moduloList=myService.listarReferenteEducativo(profesion, 1, 1L);
 		moduloList=null;
 		page_new="itnr_new";
@@ -51,7 +52,7 @@ public class ProfesionItinerario extends GenericController
 	@Override
 	public void defaultList() throws Exception
 	{
-		List<Itinerario> itins=myService.listarItinerario(profesion, modulo);
+		List<Itinerario> itins=myService.listarItinerario(profesion, modulo, tipoModulo);
 		setBeanList(itins);
 		calcularTotales(itins);
 		itins=null;
@@ -85,6 +86,7 @@ public class ProfesionItinerario extends GenericController
 		bean.setEstado(Constante.ROW_STATUS_ENABLED);
 		bean.setProfesion(profesion);
 		bean.setModulo(modulo);
+		bean.setTipoModulo(tipoModulo);
 		setBean(bean);
 		bean=null;
 	}
@@ -95,6 +97,11 @@ public class ProfesionItinerario extends GenericController
 		boolean success = true;
 		Itinerario object = (Itinerario)getBean();
 		if(!validateSelect(object.getModulo()))
+		{
+			setMessageError("Debe seleccionar un Módulo.");			
+			success = false;
+		}
+		else if(!validateSelect(object.getTipoModulo()))
 		{
 			setMessageError("Debe seleccionar un Módulo.");			
 			success = false;

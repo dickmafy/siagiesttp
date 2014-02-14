@@ -33,7 +33,7 @@ public class InstitucionUnidad extends GenericController
 		page_update="itc_oferta_amb";
 		
 		ambienteList=getListSelectItem(new TipoAmbiente(), "id", "nombre",true);
-		itinerarioList=myService.listarItinerario(profesion, -1L);
+		itinerarioList=myService.listarItinerario(profesion, -1L, -1L);
 		
 		setBean(new AmbienteUnidad());
 		forward("itc_oferta_itnr");	

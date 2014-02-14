@@ -25,6 +25,7 @@ public class Itinerario implements Serializable
 	private Long horasTotal;
 	private Double creditos;
 	private Long estado;
+	private Long tipoModulo;
 	
 	private Long 	tipoItinerario;
 	private String 	nombreModulo;
@@ -75,6 +76,14 @@ public class Itinerario implements Serializable
 	@Column(name="estado")
 	public Long getEstado() 							{return estado;}
 	public void setEstado(Long estado) 					{this.estado = estado;}
+		
+	@Column(name="tipo_modulo")
+	public Long getTipoModulo() {
+		return tipoModulo;
+	}
+	public void setTipoModulo(Long tipoModulo) {
+		this.tipoModulo = tipoModulo;
+	}
 	
 	@Transient
 	public String getNombreModulo() 					{return nombreModulo;}

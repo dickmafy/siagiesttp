@@ -16,7 +16,7 @@ public interface MarcoService extends InstitucionService
 	public void eliminarTransversal(Long profesion, Long modulo) throws Exception;
 	public List<ReferenteProductivo> listarReferenteProductivo(Long profesion, int opcion, Long tipo) throws Exception;
 	public List<ReferenteEducativo> listarReferenteEducativo(Long profesion, int opcion, Long tipo) throws Exception;
-	public List<Itinerario> listarItinerario(Long profesion, Long modulo) throws Exception;
+	public List<Itinerario> listarItinerario(Long profesion, Long modulo, Long tipo) throws Exception;
 	public List<Transversal> listarReferenteTransversal(int opcion, Long modulo) throws Exception;
 	public List<ItinerarioTransversal> listarItinerarioTransversal(Long tipo) throws Exception;
 	public List<Itinerario> listarItinerarioTotal(Long profesion) throws Exception;
