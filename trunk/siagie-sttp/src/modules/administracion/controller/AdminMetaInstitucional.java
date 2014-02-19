@@ -80,7 +80,7 @@ public class AdminMetaInstitucional extends GenericController
 		bean.setEstado(1L);
 		setBean(bean);
 		bean=null;
-		profesionList=getListSelectItem(myService.listarOferta(institucion, DateHelper.getDate(),1L),"profesion","nombreProfesion",false);
+		profesionList=getListSelectItem(myService.listarOferta(institucion, DateHelper.getDate(),2L),"profesion","nombreProfesion",false);
 		resolucionList=getListSelectItem(myService.listByObjectEnabled(new Resolucion()), "id","nombreSiglas,nombre"," ",false);
 		
 		Cronograma cronograma = new Cronograma();
