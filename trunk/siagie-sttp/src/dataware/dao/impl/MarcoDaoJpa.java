@@ -25,10 +25,10 @@ public class MarcoDaoJpa extends InstitucionDaoJpa implements MarcoDao
 		{
 			Object[] objetos=(Object[])rst.get(i);
 			Profesion field=new Profesion();
-			if(objetos[0]!=null){field.setId(Long.parseLong(objetos[0].toString()));}
-			if(objetos[1]!=null){field.setFamilia(Long.parseLong(objetos[1].toString()));}
-			if(objetos[2]!=null){field.setFormacion(Long.parseLong(objetos[2].toString()));}
-			if(objetos[3]!=null){field.setNombre(objetos[3].toString());}
+			field.setId(Long.parseLong(objetos[0].toString()));
+			field.setFamilia(Long.parseLong(objetos[1].toString()));
+			if(objetos[2]!=null)	{field.setFormacion(Long.parseLong(objetos[2].toString()));}
+			if(objetos[3]!=null)	{field.setNombre(objetos[3].toString());}
 			if(objetos[4]!=null)	{field.setDescripcion(objetos[4].toString());}
 			if(objetos[5]!=null)	{field.setMencion(objetos[5].toString());}
 			if(objetos[6]!=null)	{field.setAptitudes(objetos[6].toString());}
