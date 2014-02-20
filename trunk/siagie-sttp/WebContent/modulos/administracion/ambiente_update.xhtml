@@ -20,8 +20,9 @@
       		<tr>
    		        <td><p:outputLabel for="txtTip" 	value="Tipo de Ambiente" /></td>
    		        <td><p:outputLabel for="txtCod" 	value="Código"/></td>
-   		        <td><p:outputLabel for="txtAre" 	value="Area (m2)"/></td>
-   		        <td><p:outputLabel for="txtNom" 	value="Nombre"/></td>	      		        
+   		        <td><p:outputLabel for="txtNom" 	value="Nombre"/></td>	  
+   		        <td><p:outputLabel for="txtAre" 	value="Area (m2)"/></td>    		        	
+   		        <td><p:outputLabel for="txtCap" 	value="Capacidad"/></td>    		        
    		        <td><p:outputLabel for="txtObs" 	value="Observación"/></td>
    		  	</tr>
    		  	<tr>
@@ -31,8 +32,9 @@
         			</p:selectOneMenu>
 	    		</td>
 	    		<td><p:inputText  	id="txtCod"  value="#{adminAmbiente.bean.codigo}" size="10"/></td>
-	    		<td><p:spinner  	id="txtAre"  value="#{adminAmbiente.bean.area}" size="5"/></td>
 	    		<td><p:inputText  	id="txtNom"  value="#{adminAmbiente.bean.nombre}" size="20" disabled="true"/></td>
+	    		<td><p:spinner  	id="txtAre"  value="#{adminAmbiente.bean.area}" size="5"/></td>	    		
+	    		<td><p:spinner  	id="txtCap"  value="#{adminAmbiente.bean.capacidad}" size="3"/></td>
 	    		<td><p:inputText  	id="txtObs"  value="#{adminAmbiente.bean.observacion}" size="40" disabled="true"/></td>
 	    	</tr>
 	    	
