@@ -157,6 +157,7 @@ public class HorarioMetaDetalle extends GenericController
 		defaultList();
 	}
 	
+	//diego
 	public void optionPublicar() throws Exception
 	{
 		MetaDetalle meta=(MetaDetalle)getBeanSelected();
