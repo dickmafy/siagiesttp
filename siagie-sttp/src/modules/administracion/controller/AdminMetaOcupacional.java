@@ -89,7 +89,7 @@ public class AdminMetaOcupacional extends GenericController
 		setBean(bean);
 		bean=null;
 		
-		profesionList=getListSelectItem(myService.listarOferta(institucion, DateHelper.getDate(),1L),"profesion","nombreProfesion",false);
+		profesionList=getListSelectItem(myService.listarOferta(institucion, DateHelper.getDate(),2L),"profesion","nombreProfesion",false);
 		resolucionList=getListSelectItem(myService.listByObjectEnabled(new Resolucion()), "id","nombreSiglas,nombre"," ",false);
 	
 		Solicitud sol=new Solicitud();
@@ -134,17 +134,17 @@ public class AdminMetaOcupacional extends GenericController
 		MetaOcupacional object = (MetaOcupacional)getBean();
 		if(!validateSelect(object.getProfesion()))
 		{
-			setMessageError("Debe seleccionar una Profesión");			
+			setMessageError("Debe seleccionar una Profesiï¿½n");			
 			success = false;
 		}
 		else if(!validateSelect(object.getResolucion()))
 		{
-			setMessageError("Debe seleccionar la Resolución de ejecución");			
+			setMessageError("Debe seleccionar la Resoluciï¿½n de ejecuciï¿½n");			
 			success = false;
 		}
 		else if(!validateEmpty(object.getMinimo().toString()))
 		{
-			setMessageError("Debe ingresar la meta mínima");			
+			setMessageError("Debe ingresar la meta mï¿½nima");			
 			success = false;
 		}
 		object=null;
