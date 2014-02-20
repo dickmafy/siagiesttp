@@ -25,10 +25,10 @@ public class MarcoDaoJpa extends InstitucionDaoJpa implements MarcoDao
 		{
 			Object[] objetos=(Object[])rst.get(i);
 			Profesion field=new Profesion();
-			field.setId(Long.parseLong(objetos[0].toString()));
-			field.setFamilia(Long.parseLong(objetos[1].toString()));
-			field.setFormacion(Long.parseLong(objetos[2].toString()));
-			field.setNombre(objetos[3].toString());
+			if(objetos[0]!=null){field.setId(Long.parseLong(objetos[0].toString()));}
+			if(objetos[1]!=null){field.setFamilia(Long.parseLong(objetos[1].toString()));}
+			if(objetos[2]!=null){field.setFormacion(Long.parseLong(objetos[2].toString()));}
+			if(objetos[3]!=null){field.setNombre(objetos[3].toString());}
 			if(objetos[4]!=null)	{field.setDescripcion(objetos[4].toString());}
 			if(objetos[5]!=null)	{field.setMencion(objetos[5].toString());}
 			if(objetos[6]!=null)	{field.setAptitudes(objetos[6].toString());}
@@ -37,8 +37,8 @@ public class MarcoDaoJpa extends InstitucionDaoJpa implements MarcoDao
 			if(objetos[9]!=null)	{field.setDuracion(Long.parseLong(objetos[9].toString()));}
 			if(objetos[10]!=null)	{field.setDependencia(Long.parseLong(objetos[10].toString()));}
 			if(objetos[13]!=null)	{field.setReferente(Boolean.parseBoolean(objetos[13].toString()));}
-			field.setEstado(Long.parseLong(objetos[14].toString()));
-			field.setNombreFamilia(objetos[15].toString());
+			if(objetos[14]!=null)	{field.setEstado(Long.parseLong(objetos[14].toString()));}
+			if(objetos[15]!=null)	{field.setNombreFamilia(objetos[15].toString());}
 			lst.add(field);
 			field=null;
 		}

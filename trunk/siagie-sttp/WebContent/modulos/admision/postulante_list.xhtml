@@ -9,6 +9,11 @@
    	<h:form id="frmList" ajaxSubmit="false">
    		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
    		<p:toolbar>  
+		       
+      		<p:toolbarGroup align="left">
+	    		<p:spacer height="4px"/>
+	    	 	<p:commandButton title="Regresar" 	value="Regresar" 	icon="icn_bar_back" action="adm_pro_lst"       ajax="false" />
+	    	</p:toolbarGroup>
 	    	<p:toolbarGroup align="left">
 	    		<p:spacer width="6px"/>
 	    		<p:outputLabel for="txtAnn" value="Año" style="position:relative;  top:-4px;"/>
