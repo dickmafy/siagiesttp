@@ -8,10 +8,20 @@
     <ui:define name="body" oncontextmenu="return false">
    	<h:form id="frmList" ajaxSubmit="false">
    		<p:growl id="msgSystem" showDetail="false" life="7000" escape="true"/>  
+   		
+   		<p:toolbar>  
+	    	<p:toolbarGroup align="left">
+	    		<p:spacer width="16px"/>
+	    		<p:outputLabel  value="DOCENTE:  #{docenteSilaboList.docente_nombre}." style="position:relative;  top:-4px;"/>
+			</p:toolbarGroup>  
+  		</p:toolbar>  
+  		
+  		
   		<p:toolbar>  
 	    	<p:toolbarGroup align="left">
 	    		<p:spacer width="6px"/>
 	    		
+	    			    		
 	    		<p:outputLabel for="txtAnn" value="Año  " style="position:relative;  top:-4px;"/>
 	    		<p:selectOneMenu id="txtAnn" value="#{docenteSilaboList.annio}" style="position:relative;  top:2px; width:120px">
                     <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
@@ -39,7 +49,7 @@
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
       	
-       <h:outputText value="DOCENTE:  #{docenteSilaboList.docente_nombre}."/>
+      
       	
   
    		<p:dataTable id="itemList" var="item" value="#{docenteSilaboList.beanList}" filteredValue="#{docenteSilaboList.beanFilterList}"

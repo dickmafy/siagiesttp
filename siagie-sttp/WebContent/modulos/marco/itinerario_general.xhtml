@@ -12,7 +12,7 @@
   		
   			<p:toolbarGroup align="left"> 
 	    		<p:spacer width="6px"/>
-	    		<p:outputLabel for="txtPrf" value="Profesión" style="position:relative;  top:-6px;"/>
+	    		<p:outputLabel for="txtPrf" value="Carrera Profesional" style="position:relative;  top:-6px;"/>
 		   		<p:selectOneMenu id="txtPrf" value="#{marcoItinerario.profesion}" style="position:relative;  top:3px; left:15px; width:500px">
 		   			<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />
 					<f:selectItems value="#{marcoItinerario.profesionList}" var="lstPrf" itemValue="#{lstPrf.id}" itemLabel="#{lstPrf.nombre}"/>

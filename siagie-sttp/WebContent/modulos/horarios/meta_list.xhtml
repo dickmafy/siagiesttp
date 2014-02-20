@@ -43,7 +43,7 @@
 				<h:outputText value="Meta Institucional" />  
 			</f:facet>
 							
-			<p:column headerText="Profesión" style="width:23%; align:center;" >   
+			<p:column headerText="Carrera Profesional" style="width:23%; align:center;" >   
 				<h:outputText value="#{item.nombreProfesion}"/>
 			</p:column>		
 			
@@ -72,11 +72,11 @@
 					<f:setPropertyActionListener value="#{item}" target="#{horarioMetas.beanSelected}" />
 				</p:commandButton>
 				
-				<p:commandButton icon="icn_item_process" 	title="Iniciar Etapa Registro de Silabos" oncomplete="dialogSilMet.show()" rendered="#{item.estado eq 2}">
+				<p:commandButton icon="icn_item_process" 	title="Iniciar Etapa Programación Curricular" oncomplete="dialogSilMet.show()" rendered="#{item.estado eq 2}">
 					<f:setPropertyActionListener value="#{item}" target="#{horarioMetas.beanSelected}" />				
 				</p:commandButton>
 				
-				<p:commandButton icon="icn_item_sillabo" 	title="Silabos" 	action="#{horarioMetas.optionGoSilabo}" ajax="false" rendered="#{item.estado gt 2}">
+				<p:commandButton icon="icn_item_sillabo" 	title="Programación Curricular" 	action="#{horarioMetas.optionGoSilabo}" ajax="false" rendered="#{item.estado gt 2}">
 					<f:setPropertyActionListener value="#{item}" target="#{horarioMetas.beanSelected}" />
 				</p:commandButton>  
 				
