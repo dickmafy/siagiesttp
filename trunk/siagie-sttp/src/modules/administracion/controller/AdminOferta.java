@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -74,8 +75,8 @@ public class AdminOferta extends GenericController
 		page_update="adm_ofer_upd";
 		forward(page_main);
 		
-		setUrlRpt("/modulos/reportes/pdf/NOMINA.pdf"); // Codigo Ericson Huamaní
-		nombreUsuario = usr.getNombres(); // Codigo Ericson Huamaní
+		setUrlRpt("/modulos/reportes/pdf/NOMINA.pdf"); // Codigo Ericson Huamanï¿½
+		nombreUsuario = usr.getNombres(); // Codigo Ericson Huamanï¿½
 	}
 	
 	@Override
@@ -96,7 +97,9 @@ public class AdminOferta extends GenericController
 		
 		Profesion obj=new Profesion();
 		obj.setFormacion(formacion);
-		profesionList=getListSelectItem(obj, "id", "nombre", true);
+		
+		//funcion de eliminacion de duplicados
+		profesionList=getProfesion(obj);
 		obj=null;
 		
 		resolucionList=getListSelectItem(myService.listByObjectEnabled(new Resolucion()), "id","nombreSiglas,nombre"," ",false);
@@ -114,7 +117,9 @@ public class AdminOferta extends GenericController
 	{
 		Profesion obj=new Profesion();
 		obj.setFormacion(formacion);
-		profesionList=getListSelectItem(obj, "id", "nombre", true);
+		
+		//funcion de eliminacion de duplicados
+		profesionList=getProfesion(obj);
 		obj=null;
 		
 		resolucionList=getListSelectItem(myService.listByObjectEnabled(new Resolucion()), "id","nombreSiglas,nombre"," ",false);
@@ -146,7 +151,7 @@ public class AdminOferta extends GenericController
 		Oferta object = (Oferta)getBean();
 		if(!validateSelect(object.getProfesion()))
 		{
-			setMessageError("Debe seleccionar una Profesión");			
+			setMessageError("Debe seleccionar una Profesiï¿½n");			
 			success = false;
 		}
 		else if(!validateEmpty(object.getVigenciaInicio()))
@@ -161,7 +166,7 @@ public class AdminOferta extends GenericController
 		}
 		else if(!validateSelect(object.getResolucion()))
 		{
-			setMessageError("Debe seleccionar la Resolución de ejecución");			
+			setMessageError("Debe seleccionar la Resoluciï¿½n de ejecuciï¿½n");			
 			success = false;
 		}
 		object=null;
@@ -216,6 +221,16 @@ public class AdminOferta extends GenericController
 	public List<SelectItem> getSolicitudList() 							{return solicitudList;}
 	public void setSolicitudList(List<SelectItem> solicitudList) 		{this.solicitudList = solicitudList;}
 
+	private List<SelectItem> getProfesion(Profesion obj){
+		
+		List<SelectItem> list = getListSelectItem(obj, "id", "nombre", true);
+		List<SelectItem> list2 = new ArrayList<SelectItem>();
+		for (int i = 0; i < list.size(); i+=2) {
+			list2.add(list.get(i));
+		}
+		return list2;
+	} 
+	
 	public String getUrlRpt() {
 		return urlRpt;
 	}
@@ -224,7 +239,7 @@ public class AdminOferta extends GenericController
 		this.urlRpt = urlRpt;
 	}
 	
-	// Inicio Codigo Ericson Huamaní 19-12-2013 11:00
+	// Inicio Codigo Ericson Huamanï¿½ 19-12-2013 11:00
 		@SuppressWarnings("unchecked")
 		public void generarReporte(ActionEvent evt) {
 			try {
@@ -267,5 +282,5 @@ public class AdminOferta extends GenericController
 			}
 		}
 
-		// Fin codigo Ericson Huamaní
+		// Fin codigo Ericson Huamanï¿½
 } 
