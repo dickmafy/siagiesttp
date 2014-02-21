@@ -205,6 +205,19 @@ public class HorarioSeccionDistribucion extends GenericController
 				bean=null;
 			}
 		}
+		else if(turno.longValue()==3L)
+		{
+			for(int j=15; j<20; j++)
+			{
+				Horario bean=new Horario();
+				bean.cleanDia();
+				bean.setInicio(Long.parseLong(j+""));
+				bean.setFin(Long.parseLong((j+1)+""));
+				horario.add(bean);
+				bean=null;
+			}
+		}
+		
 	}
 
 	public Horario getSelectHorario() 						{return selectHorario;}
