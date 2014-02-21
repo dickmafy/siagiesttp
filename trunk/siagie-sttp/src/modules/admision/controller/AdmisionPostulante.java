@@ -1,18 +1,36 @@
 package modules.admision.controller; 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 import org.primefaces.model.UploadedFile;
 
+import resouces.ConnPg;
+import resouces.Fecha;
+import modules.administracion.domain.Institucion;
 import modules.admision.domain.Persona;
 import modules.admision.domain.Postulante;
 import modules.admision.domain.Proceso;
@@ -26,6 +44,7 @@ import com.belogick.factory.util.constant.Constante;
 import com.belogick.factory.util.controller.GenericController;
 import com.belogick.factory.util.helper.BeanHelper;
 import com.belogick.factory.util.helper.DateHelper;
+import com.belogick.factory.util.support.ServiceException;
 
 import dataware.service.AdmisionService;
 
@@ -57,6 +76,9 @@ public class AdmisionPostulante extends GenericController
 	private List<SelectItem> disList;
 	private Long departamento, provincia;
 	
+	private String urlRpt; // Codigo Ericson Huamani
+	private String nombreUsuario; // Codigo Ericson Huamani
+	private String nombreInstitucion;
 	
 	public void init(Long id) throws Exception 
 	{
@@ -80,6 +102,9 @@ public class AdmisionPostulante extends GenericController
 		optionSelectProceso();
 		cleanPersona();
 		forward(page_main);
+		
+		setUrlRpt("/modulos/reportes/pdf/NOMINA.pdf"); // Codigo Ericson Huamaní
+		setNombreUsuario(usr.getNombres()); // Codigo Ericson Huamaní
 	}
 	public void init() throws Exception
 	{init(-1L);}
@@ -510,5 +535,76 @@ public class AdmisionPostulante extends GenericController
 	
 	public Long getAnnio() 										{return annio;}
 	public void setAnnio(Long annio) 							{this.annio = annio;}
+	
+	
+	// Inicio Codigo Ericson Huamaní 19-12-2013 11:00
+		@SuppressWarnings("unchecked")
+		public void generarReporte(ActionEvent evt) {
+			try {
+				String rutaAplicacion = FacesContext.getCurrentInstance()
+						.getExternalContext().getRealPath("/");
+				String nombreArchivoPdf = new Fecha().getFecha(new Date(),
+						Fecha.PATTERN_DDMMYYYYHHMMS, Fecha.LOCALE_ES) + ".pdf";
+				JasperPrint print = null;
+
+				nombreInstitucion = ((Institucion) myService.findById(
+						Institucion.class, institucion)).getNombre();
+
+				@SuppressWarnings("rawtypes")
+				Map parametro = new HashMap();
+				parametro.put("PK_INSTITUCION", institucion);
+				parametro.put("NOMBRE_INSTITUTO", getNombreInstitucion());
+				parametro.put("USUARIO", nombreUsuario);
+				parametro.put("RUTA_IMAGEN", rutaAplicacion
+						+ "/recursos/imagenes/sicad_1_rpt.jpg");
+				parametro.put("ANIO", annio);
+				parametro.put("PROCESO", proceso);
+				File fp = new File(rutaAplicacion
+						+ "/modulos/reportes/jasper/rpt_postulantes.jasper");
+				InputStream reportSt = new BufferedInputStream(new FileInputStream(
+						fp));
+				print = JasperFillManager.fillReport(reportSt, parametro,
+						ConnPg.getConexion());
+				OutputStream output = new FileOutputStream(new File(rutaAplicacion
+						+ "/modulos/reportes/pdf/" + nombreArchivoPdf));
+				JasperExportManager.exportReportToPdfStream(print, output);
+				setUrlRpt("/modulos/reportes/pdf/" + nombreArchivoPdf);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	
+	
+	public String getUrlRpt() {
+		return urlRpt;
+	}
+	public void setUrlRpt(String urlRpt) {
+		this.urlRpt = urlRpt;
+	}
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
+	}
+	public String getNombreInstitucion() {
+		return nombreInstitucion;
+	}
+	public void setNombreInstitucion(String nombreInstitucion) {
+		this.nombreInstitucion = nombreInstitucion;
+	}
 	
 } 
