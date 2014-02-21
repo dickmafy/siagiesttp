@@ -29,7 +29,14 @@
 		        <p:selectOneMenu id="txtPro" value="#{admisionMatricula.proceso}" style="position:relative;  top:3px; width:140px">
 					<f:selectItems value="#{admisionMatricula.procesoList}" var="lstPro" itemValue="#{lstPro.id}" itemLabel="#{lstPro.descripcion}"/>
 					<p:ajax event="change" update=":frmList" listener="#{admisionMatricula.optionSelectProceso}"/>
-				</p:selectOneMenu>				
+				</p:selectOneMenu>	
+				
+				<p:commandButton title="Listado de Matriculados"
+						value="Listado de Matriculados" icon="icn_item_download"
+						oncomplete="wvReporte.show()"
+						actionListener="#{admisionMatricula.generarReporte}"
+						update=":dlgReporte"
+						style="position:relative; left:30px;" />			
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
@@ -103,5 +110,15 @@
 			</h:form>	
    		</p:confirmDialog>
    		
+   		<!--  muestra del reporte -->
+		<p:dialog widgetVar="wvReporte" id="dlgReporte"
+			header="Reporte de Matriculados" closable="true" appendToBody="true"
+			showEffect="fade" resizable="false" modal="true" width="1000px"
+			height="500px">
+			<p:media value="#{admisionMatricula.urlRpt}" width="976px"
+				height="476px" id="mdPdf">
+                Su navegador no cuenta con un visor de archivos PDFs, por favor descarguelo para que pueda visualizar el archivo
+            </p:media>
+		</p:dialog>
     </ui:define>
 </ui:composition>
