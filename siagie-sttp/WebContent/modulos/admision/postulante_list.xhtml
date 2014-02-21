@@ -1,10 +1,8 @@
 <ui:composition template="/modulos/index/template/default.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:p="http://primefaces.org/ui"
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-
     <ui:define name="body" oncontextmenu="return false">
    	<h:form id="frmList" ajaxSubmit="false">
    		<p:growl id="msgSystem" showDetail="false" life="5000" escape="true"/>   
@@ -36,6 +34,12 @@
 				</p:selectOneMenu>
 				<p:spacer height="6px"/> 
 		   		<p:commandButton title="Nuevo" value="Nuevo" icon="icn_bar_new" actionListener="#{admisionPostulante.nativeNew}" rendered="#{admisionPostulante.enabled}" ajax="false" style="position:relative;  top:-4px;"/>
+				<p:commandButton title="Listado de Postulantes"
+						value="Listado de Postulantes" icon="icn_item_download"
+						oncomplete="wvReporte.show()"
+						actionListener="#{admisionPostulante.generarReporte}"
+						update=":dlgReporte"
+						style="position:relative;left:30px;" />
 			</p:toolbarGroup>  
   		</p:toolbar>    		
       	<p:spacer height="4px"/>
@@ -99,18 +103,33 @@
         	</p:column>      	        
 		</p:dataTable> 
 	</h:form>
-		
 		<!-- Publicar Proceso -->
-		<p:confirmDialog widgetVar="dialogPubPro" width="350" appendToBody="true"
-			header="Mensaje de Confirmacion" message="¿Estas seguro de publicar este postulante en el registro?" style="font-size:13px;"
-        	closable="true" severity="alert" closeOnEscape="true">
-        	<h:form>	
-			<h:panelGroup style="text-align: right;" >
-				<p:commandButton value="Si" id="deleteButton" oncomplete="dialogPubPro.hide()"  actionListener="#{admisionPostulante.optionPublicar}"  update=":frmList"/>
-        		<p:commandButton value="No" id="cancelButton" onclick="dialogPubPro.hide()"/>   
-			</h:panelGroup>
-			</h:form>	
-   		</p:confirmDialog>
-   		
-    </ui:define>
+		<p:confirmDialog widgetVar="dialogPubPro" width="350"
+			appendToBody="true" header="Mensaje de Confirmacion"
+			message="¿Estas seguro de publicar este postulante en el registro?"
+			style="font-size:13px;" closable="true" severity="alert"
+			closeOnEscape="true">
+			<h:form>
+				<h:panelGroup style="text-align: right;">
+					<p:commandButton value="Si" id="deleteButton"
+						oncomplete="dialogPubPro.hide()"
+						actionListener="#{admisionPostulante.optionPublicar}"
+						update=":frmList" />
+					<p:commandButton value="No" id="cancelButton"
+						onclick="dialogPubPro.hide()" />
+				</h:panelGroup>
+			</h:form>
+		</p:confirmDialog>
+
+		<!--  muestra del reporte -->
+		<p:dialog widgetVar="wvReporte" id="dlgReporte"
+			header="Reporte de Postulantes" closable="true" appendToBody="true"
+			showEffect="fade" resizable="false" modal="true" width="1000px"
+			height="500px">
+			<p:media value="#{admisionPostulante.urlRpt}" width="976px"
+				height="476px" id="mdPdf">
+                Su navegador no cuenta con un visor de archivos PDFs, por favor descarguelo para que pueda visualizar el archivo
+            </p:media>
+		</p:dialog>
+	</ui:define>
 </ui:composition>
