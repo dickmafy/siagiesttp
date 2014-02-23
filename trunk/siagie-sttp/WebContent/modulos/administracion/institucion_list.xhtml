@@ -62,11 +62,11 @@
 					<f:setPropertyActionListener value="#{item}" target="#{adminInstitucion.beanSelected}" />
 				</p:commandButton>
 				
-				<p:commandButton icon="icn_item_goal" 	title="Meta Institucional" 				   action="#{adminInstitucion.optionGoMetaInstitucional}" ajax="false" rendered="#{item.formacion eq 1}">
+				<p:commandButton icon="icn_item_goal" 	title="Meta IESTP" 				   action="#{adminInstitucion.optionGoMetaInstitucional}" ajax="false" rendered="#{item.formacion eq 1}">
 					<f:setPropertyActionListener value="#{item}" target="#{adminInstitucion.beanSelected}" />
 				</p:commandButton>
 				
-				<p:commandButton icon="icn_item_goal" 	title="Meta Ocupacional" 				   action="#{adminInstitucion.optionGoMetaOcupacional}" ajax="false" rendered="#{item.formacion ne 1}">
+				<p:commandButton icon="icn_item_goal" 	title="Meta CETPRO" 				   action="#{adminInstitucion.optionGoMetaOcupacional}" ajax="false" rendered="#{item.formacion ne 1}">
 					<f:setPropertyActionListener value="#{item}" target="#{adminInstitucion.beanSelected}" />
 				</p:commandButton>
 				
