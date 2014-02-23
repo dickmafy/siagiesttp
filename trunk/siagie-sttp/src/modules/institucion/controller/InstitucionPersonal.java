@@ -79,17 +79,17 @@ public class InstitucionPersonal extends GenericController
 		Personal object = (Personal)getBean();
 		if(!validateEmpty(object.getCodigo()))
 		{
-			setMessageError("Debe ingresar el Código Modular.");			
+			setMessageError("Debe ingresar el Cï¿½digo Modular.");			
 			success = false;
 		}
 		else if(!validateEmpty(object.getDni()))
 		{
-			setMessageError("Debe ingresar el número del DNI.");			
+			setMessageError("Debe ingresar el nï¿½mero del DNI.");			
 			success = false;
 		}
 		else if(!validateSelect(object.getPuesto()))
 		{
-			setMessageError("Debe seleccionar el Puesto Laboral.");			
+			setMessageError("Debe seleccionar el Cargo.");			
 			success = false;
 		}
 		else if(!validateEmpty(object.getNombres()))
@@ -129,7 +129,7 @@ public class InstitucionPersonal extends GenericController
 		}
 		else if(!validateEmpty(object.getDireccion()))
 		{
-			setMessageError("Debe ingresar la dirección.");			
+			setMessageError("Debe ingresar la direcciï¿½n.");			
 			success = false;
 		}	
 		object=null;
