@@ -45,7 +45,7 @@ public class AdminMetaInstitucional extends GenericController
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
 		appName="Local";
-		moduleName="Instituciones - Meta Institucional ";
+		moduleName="Instituciones - IESTP ";
 		userName=usr.getUsuario();
 		institucion=codigo;
 		nombreInstitucion=nombre;
@@ -137,12 +137,12 @@ public class AdminMetaInstitucional extends GenericController
 		MetaInstitucional object = (MetaInstitucional)getBean();
 		if(!validateSelect(object.getProfesion()))
 		{
-			setMessageError("Debe seleccionar una Profesión");			
+			setMessageError("Debe seleccionar una Profesiï¿½n");			
 			success = false;
 		}
 		else if(!validateSelect(object.getAnnio()))
 		{
-			setMessageError("Debe seleccionar el Año");			
+			setMessageError("Debe seleccionar el Aï¿½o");			
 			success = false;
 		}
 		else if(!validateSelect(object.getProceso()))
@@ -162,7 +162,7 @@ public class AdminMetaInstitucional extends GenericController
 		}
 		else if(!validateSelect(object.getResolucion()))
 		{
-			setMessageError("Debe seleccionar la Resolución de ejecución");			
+			setMessageError("Debe seleccionar la Resoluciï¿½n de ejecuciï¿½n");			
 			success = false;
 		}
 		
