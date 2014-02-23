@@ -112,11 +112,6 @@ public class InstitucionPersonal extends GenericController
 			setMessageError("Debe ingresar su Sexo.");			
 			success = false;
 		}		
-		else if(!validateEmail(object.getCorreo().toLowerCase()))
-		{
-			setMessageError("Debe ingresar su correo electrónico correctamente.");			
-			success = false;
-		}
 		else if(!validateSelect(provincia))
 		{
 			setMessageError("Debe seleccionar la provincia.");			
