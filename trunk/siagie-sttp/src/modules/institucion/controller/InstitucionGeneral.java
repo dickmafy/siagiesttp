@@ -7,13 +7,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.List;
+
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
+
 import com.belogick.factory.util.controller.GenericController;
+
 import modules.administracion.domain.Institucion;
 import modules.administracion.domain.Local;
+import modules.mantenimiento.domain.Resolucion;
 import modules.seguridad.domain.Usuario; 
 
 public class InstitucionGeneral extends GenericController   
@@ -21,6 +26,10 @@ public class InstitucionGeneral extends GenericController
 	private List<Local> locales;
 	private UploadedFile logo;
 	private Long institucion;
+	private String nomResCre;
+	private String nomResRen;
+	private String nomResRev;
+	private Resolucion beanRes;
 	
 	private StreamedContent fileCre,fileRen,fileRev;
 	
@@ -42,7 +51,24 @@ public class InstitucionGeneral extends GenericController
 		locales=getService().listByObjectEnabled(bean);
 		bean=null;
 		
+		obtenerResoluciones();
+				
 		forward(page_main);	
+	}
+	
+	public void obtenerResoluciones() throws Exception
+	{
+		Institucion object = (Institucion)getBean();		
+		Resolucion beanRes = new Resolucion();
+		SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+		
+		beanRes = (Resolucion) getService().findById(Resolucion.class, object.getResolcre());
+		nomResCre = beanRes.getNombre() + " (" + sd.format(beanRes.getFecha()) +")";
+		beanRes = (Resolucion) getService().findById(Resolucion.class, object.getResolren());
+		nomResRen = beanRes.getNombre() + " (" + sd.format(beanRes.getFecha()) +")";
+		beanRes = (Resolucion) getService().findById(Resolucion.class, object.getResolrev());
+		nomResRev = beanRes.getNombre() + " (" + sd.format(beanRes.getFecha()) +")";
+		beanRes = null;
 	}
 	
 	public void optionUpdate() throws Exception 
@@ -129,4 +155,30 @@ public class InstitucionGeneral extends GenericController
 	public void setLocales(List<Local> locales) 	{this.locales = locales;}
 	public UploadedFile getLogo() 					{return logo;}	
 	public void setLogo(UploadedFile logo)			{this.logo = logo;}
+
+	public String getNomResCre() {
+		return nomResCre;
+	}
+
+	public void setNomResCre(String nomResCre) {
+		this.nomResCre = nomResCre;
+	}
+
+	public String getNomResRen() {
+		return nomResRen;
+	}
+
+	public void setNomResRen(String nomResRen) {
+		this.nomResRen = nomResRen;
+	}
+
+	public String getNomResRev() {
+		return nomResRev;
+	}
+
+	public void setNomResRev(String nomResRev) {
+		this.nomResRev = nomResRev;
+	}
+	
+	
 } 
