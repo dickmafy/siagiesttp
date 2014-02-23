@@ -10,6 +10,7 @@ import com.belogick.factory.util.helper.DateHelper;
 import com.belogick.factory.util.helper.PasswordHelper;
 import com.belogick.factory.util.support.Encriptador;
 
+import modules.administracion.domain.Institucion;
 import modules.administracion.domain.Personal;
 import modules.admision.domain.Matricula;
 import modules.admision.domain.Persona;
@@ -35,6 +36,7 @@ public class InstitucionUsuario extends GenericController
 		moduleName="Usuario";
 		userName=usr.getUsuario();
 		institucion=usr.getInstitucion();
+		
 		defaultList();
 		page_new="itc_usr_new";
 		page_main="itc_usr_lst";
@@ -47,12 +49,27 @@ public class InstitucionUsuario extends GenericController
 	public void fillAll() throws Exception
 	{
 		Perfil objPrf=new Perfil();
-		objPrf.setTipo(3L);
-		objPrf.setEstado(Constante.ROW_STATUS_ENABLED);
-		perfilList=getListSelectItem(objPrf, "id", "nombre", true);
-		objPrf=null;
+
 		
-		//Matricula mat=new Matricula();
+		try {
+			Institucion beanInstitucion =  (Institucion) getService().findById(Institucion.class, institucion);
+			if(beanInstitucion.getFormacion().equals(1L))//CETPRO
+			{
+				objPrf.setTipo(2L); //grupo 2- perfiles de CETPRO	
+			}
+			if(beanInstitucion.getFormacion().equals(2L))//IESTP
+			{
+				objPrf.setTipo(3L); //grupo 2- perfiles de IEST
+			}
+			objPrf.setEstado(Constante.ROW_STATUS_ENABLED);
+			perfilList=getListSelectItem(objPrf, "id", "nombre", true);
+			objPrf=null;
+		} catch (Exception e) {
+			perfilList=getListSelectItem(new Perfil(), "id", "nombre", true);
+			objPrf=null;
+		}
+		
+		
 		
 		
 	}

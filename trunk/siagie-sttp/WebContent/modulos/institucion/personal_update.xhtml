@@ -26,7 +26,7 @@
     		        <td><p:outputLabel for="txtPueLab"	value="Puesto Laboral"/></td>
    		     	</tr>
    		     	<tr>
-   		     		<td><p:inputText   id="txtCodMod"  value="#{institucionPersonal.bean.codigo}" size="20" disabled="true"/></td>
+   		     		<td><p:inputText   id="txtCodMod"  value="#{institucionPersonal.bean.codigo}" size="20" /></td>
      	       		<td>
 		  			   	<p:selectOneMenu id="txtPueLab" value="#{institucionPersonal.bean.puesto}" style="width:150px">
 		  			   		<f:selectItems value="#{institucionPersonal.puestoList}" var="lstPue" itemValue="#{lstPue.id}" itemLabel="#{lstPue.descripcion}"/>
@@ -47,7 +47,7 @@
     		        <td><p:outputLabel for="txtApm"		value="Apellido Materno"/></td>
    		     	</tr>
    		     	<tr>
-   		     		<td><p:inputText   id="txtDni"  value="#{institucionPersonal.bean.dni}" 	size="10" disabled="true"/></td>
+   		     		<td><p:inputText   id="txtDni"  value="#{institucionPersonal.bean.dni}" 	size="10" /></td>
    		     		<td><p:inputText   id="txtNom"  value="#{institucionPersonal.bean.nombres}" size="40"/></td>
    		     		<td><p:inputText   id="txtApp"  value="#{institucionPersonal.bean.apepat}" 	size="40"/></td>
    		     		<td><p:inputText   id="txtApm"  value="#{institucionPersonal.bean.apemat}" 	size="40"/></td>
@@ -69,7 +69,7 @@
    		     	<tr>
    		     		<td><p:calendar id="txtFec" value="#{institucionPersonal.bean.fecnac}" 	 showOn="button" navigator="true" pattern="dd/mm/yyyy" readonlyInput="true" yearRange="c-60" size="10"/></td>
    		     		<td>
-   		     			<p:selectOneMenu id="txtSex" value="#{institucionPersonal.bean.sexo}" size="40" disabled="true">
+   		     			<p:selectOneMenu id="txtSex" value="#{institucionPersonal.bean.sexo}" size="40" >
 	    			   		<f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="null" />
 	            		    <f:selectItem itemLabel="Masculino"	itemValue="true" />  
 	            		    <f:selectItem itemLabel="Femenino"  itemValue="false" />
