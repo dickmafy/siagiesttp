@@ -147,9 +147,9 @@ public class OfertaEducativa implements Serializable
 	
 	@Transient
 	public String getNombreTipo() 										{
-		if(tipo.longValue()==1L)													{return "Módulo Ocupacional";}
-		if(tipo.longValue()==2L)													{return "Capacitación";}
-		if(tipo.longValue()==3L)													{return "Actualización";}
+		if(tipo.longValue()==1L)													{return "Modulo Ocupacional";}
+		if(tipo.longValue()==2L)													{return "Capacitacion";}
+		if(tipo.longValue()==3L)													{return "Actualizacion";}
 		return "(No Definido)";
 		}
 	public void setNombreTipo(String nombreTipo) 						{this.nombreTipo = nombreTipo;}

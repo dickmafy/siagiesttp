@@ -20,7 +20,7 @@ public class InstitucionMetaCetpro extends GenericController
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
 		appName="Institucion";
-		moduleName="Meta Institucional ";
+		moduleName="Meta CETPRO ";
 		userName=usr.getUsuario();
 		page_new="itc_meta_cetpro";
 		page_main="itc_meta_cetpro";

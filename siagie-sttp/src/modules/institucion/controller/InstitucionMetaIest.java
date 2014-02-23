@@ -20,7 +20,7 @@ public class InstitucionMetaIest extends GenericController
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
 		appName="Institucion";
-		moduleName="Meta Institucional ";
+		moduleName="Meta IESTP ";
 		userName=usr.getUsuario();
 		page_new="itc_meta_iest";
 		page_main="itc_meta_iest";

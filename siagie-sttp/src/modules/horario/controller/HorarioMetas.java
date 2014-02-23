@@ -21,7 +21,7 @@ public class HorarioMetas extends GenericController
 	{
 		Usuario usr = (Usuario)getSpringBean("usuarioSesion");
 		appName="Horarios";
-		moduleName="Meta Institucional ";
+		moduleName="Meta IESTP ";
 		userName=usr.getUsuario();
 		institucion=usr.getInstitucion();
 		
@@ -99,11 +99,11 @@ public class HorarioMetas extends GenericController
 			if(cantidad.longValue()==0L)
 			{
 				myService.updateStatus(getBeanSelected(), 2L);
-				setMessageSuccess("El proceso ha registrado el Inicio de la Etapa Asignaci�n Docente exit�samente.");
+				setMessageSuccess("El proceso ha registrado el Inicio de la Etapa Asignaci���n Docente exit���samente.");
 				defaultList();
 			}
 			else
-			{setMessageError("No es posible iniciar la Etapa Asignaci�n Docente debido a que existen "+cantidad+" Unidad(es) Didactica(s) pendiente asignaci�n horaria.");}
+			{setMessageError("No es posible iniciar la Etapa Asignaci���n Docente debido a que existen "+cantidad+" Unidad(es) Didactica(s) pendiente asignaci���n horaria.");}
 		}
 		cantidad=null;
 	}
@@ -117,7 +117,7 @@ public class HorarioMetas extends GenericController
 			if(cantidad.longValue()==0L)
 			{
 				myService.updateStatus(getBeanSelected(), 3L);
-				setMessageSuccess("El proceso ha registrado el Inicio de la Etapa Registro de Silabo exit�samente.");
+				setMessageSuccess("El proceso ha registrado el Inicio de la Etapa Registro de Silabo exit���samente.");
 				defaultList();
 			}
 			else
@@ -135,11 +135,11 @@ public class HorarioMetas extends GenericController
 			if(cantidad.longValue()==0L)
 			{
 				myService.etapaAdmision(annio, proceso);
-				setMessageSuccess("El proceso ha registrado el Inicio de la Etapa de Admisi�n exit�samente.");
+				setMessageSuccess("El proceso ha registrado el Inicio de la Etapa de Admisi���n exit���samente.");
 				defaultList();
 			}
 			else
-			{setMessageError("Para iniciar la Etapa de Admisi�n todos las secciones de los procesos en conjunto deben tener aprobados sus silabos.");}
+			{setMessageError("Para iniciar la Etapa de Admisi���n todos las secciones de los procesos en conjunto deben tener aprobados sus silabos.");}
 		}
 		cantidad=null;
 	}

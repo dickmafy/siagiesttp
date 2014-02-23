@@ -70,8 +70,8 @@ public class AdminPersonal extends GenericController {
 		page_update = "adm_prs_upd";
 		forward(page_main);
 		
-		setUrlRpt("/modulos/reportes/pdf/NOMINA.pdf"); // Codigo Ericson Huamaní
-		nombreUsuario=usr.getNombres(); // Codigo Ericson Huamaní
+		setUrlRpt("/modulos/reportes/pdf/NOMINA.pdf"); // Codigo Ericson Huamanï¿½
+		nombreUsuario=usr.getNombres(); // Codigo Ericson Huamanï¿½
 	}
 
 	@Override
@@ -120,13 +120,13 @@ public class AdminPersonal extends GenericController {
 		boolean success = true;
 		Personal object = (Personal) getBean();
 		if (!validateEmpty(object.getCodigo())) {
-			setMessageError("Debe ingresar el Código Modular.");
+			setMessageError("Debe ingresar el Cï¿½digo Modular.");
 			success = false;
 		} else if (!validateEmpty(object.getDni())) {
-			setMessageError("Debe ingresar el número del DNI.");
+			setMessageError("Debe ingresar el nï¿½mero del DNI.");
 			success = false;
 		} else if (!validateSelect(object.getPuesto())) {
-			setMessageError("Debe seleccionar el Puesto Laboral.");
+			setMessageError("Debe seleccionar el Cargo.");
 			success = false;
 		} else if (!validateEmpty(object.getNombres())) {
 			setMessageError("Debe ingresar sus Nombres.");
@@ -141,7 +141,7 @@ public class AdminPersonal extends GenericController {
 			setMessageError("Debe ingresar su Sexo.");
 			success = false;
 		} else if (!validateEmail(object.getCorreo().toLowerCase())) {
-			setMessageError("Debe ingresar su correo electrónico correctamente.");
+			setMessageError("Debe ingresar su correo electrï¿½nico correctamente.");
 			success = false;
 		} else if (!validateSelect(provincia)) {
 			setMessageError("Debe seleccionar la provincia.");
@@ -153,7 +153,7 @@ public class AdminPersonal extends GenericController {
 			setMessageError("Debe seleccionar el distrito.");
 			success = false;
 		} else if (!validateEmpty(object.getDireccion())) {
-			setMessageError("Debe ingresar la dirección.");
+			setMessageError("Debe ingresar la direcciï¿½n.");
 			success = false;
 		}
 		object = null;
@@ -317,7 +317,7 @@ public class AdminPersonal extends GenericController {
 		this.nombreInstitucion = nombreInstitucion;
 	}
 
-	// Inicio Codigo Ericson Huamaní 19-12-2013 11:00
+	// Inicio Codigo Ericson Huamanï¿½ 19-12-2013 11:00
 	@SuppressWarnings("unchecked")
 	public void generarReporte(ActionEvent evt) {
 		try {
@@ -369,5 +369,5 @@ public class AdminPersonal extends GenericController {
 		this.urlRpt = urlRpt;
 	}
 
-	// Fin codigo Ericson Huamaní
+	// Fin codigo Ericson Huamanï¿½
 }

@@ -118,22 +118,22 @@ public class AdminHistorialLaboral extends GenericController
 		
 		if(!validateSelect(object.getTipo()))
 		{
-			setMessageError("Debe seleccionar el Tipo de Institución.");			
+			setMessageError("Debe seleccionar el Tipo de Instituciï¿½n.");			
 			success = false;
 		}
 		else if(!validateSelect(object.getInstitucion()))
 		{
-			setMessageError("Debe seleccionar la Institución.");			
+			setMessageError("Debe seleccionar la Instituciï¿½n.");			
 			success = false;
 		}
 		else if(!validateSelect(object.getPuesto()))
 		{
-			setMessageError("Debe seleccionar el Puesto Laboral.");			
+			setMessageError("Debe seleccionar el Cargo.");			
 			success = false;
 		}
 		else if(!validateEmpty(object.getFuncion()))
 		{
-			setMessageError("Debe ingresar la Función Principal.");			
+			setMessageError("Debe ingresar la Funciï¿½n Principal.");			
 			success = false;
 		}
 		else if(!validateEmpty(object.getInicio()))
