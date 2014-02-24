@@ -24,6 +24,7 @@
    		     	<tr>
     		        <td><p:outputLabel for="txtCodMod" 	value="Código Modular" /></td>
     		        <td><p:outputLabel for="txtPueLab"	value="Cargo"/></td>
+    		        <td><p:outputLabel value="Condición" /></td>
    		     	</tr>
    		     	<tr>
    		     		<td><p:inputText   id="txtCodMod"  value="#{adminPersonal.bean.codigo}" size="20"/></td>
@@ -32,6 +33,13 @@
 		  			   		<f:selectItems value="#{adminPersonal.puestoList}" />
 						</p:selectOneMenu>		
   		    		</td>
+  		    		 <td>
+  		    		<p:selectOneMenu value="#{institucionPersonal.bean.condicion}" style="position:relative;  top:2px;">
+                    <f:selectItem itemLabel="#{constante.OPTION_SELECT}" 	itemValue="-1" />  
+           	        <f:selectItem itemLabel="Nombrado"  itemValue="1" />
+           	        <f:selectItem itemLabel="Contratado" 	itemValue="2" />
+           	        </p:selectOneMenu>
+					</td>
   		    	</tr>
    		    	</table>
    		    	</td>
