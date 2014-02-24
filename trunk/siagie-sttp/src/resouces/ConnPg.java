@@ -6,11 +6,9 @@ import java.sql.SQLException;
 
 public class ConnPg {
 	private static final String DRIVER = "org.postgresql.Driver";
-	//private static final String CONNECTION_STRING = "jdbc:postgresql://192.168.1.200:5432/sttp_prod";
-	private static final String CONNECTION_STRING = "jdbc:postgresql://127.0.0.1:5432/sttp_prod";
+	private static final String CONNECTION_STRING = "jdbc:postgresql://190.12.76.5:5432/sttp_prod";
 	private static final String USER = "postgres";
 	private static final String PASSWORD = "aprolab2013";
-
 	private static Connection CONEXION;
 	private static boolean IS_INSTANCE;
 
