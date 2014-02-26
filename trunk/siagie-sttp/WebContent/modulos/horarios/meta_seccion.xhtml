@@ -12,6 +12,9 @@
 	    	<p:toolbarGroup align="left">
 	    		<p:toolbarGroup align="left">
 	    		<p:commandButton title="Regresar" value="Regresar" icon="icn_bar_back" action="hor_meta_det" ajax="false" />
+	    		<p:spacer width="4px"/>
+	    	    <p:commandButton title="Guradar" value="Guardar" icon="icn_bar_save" actionListener="#{horarioSeccion.prePublicar}" ajax="false" rendered="#{horarioSeccion.estado eq 1}"/>  
+			
 			</p:toolbarGroup>  
 			</p:toolbarGroup>  
   		</p:toolbar>    		
