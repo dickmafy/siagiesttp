@@ -1,10 +1,14 @@
 package modules.horario.controller; 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.faces.model.SelectItem;
+
 import com.belogick.factory.util.controller.GenericController;
+
 import dataware.service.HorarioService;
 import modules.administracion.domain.AmbienteUnidad;
+import modules.administracion.domain.MetaDetalle;
 import modules.seguridad.domain.Usuario;
 
 public class HorarioSeccion extends GenericController   
@@ -13,7 +17,7 @@ public class HorarioSeccion extends GenericController
 	private List<AmbienteUnidad> 	ambienteTipoList;
 	
 	private	Long 	institucion,seccion,unidadDidactica;
-	private	Long	turno,totalMeta,capacidad,estado;
+	private	Long	turno,totalMeta,capacidad,estado, horas, pkMetaDet;
 	
 	private HorarioService	myService;
 	
@@ -27,6 +31,8 @@ public class HorarioSeccion extends GenericController
 		
 		unidadDidactica=und;
 		turno=trn;
+		horas = hrs;
+		pkMetaDet=pk;
 		
 		capacidad=0L;
 		this.estado=estado;
@@ -59,6 +65,25 @@ public class HorarioSeccion extends GenericController
 		}
 	}
 	
+	//fer
+	public void prePublicar() throws Exception
+	{		
+		int hrs=0;
+		
+		for (AmbienteUnidad item : ambienteTipoList) 
+		{
+			hrs = hrs + item.getHoras().intValue();		
+		}
+				
+		if(hrs >= horas.intValue())
+		{
+			MetaDetalle metaDet = (MetaDetalle) myService.findById(MetaDetalle.class, pkMetaDet);
+			metaDet.setEstado(2L);
+			myService.updateStatus(metaDet, 2L);
+			setMessageSuccess("El registro fue pre-publicado satifactoriamente.");
+		}
+		
+	}
 	
 	
 	public HorarioService getMyService() 										{return myService;}
@@ -75,4 +100,15 @@ public class HorarioSeccion extends GenericController
 
 	public List<AmbienteUnidad> getAmbienteTipoList() 							{return ambienteTipoList;}
 	public void setAmbienteTipoList(List<AmbienteUnidad> ambienteTipoList) 		{this.ambienteTipoList = ambienteTipoList;}
+
+	public Long getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Long estado) {
+		this.estado = estado;
+	}
+
+	
+	
 } 
