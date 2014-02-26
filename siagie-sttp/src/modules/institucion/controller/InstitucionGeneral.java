@@ -62,12 +62,19 @@ public class InstitucionGeneral extends GenericController
 		Resolucion beanRes = new Resolucion();
 		SimpleDateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
 		
-		beanRes = (Resolucion) getService().findById(Resolucion.class, object.getResolcre());
-		nomResCre = beanRes.getNombre() + " (" + sd.format(beanRes.getFecha()) +")";
-		beanRes = (Resolucion) getService().findById(Resolucion.class, object.getResolren());
-		nomResRen = beanRes.getNombre() + " (" + sd.format(beanRes.getFecha()) +")";
-		beanRes = (Resolucion) getService().findById(Resolucion.class, object.getResolrev());
-		nomResRev = beanRes.getNombre() + " (" + sd.format(beanRes.getFecha()) +")";
+		if(object.getResolcre()!=null){
+			beanRes = (Resolucion) getService().findById(Resolucion.class, object.getResolcre());
+			nomResCre = beanRes.getNombre() + " (" + sd.format(beanRes.getFecha()) +")";
+		}
+		if(object.getResolren()!=null){
+			beanRes = (Resolucion) getService().findById(Resolucion.class, object.getResolren());
+			nomResRen = beanRes.getNombre() + " (" + sd.format(beanRes.getFecha()) +")";
+		}
+		if(object.getResolrev()!=null){
+			beanRes = (Resolucion) getService().findById(Resolucion.class, object.getResolrev());
+			nomResRev = beanRes.getNombre() + " (" + sd.format(beanRes.getFecha()) +")";
+		}
+		
 		beanRes = null;
 	}
 	
