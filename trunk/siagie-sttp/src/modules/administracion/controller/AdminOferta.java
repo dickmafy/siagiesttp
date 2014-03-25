@@ -95,12 +95,21 @@ public class AdminOferta extends GenericController
 		setBean(bean);
 		bean=null;
 		
+		
+		/*
 		Profesion obj=new Profesion();
 		obj.setFormacion(formacion);
 		
 		//funcion de eliminacion de duplicados
 		profesionList=getProfesion(obj);
 		obj=null;
+		*/
+		
+		Profesion obj=new Profesion();
+		obj.setFormacion(formacion);
+		profesionList=getListSelectItem(obj, "id", "nombre", true);
+		obj=null;
+		
 		
 		resolucionList=getListSelectItem(myService.listByObjectEnabled(new Resolucion()), "id","nombreSiglas,nombre"," ",false);
 	
