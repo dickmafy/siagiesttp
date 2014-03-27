@@ -11,6 +11,7 @@ import modules.administracion.domain.Cronograma;
 import modules.administracion.domain.Institucion;
 import modules.administracion.domain.MetaInstitucional;
 import modules.administracion.domain.Solicitud;
+import modules.admision.domain.Proceso;
 import modules.horario.controller.HorarioMetaDetalle;
 import modules.mantenimiento.domain.Resolucion;
 import modules.seguridad.domain.Usuario;
@@ -51,7 +52,7 @@ public class AdminMetaInstitucional extends GenericController
 		nombreInstitucion=nombre;
 		formacion=forma;
 		defaultList();
-		
+		nativeSave(null);
 		Institucion obj=new Institucion();
 		obj.setFormacion(1L);
 		instituciones=myService.listByObjectEnabledDisabled(obj);
@@ -95,6 +96,19 @@ public class AdminMetaInstitucional extends GenericController
 		sol.setEstado(3L);
 		solicitudList=getListSelectItem(myService.listByObject(sol),"id","id,fecha,nombreTipo"," ",true);
 		sol=null;
+	}
+	
+	@Override
+	public void afterSave() throws Exception {
+		MetaInstitucional metaInstitucional = (MetaInstitucional) getBean();
+		Proceso proceso = new Proceso();
+		proceso.setAnnio(metaInstitucional.getAnnio());
+		proceso.setProceso(metaInstitucional.getProceso());
+		proceso.setInstitucion(metaInstitucional.getInstitucion());
+		proceso = (Proceso) myService.findByObject(proceso);
+		proceso.setEstado(1L);
+		myService.save(proceso);
+		System.out.println("Grabando proceso:=========================="+ proceso.getId());
 	}
 	
 	@SuppressWarnings("unchecked")

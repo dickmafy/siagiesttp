@@ -103,8 +103,8 @@ public class AdmisionPostulante extends GenericController
 		cleanPersona();
 		forward(page_main);
 		
-		setUrlRpt("/modulos/reportes/pdf/NOMINA.pdf"); // Codigo Ericson Huamaní
-		setNombreUsuario(usr.getNombres()); // Codigo Ericson Huamaní
+		setUrlRpt("/modulos/reportes/pdf/NOMINA.pdf"); // Codigo Ericson Huamanï¿½
+		setNombreUsuario(usr.getNombres()); // Codigo Ericson Huamanï¿½
 	}
 	public void init() throws Exception
 	{init(-1L);}
@@ -258,12 +258,12 @@ public class AdmisionPostulante extends GenericController
     	boolean success=true;
     	if(!validateSelect(docTip))
     	{
-    		setMessageError("Debe seleccionar el Tipo de Documento de Identificación para iniciar con la busqueda.");
+    		setMessageError("Debe seleccionar el Tipo de Documento de Identificaciï¿½n para iniciar con la busqueda.");
     		success=false;
     	}
     	else if(!validateEmpty(docNro))
     	{
-    		setMessageError("Debe ingresar el Número del Documento de Identificación para iniciar con la busqueda.");
+    		setMessageError("Debe ingresar el Nï¿½mero del Documento de Identificaciï¿½n para iniciar con la busqueda.");
     		success=false;
     	}
     	
@@ -312,7 +312,7 @@ public class AdmisionPostulante extends GenericController
 		if(!validationProfesion() && object.getProfesion()==null)
         {
 			tabIndex=0L;
-			setMessageError("Debe seleccionar solo una Oferta de Admisión.");                        
+			setMessageError("Debe seleccionar solo una Oferta de Admisiï¿½n.");                        
             success = false;
         }
 		else if(!validationPersona())
@@ -323,7 +323,7 @@ public class AdmisionPostulante extends GenericController
 		else if(!validateSelect(object.getModalidad()))
 		{
 			tabIndex=3L;
-			setMessageError("Debe seleccionar una Modalidad del Proceso de Admisión en Requisitos.");			
+			setMessageError("Debe seleccionar una Modalidad del Proceso de Admisiï¿½n en Requisitos.");			
 			success = false;
 		}
 		object=null;
@@ -379,21 +379,6 @@ public class AdmisionPostulante extends GenericController
 		{
 			setMessageError("Debe ingresar su Fecha de Nacimiento.");			
 			success = false;
-		}
-		else if(!validateEmpty(beanPersona.getCorreo()))
-		{
-			setMessageError("Debe ingresar su Correo Electrónico.");			
-			success = false;
-		}
-		else if(!validateEmail(beanPersona.getCorreo().toLowerCase()))
-		{
-			setMessageError("Debe ingresar su Correo Electrónico correctamente.");			
-			success = false;
-		}
-		else if(!validateEmpty(beanPersona.getTelefonos()))
-		{
-			setMessageError("Debe ingresar al menos un Número Telefonico.");			
-			success = false;
 		}		
 		else if(!validateSelect(provincia))
 		{
@@ -412,7 +397,7 @@ public class AdmisionPostulante extends GenericController
 		}
 		else if(!validateEmpty(beanPersona.getDireccion()))
 		{
-			setMessageError("Debe ingresar la dirección.");			
+			setMessageError("Debe ingresar la direcciï¿½n.");			
 			success = false;
 		}	
 		else if(!validateSelect(beanPersona.getColegio_tipo()))
@@ -432,10 +417,10 @@ public class AdmisionPostulante extends GenericController
 	{		
 		boolean success = true;
 		if(!validateSelect(docTip))		{setMessageError("Debe seleccionar un Tipo de Documento de Identidad"); success=false;}
-		else if(!validateEmpty(docNro))	{setMessageError("Debe ingresar el número de Documento de Identidad"); success=false;}
-		else if(docTip.longValue()==1L && !validateLength(docNro, 8))		{setMessageError("El número de DNI debe ser de 8 dígitos"); success=false;}
-		else if(docTip.longValue()==3L && !validateLength(docNro, 12))		{setMessageError("El número de Carnet de Extranjería debe ser de 12 dígitos"); success=false;}
-		else if(docTip.longValue()==4L && !validateLength(docNro, 8))		{setMessageError("El número de Pasaporte debe ser de 12 dígitos"); success=false;}
+		else if(!validateEmpty(docNro))	{setMessageError("Debe ingresar el nï¿½mero de Documento de Identidad"); success=false;}
+		else if(docTip.longValue()==1L && !validateLength(docNro, 8))		{setMessageError("El nï¿½mero de DNI debe ser de 8 dï¿½gitos"); success=false;}
+		else if(docTip.longValue()==3L && !validateLength(docNro, 12))		{setMessageError("El nï¿½mero de Carnet de Extranjerï¿½a debe ser de 12 dï¿½gitos"); success=false;}
+		else if(docTip.longValue()==4L && !validateLength(docNro, 8))		{setMessageError("El nï¿½mero de Pasaporte debe ser de 12 dï¿½gitos"); success=false;}
 		return success;
 	}
 	
@@ -537,7 +522,7 @@ public class AdmisionPostulante extends GenericController
 	public void setAnnio(Long annio) 							{this.annio = annio;}
 	
 	
-	// Inicio Codigo Ericson Huamaní 19-12-2013 11:00
+	// Inicio Codigo Ericson Huamanï¿½ 19-12-2013 11:00
 		@SuppressWarnings("unchecked")
 		public void generarReporte(ActionEvent evt) {
 			try {
