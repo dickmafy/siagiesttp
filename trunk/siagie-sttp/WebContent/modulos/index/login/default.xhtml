@@ -46,6 +46,8 @@
 	
 </h:head>
 <h:body>
+
+
 	<p:layout fullPage="true">  
   
 	    <p:layoutUnit id="tmp_header" position="north" style="background:white"> 
@@ -70,8 +72,11 @@
 					<h:panelGrid columns="1" >
 						<img src="#{request.contextPath}/recursos/imagenes/login.png"/>							
 					</h:panelGrid>
-											
-					<h:panelGrid columns="1" >
+
+								<p:outputLabel
+									value="admin 123 alumnocetpro1	Alumno CETPRO	alumnoElena	Alumno IEST alumno3	Alumno IEST alumno2	Alumno IEST alumno1	ADM_INST_TEST" />
+
+								<h:panelGrid columns="1" >
 						<h:outputText value="Usuario"/>
 						<p:inputText label="Usuario" value="#{loginController.beanSearch.usuario}" style="width:180px" required="true"/>
 						<h:outputText value="Contrase&#241;a"/>
